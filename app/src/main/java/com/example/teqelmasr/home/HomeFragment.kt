@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.teqelmasr.R
+import com.example.teqelmasr.databinding.ActivityHomeBinding
+import com.example.teqelmasr.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +27,7 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,10 +40,26 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+      binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        return  binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.equipmentSellBtn.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
+        }
+        binding.equipmentRentBtn.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentRentFragment)
+        }
+        binding.SpareBtn.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displaySparePartFragment)
+        }
+        binding.sellertn.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displaySellerProductsFragment)
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

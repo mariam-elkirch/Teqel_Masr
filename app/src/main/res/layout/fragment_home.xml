@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home fragment" />
 
-</FrameLayout>
+
+    <Button
+        android:id="@+id/equipmentSellBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Equipment sell"
+        app:layout_constraintEnd_toStartOf="@id/equipmentRentBtn"
+       app:layout_constraintBottom_toTopOf="@id/SpareBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/equipmentRentBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Equipment rent"
+        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintBottom_toTopOf="@id/sellertn"
+        app:layout_constraintStart_toEndOf="@id/equipmentSellBtn"
+        app:layout_constraintTop_toTopOf="parent"  />
+
+    <Button
+        android:id="@+id/SpareBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Spare Part"
+        app:layout_constraintEnd_toStartOf="@id/equipmentRentBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equipmentSellBtn" />
+    <Button
+        android:id="@+id/sellertn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Seller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/SpareBtn"
+        app:layout_constraintTop_toBottomOf="@id/equipmentRentBtn"  />
+</androidx.constraintlayout.widget.ConstraintLayout>
