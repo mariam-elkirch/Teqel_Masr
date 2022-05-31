@@ -28,6 +28,7 @@ class DisplaySparePartsRecyclerAdapter : RecyclerView.Adapter<SparePartsViewHold
     override fun onBindViewHolder(holder: SparePartsViewHolder, position: Int) {
         val sparePartItem = sparePartsList[position]
         holder.binding.textView.text = sparePartItem.title ?: "Unknown"
+        holder.binding.priceTextView.text = sparePartItem.bodyHtml ?: "Unknown"
         /*Glide.with(context).load(sparePartItem.).placeholder(R.drawable.photo)
             .into(holder.binding.imageView)*/
     }
