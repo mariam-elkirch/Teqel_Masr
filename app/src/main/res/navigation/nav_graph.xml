@@ -30,6 +30,11 @@
             app:destination="@id/displaySellerProductsFragment"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
@@ -53,7 +58,7 @@
         tools:layout="@layout/fragment_display_equipment_rent" />
     <fragment
         android:id="@+id/displaySparePartFragment"
-        android:name="com.example.teqelmasr.displaySparePart.DisplaySparePartFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragment"
         android:label="fragment_display_spare_part"
         tools:layout="@layout/fragment_display_spare_part" />
     <fragment
