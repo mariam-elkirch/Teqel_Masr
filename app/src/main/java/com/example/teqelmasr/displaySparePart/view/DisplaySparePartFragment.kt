@@ -42,7 +42,7 @@ class DisplaySparePartFragment : Fragment() {
     fun fetchSpareParts(){
         viewModel.fetchSpareParts()
         viewModel.sparePartsLiveData.observe(viewLifecycleOwner) {
-            sparePartsAdapter.setSparePartsList(it.products)
+            sparePartsAdapter.setSparePartsList(it.products!!)
         }
     }
 

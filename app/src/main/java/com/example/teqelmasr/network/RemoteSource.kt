@@ -11,4 +11,6 @@ import com.example.teqelmasr.model.ProductItem
 interface RemoteSource {
     suspend fun storeProduct(@Body product: ProductItem): Response<ProductItem>
     suspend fun fetchSpareParts() : Response<ProductItem>
+
+    suspend fun getMyProducts(): Response<ProductItem>
 }

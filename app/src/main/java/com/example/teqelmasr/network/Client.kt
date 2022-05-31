@@ -1,9 +1,11 @@
 package com.example.teqelmasr.network
 
-import com.example.teqelmasr.model.Product
-
 
 import com.example.teqelmasr.model.ProductItem
+
+
+import com.example.teqelmasr.model.Product
+
 import retrofit2.Response
 
 class Client : RemoteSource {
@@ -20,9 +22,14 @@ class Client : RemoteSource {
         }
 
     override suspend fun fetchSpareParts() : Response<ProductItem> {
-
+        val productsService = ApiManager.getInstance().create(WebService::class.java)
         return productsService.getProducts()
 
+    }
+
+    override suspend fun getMyProducts(): Response<ProductItem> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return service.getMyProducts()
     }
 
     override suspend fun storeProduct(product: ProductItem): Response<ProductItem> {
