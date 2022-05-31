@@ -1,5 +1,8 @@
 package com.example.teqelmasr.network
 
+import com.example.teqelmasr.model.ProductItem
+import retrofit2.Response
+
 class Client : RemoteSource {
     /*override suspend fun getCurrentWeather(units: String, lat: String, lng: String, lang: String): WeatherResponse {
         val weatherService = RetrofitHelper.getInstance().create(WeatherService::class.java)
@@ -11,5 +14,10 @@ class Client : RemoteSource {
                 return  instance?: Client()
             }
         }
+
+    override suspend fun getMyProducts(): Response<ProductItem> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return service.getMyProducts()
+    }
 
 }

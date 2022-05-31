@@ -23,5 +23,7 @@ class Repository private constructor(
         }
     }
 
+    override suspend fun getMyProducts(): Response<ProductItem> = remoteSource.getMyProducts()
+
 
 }

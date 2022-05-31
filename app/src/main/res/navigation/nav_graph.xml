@@ -58,7 +58,7 @@
         tools:layout="@layout/fragment_display_spare_part" />
     <fragment
         android:id="@+id/displaySellerProductsFragment"
-        android:name="com.example.teqelmasr.displaySellerProducts.DisplaySellerProductsFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment"
         android:label="fragment_display_seller_products"
         tools:layout="@layout/fragment_display_seller_products" />
 </navigation>

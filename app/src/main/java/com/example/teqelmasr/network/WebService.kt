@@ -9,6 +9,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface WebService {
+
     @Headers(
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
@@ -23,5 +24,15 @@ interface WebService {
         "X-Shopify-Access-Token: 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"
     )
     @POST("admin/products.json")
+
     suspend fun storeProduct(@Body product: ProductItem): Response<ProductItem>
+
+    //get seller products
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("admin/products.json")
+    suspend fun getMyProducts(): Response<ProductItem>
+
 }

@@ -2,7 +2,7 @@ package com.example.teqelmasr.model
 
 
 data class ProductItem(
-    val product: Product? = null
+    val products: List<Product>? = null
 )
 
 data class OptionsItem(
