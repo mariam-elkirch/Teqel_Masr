@@ -8,14 +8,84 @@
     tools:context=".addEquipmentSell.AddEquipmentSellFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/hello_blank_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.github.siyamed.shapeimageview.RoundedImageView
+        android:id="@+id/productImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_baseline_image_24"
+        app:siRadius="6dp"
+        android:scaleType="fitXY"
+        app:siBorderWidth="6dp"
+        app:siBorderColor="@color/orange"
+        app:siSquare="true"/>
+    <Spinner
+        android:id="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/productImg"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:entries="@array/equiments"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/title_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/orange"
+        android:hint="@string/title"
+        android:maxLines="1"
+       app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/describtion_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/orange"
+        android:hint="@string/describtion"
+        android:maxLines="3"
+        app:layout_constraintTop_toBottomOf="@+id/title_editText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/manfactory_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/orange"
+        android:hint="@string/manfactory"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@+id/describtion_editText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveButton"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manfactory_editText"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_shape"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
