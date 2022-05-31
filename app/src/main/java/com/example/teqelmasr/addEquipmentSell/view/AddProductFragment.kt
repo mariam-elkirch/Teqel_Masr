@@ -1,4 +1,4 @@
-package com.example.teqelmasr.addEquipmentSell
+package com.example.teqelmasr.addEquipmentSell.view
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
