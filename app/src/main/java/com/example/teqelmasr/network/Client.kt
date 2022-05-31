@@ -4,7 +4,7 @@ import com.example.teqelmasr.model.ProductItem
 
 
 import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductItem
+
 import retrofit2.Response
 
 class Client : RemoteSource {

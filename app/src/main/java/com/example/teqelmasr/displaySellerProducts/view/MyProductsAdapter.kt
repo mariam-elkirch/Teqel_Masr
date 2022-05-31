@@ -13,7 +13,7 @@ import com.example.teqelmasr.model.Product
 class MyProductsAdapter(private val context: Context): RecyclerView.Adapter<MyProductsAdapter.ViewHolder>() {
 
     private var productList: List<Product> = listOf()
-
+    private val TAG = "MyProducts Adapter"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(MyProductsListItemBinding.inflate(LayoutInflater.from(parent.context)))
 
@@ -23,9 +23,10 @@ class MyProductsAdapter(private val context: Context): RecyclerView.Adapter<MyPr
         val currentItem = productList[position]
         holder.binding.apply {
             itemTitle.text = currentItem.title
+            price.text = currentItem.variants[0].price.toString()
 
         }
-        Glide.with(context).load(currentItem.image).centerCrop().placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
+        Glide.with(context).load(currentItem.image?.src).centerCrop().placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
     }
 
     override fun getItemCount(): Int = productList.size
