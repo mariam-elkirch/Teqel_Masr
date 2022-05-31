@@ -2,5 +2,15 @@
     <string name="app_name">Teqel Masr</string>
     <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="equiments">
+        <item>Array Item One</item>
+        <item>Array Item Two</item>
+        <item>Array Item Three</item>
+    </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Title</string>
+    <string name="describtion">describtion</string>
+    <string name="manfactory">Manfactory</string>
+    <string name="save">Save</string>
+    <string name="my_products_txt">My Products</string>
 </resources>

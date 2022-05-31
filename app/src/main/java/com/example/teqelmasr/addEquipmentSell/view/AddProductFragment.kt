@@ -1,11 +1,24 @@
-package com.example.teqelmasr.addEquipmentSell
+package com.example.teqelmasr.addEquipmentSell.view
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.teqelmasr.R
+import android.widget.Spinner
+import androidx.navigation.findNavController
+
+import com.example.teqelmasr.databinding.FragmentAddEquipmentSellBinding
+import com.example.teqelmasr.databinding.FragmentHomeBinding
+
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,10 +31,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AddEquipmentSellFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var binding: FragmentAddEquipmentSellBinding
+    private val pickImage = 100
+    private var imageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,9 +50,30 @@ class AddEquipmentSellFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
-    }
+        binding = FragmentAddEquipmentSellBinding.inflate(inflater, container, false)
 
+        return  binding.root
+       // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.productImg.setOnClickListener {
+
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
+        val spinner = binding.spinner
+        val text = spinner.selectedItem.toString()
+        Log.i("Tag", "Imgggggggg"+text)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            imageUri = data?.data
+                    binding.productImg.setImageURI(imageUri)
+
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

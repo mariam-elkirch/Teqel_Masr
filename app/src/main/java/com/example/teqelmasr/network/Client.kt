@@ -1,7 +1,11 @@
 package com.example.teqelmasr.network
 
-import com.example.teqelmasr.model.Product
+
 import com.example.teqelmasr.model.ProductItem
+
+
+import com.example.teqelmasr.model.Product
+
 import retrofit2.Response
 
 class Client : RemoteSource {
@@ -9,6 +13,7 @@ class Client : RemoteSource {
         val weatherService = RetrofitHelper.getInstance().create(WeatherService::class.java)
         return weatherService.getCurrentWeather(units, lat, lng, lang)
     }*/
+    val productsService = ApiManager.getInstance().create(WebService::class.java)
      companion object{
             private var instance: Client? = null
             fun getInstance(): Client{
@@ -20,6 +25,16 @@ class Client : RemoteSource {
         val productsService = ApiManager.getInstance().create(WebService::class.java)
         return productsService.getProducts()
 
+    }
+
+    override suspend fun getMyProducts(): Response<ProductItem> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return service.getMyProducts()
+    }
+
+    override suspend fun storeProduct(product: ProductItem): Response<ProductItem> {
+
+        return productsService.storeProduct(product)
     }
 
 }
