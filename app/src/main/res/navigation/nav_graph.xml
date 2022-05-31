@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/addEquipmentSellFragment"
-        android:name="com.example.teqelmasr.addEquipmentSell.AddEquipmentSellFragment"
+        android:name="com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragment"
         android:label="fragment_add_equipment_sell"
         tools:layout="@layout/fragment_add_equipment_sell" />
     <fragment
