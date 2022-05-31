@@ -58,7 +58,7 @@
         tools:layout="@layout/fragment_display_equipment_rent" />
     <fragment
         android:id="@+id/displaySparePartFragment"
-        android:name="com.example.teqelmasr.displaySparePart.DisplaySparePartFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragment"
         android:label="fragment_display_spare_part"
         tools:layout="@layout/fragment_display_spare_part" />
     <fragment
