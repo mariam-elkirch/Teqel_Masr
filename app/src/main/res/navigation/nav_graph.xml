@@ -30,6 +30,11 @@
             app:destination="@id/displaySellerProductsFragment"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"

@@ -37,6 +37,9 @@ class HomeFragment : Fragment() {
         binding.sellertn.setOnClickListener {
             binding.root.findNavController().navigate(R.id.action_homeFragment_to_displaySellerProductsFragment)
         }
+        binding.postProductBtn.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_addEquipmentSellFragment)
+        }
     }
 
 }
