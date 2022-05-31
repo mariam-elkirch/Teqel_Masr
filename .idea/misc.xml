@@ -3,15 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/activity_home.xml" value="0.223731884057971" />
-        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/activity_main.xml" value="0.223731884057971" />
-        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_add_equipment_sell.xml" value="0.25416666666666665" />
-        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_home.xml" value="0.223731884057971" />
-        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Ghada/Teqel_Masr/app/src/main/res/layout/fragment_details_seller_product.xml" value="0.11302083333333333" />
+        <entry key="..\:/Ghada/Teqel_Masr/app/src/main/res/layout/fragment_details_spare_part.xml" value="0.25416666666666665" />
+        <entry key="..\:/Ghada/Teqel_Masr/app/src/main/res/layout/fragment_display_spare_part.xml" value="0.11302083333333333" />
+        <entry key="..\:/Ghada/Teqel_Masr/app/src/main/res/layout/spare_part_item.xml" value="0.2" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
