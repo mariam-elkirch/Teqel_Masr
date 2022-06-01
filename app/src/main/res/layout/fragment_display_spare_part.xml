@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +9,31 @@
     android:background="#F7F8F9"
     >
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/spare_shimmer"
+        app:layout_constraintTop_toBottomOf="@id/my_products_txt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_spare_parts"
@@ -15,4 +41,8 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/spare_part_item"
         />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

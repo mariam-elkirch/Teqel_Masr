@@ -53,6 +53,8 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     private fun fetchSpareParts() {
         viewModel.sparePartsLiveData.observe(viewLifecycleOwner) {
             sparePartsAdapter.setSparePartsList(it.products!!)
+            binding.spareShimmer.stopShimmer()
+            binding.spareShimmer.visibility = View.GONE
         }
     }
 
