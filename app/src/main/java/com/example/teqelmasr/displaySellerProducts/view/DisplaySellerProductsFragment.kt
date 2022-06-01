@@ -20,6 +20,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     private val binding by lazy { FragmentDisplaySellerProductsBinding.inflate(layoutInflater) }
     private val factory by lazy { MyProductsViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
     //private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java] }
+    private lateinit var adapter: MyProductsAdapter
     private lateinit var viewModel: MyProductsViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +28,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     ): View? {
 
         viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
-
+        adapter = MyProductsAdapter(requireContext(),this)
         setUpRecyclerView()
 
         observeMyProducts()
@@ -54,12 +55,11 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private fun setUpRecyclerView() = binding.apply {
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
-        myProductsRecycler.adapter = MyProductsAdapter(requireContext(), this@DisplaySellerProductsFragment)
+        myProductsRecycler.adapter = adapter
     }
 
     override fun onDeleteClick(product: Product) {
         viewModel.deleteProduct(product)
-        (binding.myProductsRecycler.adapter as MyProductsAdapter).notifyDataSetChanged()
     }
 
 }

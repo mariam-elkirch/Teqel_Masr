@@ -1,6 +1,6 @@
 package com.example.teqelmasr.model
 data class ProductItem(
-	val products: List<Product>? = null
+	val products:ArrayList<Product>? = null
 )
 
 data class ProductPost(
