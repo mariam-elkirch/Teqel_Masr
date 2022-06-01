@@ -2,6 +2,7 @@ package com.example.teqelmasr.network
 
 
 import android.util.Log
+import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 
 
@@ -41,7 +42,7 @@ class Client : RemoteSource {
 
     override suspend fun deleteProduct(product: Product) {
         val service = ApiManager.getInstance().create(WebService::class.java)
-        service.deleteProduct(product.variants[0].product_id!!)
+        service.deleteProduct(product.variants?.get(0)?.product_id!!)
 
     }
 

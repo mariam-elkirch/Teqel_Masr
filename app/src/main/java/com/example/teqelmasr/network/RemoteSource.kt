@@ -1,6 +1,7 @@
 package com.example.teqelmasr.network
 
 
+import com.example.teqelmasr.model.Product
 import retrofit2.Response
 
 import com.example.teqelmasr.model.ProductItem
