@@ -32,7 +32,7 @@ class DisplaySparePartsRecyclerAdapter(val context: Context, private val listene
         val sparePartItem = sparePartsList[position]
         holder.binding.apply {
             textView.text = sparePartItem.title ?: "Unknown"
-            priceTextView.text = sparePartItem.variants[0].price.toString()
+            priceTextView.text = sparePartItem.variants!![0]?.price.toString()
             sparePartCardView.setOnClickListener { listener.onProductClick(sparePartItem) }
         }
         Glide.with(context).load(sparePartItem.image?.src).centerCrop()

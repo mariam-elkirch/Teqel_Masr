@@ -8,7 +8,6 @@ import com.example.teqelmasr.model.ProductItem
 
 import com.example.teqelmasr.model.ProductPost
 
-import com.example.teqelmasr.model.ProductItem
 import retrofit2.Response
 
 class Client : RemoteSource {
@@ -25,27 +24,27 @@ class Client : RemoteSource {
         }
     }
 
-    override suspend fun getProductsByCategory(productCategory: String) =
-        productsService.getProducts(productCategory)
-
-    }
-
-    override suspend fun getMyProducts(): Response<ProductItem> {
-        val service = ApiManager.getInstance().create(WebService::class.java)
-        return service.getMyProducts()
-    }
-
-
     override suspend fun storeProduct(product: ProductPost): Response<ProductItem> {
         Log.i("Tag",product.toString() + "imgggggg")
         val productsService = ApiManager.getInstance().create(WebService::class.java)
         return productsService.storeProduct(product)
     }
 
+
+    override suspend fun getProductsByCategory(productCategory: String) =
+        productsService.getProducts(productCategory)
+
+    override suspend fun getMyProducts(): Response<ProductItem> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return service.getMyProducts()
+    }
+
     override suspend fun deleteProduct(product: Product) {
         val service = ApiManager.getInstance().create(WebService::class.java)
         service.deleteProduct(product.variants?.get(0)?.product_id!!)
-
     }
 
 }
+
+
+
