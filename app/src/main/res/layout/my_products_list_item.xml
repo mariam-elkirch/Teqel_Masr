@@ -49,10 +49,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="140dp"
                 android:fontFamily="@font/noto_sans"
                 android:textColor="#E97000"
                 app:layout_constraintEnd_toEndOf="@id/item_title"
-                android:layout_marginEnd="140dp"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/item_title"
                 app:layout_constraintTop_toBottomOf="@id/item_title" />
 
@@ -90,7 +91,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/editBtn"
                 android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="110dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
