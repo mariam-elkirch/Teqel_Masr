@@ -48,6 +48,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private fun fillData(productItem: ProductItem) = binding.apply {
         (myProductsRecycler.adapter as MyProductsAdapter).setData(productItem.products!!)
+        shimmer.stopShimmer()
+        shimmer.visibility = View.GONE
     }
 
     private fun setUpRecyclerView() = binding.apply {
