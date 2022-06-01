@@ -25,8 +25,12 @@ class Repository private constructor(
 
     override suspend fun getMyProducts(): Response<ProductItem> = remoteSource.getMyProducts()
 
-    override suspend fun fetchSpareParts() :  Response<ProductItem> {
-        return remoteSource.fetchSpareParts()
+   override suspend fun storeProduct(product: ProductPost): Response<ProductItem>{
+        return  remoteSource.storeProduct(product)
+    }
+
+    override suspend fun getProductsByCategory(productCategory: String) :  Response<ProductItem> {
+        return remoteSource.getProductsByCategory(productCategory)
     }
 
     override suspend fun deleteProduct(product: Product) {

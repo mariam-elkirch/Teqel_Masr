@@ -58,6 +58,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 
     //shimmer effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'

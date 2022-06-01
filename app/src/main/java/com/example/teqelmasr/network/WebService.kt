@@ -2,7 +2,7 @@ package com.example.teqelmasr.network
 
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
-import retrofit2.Call
+import com.example.teqelmasr.model.ProductPost
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -13,7 +13,7 @@ interface WebService {
         "X-Shopify-Access-Token: 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",
     )
     @GET("admin/products.json")
-    suspend fun getProducts(): Response<ProductItem>
+    suspend fun getProducts(@Query("tags") productType: String): Response<ProductItem>
 
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
@@ -22,7 +22,7 @@ interface WebService {
     )
     @POST("admin/products.json")
 
-    suspend fun storeProduct(@Body product: ProductItem): Response<ProductItem>
+    suspend fun storeProduct(@Body product: ProductPost): Response<ProductItem>
 
     //get seller products
     @Headers(
