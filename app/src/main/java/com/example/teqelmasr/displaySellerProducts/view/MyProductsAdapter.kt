@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
@@ -46,7 +47,12 @@ class MyProductsAdapter(private val context: Context, private val onBtnListener:
                     .create().show()
             }
 
+            details.setOnClickListener {
+                root.findNavController().navigate(R.id.action_displaySellerProductsFragment_to_detailsSellerProductFragment)
+            }
+
         }
+
         Glide.with(context).load(currentItem.image?.src).centerCrop().placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
     }
 

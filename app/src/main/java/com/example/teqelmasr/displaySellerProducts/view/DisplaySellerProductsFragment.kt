@@ -62,4 +62,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         viewModel.deleteProduct(product)
     }
 
+
+
 }
