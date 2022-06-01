@@ -15,7 +15,7 @@ import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 
-class DisplaySellerProductsFragment : Fragment() {
+class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private val binding by lazy { FragmentDisplaySellerProductsBinding.inflate(layoutInflater) }
     private val factory by lazy { MyProductsViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
@@ -52,7 +52,12 @@ class DisplaySellerProductsFragment : Fragment() {
 
     private fun setUpRecyclerView() = binding.apply {
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
-        myProductsRecycler.adapter = MyProductsAdapter(requireContext())
+        myProductsRecycler.adapter = MyProductsAdapter(requireContext(), this@DisplaySellerProductsFragment)
+    }
+
+    override fun onDeleteClick(product: Product) {
+        viewModel.deleteProduct(product)
+        (binding.myProductsRecycler.adapter as MyProductsAdapter).notifyDataSetChanged()
     }
 
 }
