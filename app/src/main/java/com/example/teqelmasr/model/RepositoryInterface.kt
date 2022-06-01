@@ -10,4 +10,6 @@ interface RepositoryInterface {
     suspend fun fetchSpareParts() :  Response<ProductItem>
 
     suspend fun deleteProduct(product: Product)
+
+    suspend fun getProductsByCategory(productCategory: String) :  Response<ProductItem>
 }

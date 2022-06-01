@@ -13,7 +13,7 @@ interface WebService {
         "X-Shopify-Access-Token: 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",
     )
     @GET("admin/products.json")
-    suspend fun getProducts(): Response<ProductItem>
+    suspend fun getProducts(@Query("tags") productType: String): Response<ProductItem>
 
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
