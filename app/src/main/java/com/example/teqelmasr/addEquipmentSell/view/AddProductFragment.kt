@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
+import com.example.teqelmasr.addEquipmentSell.viewmodel.AddProductViewModel
+import com.example.teqelmasr.addEquipmentSell.viewmodel.AddProductViewModelFactory
 
 import com.example.teqelmasr.databinding.FragmentAddEquipmentSellBinding
-import com.example.teqelmasr.databinding.FragmentHomeBinding
-
-
-
+import com.example.teqelmasr.model.Product
+import com.example.teqelmasr.model.ProductPost
+import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.network.Client
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +38,9 @@ class AddEquipmentSellFragment : Fragment() {
     private lateinit var binding: FragmentAddEquipmentSellBinding
     private val pickImage = 100
     private var imageUri: Uri? = null
+    lateinit var viewModel: AddProductViewModel
+
+    lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,6 +56,14 @@ class AddEquipmentSellFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAddEquipmentSellBinding.inflate(inflater, container, false)
 
+         var product = ProductPost(Product(title = "heba"))
+        addProductfactory = AddProductViewModelFactory(
+            Repository.getInstance(
+                Client.getInstance(),
+                requireContext()
+            ), product)
+        // ViewModelProvider(this,addProductfactory).get(AddProductViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]
         return  binding.root
        // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
     }
@@ -65,6 +77,21 @@ class AddEquipmentSellFragment : Fragment() {
         val spinner = binding.spinner
         val text = spinner.selectedItem.toString()
         Log.i("Tag", "Imgggggggg"+text)
+        viewModel.myProducts.observe(viewLifecycleOwner){
+           Log.i("tag",it.toString()+ "product")
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner){
+            Log.i("tag",it.toString()+ "product")
+        }
+      /*  fun getDestinations() =  ProductItem (listOf(Product(title = "mariam")))
+           // var product = ProductItem(Product(title = "mariam"))
+                addProductfactory = AddProductViewModelFactory(
+                Repository.getInstance(
+                    Client.getInstance(),
+                    requireContext()
+                ), getDestinations())
+    // ViewModelProvider(this,addProductfactory).get(AddProductViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]*/
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

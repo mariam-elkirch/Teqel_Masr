@@ -1,9 +1,6 @@
 package com.example.teqelmasr.model
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.teqelmasr.db.LocalSource
 import com.example.teqelmasr.network.RemoteSource
 import retrofit2.Response
 
@@ -25,6 +22,9 @@ class Repository private constructor(
 
     override suspend fun getMyProducts(): Response<ProductItem> = remoteSource.getMyProducts()
 
+   override suspend fun storeProduct(product: ProductPost): Response<ProductItem>{
+        return  remoteSource.storeProduct(product)
+    }
     override suspend fun fetchSpareParts() :  Response<ProductItem> {
         return remoteSource.fetchSpareParts()
     }

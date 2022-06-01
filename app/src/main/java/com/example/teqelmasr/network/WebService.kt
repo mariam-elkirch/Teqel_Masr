@@ -1,7 +1,7 @@
 package com.example.teqelmasr.network
 
 import com.example.teqelmasr.model.ProductItem
-import retrofit2.Call
+import com.example.teqelmasr.model.ProductPost
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,7 +24,7 @@ interface WebService {
     )
     @POST("admin/products.json")
 
-    suspend fun storeProduct(@Body product: ProductItem): Response<ProductItem>
+    suspend fun storeProduct(@Body product: ProductPost): Response<ProductItem>
 
     //get seller products
     @Headers(

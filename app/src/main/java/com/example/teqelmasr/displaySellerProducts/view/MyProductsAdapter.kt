@@ -23,7 +23,7 @@ class MyProductsAdapter(private val context: Context): RecyclerView.Adapter<MyPr
         val currentItem = productList[position]
         holder.binding.apply {
             itemTitle.text = currentItem.title
-            price.text = currentItem.variants[0].price.toString()
+            price.text = currentItem.variants?.get(0)?.price.toString()
 
         }
         Glide.with(context).load(currentItem.image?.src).centerCrop().placeholder(R.drawable.placeholder).into(holder.binding.itemImage)

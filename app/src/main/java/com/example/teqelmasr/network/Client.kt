@@ -1,10 +1,11 @@
 package com.example.teqelmasr.network
 
 
+import android.util.Log
 import com.example.teqelmasr.model.ProductItem
 
 
-import com.example.teqelmasr.model.Product
+import com.example.teqelmasr.model.ProductPost
 
 import retrofit2.Response
 
@@ -32,8 +33,9 @@ class Client : RemoteSource {
         return service.getMyProducts()
     }
 
-    override suspend fun storeProduct(product: ProductItem): Response<ProductItem> {
-
+    override suspend fun storeProduct(product: ProductPost): Response<ProductItem> {
+        Log.i("Tag",product.toString() + "imgggggg")
+        val productsService = ApiManager.getInstance().create(WebService::class.java)
         return productsService.storeProduct(product)
     }
 
