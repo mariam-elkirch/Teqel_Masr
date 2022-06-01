@@ -10,7 +10,7 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.MyProductsListItemBinding
 import com.example.teqelmasr.model.Product
 
-class MyProductsAdapter(private val context: Context): RecyclerView.Adapter<MyProductsAdapter.ViewHolder>() {
+class MyProductsAdapter(private val context: Context, private val onBtnListener: OnBtnListener): RecyclerView.Adapter<MyProductsAdapter.ViewHolder>() {
 
     private var productList: List<Product> = listOf()
     private val TAG = "MyProducts Adapter"
@@ -23,7 +23,11 @@ class MyProductsAdapter(private val context: Context): RecyclerView.Adapter<MyPr
         val currentItem = productList[position]
         holder.binding.apply {
             itemTitle.text = currentItem.title
-            price.text = currentItem.variants[0].price.toString()
+            price.text = "${currentItem.variants[0].price.toString()} LE"
+
+            deleteBtn.setOnClickListener {
+                onBtnListener.onDeleteClick(currentItem)
+            }
 
         }
         Glide.with(context).load(currentItem.image?.src).centerCrop().placeholder(R.drawable.placeholder).into(holder.binding.itemImage)

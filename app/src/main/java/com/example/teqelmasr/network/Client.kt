@@ -30,4 +30,10 @@ class Client : RemoteSource {
         return service.getMyProducts()
     }
 
+    override suspend fun deleteProduct(product: Product) {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        service.deleteProduct(product.variants[0].product_id!!)
+
+    }
+
 }

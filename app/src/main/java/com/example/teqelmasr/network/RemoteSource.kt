@@ -8,4 +8,6 @@ interface RemoteSource {
     suspend fun fetchSpareParts() : Response<ProductItem>
 
     suspend fun getMyProducts(): Response<ProductItem>
+
+    suspend fun deleteProduct(product: Product)
 }

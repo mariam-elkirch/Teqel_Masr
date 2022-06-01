@@ -29,5 +29,9 @@ class Repository private constructor(
         return remoteSource.fetchSpareParts()
     }
 
+    override suspend fun deleteProduct(product: Product) {
+        remoteSource.deleteProduct(product)
+    }
+
 
 }
