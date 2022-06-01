@@ -7,5 +7,5 @@ interface RepositoryInterface {
     suspend fun getMyProducts(): Response<ProductItem>
 
 
-    suspend fun fetchSpareParts() :  Response<ProductItem>
+    suspend fun getProductsByCategory(productCategory: String) :  Response<ProductItem>
 }

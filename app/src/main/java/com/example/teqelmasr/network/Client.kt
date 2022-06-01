@@ -2,10 +2,6 @@ package com.example.teqelmasr.network
 
 
 import com.example.teqelmasr.model.ProductItem
-
-
-import com.example.teqelmasr.model.Product
-
 import retrofit2.Response
 
 class Client : RemoteSource {
@@ -13,19 +9,18 @@ class Client : RemoteSource {
         val weatherService = RetrofitHelper.getInstance().create(WeatherService::class.java)
         return weatherService.getCurrentWeather(units, lat, lng, lang)
     }*/
-    val productsService = ApiManager.getInstance().create(WebService::class.java)
-     companion object{
-            private var instance: Client? = null
-            fun getInstance(): Client{
-                return  instance?: Client()
-            }
+    private val productsService = ApiManager.getInstance().create(WebService::class.java)
+
+    companion object {
+        private var instance: Client? = null
+        fun getInstance(): Client {
+            return instance ?: Client()
         }
-
-    override suspend fun fetchSpareParts() : Response<ProductItem> {
-        val productsService = ApiManager.getInstance().create(WebService::class.java)
-        return productsService.getProducts()
-
     }
+
+    override suspend fun getProductsByCategory(productCategory: String) =
+        productsService.getProducts(productCategory)
+
 
     override suspend fun getMyProducts(): Response<ProductItem> {
         val service = ApiManager.getInstance().create(WebService::class.java)
@@ -33,7 +28,6 @@ class Client : RemoteSource {
     }
 
     override suspend fun storeProduct(product: ProductItem): Response<ProductItem> {
-
         return productsService.storeProduct(product)
     }
 

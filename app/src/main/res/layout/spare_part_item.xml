@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/spare_part_cardView"
         android:layout_width="190dp"
         android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +23,7 @@
         app:cardUseCompatPadding="true"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

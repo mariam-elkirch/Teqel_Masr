@@ -6,7 +6,7 @@
         android:title="@string/home"  />
    <item
         android:id="@+id/favouriteFragment"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_baseline_favorite_border_24"
         android:title="favourite" />
 
 </menu>

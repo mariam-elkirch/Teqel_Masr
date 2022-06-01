@@ -1,17 +1,18 @@
 package com.example.teqelmasr.displaySparePart.view
 
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.SparePartItemBinding
-
-
 import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductItem
 
-class DisplaySparePartsRecyclerAdapter : RecyclerView.Adapter<SparePartsViewHolder>() {
+class DisplaySparePartsRecyclerAdapter(val context: Context, private val listener: OnProductClickListener) :
+    RecyclerView.Adapter<SparePartsViewHolder>() {
 
     private var sparePartsList = mutableListOf<Product>()
 
@@ -19,6 +20,7 @@ class DisplaySparePartsRecyclerAdapter : RecyclerView.Adapter<SparePartsViewHold
         this.sparePartsList = sparePartsList.toMutableList()
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SparePartsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = SparePartItemBinding.inflate(inflater, parent, false)
@@ -26,14 +28,20 @@ class DisplaySparePartsRecyclerAdapter : RecyclerView.Adapter<SparePartsViewHold
     }
 
     override fun onBindViewHolder(holder: SparePartsViewHolder, position: Int) {
+        Log.i("TAG", "list size ${sparePartsList.size}" )
         val sparePartItem = sparePartsList[position]
-        holder.binding.textView.text = sparePartItem.title ?: "Unknown"
-        holder.binding.priceTextView.text = sparePartItem.bodyHtml ?: "Unknown"
-        /*Glide.with(context).load(sparePartItem.).placeholder(R.drawable.photo)
-            .into(holder.binding.imageView)*/
+        holder.binding.apply {
+            textView.text = sparePartItem.title ?: "Unknown"
+            priceTextView.text = sparePartItem.variants[0].price.toString()
+            sparePartCardView.setOnClickListener { listener.onProductClick(sparePartItem) }
+        }
+        Glide.with(context).load(sparePartItem.image?.src).centerCrop()
+            .placeholder(R.drawable.placeholder).into(holder.binding.imageView)
+
     }
 
     override fun getItemCount() = sparePartsList.size
 }
 
-class SparePartsViewHolder(val binding: SparePartItemBinding) : RecyclerView.ViewHolder(binding.root)
+class SparePartsViewHolder(val binding: SparePartItemBinding) :
+    RecyclerView.ViewHolder(binding.root)
