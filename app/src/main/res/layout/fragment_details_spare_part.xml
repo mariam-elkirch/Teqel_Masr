@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".displaySparePart.DetailsSparePartFragment">
+    tools:context=".displaySparePart.view.DetailsSparePartFragment">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/product_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="product_title"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="75dp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/product_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="product_description"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="163dp" />
+
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="product_price"
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="368dp"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/product_vendor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="product_vendor"
+        tools:layout_editor_absoluteX="181dp"
+        tools:layout_editor_absoluteY="300dp" />
+
+    <TextView
+        android:id="@+id/product_published_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="product_published_at"
+        tools:layout_editor_absoluteX="190dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

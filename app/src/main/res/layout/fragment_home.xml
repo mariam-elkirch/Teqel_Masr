@@ -4,38 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
+    tools:context=".home.HomeFragment"
+    android:background="#F7F8F9"
+    >
 
     <Button
         android:id="@+id/equipmentSellBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:layout_width="100dp"
+        android:layout_height="140dp"
         android:text="Equipment sell"
+        android:textColor="#00477A"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/equipmentRentBtn"
        app:layout_constraintBottom_toTopOf="@id/SpareBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#E3EAEF"/>
 
     <Button
         android:id="@+id/equipmentRentBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:layout_width="100dp"
+        android:layout_height="140dp"
         android:text="Equipment rent"
+        android:textColor="#00477A"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintBottom_toTopOf="@id/sellertn"
         app:layout_constraintStart_toEndOf="@id/equipmentSellBtn"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#E3EAEF"/>
 
     <Button
         android:id="@+id/SpareBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="Spare Part"
         app:layout_constraintEnd_toStartOf="@id/equipmentRentBtn"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,4 +63,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/SpareBtn"  />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/ic_logo_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
