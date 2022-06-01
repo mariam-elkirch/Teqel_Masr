@@ -1,9 +1,6 @@
 package com.example.teqelmasr.model
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.teqelmasr.db.LocalSource
 import com.example.teqelmasr.network.RemoteSource
 import retrofit2.Response
 
@@ -29,7 +26,8 @@ class Repository private constructor(
         return  remoteSource.storeProduct(product)
     }
 
-    override suspend fun getProductsByCategory(productCategory: String) :  Response<ProductItem> {
+
+    override suspend fun getProductsByCategory(productCategory: Long) :  Response<ProductItem> {
         return remoteSource.getProductsByCategory(productCategory)
     }
 

@@ -1,4 +1,9 @@
 package com.example.teqelmasr.model
+
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
+
 data class ProductItem(
 	val products: List<Product>? = null
 )
@@ -6,11 +11,11 @@ data class ProductItem(
 data class ProductPost(
 	val product: Product? = null
 )
-
+@Parcelize
 data class OptionsItem(
 	val name: String? = null,
 	val position: Int? = null
-)
+):Parcelable
 
 data class ImagesItem(
 	val alt: Any? = null,
@@ -19,9 +24,10 @@ data class ImagesItem(
 	val position: Int? = null,
 	val height: Int? = null
 )
+@Parcelize
 data class Variant(
 	val barcode: String? =null,
-	val compare_at_price: Any? = null,
+	val compare_at_price: @RawValue Any? = null,
 	val created_at: String? =null,
 	val fulfillment_service: String? =null,
 	val grams: Int? = 0,
@@ -41,21 +47,22 @@ data class Variant(
 	val updated_at: String? = null,
 	val weight: Double? = 0.0,
 	val weight_unit: String? = null
-)
+):Parcelable
+@Parcelize
 data class Image(
-	val alt: Any? = null,
+	val alt: @RawValue Any? = null,
 	val width: Int? = null,
-	val variantIds: List<Any?>? = null,
+	val variantIds: @RawValue List<Any?>? = null,
 	val height: Int? = null,
 	val src: String? =null,
-)
-
+):Parcelable
+@Parcelize
 data class Product(
 	val publishedScope: String? = null,
 	val image: Image? = null,
 	val bodyHtml: String? = null,
 
-	val images: List<ImagesItem?>? = null,
+	val images: @RawValue List<ImagesItem?>? = null,
 	val templateSuffix: String? = null,
 	val variants: List<Variant>? = null,
 	val productType: String? = null,
@@ -64,7 +71,7 @@ data class Product(
 	val title: String? = null,
 	val status: String? = null,
 	val tags: String? = null
-)
+):Parcelable
 
 
 

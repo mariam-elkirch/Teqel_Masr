@@ -12,8 +12,8 @@ interface WebService {
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
     )
-    @GET("admin/products.json")
-    suspend fun getProducts(@Query("tags") productType: String): Response<ProductItem>
+    @GET("admin/collections/{CollectionID}/products.json")
+    suspend fun getProducts(@Path("CollectionID") id: Long): Response<ProductItem>
 
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
