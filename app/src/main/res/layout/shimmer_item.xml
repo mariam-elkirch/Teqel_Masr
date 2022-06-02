@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -13,7 +13,9 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/item_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,7 +27,7 @@
                 android:layout_width="0dp"
                 app:layout_constraintWidth_percent="0.4"
                 android:layout_height="0dp"
-                app:layout_constraintHeight_percent="0.7"
+                app:layout_constraintHeight_percent="0.9"
                 android:layout_marginEnd="30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:background="@android:color/darker_gray"
@@ -34,6 +36,7 @@
             <TextView
                 android:id="@+id/item_title"
                 android:layout_width="0dp"
+                android:background="@android:color/darker_gray"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
@@ -45,59 +48,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/item_price"
                 android:layout_width="0dp"
+                android:background="@android:color/darker_gray"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="140dp"
                 android:fontFamily="@font/noto_sans"
                 android:textColor="#E97000"
                 app:layout_constraintEnd_toEndOf="@id/item_title"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginEnd="140dp"
                 app:layout_constraintStart_toStartOf="@id/item_title"
                 app:layout_constraintTop_toBottomOf="@id/item_title" />
-
-            <Button
-                android:id="@+id/deleteBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#00477A"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="18dp"
-                android:text="Delete"
-                android:textSize="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/item_image" />
-
-            <Button
-                android:id="@+id/editBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Edit"
-                android:textSize="12dp"
-                android:backgroundTint="#00477A"
-                app:layout_constraintStart_toEndOf="@id/deleteBtn"
-                app:layout_constraintTop_toTopOf="@id/deleteBtn" />
-
-            <TextView
-                android:id="@+id/details"
-                android:text="Details"
-                android:backgroundTint= "@color/white"
-                android:textSize="13dp"
-                android:padding="12dp"
-                android:textColor="#00477A"
-                android:fontFamily="@font/noto_sans_bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/editBtn"
-                android:layout_marginEnd="15dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="110dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

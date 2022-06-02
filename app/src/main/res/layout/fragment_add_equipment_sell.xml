@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    tools:context=".addEquipmentSell.AddEquipmentSellFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addEquipmentSell.AddEquipmentSellFragment">
+    android:fillViewport="true"
+    android:orientation="vertical"
+   >
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <com.github.siyamed.shapeimageview.RoundedImageView
         android:id="@+id/productImg"
         android:layout_width="150dp"
@@ -26,14 +31,38 @@
         android:id="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/productImg"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:entries="@array/equiments"
+        android:entries="@array/type"
         />
+        <Spinner
+            android:id="@+id/spinnerEquipment"
+            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:entries="@array/equiments"
+            />
+        <Spinner
+            android:id="@+id/spinnerSpare"
+            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:entries="@array/spare"
+            />
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/title_editText"
         android:layout_width="match_parent"
@@ -41,22 +70,37 @@
         app:backgroundTint="@color/orange"
         android:hint="@string/title"
         android:maxLines="1"
-       app:layout_constraintTop_toBottomOf="@+id/spinner"
+       app:layout_constraintTop_toBottomOf="@+id/spinnerSpare"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         />
-    <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/price_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/orange"
+            android:hint="@string/price"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            app:layout_constraintTop_toBottomOf="@+id/title_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            />
+    <EditText
         android:id="@+id/describtion_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/orange"
         android:hint="@string/describtion"
-        android:maxLines="3"
-        app:layout_constraintTop_toBottomOf="@+id/title_editText"
+        android:inputType="textCapSentences|textMultiLine"
+        app:layout_constraintTop_toBottomOf="@+id/manfactory_editText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="40dp"
+
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         />
@@ -67,9 +111,9 @@
         app:backgroundTint="@color/orange"
         android:hint="@string/manfactory"
         android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/describtion_editText"
+        app:layout_constraintTop_toBottomOf="@+id/price_editText"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         />
@@ -77,15 +121,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveButton"
-        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/manfactory_editText"
+        app:layout_constraintTop_toBottomOf="@id/describtion_editText"
         android:paddingStart="70dp"
         android:paddingEnd="70dp"
         android:text="@string/save"
         android:textColor="@color/white"
         android:background="@drawable/rounded_shape"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

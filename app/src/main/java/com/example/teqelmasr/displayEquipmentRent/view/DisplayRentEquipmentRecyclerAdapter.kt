@@ -31,14 +31,14 @@ class DisplayRentEquipmentRecyclerAdapter(val context: Context, private val list
         Log.i("TAG", "list size ${equipmentRentList.size}" )
         val equipmentRentItem = equipmentRentList[position]
         holder.binding.apply {
-            textView.text = equipmentRentItem.title ?: "Unknown"
-            priceTextView.text = equipmentRentItem.variants?.get(0)?.price.toString()
-            sparePartCardView.setOnClickListener {
+            itemTitle.text = equipmentRentItem.title ?: "Unknown"
+           itemPrice.text = equipmentRentItem.variants?.get(0)?.price.toString()
+           itemCard.setOnClickListener {
                val action = DisplayEquipmentRentFragmentDirections.actionDisplayEquipmentRentFragmentToDetailsEquipmentRentFragment(equipmentRentItem)
                 listener.onProductClick(equipmentRentItem) }
         }
         Glide.with(context).load(equipmentRentItem.image?.src).centerCrop()
-            .placeholder(R.drawable.placeholder).into(holder.binding.imageView)
+            .placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
 
     }
 

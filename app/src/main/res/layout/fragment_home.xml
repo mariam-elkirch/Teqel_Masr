@@ -4,61 +4,216 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <Button
+    tools:context=".home.HomeFragment"
+    android:background="#F7F8F9"
+    >
+    <androidx.cardview.widget.CardView
         android:id="@+id/equipmentSellBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Equipment sell"
-        app:layout_constraintEnd_toStartOf="@id/equipmentRentBtn"
-       app:layout_constraintBottom_toTopOf="@id/SpareBtn"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/equipmentRentBtn"
+        android:backgroundTint="#E3EAEF"
+        app:cardCornerRadius="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_equipment_rent"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginTop="9dp"
 
-    <Button
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Equipment Rent"
+                android:textColor="#00477A"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/equipmentRentBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/SpareBtn"
+        app:layout_constraintStart_toEndOf="@+id/equipmentSellBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#E3EAEF"
+        app:cardCornerRadius="10dp">
 
-        android:text="Equipment rent"
-        app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintBottom_toTopOf="@id/sellertn"
-        app:layout_constraintStart_toEndOf="@id/equipmentSellBtn"
-        app:layout_constraintTop_toTopOf="parent"  />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_equipment_sell"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginTop="9dp"
 
-    <Button
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipment Sell"
+            android:textColor="#00477A"
+            android:layout_gravity="center"
+            />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/SpareBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/equipmentRentBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#E3EAEF"
+        app:cardCornerRadius="10dp">
 
-        android:text="Spare Part"
-        app:layout_constraintEnd_toStartOf="@id/equipmentRentBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/equipmentSellBtn" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_spare"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginTop="9dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spare Parts"
+                android:textColor="#00477A"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/sellertn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="18dp"
+        android:backgroundTint="#E97000"
         android:text="Seller"
+        app:layout_constraintBottom_toTopOf="@+id/postProductBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/SpareBtn"
-        app:layout_constraintTop_toBottomOf="@id/equipmentRentBtn"  />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipmentRentBtn" />
+
     <Button
         android:id="@+id/postProductBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginBottom="136dp"
         android:text="Post Product"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/ic_logo_blue"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SpareBtn"  />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
+        <Button
+            android:id="@+id/equipmentSellBtn"
+            android:drawableTop="@drawable/ic_equipment_rent"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#E3EAEF"
+            android:text="Equipment sell"
+            android:textColor="#00477A"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/equipmentRentBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/equipmentRentBtn"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#E3EAEF"
+            android:text="Equipment rent"
+            android:textColor="#00477A"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/SpareBtn"
+            app:layout_constraintStart_toEndOf="@+id/equipmentSellBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/SpareBtn"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#E3EAEF"
+            android:text="Spare Part"
+            android:textColor="#00477A"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/equipmentRentBtn"
+            app:layout_constraintTop_toTopOf="parent" />-->
