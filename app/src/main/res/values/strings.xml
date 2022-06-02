@@ -2,10 +2,35 @@
     <string name="app_name">Teqel Masr</string>
     <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="type">
+        <item>Equipment for Sell</item>
+        <item>Equipment for Rent</item>
+        <item>Spare Parts</item>
+    </string-array>
     <string-array name="equiments">
-        <item>Array Item One</item>
-        <item>Array Item Two</item>
-        <item>Array Item Three</item>
+       <item> coldplaners</item>
+        <item>compactors</item>
+        <item>excavators</item>
+        <item>dozers</item>
+        <item>asphaltpavers</item>
+        <item> backhoeloaders</item>
+        <item> articulatedtrucks</item>
+    </string-array>
+    <string-array name="spare">
+        <item>turbocharger </item>
+        <item>filter </item>
+        <item>accumulator </item>
+        <item>valve </item>
+        <item> hose </item>
+        <item> miscellaneous </item>
+        <item>hydraulic_components </item>
+        <item>other </item>
+        <item>fittings </item>
+        <item>tubes_pipes </item>
+        <item> tanks_reservoirs </item>
+        <item>pumps_motors </item>
+        <item>cylinder_rods </item>
+        <item>reman </item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">Title</string>
@@ -13,4 +38,5 @@
     <string name="manfactory">Manfactory</string>
     <string name="save">Save</string>
     <string name="my_products_txt">My Products</string>
+    <string name="price">Price</string>
 </resources>

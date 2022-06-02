@@ -28,8 +28,12 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.BitmapDrawable
 
 import android.R
+import android.view.View.*
+import android.widget.AdapterView
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
+import com.example.teqelmasr.model.Variant
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,7 +54,7 @@ class AddEquipmentSellFragment : Fragment() {
     private val pickImage = 100
     private var imageUri: Uri? = null
     lateinit var viewModel: AddProductViewModel
-
+    lateinit var mytag : String
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,17 +75,44 @@ class AddEquipmentSellFragment : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
+        val spinner = binding.spinner
+        val text = spinner.selectedItem.toString()
+       /* if(text.equals("Equipment for Sell")){
+            binding.spinnerSpare.visibility = GONE
+            binding.spinnerEquipment.visibility = VISIBLE
+        }
+        else{
+            binding.spinnerEquipment.visibility = GONE
+            binding.spinnerSpare.visibility = VISIBLE
+        }*/
+      spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+               // binding.spinnerSpare.visibility = GONE
+               // binding.spinnerEquipment.visibility = VISIBLE
+            }
 
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.i("tag",position.toString()+"Imggg")
+                if (position == 2){
+                binding.spinnerEquipment.visibility = INVISIBLE
+                binding.spinnerSpare.visibility = VISIBLE
+                     mytag = "spare"
+            }else{
+                    binding.spinnerEquipment.visibility = VISIBLE
+                    binding.spinnerSpare.visibility = INVISIBLE
+                    if(position == 0)
+                        mytag = "equimentsell"
+                    else{
+                        mytag = "equimentrent"
+                    }
+            }
+            }
 
+        }
         binding.saveButton.setOnClickListener {
-            val spinner = binding.spinner
-            val text = spinner.selectedItem.toString()
 
-          /*  val byteArrayOutputStream = ByteArrayOutputStream()
-            val bitmap = BitmapFactory.decodeResource(resources, binding.productImg.)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-            val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
-            val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)*/
+
+
             val iv: ImageView = binding.productImg as ImageView
             val bitmap = iv.getDrawable().toBitmap()
             val bos = ByteArrayOutputStream()
@@ -89,15 +120,24 @@ class AddEquipmentSellFragment : Fragment() {
             val bb = bos.toByteArray()
             val imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
 
-            Log.i("Tag", "Imgggggggg"+imageString)
+            Log.i("Tag", "Imgggggggg"+mytag)
 //decode
-            val imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+         /*   val imageBytes = Base64.decode(imageString, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-           binding.productImg.setImageBitmap(decodedImage)
+           binding.productImg.setImageBitmap(decodedImage)*/
+//end decode
+            val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
+            Log.i("tag",doublePrice.toString()+ "Priceee")
+            val varian = listOf(
 
+              Variant(price = doublePrice)
+            )
 
             if(binding.titleEditText.toString().trim().length>0){
-            var product = ProductPost(Product(title = binding.titleEditText.text.toString()))
+
+            var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
+                ,bodyHtml = binding.describtionEditText.text.toString()
+                ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
             Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())
 
                 addProductfactory = AddProductViewModelFactory(
@@ -109,6 +149,8 @@ class AddEquipmentSellFragment : Fragment() {
                 viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]
                 viewModel.myProducts.observe(viewLifecycleOwner){
                     Log.i("tag",it.toString()+ "product")
+                    val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
+                    toast.show()
                 }
                 viewModel.errorMessage.observe(viewLifecycleOwner){
                     Log.i("tag",it.toString()+ "product")
