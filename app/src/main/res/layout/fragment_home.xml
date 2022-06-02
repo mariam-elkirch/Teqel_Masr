@@ -7,8 +7,6 @@
     tools:context=".home.HomeFragment"
     android:background="#F7F8F9"
     >
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/equipmentSellBtn"
         android:layout_width="100dp"

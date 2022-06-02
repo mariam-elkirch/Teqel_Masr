@@ -1,10 +1,12 @@
-package com.example.teqelmasr.displayEquipmentRent
+package com.example.teqelmasr.displayEquipmentRent.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.fragment.navArgs
 import com.example.teqelmasr.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +23,7 @@ class DetailsEquipmentRentFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val args by navArgs<DetailsEquipmentRentFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +37,10 @@ class DetailsEquipmentRentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
+        val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
+        var txt:TextView = view.findViewById(R.id.detailsTextView)
+        txt.text= "hellllllllo ${args.product.title}"
+        return view
     }
 
     companion object {

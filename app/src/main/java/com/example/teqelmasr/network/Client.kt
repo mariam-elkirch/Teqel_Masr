@@ -30,8 +30,7 @@ class Client : RemoteSource {
         return productsService.storeProduct(product)
     }
 
-
-    override suspend fun getProductsByCategory(productCategory: String) =
+    override suspend fun getProductsByCategory(productCategory: Long) =
         productsService.getProducts(productCategory)
 
     override suspend fun getMyProducts(): Response<ProductItem> {

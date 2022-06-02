@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySparePartBinding
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
@@ -59,7 +61,8 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
     override fun onProductClick(product: Product) {
-       Log.i("TAG","${product.title} Inside onProductClick")
+        binding.root.findNavController().navigate(R.id.action_displaySparePartFragment_to_detailsSparePartFragment2)
+        Log.i("TAG","${product.title} Inside onProductClick")
     }
 
 

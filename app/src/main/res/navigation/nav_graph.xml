@@ -53,14 +53,24 @@
         tools:layout="@layout/fragment_display_equipment_sell" />
     <fragment
         android:id="@+id/displayEquipmentRentFragment"
-        android:name="com.example.teqelmasr.displayEquipmentRent.DisplayEquipmentRentFragment"
+        android:name="com.example.teqelmasr.displayEquipmentRent.view.DisplayEquipmentRentFragment"
         android:label="fragment_display_equipment_rent"
-        tools:layout="@layout/fragment_display_equipment_rent" />
+        tools:layout="@layout/fragment_display_equipment_rent" >
+        <action
+            android:id="@+id/action_displayEquipmentRentFragment_to_detailsEquipmentRentFragment"
+            app:destination="@id/detailsEquipmentRentFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/displaySparePartFragment"
         android:name="com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragment"
         android:label="fragment_display_spare_part"
-        tools:layout="@layout/fragment_display_spare_part" />
+        tools:layout="@layout/fragment_display_spare_part" >
+        <action
+            android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
+            app:destination="@id/detailsSparePartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displaySellerProductsFragment"
         android:name="com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment"
@@ -75,4 +85,17 @@
         android:name="com.example.teqelmasr.displaySellerProducts.view.DetailsSellerProductFragment"
         android:label="fragment_details_seller_product"
         tools:layout="@layout/fragment_details_seller_product" />
+    <fragment
+        android:id="@+id/detailsSparePartFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragment"
+        android:label="fragment_details_spare_part"
+        tools:layout="@layout/fragment_details_spare_part" />
+    <fragment
+        android:id="@+id/detailsEquipmentRentFragment"
+        android:name="com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragment"
+        android:label="DetailsEquipmentRentFragment" >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
 </navigation>

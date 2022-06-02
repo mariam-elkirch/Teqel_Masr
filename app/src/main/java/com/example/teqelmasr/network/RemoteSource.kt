@@ -13,9 +13,7 @@ import com.example.teqelmasr.model.ProductPost
 
 interface RemoteSource {
     suspend fun storeProduct(product: ProductPost): Response<ProductItem>
-
-
-    suspend fun getProductsByCategory(productCategory: String) : Response<ProductItem>
+    suspend fun getProductsByCategory(productCategory: Long) : Response<ProductItem>
 
     suspend fun getMyProducts(): Response<ProductItem>
 
