@@ -66,12 +66,30 @@
         android:id="@+id/displaySparePartFragment"
         android:name="com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragment"
         android:label="fragment_display_spare_part"
-        tools:layout="@layout/fragment_display_spare_part" />
+        tools:layout="@layout/fragment_display_spare_part" >
+        <action
+            android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
+            app:destination="@id/detailsSparePartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displaySellerProductsFragment"
         android:name="com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment"
         android:label="fragment_display_seller_products"
-        tools:layout="@layout/fragment_display_seller_products" />
+        tools:layout="@layout/fragment_display_seller_products" >
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_detailsSellerProductFragment"
+            app:destination="@id/detailsSellerProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsSellerProductFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.DetailsSellerProductFragment"
+        android:label="fragment_details_seller_product"
+        tools:layout="@layout/fragment_details_seller_product" />
+    <fragment
+        android:id="@+id/detailsSparePartFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragment"
+        android:label="fragment_details_spare_part"
+        tools:layout="@layout/fragment_details_spare_part" />
     <fragment
         android:id="@+id/detailsEquipmentRentFragment"
         android:name="com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragment"

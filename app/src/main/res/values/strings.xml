@@ -39,4 +39,14 @@
     <string name="save">Save</string>
     <string name="my_products_txt">My Products</string>
     <string name="price">Price</string>
+    <string name="delete_message">Do you want to delete this item?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="item_deleted">Item Deleted</string>
+    <string name="category">Category</string>
+    <string name="type">Type</string>
+    <string name="vendor">Vendor</string>
+    <string name="description">Description</string>
+    <string name="details">Details</string>
+    <string name="dummy_desc">It is the job of the turbocharger to compress more air flowing into the engine\'s cylinder. When air is compressed the oxygen molecules are packed closer together. This increase in air means that more fuel can be added for the same si</string>
 </resources>

@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 data class ProductItem(
-	val products: List<Product>? = null
+	val products:ArrayList<Product>? = null
 )
 
 data class ProductPost(
