@@ -70,6 +70,7 @@
         <action
             android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
             app:destination="@id/detailsSparePartFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/displaySellerProductsFragment"
@@ -89,7 +90,13 @@
         android:id="@+id/detailsSparePartFragment"
         android:name="com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragment"
         android:label="fragment_details_spare_part"
-        tools:layout="@layout/fragment_details_spare_part" />
+        tools:layout="@layout/fragment_details_spare_part"
+
+        >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
     <fragment
         android:id="@+id/detailsEquipmentRentFragment"
         android:name="com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragment"
