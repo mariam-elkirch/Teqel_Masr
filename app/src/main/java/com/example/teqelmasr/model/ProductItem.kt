@@ -3,6 +3,7 @@ package com.example.teqelmasr.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
+import com.google.gson.annotations.SerializedName
 
 data class ProductItem(
 	val products:ArrayList<Product>? = null
@@ -14,12 +15,14 @@ data class ProductPost(
 @Parcelize
 data class OptionsItem(
 	val name: String? = null,
-	val position: Int? = null
+	val position: Int? = null,
+val product_id : Long? = null
 ):Parcelable
 
 data class ImagesItem(
 	val alt: Any? = null,
 	val width: Int? = null,
+	@SerializedName("variant_ids")
 	val variantIds: List<Any?>? = null,
 	val position: Int? = null,
 	val height: Int? = null
@@ -52,22 +55,29 @@ data class Variant(
 data class Image(
 	val alt: @RawValue Any? = null,
 	val width: Int? = null,
-	val variantIds: @RawValue List<Any?>? = null,
+	@SerializedName("variant_ids")
+val variantIds: @RawValue List<Any?>? = null,
 	val height: Int? = null,
 	val src: String? =null,
 ):Parcelable
 @Parcelize
 data class Product(
-	val publishedScope: String? = null,
+	@SerializedName("published_scope")
+val publishedScope: String? = null,
 	val image: Image? = null,
+	@SerializedName("body_html")
 	val bodyHtml: String? = null,
 
 	val images: @RawValue List<ImagesItem?>? = null,
+	@SerializedName("template_suffix")
 	val templateSuffix: String? = null,
 	val variants: List<Variant>? = null,
+	@SerializedName("product_type")
 	val productType: String? = null,
 	val vendor: String? = null,
 	val options: List<OptionsItem?>? = null,
+	val updated_at: String? = null,
+	val published_at: String? = null,
 	val title: String? = null,
 	val status: String? = null,
 	val tags: String? = null
