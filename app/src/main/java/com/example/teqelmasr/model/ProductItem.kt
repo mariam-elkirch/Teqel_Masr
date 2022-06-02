@@ -8,6 +8,7 @@ data class ProductItem(
 	val products:ArrayList<Product>? = null
 )
 
+
 data class ProductPost(
 	val product: Product? = null
 )

@@ -7,18 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.example.teqelmasr.R
+import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
-
-
+    private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      binding = FragmentHomeBinding.inflate(inflater, container, false)
+     // binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return  binding.root
     }
