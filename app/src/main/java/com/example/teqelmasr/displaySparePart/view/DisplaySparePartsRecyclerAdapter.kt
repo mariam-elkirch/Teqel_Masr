@@ -31,9 +31,9 @@ class DisplaySparePartsRecyclerAdapter(val context: Context, private val listene
         Log.i("TAG", "list size ${sparePartsList.size}" )
         val sparePartItem = sparePartsList[position]
         holder.binding.apply {
-            textView.text = sparePartItem.title ?: "Unknown"
-            priceTextView.text = sparePartItem.variants?.get(0)?.price.toString()
-            sparePartCardView.setOnClickListener { listener.onProductClick(sparePartItem) }
+            itemTitle.text = sparePartItem.title ?: "Unknown"
+            itemPrice.text = sparePartItem.variants!![0]?.price.toString()
+            itemCard.setOnClickListener { listener.onProductClick(sparePartItem) }
         }
         Glide.with(context).load(sparePartItem.image?.src).centerCrop()
             .placeholder(R.drawable.placeholder).into(holder.binding.imageView)

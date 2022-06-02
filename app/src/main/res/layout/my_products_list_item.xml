@@ -22,22 +22,23 @@
 
             <ImageView
                 android:id="@+id/item_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.4"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.7"
                 android:layout_marginEnd="30dp"
-                android:src="@drawable/placeholder"
                 app:layout_constraintStart_toStartOf="parent"
+                android:background="@android:color/darker_gray"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:textAlignment="viewStart"
                 android:fontFamily="@font/noto_sans_bold"
-                android:text="101-9528: SOLENOID ASSEMBLY"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/item_image"
@@ -45,12 +46,13 @@
 
             <TextView
                 android:id="@+id/price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/noto_sans"
-                android:text="100 LE"
                 android:textColor="#E97000"
+                app:layout_constraintEnd_toEndOf="@id/item_title"
+                android:layout_marginEnd="140dp"
                 app:layout_constraintStart_toStartOf="@id/item_title"
                 app:layout_constraintTop_toBottomOf="@id/item_title" />
 
