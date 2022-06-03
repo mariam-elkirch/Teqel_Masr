@@ -13,7 +13,6 @@ import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
-import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -67,4 +66,14 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
         Log.i("TAG", "${product.title} Inside onProductClick")
 
     }
+
+    override fun onEmptyList(searchKey: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFullList() {
+
+    }
+
+
 }

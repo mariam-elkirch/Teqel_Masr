@@ -16,7 +16,6 @@ import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewMod
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
-import java.util.*
 
 
 class DisplaySparePartFragment : Fragment(), OnProductClickListener {
@@ -52,7 +51,26 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
             recyclerViewSpareParts.hasFixedSize()
             recyclerViewSpareParts.layoutManager = LinearLayoutManager(requireContext())
 
-            //sparePartSearch.setOnCloseListener { true }
+            searchSpareParts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    sparePartsAdapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    sparePartsAdapter.filter.filter(newText)
+                    return true
+                }
+
+            })
+            searchSpareParts.setOnCloseListener(SearchView.OnCloseListener() {
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            });
         }
         fetchSpareParts()
         return binding.root
@@ -61,32 +79,9 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     private fun fetchSpareParts() {
         viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productItem ->
             binding.searchSpareParts.visibility = View.VISIBLE
-            sparePartsAdapter.setSparePartsList(productItem.products!!)
+            sparePartsAdapter.setData(productItem.products!!)
             binding.spareShimmer.stopShimmer()
             binding.spareShimmer.visibility = View.GONE
-            binding.searchSpareParts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    val searchKeyWord = newText!!.toLowerCase(Locale.getDefault())
-                    if (searchKeyWord.isNotEmpty()) {
-                        Log.i("TAG", "query word is ${newText}")
-                        productItem.products.forEach { product ->
-                            if (product.title?.toLowerCase()?.contains(searchKeyWord)!!) {
-                                Log.i("TAG", "search result is ${product.title}")
-                            }
-
-                        }
-
-                    }
-                    return false
-                }
-
-
-            })
         }
     }
 
@@ -97,6 +92,21 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
             )
         binding.root.findNavController().navigate(action)
         Log.i("TAG", "${product.title} Inside onProductClick")
+    }
+
+    override fun onEmptyList(searchKey: String) {
+        binding.apply {
+            noResultsImage.visibility = View.VISIBLE
+            noResultText.text = "No Results for your search \"$searchKey\""
+            noResultText.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onFullList() {
+        binding.apply {
+            noResultsImage.visibility = View.GONE
+            noResultText.visibility = View.GONE
+        }
     }
 
 
