@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
+
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
 import com.example.teqelmasr.model.Product
@@ -66,6 +67,11 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     override fun onDetailsClick(product: Product) {
         val action: NavDirections = DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToDetailsSellerProductFragment(product)
+        binding.root.findNavController().navigate(action)
+    }
+
+    override fun onEditClick(product: Product) {
+        val action: NavDirections = DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToEditSellerProductFragment(product)
         binding.root.findNavController().navigate(action)
     }
 

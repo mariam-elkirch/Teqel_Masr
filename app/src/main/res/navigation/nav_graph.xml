@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_detailsSellerProductFragment"
             app:destination="@id/detailsSellerProductFragment" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
+            app:destination="@id/editSellerProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -100,6 +103,15 @@
         android:label="DetailsEquipmentRentFragment" >
         <argument
             android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSellerProductFragment"
+        android:name="com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragment"
+        android:label="fragment_edit_seller_product"
+        tools:layout="@layout/fragment_edit_seller_product" >
+        <argument
+            android:name="currentProduct"
             app:argType="com.example.teqelmasr.model.Product" />
     </fragment>
 </navigation>

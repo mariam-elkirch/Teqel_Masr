@@ -29,7 +29,7 @@ class DetailsSellerProductFragment : Fragment() {
 
     private fun setUpUI() {
         binding.apply {
-            priceTxt.text = args.currentProduct.variants!![0].price.toString()
+            priceTxt.text = args.currentProduct.variants?.get(0)?.price.toString()
             dateTxt.text = args.currentProduct.published_at?.slice(IntRange(0,9))
             titleTxt.text = args.currentProduct.title
             categoryTxt.text = args.currentProduct.tags

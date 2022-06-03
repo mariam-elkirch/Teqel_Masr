@@ -48,8 +48,12 @@ class MyProductsAdapter(private val context: Context, private val onBtnListener:
             }
 
             details.setOnClickListener {
-                //root.findNavController().navigate(R.id.action_displaySellerProductsFragment_to_detailsSellerProductFragment)
                 onBtnListener.onDetailsClick(currentItem)
+            }
+
+            editBtn.setOnClickListener {
+                onBtnListener.onEditClick(currentItem)
+                //root.findNavController().navigate(R.id.action_displaySellerProductsFragment_to_editSellerProductFragment)
             }
 
         }
