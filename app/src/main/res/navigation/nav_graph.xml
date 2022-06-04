@@ -50,7 +50,13 @@
         android:id="@+id/displayEquipmentSellFragment"
         android:name="com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragment"
         android:label="fragment_display_equipment_sell"
-        tools:layout="@layout/fragment_display_equipment_sell" />
+        tools:layout="@layout/fragment_display_equipment_sell" >
+        <action
+            android:id="@+id/action_displayEquipmentSellFragment_to_detailsEquipmentSellFragment"
+            app:destination="@id/detailsEquipmentSellFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/displayEquipmentRentFragment"
         android:name="com.example.teqelmasr.displayEquipmentRent.view.DisplayEquipmentRentFragment"
@@ -96,6 +102,14 @@
         android:label="DetailsEquipmentRentFragment" >
         <argument
             android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsEquipmentSellFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragment"
+        android:label="DetailsEquipmentSellFragment" >
+        <argument
+            android:name="productsell"
             app:argType="com.example.teqelmasr.model.Product" />
     </fragment>
 </navigation>

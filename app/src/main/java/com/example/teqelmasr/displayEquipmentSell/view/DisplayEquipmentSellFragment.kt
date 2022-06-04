@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
@@ -64,7 +65,9 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         binding.apply {
             recyclerViewSellEquipment.adapter = equipmentSellAdapter
             recyclerViewSellEquipment.hasFixedSize()
-            recyclerViewSellEquipment.layoutManager = GridLayoutManager(requireContext(), 2)
+
+            recyclerViewSellEquipment.layoutManager = LinearLayoutManager(requireContext())
+
         }
 
         fetchEquipmentSell()
@@ -74,12 +77,14 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
     private fun fetchEquipmentSell() {
         viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentSellAdapter.setEquipmentSellList(it.products!!)
+            binding.shimmersell.stopShimmer()
+            binding.shimmersell.visibility = View.GONE
         }
     }
 
     override fun onProductClick(product: Product) {
-      //  val action = DisplayEquipmentRentFragmentDirections.actionDisplayEquipmentRentFragmentToDetailsEquipmentRentFragment(product)
-      //  binding.root.findNavController().navigate(action)
+        val action = DisplayEquipmentSellFragmentDirections.actionDisplayEquipmentSellFragmentToDetailsEquipmentSellFragment(product)
+        binding.root.findNavController().navigate(action)
         Log.i("TAG", "${product.title} Inside onProductClick")
 
     }

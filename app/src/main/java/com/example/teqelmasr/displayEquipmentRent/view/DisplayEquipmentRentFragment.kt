@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
@@ -48,7 +49,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
         binding.apply {
             recyclerViewRentEquipment.adapter = equipmentRentAdapter
             recyclerViewRentEquipment.hasFixedSize()
-            recyclerViewRentEquipment.layoutManager = GridLayoutManager(requireContext(), 2)
+            recyclerViewRentEquipment.layoutManager = LinearLayoutManager(requireContext())
+
         }
 
         fetchEquipmentRent()
@@ -58,6 +60,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentRentAdapter.setEquipmentRentList(it.products!!)
+            binding.shimmerrent.stopShimmer()
+            binding.shimmerrent.visibility = View.GONE
         }
     }
 
