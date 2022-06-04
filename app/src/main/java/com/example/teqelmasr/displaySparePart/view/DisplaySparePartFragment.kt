@@ -5,12 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySparePartBinding
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
@@ -23,7 +22,12 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
 
     private val binding by lazy { FragmentDisplaySparePartBinding.inflate(layoutInflater) }
 
-    private val sparePartsAdapter by lazy { DisplaySparePartsRecyclerAdapter(requireContext(), this) }
+    private val sparePartsAdapter by lazy {
+        DisplaySparePartsRecyclerAdapter(
+            requireContext(),
+            this
+        )
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -38,7 +42,6 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,23 +49,64 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         binding.apply {
             recyclerViewSpareParts.adapter = sparePartsAdapter
             recyclerViewSpareParts.hasFixedSize()
-            recyclerViewSpareParts.layoutManager =LinearLayoutManager(requireContext())
+            recyclerViewSpareParts.layoutManager = LinearLayoutManager(requireContext())
+
+            searchSpareParts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    sparePartsAdapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    sparePartsAdapter.filter.filter(newText)
+                    return true
+                }
+
+            })
+            searchSpareParts.setOnCloseListener(SearchView.OnCloseListener() {
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            });
         }
         fetchSpareParts()
         return binding.root
     }
 
     private fun fetchSpareParts() {
-        viewModel.sparePartsLiveData.observe(viewLifecycleOwner) {
-            sparePartsAdapter.setSparePartsList(it.products!!)
+        viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productItem ->
+            binding.searchSpareParts.visibility = View.VISIBLE
+            sparePartsAdapter.setData(productItem.products!!)
             binding.spareShimmer.stopShimmer()
             binding.spareShimmer.visibility = View.GONE
         }
     }
 
     override fun onProductClick(product: Product) {
-        binding.root.findNavController().navigate(R.id.action_displaySparePartFragment_to_detailsSparePartFragment2)
-        Log.i("TAG","${product.title} Inside onProductClick")
+        val action =
+            DisplaySparePartFragmentDirections.actionDisplaySparePartFragmentToDetailsSparePartFragment2(
+                product
+            )
+        binding.root.findNavController().navigate(action)
+        Log.i("TAG", "${product.title} Inside onProductClick")
+    }
+
+    override fun onEmptyList(searchKey: String) {
+        binding.apply {
+            noResultsImage.visibility = View.VISIBLE
+            noResultText.text = "No Results for your search \"$searchKey\""
+            noResultText.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onFullList() {
+        binding.apply {
+            noResultsImage.visibility = View.GONE
+            noResultText.visibility = View.GONE
+        }
     }
 
 

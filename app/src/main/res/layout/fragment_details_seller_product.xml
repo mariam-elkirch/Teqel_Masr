@@ -14,7 +14,7 @@
 
     <ImageView
         android:id="@+id/image_item"
-        android:src="@drawable/valve"
+        android:src="@drawable/placeholder"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +26,13 @@
         android:id="@+id/info_card"
         app:layout_constraintTop_toBottomOf="@id/image_item"
         android:layout_width="match_parent"
-        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHeight_percent="0.13"
         android:elevation="2dp"
         android:layout_marginTop="8dp"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:paddingBottom="8dp"
                 android:layout_height="match_parent">
 
                     <TextView
@@ -79,7 +80,7 @@
         android:text="@string/details"
         android:textSize="20sp"
         android:fontFamily="@font/noto_sans_bold"
-        android:textColor="#00477A"
+        android:textColor="#E97000"
         app:layout_constraintTop_toBottomOf="@id/info_card"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="10dp"
@@ -158,7 +159,7 @@
         android:textSize="20sp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/noto_sans_bold"
-        android:textColor="#00477A"
+        android:textColor="#E97000"
         android:text="@string/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -173,6 +174,7 @@
         android:textColor="#00477A"
         android:fontFamily="@font/noto_sans"
         android:layout_width="match_parent"
+        app:layout_constraintHeight_percent="0.2"
         android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
