@@ -113,5 +113,8 @@
         <argument
             android:name="currentProduct"
             app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
     </fragment>
 </navigation>

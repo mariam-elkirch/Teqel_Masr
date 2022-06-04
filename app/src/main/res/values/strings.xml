@@ -52,4 +52,5 @@
     <string name="save_message">Save Changes?</string>
     <string name="item_updated">Item Updated</string>
     <string name="discard">Discard</string>
+    <string name="no_changes">No Changes</string>
 </resources>

@@ -15,6 +15,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
@@ -50,10 +52,11 @@ class EditSellerProductFragment : Fragment() {
         "valve",
         "hose",
         "miscellaneous",
+        "seals",
         "hydraulic_components",
-        "Other"
+        "other"
     )
-    private val categoryArray = arrayOf("Equipment For Sell", "Equipment For Rent", "Spare Parts")
+    private val categoryArray = arrayOf("Equipment For Sell", "Equipment For Rent", "spare")
 
     private val factory by lazy { EditProductViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
     private val viewModel by lazy { ViewModelProvider(requireActivity(),factory)[EditProductViewModel::class.java] }
@@ -90,25 +93,41 @@ class EditSellerProductFragment : Fragment() {
             }
 
             saveTxt.setOnClickListener {
-                val builder = AlertDialog.Builder(context)
-                builder.setMessage(R.string.save_message)
-                    .setPositiveButton(
-                        R.string.save
-                    ) { dialog, _ ->
-                        updateProductObject()
-                        dialog.dismiss()
-                        Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
+                if(!checkChanges()){
+                    val builder = AlertDialog.Builder(context)
+                    builder.setMessage(R.string.save_message)
+                        .setPositiveButton(
+                            R.string.save
+                        ) { dialog, _ ->
 
-                    }
-                    .setNegativeButton(R.string.discard) { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .create().show()
+                            updateProductObject()
+                            dialog.dismiss()
+                            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
+                            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment()
+                            binding.root.findNavController().navigate(action)
+
+                        }
+                        .setNegativeButton(R.string.discard) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create().show()
+
+                }else{
+                    Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
+                }
 
 
             }
         }
     }
+
+    private fun checkChanges(): Boolean = (args.currentProduct.title.equals(binding.titleTxt.text.trim().toString())
+            && args.currentProduct.variants?.get(0)?.price.toString() == binding.priceTxt.text.trim().toString()
+            && args.currentProduct.bodyHtml.equals(binding.productDesc.text.trim().toString())
+            && args.currentProduct.tags?.equals(binding.categorySpinner.selectedItem.toString())!!
+            && args.currentProduct.productType!! == binding.typeSpinner.selectedItem
+            && args.currentProduct.templateSuffix.equals(binding.vendorTxt.text.trim().toString()))
+
 
     private fun updateProductObject() {
         val variant = Variant(
@@ -158,8 +177,8 @@ class EditSellerProductFragment : Fragment() {
             categorySpinner.adapter = categoryAdapter
             categorySpinner.setSelection(
                 when (args.currentProduct.tags) {
-                    "equimentsell" -> 0
-                    "equimentrent" -> 1
+                    "Equipment For Sell" -> 0
+                    "Equipment For Rent" -> 1
                     else -> { 2 }
                 }
             )
@@ -201,7 +220,7 @@ class EditSellerProductFragment : Fragment() {
                            android.R.layout.simple_spinner_item,
                            equipmentArray
                        )
-                       "Spare Parts" -> ArrayAdapter<String>(
+                       "spare" -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            spareArray
