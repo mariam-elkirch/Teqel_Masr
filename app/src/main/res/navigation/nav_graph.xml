@@ -84,7 +84,9 @@
         tools:layout="@layout/fragment_display_seller_products" >
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_detailsSellerProductFragment"
-            app:destination="@id/detailsSellerProductFragment" />
+            app:destination="@id/detailsSellerProductFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
             app:destination="@id/editSellerProductFragment" />
