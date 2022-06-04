@@ -5,10 +5,13 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -30,12 +33,30 @@ class EditSellerProductFragment : Fragment() {
     private lateinit var typeAdapter: ArrayAdapter<String>
     private lateinit var categoryAdapter: ArrayAdapter<String>
 
-    private val equipmentArray = arrayOf("coldplaners", "compactors", "excavators", "dozers", "asphaltpavers", "backhoeloaders","articulatedtrucks", "Other")
-    private val spareArray = arrayOf("turbocharger", "filter", "accumulator", "valve", "hose", "miscellaneous","hydraulic_components", "Other")
+    private val equipmentArray = arrayOf(
+        "coldplaners",
+        "compactors",
+        "excavators",
+        "dozers",
+        "asphaltpavers",
+        "backhoeloaders",
+        "articulatedtrucks",
+        "Other"
+    )
+    private val spareArray = arrayOf(
+        "turbocharger",
+        "filter",
+        "accumulator",
+        "valve",
+        "hose",
+        "miscellaneous",
+        "hydraulic_components",
+        "Other"
+    )
     private val categoryArray = arrayOf("Equipment For Sell", "Equipment For Rent", "Spare Parts")
 
     private val factory by lazy { EditProductViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
-    private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[EditProductViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(requireActivity(),factory)[EditProductViewModel::class.java] }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,15 +73,17 @@ class EditSellerProductFragment : Fragment() {
 
     private fun setUpUI() {
         binding.apply {
-            dateTxt.text = args.currentProduct.published_at?.slice(IntRange(0,9))
+            dateTxt.text = args.currentProduct.published_at?.slice(IntRange(0, 9))
             vendorTxt.setText(args.currentProduct.templateSuffix)
             productDesc.setText(args.currentProduct.bodyHtml)
             titleTxt.setText(args.currentProduct.title)
             priceTxt.setText(args.currentProduct.variants?.get(0)?.price.toString())
 
-            Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop().placeholder(
-                R.drawable.placeholder)
-               .into(binding.imageItem)
+            Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop()
+                .placeholder(
+                    R.drawable.placeholder
+                )
+                .into(binding.imageItem)
 
             imageItem.setOnClickListener {
                 pickImageFromGallery()
@@ -69,25 +92,15 @@ class EditSellerProductFragment : Fragment() {
             saveTxt.setOnClickListener {
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage(R.string.save_message)
-                    .setPositiveButton(R.string.save
+                    .setPositiveButton(
+                        R.string.save
                     ) { dialog, _ ->
-                        val variant = Variant(price = binding.priceTxt.text.trim().toString()
-                            .toDouble(), id = args.currentProduct.variants?.get(0)?.id, product_id = args.currentProduct.variants?.get(0)?.product_id)
-                        val optionsItem = OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
-                        val optionsItems: List<OptionsItem> = listOf(optionsItem)
-                        val variants: List<Variant> = listOf(variant)
-                        val product = Product(title = binding.titleTxt.text.trim().toString(), bodyHtml = binding.productDesc.text.trim().toString(),
-                            variants = variants, tags = binding.categorySpinner.selectedItem.toString(), productType = binding.typeSpinner.selectedItem.toString(),
-                            templateSuffix = binding.vendorTxt.text.trim().toString(),options = optionsItems)
-                        val productPost = ProductPost(product)
-
-                        //update product
-                        viewModel.updateProduct(productPost)
+                        updateProductObject()
                         dialog.dismiss()
                         Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
 
                     }
-                    .setNegativeButton(R.string.discard){ dialog, _ ->
+                    .setNegativeButton(R.string.discard) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .create().show()
@@ -95,6 +108,31 @@ class EditSellerProductFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun updateProductObject() {
+        val variant = Variant(
+            price = binding.priceTxt.text.trim().toString()
+                .toDouble(),
+            id = args.currentProduct.variants?.get(0)?.id,
+            product_id = args.currentProduct.variants?.get(0)?.product_id
+        )
+        val optionsItem = OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
+        val optionsItems: List<OptionsItem> = listOf(optionsItem)
+        val variants: List<Variant> = listOf(variant)
+        val product = Product(
+            title = binding.titleTxt.text.trim().toString(),
+            bodyHtml = binding.productDesc.text.trim().toString(),
+            variants = variants,
+            tags = binding.categorySpinner.selectedItem.toString(),
+            productType = binding.typeSpinner.selectedItem.toString(),
+            templateSuffix = binding.vendorTxt.text.trim().toString(),
+            options = optionsItems
+        )
+        val productPost = ProductPost(product)
+
+        //update product
+        viewModel.updateProduct(productPost)
     }
 
     private fun pickImageFromGallery() {
@@ -105,14 +143,88 @@ class EditSellerProductFragment : Fragment() {
 
 
     private fun setUpSpinners() {
-        categoryAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item, categoryArray)
-        typeAdapter = when(args.currentProduct.tags){
-            "equipment" -> ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item, equipmentArray)
-            "spare" -> ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item, spareArray)
-            else -> {ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item, equipmentArray)}
+        categoryAdapter = ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            categoryArray
+        )
+        typeAdapter = when (args.currentProduct.tags) {
+            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item,spareArray)
+            else -> {
+                ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, equipmentArray)
+            }
         }
-        binding.categorySpinner.adapter = categoryAdapter
-        binding.typeSpinner.adapter = typeAdapter
+        binding.apply {
+            categorySpinner.adapter = categoryAdapter
+            categorySpinner.setSelection(
+                when (args.currentProduct.tags) {
+                    "equimentsell" -> 0
+                    "equimentrent" -> 1
+                    else -> { 2 }
+                }
+            )
+
+/*            if(args.currentProduct.tags.equals("equimentsell") || args.currentProduct.tags.equals("equimentrent")){
+                typeSpinner.setSelection(when(args.currentProduct.productType){
+                    "coldplaners" -> 0
+                    "compactors" -> 1
+                    "excavators" -> 2
+                    "dozers" -> 3
+                    "asphaltpavers" -> 4
+                    "backhoeloaders" -> 5
+                    "articulatedtrucks" -> 6
+                    else -> {7}
+                })
+            }else{
+                typeSpinner.setSelection(when(args.currentProduct.productType){
+                    "turbocharger" -> 0
+                    "filter" -> 1
+                    "accumulator" -> 2
+                    "valve" -> 3
+                    "hose" -> 4
+                    "miscellaneous" -> 5
+                    "hydraulic_components" -> 6
+                    else -> {7}
+                })
+            }*/
+           categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+               override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                   Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
+                   typeAdapter = when (p0?.selectedItem.toString()) {
+                       "Equipment For Sell" -> ArrayAdapter<String>(
+                           requireContext(),
+                           android.R.layout.simple_spinner_item,
+                           equipmentArray
+                       )
+                       "Equipment For Rent" -> ArrayAdapter<String>(
+                           requireContext(),
+                           android.R.layout.simple_spinner_item,
+                           equipmentArray
+                       )
+                       "Spare Parts" -> ArrayAdapter<String>(
+                           requireContext(),
+                           android.R.layout.simple_spinner_item,
+                           spareArray
+                       )
+                       else -> {
+                           ArrayAdapter<String>(
+                               requireContext(),
+                               android.R.layout.simple_spinner_item,
+                               equipmentArray
+                           )
+                       }
+                   }
+
+                   typeSpinner.adapter = typeAdapter
+
+
+               }
+
+               override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+           }
+
+        }
     }
 
 
@@ -120,7 +232,7 @@ class EditSellerProductFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == IMAGE_REQ_CODE && resultCode == Activity.RESULT_OK){
+        if (requestCode == IMAGE_REQ_CODE && resultCode == Activity.RESULT_OK) {
             binding.imageItem.setImageURI(data?.data)
         }
 
