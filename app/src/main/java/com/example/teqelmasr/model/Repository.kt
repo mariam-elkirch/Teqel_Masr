@@ -31,6 +31,10 @@ class Repository private constructor(
         return remoteSource.getProductsByCategory(productCategory)
     }
 
+    override suspend fun updateProduct(productPost: ProductPost) {
+        remoteSource.updateProduct(productPost)
+    }
+
     override suspend fun deleteProduct(product: Product) {
         remoteSource.deleteProduct(product)
     }

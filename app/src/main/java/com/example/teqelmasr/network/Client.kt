@@ -43,6 +43,12 @@ class Client : RemoteSource {
         service.deleteProduct(product.variants?.get(0)?.product_id!!)
     }
 
+    override suspend fun updateProduct(productPost: ProductPost) {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        val res = service.updateProduct(productPost.product?.variants?.get(0)?.product_id!!, productPost)
+        Log.i("res", "updateProduct: ${res.raw()}")
+    }
+
 }
 
 

@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
+
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
 import com.example.teqelmasr.model.Product
@@ -21,15 +22,13 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private val binding by lazy { FragmentDisplaySellerProductsBinding.inflate(layoutInflater) }
     private val factory by lazy { MyProductsViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
-    //private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java] }
     private lateinit var adapter: MyProductsAdapter
-    private lateinit var viewModel: MyProductsViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
         adapter = MyProductsAdapter(requireContext(),this)
         setUpRecyclerView()
 
@@ -66,6 +65,11 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     override fun onDetailsClick(product: Product) {
         val action: NavDirections = DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToDetailsSellerProductFragment(product)
+        binding.root.findNavController().navigate(action)
+    }
+
+    override fun onEditClick(product: Product) {
+        val action: NavDirections = DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToEditSellerProductFragment(product)
         binding.root.findNavController().navigate(action)
     }
 

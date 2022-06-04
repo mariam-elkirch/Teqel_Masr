@@ -4,6 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 
 data class ProductItem(
 	val products:ArrayList<Product>? = null
@@ -13,23 +15,31 @@ data class ProductPost(
 	val product: Product? = null
 )
 @Parcelize
+@Serializable
 data class OptionsItem(
 	val name: String? = null,
 	val position: Int? = null,
-val product_id : Long? = null
-):Parcelable
+	val product_id : Long? = null
+):Parcelable, java.io.Serializable
+@Serializable
+@Parcelize
 
 data class ImagesItem(
-	val alt: Any? = null,
+	@Contextual
+
+	val alt:@RawValue  Any? = null,
 	val width: Int? = null,
 	@SerializedName("variant_ids")
-	val variantIds: List<Any?>? = null,
+	val variantIds: List<@Contextual @RawValue Any?>? = null,
 	val position: Int? = null,
 	val height: Int? = null
-)
+):Parcelable, java.io.Serializable
 @Parcelize
+@Serializable
+
 data class Variant(
 	val barcode: String? =null,
+	@Contextual
 	val compare_at_price: @RawValue Any? = null,
 	val created_at: String? =null,
 	val fulfillment_service: String? =null,
@@ -50,38 +60,42 @@ data class Variant(
 	val updated_at: String? = null,
 	val weight: Double? = 0.0,
 	val weight_unit: String? = null
-):Parcelable
+):Parcelable, java.io.Serializable
+
 @Parcelize
+@Serializable
 data class Image(
-	val alt: @RawValue Any? = null,
+	val alt: @RawValue @Contextual Any? = null,
 	val width: Int? = null,
 	@SerializedName("variant_ids")
-val variantIds: @RawValue List<Any?>? = null,
+	val variantIds: @RawValue List<@Contextual Any?>? = null,
 	val height: Int? = null,
 	val src: String? =null,
-):Parcelable
+): Parcelable, java.io.Serializable
+
 @Parcelize
+@Serializable
 data class Product(
 	@SerializedName("published_scope")
-val publishedScope: String? = null,
+	val publishedScope: String? = null,
+	@Contextual
 	val image: Image? = null,
 	@SerializedName("body_html")
 	val bodyHtml: String? = null,
-
-	val images: @RawValue List<ImagesItem?>? = null,
+	val images: @RawValue List<@Contextual ImagesItem?>? = null,
 	@SerializedName("template_suffix")
 	val templateSuffix: String? = null,
-	val variants: List<Variant>? = null,
+	val variants: List<@Contextual Variant>? = null,
 	@SerializedName("product_type")
 	val productType: String? = null,
 	val vendor: String? = null,
-	val options: List<OptionsItem?>? = null,
+	val options: List<@Contextual OptionsItem?>? = null,
 	val updated_at: String? = null,
 	val published_at: String? = null,
 	val title: String? = null,
 	val status: String? = null,
-	val tags: String? = null
-):Parcelable
+	val tags: String? = null,
+):Parcelable, java.io.Serializable
 
 
 

@@ -76,7 +76,6 @@
         <action
             android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
             app:destination="@id/detailsSparePartFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/displaySellerProductsFragment"
@@ -86,6 +85,9 @@
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_detailsSellerProductFragment"
             app:destination="@id/detailsSellerProductFragment" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
+            app:destination="@id/editSellerProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -122,5 +124,17 @@
         <argument
             android:name="productsell"
             app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSellerProductFragment"
+        android:name="com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragment"
+        android:label="fragment_edit_seller_product"
+        tools:layout="@layout/fragment_edit_seller_product" >
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
     </fragment>
 </navigation>
