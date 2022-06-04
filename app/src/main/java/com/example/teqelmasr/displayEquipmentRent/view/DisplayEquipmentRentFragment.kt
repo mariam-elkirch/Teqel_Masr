@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel

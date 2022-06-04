@@ -88,4 +88,12 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         Log.i("TAG", "${product.title} Inside onProductClick")
 
     }
+
+    override fun onEmptyList(searchKey: String) {
+
+    }
+
+    override fun onFullList() {
+
+    }
 }

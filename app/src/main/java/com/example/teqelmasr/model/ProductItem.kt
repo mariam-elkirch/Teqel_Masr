@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Contextual
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 data class ProductItem(
 	val products:ArrayList<Product>? = null
