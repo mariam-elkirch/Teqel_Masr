@@ -94,7 +94,7 @@ data class Product(
 	val published_at: String? = null,
 	val title: String? = null,
 	val status: String? = null,
-	val tags: String? = null
+	val tags: String? = null,
 ):Parcelable, java.io.Serializable
 
 

@@ -49,4 +49,7 @@
     <string name="description">Description</string>
     <string name="details">Details</string>
     <string name="dummy_desc">It is the job of the turbocharger to compress more air flowing into the engine\'s cylinder. When air is compressed the oxygen molecules are packed closer together. This increase in air means that more fuel can be added for the same si</string>
+    <string name="save_message">Save Changes?</string>
+    <string name="item_updated">Item Updated</string>
+    <string name="discard">Discard</string>
 </resources>

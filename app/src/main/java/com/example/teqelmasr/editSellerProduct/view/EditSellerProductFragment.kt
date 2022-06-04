@@ -1,7 +1,7 @@
 package com.example.teqelmasr.editSellerProduct.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -10,10 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentEditSellerProductBinding
+import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModel
+import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModelFactory
+import com.example.teqelmasr.model.*
+import com.example.teqelmasr.network.Client
 
 class EditSellerProductFragment : Fragment() {
 
@@ -27,6 +33,9 @@ class EditSellerProductFragment : Fragment() {
     private val equipmentArray = arrayOf("coldplaners", "compactors", "excavators", "dozers", "asphaltpavers", "backhoeloaders","articulatedtrucks", "Other")
     private val spareArray = arrayOf("turbocharger", "filter", "accumulator", "valve", "hose", "miscellaneous","hydraulic_components", "Other")
     private val categoryArray = arrayOf("Equipment For Sell", "Equipment For Rent", "Spare Parts")
+
+    private val factory by lazy { EditProductViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
+    private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[EditProductViewModel::class.java] }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +67,32 @@ class EditSellerProductFragment : Fragment() {
             }
 
             saveTxt.setOnClickListener {
-                TODO()//EDIT
+                val builder = AlertDialog.Builder(context)
+                builder.setMessage(R.string.save_message)
+                    .setPositiveButton(R.string.save
+                    ) { dialog, _ ->
+                        val variant = Variant(price = binding.priceTxt.text.trim().toString()
+                            .toDouble(), id = args.currentProduct.variants?.get(0)?.id, product_id = args.currentProduct.variants?.get(0)?.product_id)
+                        val optionsItem = OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
+                        val optionsItems: List<OptionsItem> = listOf(optionsItem)
+                        val variants: List<Variant> = listOf(variant)
+                        val product = Product(title = binding.titleTxt.text.trim().toString(), bodyHtml = binding.productDesc.text.trim().toString(),
+                            variants = variants, tags = binding.categorySpinner.selectedItem.toString(), productType = binding.typeSpinner.selectedItem.toString(),
+                            templateSuffix = binding.vendorTxt.text.trim().toString(),options = optionsItems)
+                        val productPost = ProductPost(product)
+
+                        //update product
+                        viewModel.updateProduct(productPost)
+                        dialog.dismiss()
+                        Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
+
+                    }
+                    .setNegativeButton(R.string.discard){ dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create().show()
+
+
             }
         }
     }

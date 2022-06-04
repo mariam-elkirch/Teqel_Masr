@@ -12,17 +12,7 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/save_txt"
-            android:text="@string/save"
-            android:textSize="20sp"
-            android:fontFamily="@font/noto_sans_bold"
-            android:textColor="#E97000"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
         <ImageView
             android:id="@+id/image_item"
             android:clickable="true"
@@ -35,7 +25,20 @@
             app:layout_constraintHeight_percent="0.4"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
-
+        <TextView
+            android:id="@+id/save_txt"
+            android:text="@string/save"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textSize="20sp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="#E97000"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/info_card"
             app:layout_constraintTop_toBottomOf="@id/image_item"

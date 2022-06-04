@@ -22,15 +22,13 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private val binding by lazy { FragmentDisplaySellerProductsBinding.inflate(layoutInflater) }
     private val factory by lazy { MyProductsViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
-    //private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java] }
     private lateinit var adapter: MyProductsAdapter
-    private lateinit var viewModel: MyProductsViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
         adapter = MyProductsAdapter(requireContext(),this)
         setUpRecyclerView()
 

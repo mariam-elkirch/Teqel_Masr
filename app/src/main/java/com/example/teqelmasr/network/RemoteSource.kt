@@ -18,4 +18,7 @@ interface RemoteSource {
     suspend fun getMyProducts(): Response<ProductItem>
 
     suspend fun deleteProduct(product: Product)
-}
+
+    suspend fun updateProduct(product: ProductPost)
+
+    }
