@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".displaySparePart.view.SparePartsFilterBottomSheetFragment">
+
+    <TextView
+        android:id="@+id/pricre_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="12dp"
+        android:text="Price Range"
+        android:textColor="#E97000"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/range_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:stepSize="5"
+        android:value="20"
+        android:valueFrom="0"
+        android:valueTo="1000"
+        app:haloColor="#E97000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:thumbColor="@color/orange"
+        app:trackColorActive="#FF7B00"
+        app:trackColorInactive="#FFCA97"
+        app:values="@array/sliderValues" />
+
+    <View
+        android:id="@+id/first_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/range_slider" />
+
+    <TextView
+        android:id="@+id/category_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:padding="12dp"
+        android:text="Type"
+        android:textColor="#E97000"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/first_view" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.66"
+        app:layout_constraintTop_toBottomOf="@id/category_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TableLayout
+            android:id="@+id/table"
+            android:stretchColumns="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="turbocharger"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+
+                    android:textColor="#00477A"
+                    android:text="filter"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="accumulator"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="valve"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="hose"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="miscellaneous"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="hydraulic_components"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="fittings"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/eight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="tubes_pipes"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/nine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="tanks_reservoirs"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/ten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="pumps_motors"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/eleven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="cylinder_rods"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/twelve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="reman"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange"
+                    android:id="@+id/thirteen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#00477A"
+                    android:text="other"/>
+
+                <CheckBox
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/fourteen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/orange"
+                    />
+            </TableRow>
+           <!-- <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />-->
+
+        </TableLayout>
+    </androidx.core.widget.NestedScrollView>
+    <View
+       android:id="@+id/button_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#D3D3D3"
+        app:layout_constraintBottom_toTopOf="@id/apply_button"
+        app:layout_constraintTop_toBottomOf="@id/scroll"
+        />
+
+
+    <Button
+        android:id="@+id/apply_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.9">
+
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--<HorizontalScrollView
+        android:id="@+id/first_scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/category_label">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+           >
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_one"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Turbo Charger"
+                android:textColor="@color/chip_text"
+                app:checkedIconTint="@color/white"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_two"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Filter"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_three"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Hose"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_four"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Valve"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_five"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Hydraulic Component"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_six"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="pumps and motors"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_seven"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="accumulator"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_eight"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="reman"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+
+
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips_group_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_nine"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="tanks and reservoirs"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_ten"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="tubes and pipes"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_eleven"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="fittings"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_twelve"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="miscellaneous"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_thirteen"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="cylinder_rods"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fourteen"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Other"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_background"/>
+
+
+        </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+    </HorizontalScrollView>-->
+
+
+
+
+
+
+
+
+

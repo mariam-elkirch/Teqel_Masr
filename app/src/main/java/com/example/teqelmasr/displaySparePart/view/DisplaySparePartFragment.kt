@@ -9,13 +9,17 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySparePartBinding
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import javax.security.auth.login.LoginException
+import kotlin.math.log
 
 
 class DisplaySparePartFragment : Fragment(), OnProductClickListener {
@@ -50,6 +54,7 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
             recyclerViewSpareParts.adapter = sparePartsAdapter
             recyclerViewSpareParts.hasFixedSize()
             recyclerViewSpareParts.layoutManager = LinearLayoutManager(requireContext())
+            filterButton.setOnClickListener { findNavController().navigate(R.id.action_displaySparePartFragment_to_sparePartsFilterBottomSheetFragment) }
 
             searchSpareParts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -64,7 +69,9 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
                 }
 
             })
+
             searchSpareParts.setOnCloseListener(SearchView.OnCloseListener() {
+                Log.i("Tag", "onCreateView: setOnCloseListener")
                 binding.apply {
                     noResultsImage.visibility = View.GONE
                     noResultText.visibility = View.GONE

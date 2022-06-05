@@ -8,7 +8,7 @@
         <item>Spare Parts</item>
     </string-array>
     <string-array name="equiments">
-       <item> coldplaners</item>
+        <item> coldplaners</item>
         <item>compactors</item>
         <item>excavators</item>
         <item>dozers</item>

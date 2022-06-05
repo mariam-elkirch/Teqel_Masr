@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
             app:destination="@id/detailsSparePartFragment" />
+        <action
+            android:id="@+id/action_displaySparePartFragment_to_sparePartsFilterBottomSheetFragment"
+            app:destination="@id/sparePartsFilterBottomSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/displaySellerProductsFragment"
@@ -139,4 +142,9 @@
             android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/sparePartsFilterBottomSheetFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragment"
+        android:label="fragment_filter_bottom_sheet"
+        tools:layout="@layout/fragment_filter_bottom_sheet" />
 </navigation>
