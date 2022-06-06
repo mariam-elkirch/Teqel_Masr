@@ -38,7 +38,7 @@ class DisplaySparePartsRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: SparePartsViewHolder, position: Int) {
-        Log.i("TAG", "list size ${sparePartsList.size}")
+      //  Log.i("TAG", "list size ${sparePartsList.size}")
         val sparePartItem = sparePartsList[position]
         holder.binding.apply {
             itemTitle.text = sparePartItem.title ?: "Unknown"
