@@ -116,7 +116,7 @@ class AddEquipmentSellFragment : Fragment() {
         binding.saveButton.setOnClickListener {
 
 
-
+             checkDataEnter()
             val iv: ImageView = binding.productImg as ImageView
             val bitmap = iv.getDrawable().toBitmap()
             val bos = ByteArrayOutputStream()
@@ -130,6 +130,7 @@ class AddEquipmentSellFragment : Fragment() {
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
            binding.productImg.setImageBitmap(decodedImage)*/
 //end decode
+            if(checkData()){
             val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
             Log.i("tag",doublePrice.toString()+ "Priceee")
             val varian = listOf(
@@ -137,7 +138,7 @@ class AddEquipmentSellFragment : Fragment() {
               Variant(price = doublePrice)
             )
 
-            if(binding.titleEditText.toString().trim().length>0){
+
 
             var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
                 ,bodyHtml = binding.describtionEditText.text.toString()
@@ -159,8 +160,6 @@ class AddEquipmentSellFragment : Fragment() {
                             com.example.teqelmasr.R.string.save
                         ) { dialog, _ ->
 
-
-
                             dialog.dismiss()
                             Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
                             val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
@@ -179,13 +178,45 @@ class AddEquipmentSellFragment : Fragment() {
                 }
                 viewModel.postProduct(product)
             }
+            else{
+                Log.i("tag", "")
+            }
 
         }
 
         return  binding.root
        // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
     }
+    private fun checkDataEnter() {
+        if( binding.titleEditText.getText().toString().trim().equals(""))
+        {
+            binding.titleEditText.setError( "title is required!" )
 
+            binding.titleEditText.setHint("please enter title")
+
+        }
+        if( binding.describtionEditText.getText().toString().trim().equals(""))
+        {
+            binding.describtionEditText.setError( "describtion is required!" )
+
+            binding.describtionEditText.setHint("please enter describtion")
+
+        }
+        if( binding.priceEditText.getText().toString().trim().equals(""))
+        {
+            binding.priceEditText.setError( "price is required!" )
+
+            binding.priceEditText.setHint("please enter price")
+
+        }
+        if( binding.manfactoryEditText.getText().toString().trim().equals(""))
+        {
+            binding.manfactoryEditText.setError( "Manfactory is required!" )
+
+            binding.manfactoryEditText.setHint("please enter manfactory")
+
+        }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
@@ -193,6 +224,18 @@ class AddEquipmentSellFragment : Fragment() {
                     binding.productImg.setImageURI(imageUri)
 
         }
+    }
+    private fun checkData(): Boolean {
+      if((binding.manfactoryEditText.getText().toString().trim().equals(""))
+          || binding.priceEditText.getText().toString().trim().equals("")
+          || binding.describtionEditText.getText().toString().trim().equals("")
+          || binding.titleEditText.getText().toString().trim().equals(""))
+
+                    return false
+        else{
+            return true
+        }
+
     }
     companion object {
         /**
