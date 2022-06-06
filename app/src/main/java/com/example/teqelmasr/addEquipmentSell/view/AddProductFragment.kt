@@ -28,11 +28,15 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.BitmapDrawable
 
 import android.R
+import android.app.AlertDialog
 import android.view.View.*
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.Variant
 
 
@@ -149,8 +153,26 @@ class AddEquipmentSellFragment : Fragment() {
                 viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]
                 viewModel.myProducts.observe(viewLifecycleOwner){
                     Log.i("tag",it.toString()+ "product")
-                    val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
-                    toast.show()
+                    val builder = AlertDialog.Builder(context)
+                    builder.setMessage(com.example.teqelmasr.R.string.save)
+                        .setPositiveButton(
+                            com.example.teqelmasr.R.string.save
+                        ) { dialog, _ ->
+
+
+
+                            dialog.dismiss()
+                            Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
+                            val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
+                            binding.root.findNavController().navigate(action)
+
+                        }
+                        .setNegativeButton(com.example.teqelmasr.R.string.discard) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create().show()
+                   // val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
+                    //toast.show()
                 }
                 viewModel.errorMessage.observe(viewLifecycleOwner){
                     Log.i("tag",it.toString()+ "product")
