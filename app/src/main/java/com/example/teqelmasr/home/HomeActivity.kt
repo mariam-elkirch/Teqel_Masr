@@ -1,8 +1,10 @@
 package com.example.teqelmasr.home
 
 import android.app.Activity
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.ColorInt
 import androidx.core.app.ActivityCompat.recreate
 
 import androidx.navigation.ui.NavigationUI
@@ -28,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bottomNavigationView = binding.bottomNav
-
+         bottomNavigationView.setBackgroundColor(Color.GRAY)
         val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
         setupWithNavController(bottomNavigationView, navController)
     }
