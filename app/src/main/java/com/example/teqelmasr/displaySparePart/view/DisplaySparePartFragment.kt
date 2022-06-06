@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySparePartBinding
@@ -25,7 +26,7 @@ import kotlin.math.log
 class DisplaySparePartFragment : Fragment(), OnProductClickListener {
 
     private val binding by lazy { FragmentDisplaySparePartBinding.inflate(layoutInflater) }
-
+    private val args by navArgs<DisplaySparePartFragmentArgs>()
     private val sparePartsAdapter by lazy {
         DisplaySparePartsRecyclerAdapter(
             requireContext(),
@@ -50,6 +51,8 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i("ARGS", args.filterValues?.priceStart.toString())
+        Log.i("ARGS", args.filterValues?.types?.elementAt(0).toString())
         binding.apply {
             recyclerViewSpareParts.adapter = sparePartsAdapter
             recyclerViewSpareParts.hasFixedSize()

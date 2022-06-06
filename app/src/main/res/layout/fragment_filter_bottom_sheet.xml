@@ -75,6 +75,7 @@
 
             <TableRow>
                 <TextView
+                    android:id="@+id/one_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -83,38 +84,38 @@
                     android:text="turbocharger"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/one"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
-
+                    android:id="@+id/two_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif"
-
                     android:textColor="#00477A"
                     android:text="filter"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/two"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/three_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -123,17 +124,18 @@
                     android:text="accumulator"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/three"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/four_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -142,17 +144,18 @@
                     android:text="valve"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/four"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/five_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -161,17 +164,18 @@
                     android:text="hose"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/five"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/six_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -180,17 +184,18 @@
                     android:text="miscellaneous"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/six"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/seven_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -199,17 +204,18 @@
                     android:text="hydraulic_components"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/seven"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/eight_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -218,17 +224,18 @@
                     android:text="fittings"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/eight"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/nine_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -237,17 +244,18 @@
                     android:text="tubes_pipes"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/nine"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/ten_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -256,17 +264,18 @@
                     android:text="tanks_reservoirs"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/ten"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/eleven_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -275,17 +284,18 @@
                     android:text="pumps_motors"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/eleven"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/twelve_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -294,17 +304,18 @@
                     android:text="cylinder_rods"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/twelve"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/thirteen_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -313,17 +324,18 @@
                     android:text="reman"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
-                    android:buttonTint="@color/orange"
                     android:id="@+id/thirteen"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
             <TableRow>
                 <TextView
+                    android:id="@+id/fourteen_text"
                     android:layout_column="1"
                     android:padding="12dp"
                     android:textSize="18sp"
@@ -332,12 +344,11 @@
                     android:text="other"/>
 
                 <CheckBox
-                    android:layout_marginEnd="10dp"
                     android:id="@+id/fourteen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/orange"
-                    />
+                    android:layout_marginEnd="10dp"
+                    android:buttonTint="@color/orange" />
             </TableRow>
            <!-- <View
                 android:layout_height="1dp"

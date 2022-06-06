@@ -15,7 +15,7 @@ import com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragm
 class DetailsSparePartFragment : Fragment() {
 
     private val binding by lazy { FragmentDetailsSparePartBinding.inflate(layoutInflater) }
-    private val args by navArgs<DetailsEquipmentRentFragmentArgs>()
+    private val args by navArgs<DetailsSparePartFragmentArgs>()
     private var clicked = false
 
     override fun onCreateView(
