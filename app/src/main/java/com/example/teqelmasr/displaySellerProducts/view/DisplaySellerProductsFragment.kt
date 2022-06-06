@@ -1,12 +1,14 @@
 package com.example.teqelmasr.displaySellerProducts.view
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -15,16 +17,13 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
-import com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragmentArgs
-
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
-import kotlin.collections.ArrayList
-import kotlin.math.log
+
 
 class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     private val TAG = "DisplaySellerProducts"
@@ -46,6 +45,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
     private lateinit var adapter: MyProductsAdapter
     private val args by navArgs<DisplaySellerProductsFragmentArgs>()
+
     //private lateinit var args: DisplaySellerProductsFragmentArgs
     private lateinit var productList: ArrayList<Product>
 
@@ -55,21 +55,15 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     ): View? {
 
         adapter = MyProductsAdapter(requireContext(), this)
+
         setUpUI()
 
         observeMyProducts()
 
-        testFilteration()
 
         return binding.root
     }
 
-    private fun testFilteration() {
-        Log.i(TAG, "price: ${args.filterObj?.priceRange}")
-        Log.i(TAG, "categories: ${args.filterObj?.categories}")
-        Log.i(TAG, "types: ${args.filterObj?.types}")
-
-    }
 
     override fun onResume() {
         super.onResume()
@@ -79,7 +73,15 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     override fun onPause() {
         super.onPause()
-        Log.i(TAG, "onPause: ")
+        observeMyProducts()
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        observeMyProducts()
+
     }
 
     private fun observeMyProducts() {
@@ -90,44 +92,23 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
 
     private fun fillData(productItem: ProductItem) = binding.apply {
-        if(args.filterObj != null){
-            productList = productItem.products?.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
+        if (args.filterObj != null /*&& !args.filterObj!!.categories.isNullOrEmpty()*/ && !(args.filterObj!!.types.isNullOrEmpty()) /*&& args.filterObj!!.priceRange != null*/) {
+            productList =
+                productItem.products?.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
             Log.i(TAG, "IN FILTER: ${productList.size}")
-            Log.i(TAG, "fillData: ${productList.get(0).title}")
             adapter.setData(productList)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
 
-        }else{
+        } else {
             productList = productItem.products!!
-            (myProductsRecycler.adapter as MyProductsAdapter).setData(productList)
+            adapter.setData(productItem.products)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
-            Log.i(TAG, "fillData: ${args.filterObj?.types?.get(0)}")
-            Log.i(TAG, "fillData: ${productList.size}")
+            Log.i(TAG, "IN ELSE: ${productList.size}")
         }
 
     }
-
-    private fun filterProducts(products: ArrayList<Product>?) {
-        if (args.filterObj != null) {
-/*            products?.filter { product ->
-                //product.variants?.get(0)?.price?.toInt()!! in args.filterObj!!.priceRange
-                product.productType == "selas"
-            }*/
-            if (products != null) {
-                for (product in products) {
-                    if (product.productType.equals("selas")) {
-                        Log.i(TAG, "filterProducts: ${product.title}")
-
-                    }
-
-                }
-
-            }
-        }
-    }
-
 
     private fun setUpUI() = binding.apply {
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
@@ -162,7 +143,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
                 product
             )
         binding.root.findNavController().navigate(action)
-        Log.i(TAG, "onDetailsClick: ${product.productType}")
     }
 
     override fun onEditClick(product: Product) {
