@@ -45,7 +45,11 @@
         android:id="@+id/addEquipmentSellFragment"
         android:name="com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragment"
         android:label="fragment_add_equipment_sell"
-        tools:layout="@layout/fragment_add_equipment_sell" />
+        tools:layout="@layout/fragment_add_equipment_sell" >
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displayEquipmentSellFragment"
         android:name="com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragment"
@@ -76,6 +80,14 @@
         <action
             android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
             app:destination="@id/detailsSparePartFragment" />
+        <action
+            android:id="@+id/action_displaySparePartFragment_to_sparePartsFilterBottomSheetFragment"
+            app:destination="@id/sparePartsFilterBottomSheetFragment" />
+        <argument
+            android:name="filter_values"
+            app:argType="com.example.teqelmasr.model.FilterValues"
+            app:nullable="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/displaySellerProductsFragment"
@@ -158,5 +170,15 @@
         <action
             android:id="@+id/action_filtrationSheetFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment"/>
+    </dialog>
+    <dialog
+        android:id="@+id/sparePartsFilterBottomSheetFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragment"
+        android:label="fragment_filter_bottom_sheet"
+        tools:layout="@layout/fragment_filter_bottom_sheet" >
+        <action
+            android:id="@+id/action_sparePartsFilterBottomSheetFragment_to_displaySparePartFragment"
+            app:destination="@id/displaySparePartFragment" />
+
     </dialog>
 </navigation>

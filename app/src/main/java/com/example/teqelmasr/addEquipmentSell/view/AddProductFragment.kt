@@ -18,9 +18,6 @@ import com.example.teqelmasr.addEquipmentSell.viewmodel.AddProductViewModel
 import com.example.teqelmasr.addEquipmentSell.viewmodel.AddProductViewModelFactory
 
 import com.example.teqelmasr.databinding.FragmentAddEquipmentSellBinding
-import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductPost
-import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import java.io.ByteArrayOutputStream
 import android.graphics.Bitmap.CompressFormat
@@ -28,12 +25,16 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.BitmapDrawable
 
 import android.R
+import android.app.AlertDialog
 import android.view.View.*
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
-import com.example.teqelmasr.model.Variant
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
+import com.example.teqelmasr.model.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -109,61 +110,117 @@ class AddEquipmentSellFragment : Fragment() {
             }
 
         }
+        addProductfactory = AddProductViewModelFactory(
+            Repository.getInstance(
+                Client.getInstance(),
+                requireContext()
+            ))
+        // ViewModelProvider(this,addProductfactory).get(AddProductViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]
         binding.saveButton.setOnClickListener {
 
 
+             checkDataEnter()
 
-            val iv: ImageView = binding.productImg as ImageView
-            val bitmap = iv.getDrawable().toBitmap()
-            val bos = ByteArrayOutputStream()
-            bitmap.compress(CompressFormat.PNG, 100, bos)
-            val bb = bos.toByteArray()
-            val imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
-
-            Log.i("Tag", "Imgggggggg"+mytag)
 //decode
          /*   val imageBytes = Base64.decode(imageString, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
            binding.productImg.setImageBitmap(decodedImage)*/
 //end decode
-            val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
-            Log.i("tag",doublePrice.toString()+ "Priceee")
-            val varian = listOf(
+            if(checkData()){
+                val builder = AlertDialog.Builder(context)
+                builder.setMessage(com.example.teqelmasr.R.string.save)
+                    .setPositiveButton(
+                        com.example.teqelmasr.R.string.save
+                    ) { dialog, _ ->
+                          saveProductObject()
+                        dialog.dismiss()
+                        Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
+                         val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment(null)
+                         binding.root.findNavController().navigate(action)
 
-              Variant(price = doublePrice)
-            )
+                    }
+                    .setNegativeButton(com.example.teqelmasr.R.string.discard) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create().show()
 
-            if(binding.titleEditText.toString().trim().length>0){
 
-            var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
-                ,bodyHtml = binding.describtionEditText.text.toString()
-                ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
-            Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())
 
-                addProductfactory = AddProductViewModelFactory(
-                    Repository.getInstance(
-                        Client.getInstance(),
-                        requireContext()
-                    ))
-                // ViewModelProvider(this,addProductfactory).get(AddProductViewModel::class.java)
-                viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]
-                viewModel.myProducts.observe(viewLifecycleOwner){
-                    Log.i("tag",it.toString()+ "product")
-                    val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
-                    toast.show()
-                }
-                viewModel.errorMessage.observe(viewLifecycleOwner){
-                    Log.i("tag",it.toString()+ "product")
-                }
-                viewModel.postProduct(product)
+            }
+            else{
+                Log.i("tag", "")
             }
 
+        }
+        viewModel.myProducts.observe(viewLifecycleOwner){
+            Log.i("tag",it.toString()+ "product")
+
+            // val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
+            //toast.show()
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner){
+            Log.i("tag",it.toString()+ "product")
         }
 
         return  binding.root
        // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
     }
+    private fun saveProductObject() {
+        val iv: ImageView = binding.productImg as ImageView
+        val bitmap = iv.getDrawable().toBitmap()
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(CompressFormat.PNG, 100, bos)
+        val bb = bos.toByteArray()
+        val imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
 
+        Log.i("Tag", "Imgggggggg"+mytag)
+        val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
+        Log.i("tag",doublePrice.toString()+ "Priceee")
+        val varian = listOf(
+
+            Variant(price = doublePrice)
+        )
+
+
+
+        var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
+            ,bodyHtml = binding.describtionEditText.text.toString()
+            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
+        Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())
+
+        viewModel.postProduct(product)
+    }
+    private fun checkDataEnter() {
+        if( binding.titleEditText.getText().toString().trim().equals(""))
+        {
+            binding.titleEditText.setError( "title is required!" )
+
+            binding.titleEditText.setHint("please enter title")
+
+        }
+        if( binding.describtionEditText.getText().toString().trim().equals(""))
+        {
+            binding.describtionEditText.setError( "describtion is required!" )
+
+            binding.describtionEditText.setHint("please enter describtion")
+
+        }
+        if( binding.priceEditText.getText().toString().trim().equals(""))
+        {
+            binding.priceEditText.setError( "price is required!" )
+
+            binding.priceEditText.setHint("please enter price")
+
+        }
+        if( binding.manfactoryEditText.getText().toString().trim().equals(""))
+        {
+            binding.manfactoryEditText.setError( "Manfactory is required!" )
+
+            binding.manfactoryEditText.setHint("please enter manfactory")
+
+        }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
@@ -171,6 +228,18 @@ class AddEquipmentSellFragment : Fragment() {
                     binding.productImg.setImageURI(imageUri)
 
         }
+    }
+    private fun checkData(): Boolean {
+      if((binding.manfactoryEditText.getText().toString().trim().equals(""))
+          || binding.priceEditText.getText().toString().trim().equals("")
+          || binding.describtionEditText.getText().toString().trim().equals("")
+          || binding.titleEditText.getText().toString().trim().equals(""))
+
+                    return false
+        else{
+            return true
+        }
+
     }
     companion object {
         /**

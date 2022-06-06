@@ -23,11 +23,11 @@ class DisplaySparePartsRecyclerAdapter(
     RecyclerView.Adapter<SparePartsViewHolder>(), Filterable {
 
     private var sparePartsList: List<Product> = arrayListOf()
-    private var filteredSparePartsList: List<Product> = arrayListOf()
+    private var originalSparePartsList: List<Product> = arrayListOf()
 
     fun setData(sparePartsList: List<Product>) {
         this.sparePartsList = sparePartsList
-        this.filteredSparePartsList = sparePartsList
+        this.originalSparePartsList = sparePartsList
         notifyDataSetChanged()
     }
 
@@ -38,7 +38,7 @@ class DisplaySparePartsRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: SparePartsViewHolder, position: Int) {
-        Log.i("TAG", "list size ${sparePartsList.size}")
+      //  Log.i("TAG", "list size ${sparePartsList.size}")
         val sparePartItem = sparePartsList[position]
         holder.binding.apply {
             itemTitle.text = sparePartItem.title ?: "Unknown"
@@ -57,11 +57,11 @@ class DisplaySparePartsRecyclerAdapter(
             override fun performFiltering(query: CharSequence?): FilterResults {
                 val filterResults = FilterResults()
                 if (query == null || query.isEmpty()) {
-                    filterResults.values = filteredSparePartsList
+                    filterResults.values = originalSparePartsList
                 } else {
                     val searchKey = query.toString().lowercase(Locale.getDefault())
                     val filteredList = ArrayList<Product>()
-                    for (product in filteredSparePartsList) {
+                    for (product in originalSparePartsList) {
                         if (product.title!!.lowercase(Locale.getDefault()).contains(searchKey)) {
                             filteredList.add(product)
                         }

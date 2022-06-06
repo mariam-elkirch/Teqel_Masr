@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentHomeBinding
+import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragmentDirections
 
 class HomeFragment : Fragment() {
 
@@ -32,7 +34,10 @@ class HomeFragment : Fragment() {
             binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentRentFragment)
         }
         binding.SpareBtn.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displaySparePartFragment)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDisplaySparePartFragment(null)
+            findNavController().navigate(action)
+
         }
         binding.sellertn.setOnClickListener {
             val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDisplaySellerProductsFragment(null)
