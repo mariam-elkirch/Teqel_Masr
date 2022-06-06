@@ -117,7 +117,7 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
                 }
 
             }
-            eight.setOnCheckedChangeListener { _, isClicked ->
+           /* eight.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
                     typesArray.add(eightText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
@@ -170,7 +170,7 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
                     typesArray.remove(thirteenText.text.toString())
                 }
 
-            }
+            }*/
             fourteen.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
                     typesArray.add(fourteenText.text.toString())

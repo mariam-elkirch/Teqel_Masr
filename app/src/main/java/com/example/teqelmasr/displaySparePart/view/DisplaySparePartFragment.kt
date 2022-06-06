@@ -97,9 +97,7 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
 
     override fun onProductClick(product: Product) {
         val action =
-            DisplaySparePartFragmentDirections.actionDisplaySparePartFragmentToDetailsSparePartFragment2(
-                product
-            )
+            DisplaySparePartFragmentDirections.actionDisplaySparePartFragmentToDetailsSparePartFragment2(product)
         binding.root.findNavController().navigate(action)
         Log.i("TAG", "${product.title} Inside onProductClick")
     }

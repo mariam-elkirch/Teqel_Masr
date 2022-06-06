@@ -3,6 +3,7 @@ package com.example.teqelmasr.editSellerProduct.view
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.wifi.WifiConfiguration.AuthAlgorithm.strings
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -35,28 +36,10 @@ class EditSellerProductFragment : Fragment() {
     private lateinit var typeAdapter: ArrayAdapter<String>
     private lateinit var categoryAdapter: ArrayAdapter<String>
 
-    private val equipmentArray = arrayOf(
-        "coldplaners",
-        "compactors",
-        "excavators",
-        "dozers",
-        "asphaltpavers",
-        "backhoeloaders",
-        "articulatedtrucks",
-        "Other"
-    )
-    private val spareArray = arrayOf(
-        "turbocharger",
-        "filter",
-        "accumulator",
-        "valve",
-        "hose",
-        "miscellaneous",
-        "seals",
-        "hydraulic_components",
-        "other"
-    )
-    private val categoryArray = arrayOf("Equipment For Sell", "Equipment For Rent", "spare")
+    private  var equipmentArray : Array<String>? = null
+    private  var spareArray : Array<String>? = null
+    private  var categoryArray : Array<String>? = null
+
 
     private val factory by lazy { EditProductViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
     private val viewModel by lazy { ViewModelProvider(requireActivity(),factory)[EditProductViewModel::class.java] }
@@ -66,6 +49,10 @@ class EditSellerProductFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ): View? {
+
+        equipmentArray = context?.resources?.getStringArray(R.array.equiments)
+       spareArray = context?.resources?.getStringArray(R.array.spare)
+         categoryArray = context?.resources?.getStringArray(R.array.type)
 
         setUpUI()
 
@@ -165,12 +152,12 @@ class EditSellerProductFragment : Fragment() {
         categoryAdapter = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
-            categoryArray
+            categoryArray!!
         )
         typeAdapter = when (args.currentProduct.tags) {
-            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray)
+            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray!!)
             else -> {
-                ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, equipmentArray)
+                ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, equipmentArray!!)
             }
         }
         binding.apply {
@@ -213,23 +200,23 @@ class EditSellerProductFragment : Fragment() {
                        "Equipment For Sell" -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
-                           equipmentArray
+                           equipmentArray!!
                        )
                        "Equipment For Rent" -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
-                           equipmentArray
+                           equipmentArray!!
                        )
                        "spare" -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
-                           spareArray
+                           spareArray!!
                        )
                        else -> {
                            ArrayAdapter<String>(
                                requireContext(),
                                android.R.layout.simple_spinner_item,
-                               equipmentArray
+                               equipmentArray!!
                            )
                        }
                    }

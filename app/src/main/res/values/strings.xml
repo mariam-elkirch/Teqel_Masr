@@ -12,12 +12,10 @@
         <item>compactors</item>
         <item>excavators</item>
         <item>dozers</item>
-        <item>asphaltpavers</item>
-        <item> backhoeloaders</item>
-        <item> articulatedtrucks</item>
+        <item>Other</item>
     </string-array>
     <string-array name="spare">
-        <item>turbocharger </item>
+        <item>turbocharger</item>
         <item>filter </item>
         <item>accumulator </item>
         <item>valve </item>
@@ -25,12 +23,6 @@
         <item> miscellaneous </item>
         <item>hydraulic_components </item>
         <item>other </item>
-        <item>fittings </item>
-        <item>tubes_pipes </item>
-        <item> tanks_reservoirs </item>
-        <item>pumps_motors </item>
-        <item>cylinder_rods </item>
-        <item>reman </item>
     </string-array>
     <string-array name="sliderValues">
         <item>20</item>
