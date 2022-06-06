@@ -94,6 +94,13 @@
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
             app:destination="@id/editSellerProductFragment" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_filtrationSheetFragment"
+            app:destination="@id/filtrationSheetFragment" />
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterObj"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -143,4 +150,14 @@
             android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/filtrationSheetFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.FiltrationSheetFragment"
+        android:label="fragment_filteration_sheet"
+        tools:layout="@layout/fragment_filteration_sheet" >
+
+        <action
+            android:id="@+id/action_filtrationSheetFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment"/>
+    </dialog>
 </navigation>

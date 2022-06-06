@@ -103,7 +103,7 @@ class EditSellerProductFragment : Fragment() {
                             updateProductObject()
                             dialog.dismiss()
                             Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
-                            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment()
+                            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(null)
                             binding.root.findNavController().navigate(action)
 
                         }
@@ -164,13 +164,13 @@ class EditSellerProductFragment : Fragment() {
     private fun setUpSpinners() {
         categoryAdapter = ArrayAdapter<String>(
             requireContext(),
-            android.R.layout.simple_spinner_item,
+            android.R.layout.simple_spinner_dropdown_item,
             categoryArray
         )
         typeAdapter = when (args.currentProduct.tags) {
-            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item,spareArray)
+            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray)
             else -> {
-                ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, equipmentArray)
+                ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, equipmentArray)
             }
         }
         binding.apply {
@@ -239,7 +239,18 @@ class EditSellerProductFragment : Fragment() {
 
                }
 
-               override fun onNothingSelected(p0: AdapterView<*>?) {}
+               override fun onNothingSelected(p0: AdapterView<*>?) {
+                   typeSpinner.setSelection(when(args.currentProduct.productType){
+                       "turbocharger" -> 0
+                       "filter" -> 1
+                       "accumulator" -> 2
+                       "valve" -> 3
+                       "hose" -> 4
+                       "miscellaneous" -> 5
+                       "hydraulic_components" -> 6
+                       else -> {7}
+                   })
+               }
 
            }
 

@@ -36,6 +36,7 @@ class DetailsSellerProductFragment : Fragment() {
             typeTxt.text = args.currentProduct.productType
             vendorTxt.text = args.currentProduct.templateSuffix
             productDesc.text = args.currentProduct.bodyHtml
+
         }
         Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop().placeholder(R.drawable.placeholder)
             .into(binding.imageItem)
