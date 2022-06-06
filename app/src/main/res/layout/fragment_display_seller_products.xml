@@ -26,7 +26,6 @@
             <include layout="@layout/shimmer_item" />
             <include layout="@layout/shimmer_item" />
         </LinearLayout>
-
     </com.facebook.shimmer.ShimmerFrameLayout>
 <!--    <TextView
         android:id="@+id/my_products_txt"

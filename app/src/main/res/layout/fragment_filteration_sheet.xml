@@ -22,22 +22,23 @@
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/range_slider"
-        app:layout_constraintTop_toTopOf="@id/pricre_txt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:stepSize="5"
         android:value="20"
         android:valueFrom="0"
         android:valueTo="100"
-        android:stepSize="5"
-        app:thumbColor="#E97000"
-        app:values="@array/sliderValues"
-        app:tickColor="#00477A"
-        android:layout_width="match_parent"
         app:haloColor="#00477A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:thumbColor="#E97000"
+        app:tickColor="#00477A"
         app:trackColorActive="#00477A"
         app:trackColorInactive="@color/cardview_shadow_start_color"
-        android:layout_height="wrap_content"/>
+        app:values="@array/sliderValues" />
 
     <View
         android:id="@+id/first_view"
@@ -73,6 +74,7 @@
 
         <TableRow>
             <TextView
+                android:id="@+id/first_category"
                 android:layout_column="1"
                 android:padding="12dp"
                 android:textSize="18sp"
@@ -90,6 +92,7 @@
             android:background="#D3D3D3" />
         <TableRow>
             <TextView
+                android:id="@+id/second_category"
                 android:layout_column="1"
                 android:padding="12dp"
                 android:textSize="18sp"
@@ -108,11 +111,11 @@
             android:background="#D3D3D3" />
         <TableRow>
             <TextView
+                android:id="@+id/third_category"
                 android:layout_column="1"
                 android:padding="12dp"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
-
                 android:textColor="#00477A"
                 android:text="Spare Parts"/>
 
@@ -146,6 +149,7 @@
         android:scrollbars="none">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
             android:padding="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -155,7 +159,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Turbo Charger" />
+                android:text="turbocharger" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_two"

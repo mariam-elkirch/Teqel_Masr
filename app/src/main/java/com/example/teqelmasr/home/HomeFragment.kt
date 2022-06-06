@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
@@ -34,7 +35,8 @@ class HomeFragment : Fragment() {
             binding.root.findNavController().navigate(R.id.action_homeFragment_to_displaySparePartFragment)
         }
         binding.sellertn.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displaySellerProductsFragment)
+            val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDisplaySellerProductsFragment(null)
+            binding.root.findNavController().navigate(action)
         }
         binding.postProductBtn.setOnClickListener {
             binding.root.findNavController().navigate(R.id.action_homeFragment_to_addEquipmentSellFragment)

@@ -103,7 +103,7 @@ class EditSellerProductFragment : Fragment() {
                             updateProductObject()
                             dialog.dismiss()
                             Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
-                            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment()
+                            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(null)
                             binding.root.findNavController().navigate(action)
 
                         }
