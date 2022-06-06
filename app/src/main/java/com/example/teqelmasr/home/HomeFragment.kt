@@ -43,9 +43,10 @@ class HomeFragment : Fragment() {
             val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDisplaySellerProductsFragment(null)
             binding.root.findNavController().navigate(action)
         }
-        binding.postProductBtn.setOnClickListener {
+        binding.fab.setOnClickListener { view ->
             binding.root.findNavController().navigate(R.id.action_homeFragment_to_addEquipmentSellFragment)
         }
+
     }
 
 }
