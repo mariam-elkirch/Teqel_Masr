@@ -4,6 +4,8 @@ import android.app.Activity
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.core.app.ActivityCompat.recreate
 
@@ -33,5 +35,28 @@ class HomeActivity : AppCompatActivity() {
          bottomNavigationView.setBackgroundColor(Color.GRAY)
         val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
         setupWithNavController(bottomNavigationView, navController)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+/*        val fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.hostFragment, DisplaySellerProductsFragment())
+
+        fragmentTransaction.commit()*/
+
+        //Log.i("TAG", "onBackPressed: ${binding.root.findNavController().currentDestination}")
+
+        //val fragmentInstance = supportFragmentManager.findFragmentById(R.id.hostFragment)
+        //fragmentInstance?.onCreate(null)
+        //Toast.makeText(this, "${fragmentInstance?.onCreate(null)}", Toast.LENGTH_SHORT).show()
+/*
+        if(fragmentInstance is DisplaySellerProductsFragment){
+            Toast.makeText(this, "${fragmentInstance.id}", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show()
+        }*/
+//        val action: NavDirections = DetailsSellerProductFragmentDirections.actionDetailsSellerProductFragmentToDisplaySellerProductsFragment(null)
+//        binding.root.findNavController().navigate(action)
     }
 }

@@ -2,6 +2,7 @@ package com.example.teqelmasr.displaySellerProducts.view
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -71,6 +72,7 @@ class MyProductsAdapter(private val context: Context, private val onBtnListener:
     override fun getItemCount(): Int = productList.size
 
     fun setData(products: ArrayList<Product>) {
+        Log.i(TAG, "setData: ")
         productList = products
         originalList = products
         notifyDataSetChanged()

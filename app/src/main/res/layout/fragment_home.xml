@@ -144,22 +144,22 @@
         android:layout_marginBottom="18dp"
         android:backgroundTint="#E97000"
         android:text="Seller"
-        app:layout_constraintBottom_toTopOf="@+id/fab"
+        app:layout_constraintBottom_toTopOf="@+id/postProductBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/equipmentRentBtn" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:id="@+id/fab"
-        android:layout_marginBottom="10dp"
-         android:src="@drawable/ic_baseline_add_24"
-        app:backgroundTint="@color/orange"
-        android:layout_gravity="bottom|center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:maxImageSize="30dp"
+        android:layout_marginEnd="10dp"
+        app:backgroundTint="@color/orange"
+        android:src="@drawable/plus"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <ImageView

@@ -118,6 +118,9 @@
         <argument
             android:name="currentProduct"
             app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsSellerProductFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsSparePartFragment"
