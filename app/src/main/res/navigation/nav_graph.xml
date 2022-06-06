@@ -93,6 +93,10 @@
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_filtrationSheetFragment"
             app:destination="@id/filtrationSheetFragment" />
+        <argument
+            android:name="priceArray"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -146,5 +150,10 @@
         android:id="@+id/filtrationSheetFragment"
         android:name="com.example.teqelmasr.displaySellerProducts.view.FiltrationSheetFragment"
         android:label="fragment_filteration_sheet"
-        tools:layout="@layout/fragment_filteration_sheet" />
+        tools:layout="@layout/fragment_filteration_sheet" >
+
+        <action
+            android:id="@+id/action_filtrationSheetFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
+    </dialog>
 </navigation>

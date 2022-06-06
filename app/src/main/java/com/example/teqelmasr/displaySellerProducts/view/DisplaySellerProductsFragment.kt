@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -60,8 +61,22 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
         myProductsRecycler.adapter = adapter
         filterIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_displaySellerProductsFragment_to_filtrationSheetFragment)
+            val action: NavDirections = DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToFiltrationSheetFragment()
+            findNavController().navigate(action)
         }
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                return true
+            }
+
+        })
+
     }
 
     override fun onDeleteClick(product: Product) {

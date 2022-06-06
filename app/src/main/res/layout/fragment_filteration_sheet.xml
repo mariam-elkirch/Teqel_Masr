@@ -195,7 +195,7 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/apply"
+        android:id="@+id/apply_btn"
         android:text="@string/apply"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

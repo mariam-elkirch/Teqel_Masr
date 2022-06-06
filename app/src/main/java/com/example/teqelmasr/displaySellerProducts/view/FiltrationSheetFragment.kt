@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class FiltrationSheetFragment : BottomSheetDialogFragment() {
+class FiltrationSheetFragment() : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentFilterationSheetBinding
 
@@ -23,7 +23,9 @@ class FiltrationSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentFilterationSheetBinding.inflate(layoutInflater)
 
+        binding.applyBtn.setOnClickListener {
 
+        }
         return binding.root
     }
 
