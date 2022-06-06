@@ -90,6 +90,9 @@
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
             app:destination="@id/editSellerProductFragment" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_filtrationSheetFragment"
+            app:destination="@id/filtrationSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -139,4 +142,9 @@
             android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/filtrationSheetFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.FiltrationSheetFragment"
+        android:label="fragment_filteration_sheet"
+        tools:layout="@layout/fragment_filteration_sheet" />
 </navigation>

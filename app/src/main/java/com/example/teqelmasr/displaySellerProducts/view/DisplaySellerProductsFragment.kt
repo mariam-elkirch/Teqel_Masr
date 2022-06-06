@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
@@ -30,7 +32,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     ): View? {
 
         adapter = MyProductsAdapter(requireContext(),this)
-        setUpRecyclerView()
+        setUpUI()
 
         observeMyProducts()
 
@@ -54,9 +56,12 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         shimmer.visibility = View.GONE
     }
 
-    private fun setUpRecyclerView() = binding.apply {
+    private fun setUpUI() = binding.apply {
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
         myProductsRecycler.adapter = adapter
+        filterIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_displaySellerProductsFragment_to_filtrationSheetFragment)
+        }
     }
 
     override fun onDeleteClick(product: Product) {

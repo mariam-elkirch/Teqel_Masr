@@ -8,7 +8,7 @@
         <item>Spare Parts</item>
     </string-array>
     <string-array name="equiments">
-       <item> coldplaners</item>
+        <item> coldplaners</item>
         <item>compactors</item>
         <item>excavators</item>
         <item>dozers</item>
@@ -54,4 +54,12 @@
     <string name="item_updated">Item Updated</string>
     <string name="discard">Discard</string>
     <string name="no_changes">No Changes</string>
+    <string name="price_range">Price Range</string>
+    <string name="apply">Apply</string>
+
+    <array name="sliderValues">
+        <item>20</item>
+        <item>70</item>
+
+    </array>
 </resources>
