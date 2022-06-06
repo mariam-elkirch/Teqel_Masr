@@ -26,12 +26,13 @@
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_spare_part.xml" value="0.234375" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_edit_seller_product.xml" value="0.25" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_filteration_sheet.xml" value="0.2" />
-        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_home.xml" value="0.234375" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/my_products_list_item.xml" value="0.1953125" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/shimmer_item.xml" value="0.234375" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/spare_part_item.xml" value="0.25" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/mipmap-anydpi-v26/filter.xml" value="0.146" />
-        <entry key="..\:/Teqel Masr/app/src/main/res/layout/fragment_home.xml" value="0.1" />
       </map>
     </option>
   </component>
