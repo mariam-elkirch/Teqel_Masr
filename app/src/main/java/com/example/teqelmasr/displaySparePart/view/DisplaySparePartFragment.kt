@@ -87,12 +87,17 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
     private fun fetchSpareParts() {
-        viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productItem ->
-            binding.searchSpareParts.visibility = View.VISIBLE
-            sparePartsAdapter.setData(productItem.products!!)
-            binding.spareShimmer.stopShimmer()
-            binding.spareShimmer.visibility = View.GONE
+        if (args.filterValues != null){
+
+        }else{
+            viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productItem ->
+                binding.searchSpareParts.visibility = View.VISIBLE
+                sparePartsAdapter.setData(productItem.products!!)
+                binding.spareShimmer.stopShimmer()
+                binding.spareShimmer.visibility = View.GONE
+            }
         }
+
     }
 
     override fun onProductClick(product: Product) {
