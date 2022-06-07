@@ -37,12 +37,13 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
             )
         )
     }
-    private val viewModel by lazy {
+/*    private val viewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             factory
         )[MyProductsViewModel::class.java]
-    }
+    }*/
+    private lateinit var viewModel: MyProductsViewModel
     private lateinit var adapter: MyProductsAdapter
     private val args by navArgs<DisplaySellerProductsFragmentArgs>()
 
@@ -55,7 +56,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     ): View? {
 
         adapter = MyProductsAdapter(requireContext(), this)
-
+        viewModel = ViewModelProvider(requireActivity(),factory)[MyProductsViewModel::class.java]
         setUpUI()
 
         observeMyProducts()
@@ -68,15 +69,11 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     override fun onResume() {
         super.onResume()
         Log.i(TAG, "onResume: ${args.filterObj?.priceRange}")
+        viewModel.getMyProducts()
         observeMyProducts()
     }
 
-    override fun onPause() {
-        super.onPause()
-        observeMyProducts()
 
-
-    }
 
     override fun onStart() {
         super.onStart()

@@ -19,7 +19,7 @@ class MyProductsViewModel(private val repo: RepositoryInterface): ViewModel() {
     init {
         getMyProducts()
     }
-    private fun getMyProducts(){
+    fun getMyProducts(){
         viewModelScope.launch {
             val myProductsRes = repo.getMyProducts()
             withContext(Dispatchers.IO){
