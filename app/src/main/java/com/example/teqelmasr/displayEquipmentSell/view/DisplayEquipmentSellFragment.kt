@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -100,6 +101,8 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             })
 
         }
+        binding.filterButton.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
+
         binding.swipeRefreshLayout.setOnRefreshListener{
             fetchEquipmentSell()
             Log.i("tag","on Refresh")

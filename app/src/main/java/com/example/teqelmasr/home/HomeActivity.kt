@@ -32,7 +32,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bottomNavigationView = binding.bottomNav
-         bottomNavigationView.setBackgroundColor(Color.GRAY)
+         bottomNavigationView.setBackgroundColor(Color.rgb(0,71,122))
+
         val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
         setupWithNavController(bottomNavigationView, navController)
     }

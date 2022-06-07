@@ -60,6 +60,9 @@
             app:destination="@id/detailsEquipmentSellFragment"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment"
+            app:destination="@id/equimentSellBottonSheetFrgment" />
     </fragment>
     <fragment
         android:id="@+id/displayEquipmentRentFragment"
@@ -180,5 +183,14 @@
             android:id="@+id/action_sparePartsFilterBottomSheetFragment_to_displaySparePartFragment"
             app:destination="@id/displaySparePartFragment" />
 
+    </dialog>
+    <dialog
+        android:id="@+id/equimentSellBottonSheetFrgment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.EquimentSellBottonSheetFrgment"
+        android:label="fragment_equiment_sell_botton_sheet_frgment"
+        tools:layout="@layout/fragment_equiment_sell_botton_sheet_frgment" >
+        <action
+            android:id="@+id/action_equimentSellBottonSheetFrgment_to_displayEquipmentSellFragment"
+            app:destination="@id/displayEquipmentSellFragment" />
     </dialog>
 </navigation>
