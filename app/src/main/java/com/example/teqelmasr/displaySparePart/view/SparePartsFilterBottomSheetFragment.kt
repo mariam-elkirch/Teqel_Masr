@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentFilterBottomSheetBinding
@@ -35,12 +34,16 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
 
         filterValues.types = typesArray
         binding.apply {
-            configureTypesCheckBoxes()
+
             rangeSlider.addOnChangeListener { _, _, _ ->
                 filterValues.priceStart = rangeSlider.values[0]
                 filterValues.priceEnd = rangeSlider.values[1]
             }
             applyButton.setOnClickListener {
+
+                isCheckBoxesChecked()
+
+
                 val action =
                     SparePartsFilterBottomSheetFragmentDirections.actionSparePartsFilterBottomSheetFragmentToDisplaySparePartFragment(
                         filterValues
@@ -52,9 +55,41 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    private fun configureTypesCheckBoxes() {
+    private fun isCheckBoxesChecked() {
         binding.apply {
-            one.setOnCheckedChangeListener { _, isClicked ->
+            if (one.isChecked){
+                typesArray.add(oneText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (two.isChecked){
+                typesArray.add(twoText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (three.isChecked){
+                typesArray.add(threeText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (four.isChecked){
+                typesArray.add(fourText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (five.isChecked){
+                typesArray.add(fiveText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (six.isChecked){
+                typesArray.add(sixText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (seven.isChecked){
+                typesArray.add(sevenText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+            if (fourteen.isChecked){
+                typesArray.add(fourteenText.text.toString())
+                Log.i("TAG", " types array ${typesArray.size}")
+            }
+           /* one.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
                     typesArray.add(oneText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
@@ -179,7 +214,7 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
                     typesArray.remove(fourteenText.text.toString())
                 }
 
-            }
+            }*/
         }
     }
 
