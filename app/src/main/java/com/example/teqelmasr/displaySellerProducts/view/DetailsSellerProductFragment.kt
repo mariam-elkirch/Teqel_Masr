@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
@@ -36,9 +38,14 @@ class DetailsSellerProductFragment : Fragment() {
             typeTxt.text = args.currentProduct.productType
             vendorTxt.text = args.currentProduct.templateSuffix
             productDesc.text = args.currentProduct.bodyHtml
+
         }
         Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop().placeholder(R.drawable.placeholder)
             .into(binding.imageItem)
     }
+
+
+
+
 
 }

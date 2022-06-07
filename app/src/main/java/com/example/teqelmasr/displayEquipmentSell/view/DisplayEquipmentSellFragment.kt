@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
@@ -36,7 +39,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
 
-    private val binding by lazy { FragmentDisplayEquipmentSellBinding.inflate(layoutInflater) }
+    private val binding by lazy { FragmentDisplayEquipmentSellBinding.inflate(layoutInflater)  }
 
     private val equipmentSellAdapter by lazy {
        DisplaySellEquipmentAdapter(
@@ -55,8 +58,17 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             )
         )[DisplayEquipmentSellViewModel::class.java]
     }
+  /*  private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
 
+        fetchEquipmentSell()
 
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("tag","on Resume")
+        fetchEquipmentSell()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,18 +79,50 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             recyclerViewSellEquipment.hasFixedSize()
 
             recyclerViewSellEquipment.layoutManager = LinearLayoutManager(requireContext())
+            searchEquipmentSell.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                   equipmentSellAdapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    equipmentSellAdapter.filter.filter(newText)
+                    return true
+                }
+
+            })
+           searchEquipmentSell.setOnCloseListener(SearchView.OnCloseListener() {
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            })
 
         }
+        binding.filterButton.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
 
+        binding.swipeRefreshLayout.setOnRefreshListener{
+            fetchEquipmentSell()
+            Log.i("tag","on Refresh")
+        }
         fetchEquipmentSell()
+
         return binding.root
     }
+  //
 
     private fun fetchEquipmentSell() {
+      binding.swipeRefreshLayout.isRefreshing = true
         viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentSellAdapter.setEquipmentSellList(it.products!!)
             binding.shimmersell.stopShimmer()
+            Log.i("tag","fetch equipment")
+           // binding.swipeRefreshLayout.isRefreshing = false
             binding.shimmersell.visibility = View.GONE
+            binding.swipeRefreshLayout.isRefreshing = false
+          //
         }
     }
 
