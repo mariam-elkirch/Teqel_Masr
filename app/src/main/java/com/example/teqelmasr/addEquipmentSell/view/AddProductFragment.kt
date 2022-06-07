@@ -56,7 +56,7 @@ class AddEquipmentSellFragment : Fragment() {
     private var imageUri: Uri? = null
     lateinit var viewModel: AddProductViewModel
     var mytag : String = ""
-    lateinit var myproductType : String
+     var myproductType : String =""
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,18 +114,62 @@ class AddEquipmentSellFragment : Fragment() {
 
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     Log.i("tag",position.toString()+"Imggg"+mytag)
-                    if(mytag.equals("equimentsell")) {
-                        myproductType = spinnerEquipment.selectedItem.toString()
-                    }
-                    else{
-                        myproductType = spinnerspare.selectedItem.toString()
-                    }
-                    Log.i("tag",myproductType+ "Priceee")
-                }
 
+                        when (position) {
+                            0 -> myproductType = "coldplaners"
+                            1 -> {
+                                Log.i("tag",position.toString()+"positionnnnnnnn")
+                                myproductType = "compactors"
+                            }
+                            2 -> {
+                                myproductType = "excavators"
+                            }
+                            3 -> {
+                                myproductType = "dozers"
+                            }
+                            else -> {
+                                myproductType = "Other"
+                            }
+                        }
+                    }
 
         }
+        spinnerspare?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.i("tag",position.toString()+"Imggg"+mytag)
+
+                when (position) {
+                    0 -> myproductType = "turbocharger"
+                    1 -> {
+                        Log.i("tag",position.toString()+"positionnnnnnnn")
+                        myproductType = "filter"
+                    }
+                    2 -> {
+                        myproductType = "accumulator"
+                    }
+                    3 -> {
+                        myproductType = "valve"
+                    }
+                    4 -> {
+                        myproductType = "hose"
+                    }
+                    5 -> {
+                        myproductType = "miscellaneous"
+                    }
+                    6 -> {
+                        myproductType = "hydraulic_components"
+                    }
+                    else -> {
+                        myproductType = "Other"
+                    }
+                }
+            }
+
+        }
         addProductfactory = AddProductViewModelFactory(
             Repository.getInstance(
                 Client.getInstance(),
@@ -188,11 +232,13 @@ class AddEquipmentSellFragment : Fragment() {
         val bos = ByteArrayOutputStream()
         bitmap.compress(CompressFormat.PNG, 100, bos)
         val bb = bos.toByteArray()
-        val imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
+        var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
 
-        Log.i("Tag", "Imgggggggg"+mytag)
+        Log.i("Tag", "Imgggggggg"+imageString)
+        Log.i("tag",myproductType+ "Priceee")
         val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
         Log.i("tag",doublePrice.toString()+ "Priceee")
+        val img = Image(src = imageString)
         val varian = listOf(
 
             Variant(price = doublePrice)
@@ -201,7 +247,7 @@ class AddEquipmentSellFragment : Fragment() {
 
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
-            ,bodyHtml = binding.describtionEditText.text.toString(),productType = myproductType
+            ,bodyHtml = binding.describtionEditText.text.toString(),productType = myproductType , image = img
             ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
 
 
