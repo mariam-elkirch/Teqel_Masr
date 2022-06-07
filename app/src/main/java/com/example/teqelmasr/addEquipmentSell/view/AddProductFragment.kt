@@ -55,7 +55,8 @@ class AddEquipmentSellFragment : Fragment() {
     private val pickImage = 100
     private var imageUri: Uri? = null
     lateinit var viewModel: AddProductViewModel
-    lateinit var mytag : String
+    var mytag : String = ""
+    lateinit var myproductType : String
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,15 +78,10 @@ class AddEquipmentSellFragment : Fragment() {
             startActivityForResult(gallery, pickImage)
         }
         val spinner = binding.spinner
-        val text = spinner.selectedItem.toString()
-       /* if(text.equals("Equipment for Sell")){
-            binding.spinnerSpare.visibility = GONE
-            binding.spinnerEquipment.visibility = VISIBLE
-        }
-        else{
-            binding.spinnerEquipment.visibility = GONE
-            binding.spinnerSpare.visibility = VISIBLE
-        }*/
+         val spinnerspare = binding.spinnerSpare
+        val spinnerEquipment = binding.spinnerEquipment
+
+
       spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                // binding.spinnerSpare.visibility = GONE
@@ -110,6 +106,26 @@ class AddEquipmentSellFragment : Fragment() {
             }
 
         }
+
+           spinnerEquipment?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    Log.i("tag",position.toString()+"Imggg"+mytag)
+                    if(mytag.equals("equimentsell")) {
+                        myproductType = spinnerEquipment.selectedItem.toString()
+                    }
+                    else{
+                        myproductType = spinnerspare.selectedItem.toString()
+                    }
+                    Log.i("tag",myproductType+ "Priceee")
+                }
+
+
+        }
+
         addProductfactory = AddProductViewModelFactory(
             Repository.getInstance(
                 Client.getInstance(),
@@ -185,8 +201,10 @@ class AddEquipmentSellFragment : Fragment() {
 
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
-            ,bodyHtml = binding.describtionEditText.text.toString()
+            ,bodyHtml = binding.describtionEditText.text.toString(),productType = myproductType
             ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
+
+
         Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())
 
         viewModel.postProduct(product)
