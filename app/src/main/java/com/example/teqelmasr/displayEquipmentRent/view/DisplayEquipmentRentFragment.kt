@@ -30,6 +30,7 @@ import kotlin.collections.ArrayList
 class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     val allProductList = ArrayList<Product>()
     val searchResultList = ArrayList<Product>()
+    val filterResultList = ArrayList<Product>()
     private val args by navArgs<DisplayEquipmentRentFragmentArgs>()
 
     private val binding by lazy { FragmentDisplayEquipmentRentBinding.inflate(layoutInflater) }
@@ -90,23 +91,37 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
 
         }
 
+
+
         fetchEquipmentRent()
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        if(args.arrayOfFilteredProducts!=null){
-             val arr = args.arrayOfFilteredProducts
-            if (arr != null) {
-                equipmentRentAdapter.setEquipmentRentList(arr.toList())
+        if(args.filterObj!=null) {
+            for(i in 0 until allProductList.size){
+                for (cat in args.filterObj?.types!!){
+                    if (allProductList[i].productType.toString().lowercase(Locale.getDefault()) == cat){
+                        filterResultList.add(allProductList[i])
+                    }
+
+                }
+               /* allProductList.filter {
+                    args.filterObj!!.types?.filter {
+                        if (.productType.toString().lowercase(Locale.getDefault()))
+
+                    }
+                }*/
             }
+            equipmentRentAdapter.setEquipmentRentList(filterResultList)
+
         }
     }
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentRentAdapter.setEquipmentRentList(it.products!!)
-            searchResultList.addAll(it.products)
+           // searchResultList.addAll(it.products)
             allProductList.addAll(it.products)
             binding.shimmerrent.stopShimmer()
             binding.shimmerrent.visibility = View.GONE
