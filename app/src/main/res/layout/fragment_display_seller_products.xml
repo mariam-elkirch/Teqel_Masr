@@ -7,7 +7,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".displaySellerProducts.view.DisplaySellerProductsFragment">
 
-
+    <TextView
+        android:id="@+id/no_products"
+        android:text="@string/no_products"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#D3D3D3"
+        android:textSize="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer"
