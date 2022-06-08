@@ -241,8 +241,8 @@ class AddEquipmentSellFragment : Fragment() {
         Log.i("tag",myproductType+ "Priceee")
         val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
         Log.i("tag",doublePrice.toString()+ "Priceee")
-        val img = Image(src = "https://cdn.shopify.com/s/files/1/0585/8285/9912/products/sell.jpg?v=1654637583",height = 5)
-        val imagelist = listOf(ImagesItem(src = "https://cdn.shopify.com/s/files/1/0585/8285/9912/products/sell.jpg?v=1654637583" ,attachment = imageString, filename = "3.png") )
+      //  val img = Image(src = "https://cdn.shopify.com/s/files/1/0585/8285/9912/products/sell.jpg?v=1654637583",height = 5)
+        val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
         val varian = listOf(
 
             Variant(price = doublePrice)
@@ -256,7 +256,7 @@ class AddEquipmentSellFragment : Fragment() {
         }
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
-            ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype , image = img,images = imagelist
+            ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype ,images = imagelist
             ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
 
 
