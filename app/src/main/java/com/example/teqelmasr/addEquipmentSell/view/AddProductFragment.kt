@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,9 +23,7 @@ import com.example.teqelmasr.network.Client
 import java.io.ByteArrayOutputStream
 import android.graphics.Bitmap.CompressFormat
 
-import android.graphics.drawable.BitmapDrawable
 
-import android.R
 import android.app.AlertDialog
 import android.view.View.*
 import android.widget.AdapterView
@@ -33,6 +32,7 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import com.example.teqelmasr.R
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.*
 
@@ -93,14 +93,14 @@ class AddEquipmentSellFragment : Fragment() {
                 if (position == 2){
                 binding.spinnerEquipment.visibility = INVISIBLE
                 binding.spinnerSpare.visibility = VISIBLE
-                     mytag = "spare"
+                     mytag =  R.string.spare_tag.toString()
             }else{
                     binding.spinnerEquipment.visibility = VISIBLE
                     binding.spinnerSpare.visibility = INVISIBLE
                     if(position == 0)
-                        mytag = "equimentsell"
+                        mytag = R.string.sell_equip_tag.toString()
                     else{
-                        mytag = "equimentrent"
+                        mytag = R.string.rent_equip_tag.toString()
                     }
             }
             }
@@ -116,19 +116,19 @@ class AddEquipmentSellFragment : Fragment() {
                     Log.i("tag",position.toString()+"Imggg"+mytag)
 
                         when (position) {
-                            0 -> myproductType = "coldplaners"
+                            0 -> myproductType = R.string.coldplaners.toString()
                             1 -> {
                                 Log.i("tag",position.toString()+"positionnnnnnnn")
-                                myproductType = "compactors"
+                                myproductType = R.string.compactors.toString()
                             }
                             2 -> {
-                                myproductType = "excavators"
+                                myproductType = R.string.excavators.toString()
                             }
                             3 -> {
-                                myproductType = "dozers"
+                                myproductType = R.string.dozers.toString()
                             }
                             else -> {
-                                myproductType = "Other"
+                                myproductType = R.string.other.toString()
                             }
                         }
                     }
@@ -143,28 +143,28 @@ class AddEquipmentSellFragment : Fragment() {
                 Log.i("tag",position.toString()+"Imggg"+mytag)
 
                 when (position) {
-                    0 -> myproductType = "turbocharger"
+                    0 -> myproductType = R.string.turbocharger.toString()
                     1 -> {
                         Log.i("tag",position.toString()+"positionnnnnnnn")
-                        myproductType = "filter"
+                        myproductType = R.string.filter.toString()
                     }
                     2 -> {
-                        myproductType = "accumulator"
+                        myproductType = R.string.accumulator.toString()
                     }
                     3 -> {
-                        myproductType = "valve"
+                        myproductType =  R.string.valve.toString()
                     }
                     4 -> {
-                        myproductType = "hose"
+                        myproductType = R.string.hose.toString()
                     }
                     5 -> {
-                        myproductType = "miscellaneous"
+                        myproductType =  R.string.miscellaneous.toString()
                     }
                     6 -> {
-                        myproductType = "hydraulic_components"
+                        myproductType = R.string.hydraulic_components.toString()
                     }
                     else -> {
-                        myproductType = "Other"
+                        myproductType = R.string.other.toString()
                     }
                 }
             }

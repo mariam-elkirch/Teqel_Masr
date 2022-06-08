@@ -155,7 +155,7 @@ class EditSellerProductFragment : Fragment() {
             categoryArray!!
         )
         typeAdapter = when (args.currentProduct.tags) {
-            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray!!)
+            R.string.spare_tag.toString() -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray!!)
             else -> {
                 ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, equipmentArray!!)
             }
@@ -164,8 +164,8 @@ class EditSellerProductFragment : Fragment() {
             categorySpinner.adapter = categoryAdapter
             categorySpinner.setSelection(
                 when (args.currentProduct.tags) {
-                    "Equipment For Sell" -> 0
-                    "Equipment For Rent" -> 1
+                    R.string.sell_equip_tag.toString() -> 0
+                    R.string.rent_equip_tag.toString() -> 1
                     else -> { 2 }
                 }
             )
@@ -197,17 +197,17 @@ class EditSellerProductFragment : Fragment() {
                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                    Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
                    typeAdapter = when (p0?.selectedItem.toString()) {
-                       "Equipment For Sell" -> ArrayAdapter<String>(
+                       R.string.sell_equip_tag.toString() -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            equipmentArray!!
                        )
-                       "Equipment For Rent" -> ArrayAdapter<String>(
+                       R.string.rent_equip_tag.toString() -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            equipmentArray!!
                        )
-                       "spare" -> ArrayAdapter<String>(
+                       R.string.spare_tag.toString() -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            spareArray!!
@@ -228,13 +228,13 @@ class EditSellerProductFragment : Fragment() {
 
                override fun onNothingSelected(p0: AdapterView<*>?) {
                    typeSpinner.setSelection(when(args.currentProduct.productType){
-                       "turbocharger" -> 0
-                       "filter" -> 1
-                       "accumulator" -> 2
-                       "valve" -> 3
-                       "hose" -> 4
-                       "miscellaneous" -> 5
-                       "hydraulic_components" -> 6
+                       R.string.turbocharger.toString() -> 0
+                       R.string.filter.toString() -> 1
+                       R.string.accumulator.toString() -> 2
+                       R.string.valve.toString() -> 3
+                       R.string.hose.toString() -> 4
+                       R.string.miscellaneous.toString() -> 5
+                       R.string.hydraulic_components.toString() -> 6
                        else -> {7}
                    })
                }

@@ -66,20 +66,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        Log.i(TAG, "onResume: ${args.filterObj?.priceRange}")
-        viewModel.getMyProducts()
-        observeMyProducts()
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        observeMyProducts()
-
-    }
-
     private fun observeMyProducts() {
 
         viewModel.myProducts?.observe(viewLifecycleOwner) {
@@ -89,21 +75,26 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private fun fillData(productItem: ProductItem?) = binding.apply {
 
-        if(productItem?.products.isNullOrEmpty()){
+        if (productItem?.products.isNullOrEmpty()) {
             noProducts.visibility = View.VISIBLE
         }
 
 
-        if (args.filterObj != null && !args.filterObj!!.categories.isNullOrEmpty() && !(args.filterObj!!.types.isNullOrEmpty()) && args.filterObj!!.priceRange != null) {
+        if (args.filterObj != null && !(args.filterObj!!.categories.isNullOrEmpty()) && !(args.filterObj!!.types.isNullOrEmpty())) {
             productList =
-                productItem?.products?.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
+                productItem?.products?.filter {
+                    it.productType in args.filterObj!!.types
+                    it.tags in args.filterObj!!.categories
+                    it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
+                } as ArrayList<Product>
+
             Log.i(TAG, "IN FILTER: ${productList.size}")
             adapter.setData(productList)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
 
         } else {
-            productList = productItem?.products?: ArrayList<Product>()
+            productList = productItem?.products ?: ArrayList<Product>()
             adapter.setData(productItem?.products)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
@@ -154,6 +145,16 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
                 product
             )
         binding.root.findNavController().navigate(action)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume: ${args.filterObj?.priceRange}")
+        Log.i(TAG, "onResume: ${args.filterObj?.categories}")
+        Log.i(TAG, "onResume: ${args.filterObj?.types}")
+
+        viewModel.getMyProducts()
+        observeMyProducts()
     }
 
     override fun onPause() {
