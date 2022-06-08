@@ -63,6 +63,10 @@
         <action
             android:id="@+id/action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment"
             app:destination="@id/equimentSellBottonSheetFrgment" />
+        <argument
+            android:name="filterValue"
+            app:argType="com.example.teqelmasr.model.FilterValues"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/displayEquipmentRentFragment"
