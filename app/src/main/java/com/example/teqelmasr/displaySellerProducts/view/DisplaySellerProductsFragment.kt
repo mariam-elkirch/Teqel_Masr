@@ -80,12 +80,12 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         }
 
 
-        if (args.filterObj != null && !(args.filterObj!!.categories.isNullOrEmpty()) && !(args.filterObj!!.types.isNullOrEmpty())) {
+        if (args.filterObj != null /*&& !(args.filterObj!!.categories.isNullOrEmpty())*/ /*&& !(args.filterObj!!.types.isNullOrEmpty())*/) {
             productList =
                 productItem?.products?.filter {
                     it.productType in args.filterObj!!.types
-                    it.tags in args.filterObj!!.categories
-                    it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
+                    //it.tags in args.filterObj!!.categories
+                    //it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
                 } as ArrayList<Product>
 
             Log.i(TAG, "IN FILTER: ${productList.size}")
