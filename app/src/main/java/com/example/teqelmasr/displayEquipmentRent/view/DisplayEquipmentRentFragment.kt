@@ -82,7 +82,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                 }
                 false
             })
-            binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
+            binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
 
 
         }
