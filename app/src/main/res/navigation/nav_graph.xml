@@ -78,6 +78,13 @@
             app:destination="@id/detailsEquipmentRentFragment"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment"
+            app:destination="@id/equipmentRentFilterBottomSheetFragment" />
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterValues"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/displaySparePartFragment"
@@ -196,5 +203,15 @@
         <action
             android:id="@+id/action_equimentSellBottonSheetFrgment_to_displayEquipmentSellFragment"
             app:destination="@id/displayEquipmentSellFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/equipmentRentFilterBottomSheetFragment"
+        android:name="com.example.teqelmasr.displayEquipmentRent.view.EquipmentRentFilterBottomSheetFragment"
+        android:label="fragment_equipment_rent_filter_bottom_sheet"
+        tools:layout="@layout/fragment_equipment_rent_filter_bottom_sheet" >
+        <action
+            android:id="@+id/action_equipmentRentFilterBottomSheetFragment_to_displayEquipmentRentFragment"
+            app:destination="@id/displayEquipmentRentFragment" />
+
     </dialog>
 </navigation>
