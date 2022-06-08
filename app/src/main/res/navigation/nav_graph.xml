@@ -78,8 +78,8 @@
             android:id="@+id/action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment"
             app:destination="@id/equipmentRentFilterBottomSheetFragment" />
         <argument
-            android:name="arrayOfFilteredProducts"
-            app:argType="com.example.teqelmasr.model.Product[]"
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterValues"
             app:nullable="true" />
     </fragment>
     <fragment

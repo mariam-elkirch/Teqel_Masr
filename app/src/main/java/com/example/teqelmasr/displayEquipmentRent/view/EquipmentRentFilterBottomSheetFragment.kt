@@ -22,26 +22,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.*
 import kotlin.collections.ArrayList
 
-class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnProductClickListener {
+class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment()  {
     private val binding by lazy { FragmentEquipmentRentFilterBottomSheetBinding.inflate(layoutInflater) }
     var typesArray = mutableSetOf<String>()
-    val allProductList = ArrayList<Product>()
-    val filterResultList = ArrayList<Product>()
-    private val viewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            factory = DisplayRentEquipmentViewModelFactory(
-                Repository.getInstance(
-                    Client.getInstance(),
-                    requireContext()
-                )
-            )
-        )[DisplayRentEquipmentViewModel::class.java]
-    }
-    private val equipmentRentAdapter by lazy {
-        DisplayRentEquipmentRecyclerAdapter(
-            requireContext(),
-            this)}
 
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
@@ -55,24 +38,22 @@ class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnP
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fetchEquipmentRent()
+
         var filterValues = FilterValues()
 
         filterValues.types = typesArray
         binding.apply {
             configureTypesCheckBoxes()
-            rangeSlider.addOnChangeListener { _, _, _ ->
-                filterValues.priceStart = rangeSlider.values[0]
-                filterValues.priceEnd = rangeSlider.values[1]
+            rangePriceSlider.addOnChangeListener { _, _, _ ->
+                filterValues.priceStart = rangePriceSlider.values[0]
+                filterValues.priceEnd = rangePriceSlider.values[1]
             }
             applyButton.setOnClickListener {
-                filterByProductType()
                 val action =
                     EquipmentRentFilterBottomSheetFragmentDirections.actionEquipmentRentFilterBottomSheetFragmentToDisplayEquipmentRentFragment(
-                        filterResultList.toTypedArray()
+                        filterValues
                     )
                 findNavController().navigate(action)
-                equipmentRentAdapter.setEquipmentRentList(filterResultList)
             }
 
         }
@@ -85,48 +66,48 @@ class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnP
     }
     private fun configureTypesCheckBoxes() {
         binding.apply {
-            one.setOnCheckedChangeListener { _, isClicked ->
+            categoryOneCheckBox.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
-                    typesArray.add(oneText.text.toString())
+                    typesArray.add(categoryOneText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
                 }else if (!isClicked){
-                    typesArray.remove(oneText.text.toString())
+                    typesArray.remove(categoryOneText.text.toString())
                 }
 
             }
-            two.setOnCheckedChangeListener { _, isClicked ->
+            categoryTwoCheckBox.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
-                    typesArray.add(twoText.text.toString())
+                    typesArray.add(categoryTwoText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
                 }else if (!isClicked){
-                    typesArray.remove(twoText.text.toString())
+                    typesArray.remove(categoryTwoText.text.toString())
                 }
 
             }
-            three.setOnCheckedChangeListener { _, isClicked ->
+            categoryThreeCheckBox.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
-                    typesArray.add(threeText.text.toString())
+                    typesArray.add(categoryThreeText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
                 }else if (!isClicked){
-                    typesArray.remove(threeText.text.toString())
+                    typesArray.remove(categoryThreeText.text.toString())
                 }
 
             }
-            four.setOnCheckedChangeListener { _, isClicked ->
+            categoryFourCheckBox.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
-                    typesArray.add(fourText.text.toString())
+                    typesArray.add(categoryFourText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
                 }else if (!isClicked){
-                    typesArray.remove(fourText.text.toString())
+                    typesArray.remove(categoryFourText.text.toString())
                 }
 
             }
-            five.setOnCheckedChangeListener { _, isClicked ->
+            categoryFiveCheckBox.setOnCheckedChangeListener { _, isClicked ->
                 if (isClicked) {
-                    typesArray.add(fiveText.text.toString())
+                    typesArray.add(categoryFiveText.text.toString())
                     Log.i("TAG", " types array ${typesArray.size}")
                 }else if (!isClicked){
-                    typesArray.remove(fiveText.text.toString())
+                    typesArray.remove(categoryFiveText.text.toString())
                 }
 
             }
@@ -135,43 +116,4 @@ class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnP
         }
 
     }
-    private fun fetchEquipmentRent() {
-        viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
-           // equipmentRentAdapter.setEquipmentRentList(it.products!!)
-            allProductList.addAll(it.products!!)
-
-        }
-
-    }
-    private fun filterByProductType(){
-
-        for(i in 0 until allProductList.size){
-        for (cat in typesArray){
-            if (allProductList[i].productType.toString().lowercase(Locale.getDefault()).equals(cat)){
-                filterResultList.add(allProductList[i])
-            }
-
-            }
-        }
-        Log.i("TAG", " All products ${allProductList.size}")
-
-        Log.i("TAG", " filtered products ${filterResultList.size}")
-
-    }
-
-
-
-
-    override fun onProductClick(product: Product) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onEmptyList(searchKey: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onFullList() {
-        TODO("Not yet implemented")
-    }
-
 }
