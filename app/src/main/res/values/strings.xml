@@ -27,6 +27,7 @@
     <string name="price_range">Price Range</string>
     <string name="apply">Apply</string>
     <string name="favourite">favourite</string>
+    <string name="no_products">No Products</string>
     <string-array name="type">
         <item>Equipment for Sell</item>
         <item>Equipment for Rent</item>

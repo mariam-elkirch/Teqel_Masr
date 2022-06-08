@@ -1,6 +1,5 @@
 package com.example.teqelmasr.displaySellerProducts.view
 
-import android.app.FragmentManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
@@ -37,12 +34,13 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
             )
         )
     }
-/*    private val viewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            factory
-        )[MyProductsViewModel::class.java]
-    }*/
+
+    /*    private val viewModel by lazy {
+            ViewModelProvider(
+                requireActivity(),
+                factory
+            )[MyProductsViewModel::class.java]
+        }*/
     private lateinit var viewModel: MyProductsViewModel
     private lateinit var adapter: MyProductsAdapter
     private val args by navArgs<DisplaySellerProductsFragmentArgs>()
@@ -56,7 +54,9 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     ): View? {
 
         adapter = MyProductsAdapter(requireContext(), this)
-        viewModel = ViewModelProvider(requireActivity(),factory)[MyProductsViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
+
+
         setUpUI()
 
         observeMyProducts()
@@ -74,7 +74,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
 
 
-
     override fun onStart() {
         super.onStart()
         observeMyProducts()
@@ -83,23 +82,29 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private fun observeMyProducts() {
 
-        viewModel.myProducts.observe(viewLifecycleOwner) {
+        viewModel.myProducts?.observe(viewLifecycleOwner) {
             fillData(it)
         }
     }
 
-    private fun fillData(productItem: ProductItem) = binding.apply {
-        if (args.filterObj != null /*&& !args.filterObj!!.categories.isNullOrEmpty()*/ && !(args.filterObj!!.types.isNullOrEmpty()) /*&& args.filterObj!!.priceRange != null*/) {
+    private fun fillData(productItem: ProductItem?) = binding.apply {
+
+        if(productItem?.products.isNullOrEmpty()){
+            noProducts.visibility = View.VISIBLE
+        }
+
+
+        if (args.filterObj != null && !args.filterObj!!.categories.isNullOrEmpty() && !(args.filterObj!!.types.isNullOrEmpty()) && args.filterObj!!.priceRange != null) {
             productList =
-                productItem.products?.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
+                productItem?.products?.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
             Log.i(TAG, "IN FILTER: ${productList.size}")
             adapter.setData(productList)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
 
         } else {
-            productList = productItem.products!!
-            adapter.setData(productItem.products)
+            productList = productItem?.products?: ArrayList<Product>()
+            adapter.setData(productItem?.products)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
             Log.i(TAG, "IN ELSE: ${productList.size}")
@@ -108,6 +113,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
 
     private fun setUpUI() = binding.apply {
+        noProducts.visibility = View.GONE
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
         myProductsRecycler.adapter = adapter
         filterIcon.setOnClickListener {
@@ -148,6 +154,11 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
                 product
             )
         binding.root.findNavController().navigate(action)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.noProducts.visibility = View.GONE
     }
 
 
