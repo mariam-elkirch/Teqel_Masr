@@ -48,6 +48,8 @@
     <string name="other">Other</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="enable_connection">Enable Connection</string>
+    <string name="sparetype">Spare Parts</string>
+    <string name="equip_type">Equipment</string>
 
 
     <string-array name="type">
@@ -73,8 +75,8 @@
         <item>Other </item>
     </string-array>
     <string-array name="sliderValues">
-        <item>20</item>
-        <item>70</item>
+        <item>0</item>
+        <item>100</item>
     </string-array>
 
 
