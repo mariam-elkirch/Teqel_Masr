@@ -87,16 +87,24 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
     private fun fetchSpareParts() {
-        if (args.filterValues != null){
-
-        }else{
+        Log.i("TAG", "inside fetchSpareParts")
+            viewModel.fetchSpareParts()
             viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productItem ->
-                binding.searchSpareParts.visibility = View.VISIBLE
-                sparePartsAdapter.setData(productItem.products!!)
-                binding.spareShimmer.stopShimmer()
-                binding.spareShimmer.visibility = View.GONE
+                Log.i("TAG", "fetchSpareParts: ${productItem.products!!.size}")
+                if (productItem.products.isNullOrEmpty()){
+                    binding.spareShimmer.stopShimmer()
+                    binding.spareShimmer.visibility = View.GONE
+                } else{
+                sparePartsAdapter.setData(productItem.products)
+                binding.apply {
+                    searchSpareParts.visibility = View.VISIBLE
+                    spareShimmer.stopShimmer()
+                    spareShimmer.visibility = View.GONE
+                    filterButton.visibility = View.GONE
+                }
+                }
             }
-        }
+
 
     }
 

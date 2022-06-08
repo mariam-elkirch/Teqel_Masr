@@ -17,11 +17,9 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
 
     private val CATEGORY = 289563082938
 
-    init {
-        fetchSpareParts()
-    }
 
-    private fun fetchSpareParts() {
+    fun fetchSpareParts() {
+        Log.i("TAG", "fetchSpareParts: ViewModel")
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getProductsByCategory(productCategory = CATEGORY)
             withContext(Dispatchers.Main) {
