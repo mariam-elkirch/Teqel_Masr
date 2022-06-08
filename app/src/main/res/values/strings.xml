@@ -50,6 +50,10 @@
     <string name="enable_connection">Enable Connection</string>
     <string name="sparetype">Spare Parts</string>
     <string name="equip_type">Equipment</string>
+    <string name="slogan">sell and rent heavy equipment and spare parts</string>
+    <string name="search_text">What are you looking for?</string>
+    <string name="searching_for">What are you searching for?</string>
+    <string name="offer">Offer a Product</string>
 
 
     <string-array name="type">
