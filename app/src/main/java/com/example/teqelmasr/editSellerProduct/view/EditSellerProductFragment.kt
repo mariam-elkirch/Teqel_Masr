@@ -3,18 +3,18 @@ package com.example.teqelmasr.editSellerProduct.view
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.wifi.WifiConfiguration.AuthAlgorithm.strings
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -26,6 +26,7 @@ import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModel
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModelFactory
 import com.example.teqelmasr.model.*
 import com.example.teqelmasr.network.Client
+import java.io.ByteArrayOutputStream
 
 class EditSellerProductFragment : Fragment() {
 
@@ -117,6 +118,13 @@ class EditSellerProductFragment : Fragment() {
 
 
     private fun updateProductObject() {
+        val iv: ImageView = binding.imageItem as ImageView
+        val bitmap = iv.getDrawable().toBitmap()
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos)
+        val bb = bos.toByteArray()
+        var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
+        val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
         val variant = Variant(
             price = binding.priceTxt.text.trim().toString()
                 .toDouble(),
@@ -132,8 +140,10 @@ class EditSellerProductFragment : Fragment() {
             variants = variants,
             tags = binding.categorySpinner.selectedItem.toString(),
             productType = binding.typeSpinner.selectedItem.toString(),
+            images = imagelist,
             templateSuffix = binding.vendorTxt.text.trim().toString(),
             options = optionsItems
+
         )
         val productPost = ProductPost(product)
 
@@ -155,7 +165,7 @@ class EditSellerProductFragment : Fragment() {
             categoryArray!!
         )
         typeAdapter = when (args.currentProduct.tags) {
-            "spare" -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray!!)
+            R.string.spare_tag.toString() -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray!!)
             else -> {
                 ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, equipmentArray!!)
             }
@@ -164,8 +174,8 @@ class EditSellerProductFragment : Fragment() {
             categorySpinner.adapter = categoryAdapter
             categorySpinner.setSelection(
                 when (args.currentProduct.tags) {
-                    "Equipment For Sell" -> 0
-                    "Equipment For Rent" -> 1
+                    R.string.sell_equip_tag.toString() -> 0
+                    R.string.rent_equip_tag.toString() -> 1
                     else -> { 2 }
                 }
             )
@@ -197,17 +207,17 @@ class EditSellerProductFragment : Fragment() {
                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                    Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
                    typeAdapter = when (p0?.selectedItem.toString()) {
-                       "Equipment For Sell" -> ArrayAdapter<String>(
+                       R.string.sell_equip_tag.toString() -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            equipmentArray!!
                        )
-                       "Equipment For Rent" -> ArrayAdapter<String>(
+                       R.string.rent_equip_tag.toString() -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            equipmentArray!!
                        )
-                       "spare" -> ArrayAdapter<String>(
+                       R.string.spare_tag.toString() -> ArrayAdapter<String>(
                            requireContext(),
                            android.R.layout.simple_spinner_item,
                            spareArray!!
@@ -228,13 +238,13 @@ class EditSellerProductFragment : Fragment() {
 
                override fun onNothingSelected(p0: AdapterView<*>?) {
                    typeSpinner.setSelection(when(args.currentProduct.productType){
-                       "turbocharger" -> 0
-                       "filter" -> 1
-                       "accumulator" -> 2
-                       "valve" -> 3
-                       "hose" -> 4
-                       "miscellaneous" -> 5
-                       "hydraulic_components" -> 6
+                       R.string.turbocharger.toString() -> 0
+                       R.string.filter.toString() -> 1
+                       R.string.accumulator.toString() -> 2
+                       R.string.valve.toString() -> 3
+                       R.string.hose.toString() -> 4
+                       R.string.miscellaneous.toString() -> 5
+                       R.string.hydraulic_components.toString() -> 6
                        else -> {7}
                    })
                }

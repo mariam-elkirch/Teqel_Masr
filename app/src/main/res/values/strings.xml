@@ -27,40 +27,50 @@
     <string name="price_range">Price Range</string>
     <string name="apply">Apply</string>
     <string name="favourite">favourite</string>
-    <string name="equipment_sell">Equipment Sell</string>
-    <string name="equipment_rent">Equipment Rent</string>
-    <string name="spare_parts">Spare Parts</string>
-    <string name="clear_all">Clear All</string>
-    <string name="accumulator">accumulator</string>
-    <string name="valve">valve</string>
-    <string name="hose">hose</string>
-    <string name="miscellaneous">miscellaneous</string>
-    <string name="turbocharger">turbocharger</string>
-    <string name="filter">filter</string>
-    <string name="hydraulic_components">hydraulic_components</string>
-    <string name="other">other</string>
-    <string name="filters">Filters</string>
+    <string name="no_products">No Products</string>
+
+    <string name="sell_equip_tag">Equipment for Sell</string>
+    <string name="rent_equip_tag">Equipment for Rent</string>
+    <string name="spare_tag">Spare Parts</string>
+
+    <string name="coldplaners">Coldplaners</string>
+    <string name="compactors">Compactors</string>
+    <string name="excavators">Excavators</string>
+    <string name="dozers">Dozers</string>
+
+    <string name="turbocharger">Turbocharger</string>
+    <string name="filter">Filter</string>
+    <string name="accumulator">Accumulator</string>
+    <string name="valve">Valve</string>
+    <string name="hose">Hose</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="hydraulic_components">Hydraulic Components</string>
+    <string name="other">Other</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="enable_connection">Enable Connection</string>
+
+
     <string-array name="type">
         <item>Equipment for Sell</item>
         <item>Equipment for Rent</item>
         <item>Spare Parts</item>
     </string-array>
     <string-array name="equiments">
-        <item> coldplaners</item>
-        <item>compactors</item>
-        <item>excavators</item>
-        <item>dozers</item>
+        <item>Coldplaners</item>
+        <item>Compactors</item>
+        <item>Excavators</item>
+        <item>Dozers</item>
         <item>Other</item>
     </string-array>
     <string-array name="spare">
-        <item>turbocharger</item>
-        <item>filter </item>
-        <item>accumulator </item>
-        <item>valve </item>
-        <item> hose </item>
-        <item> miscellaneous </item>
-        <item>hydraulic_components </item>
-        <item>other </item>
+        <item>Turbocharger</item>
+        <item>Filter </item>
+        <item>Accumulator </item>
+        <item>Valve </item>
+        <item> Hose </item>
+        <item> Miscellaneous </item>
+        <item>Hydraulic Components</item>
+        <item>Other </item>
     </string-array>
     <string-array name="sliderValues">
         <item>20</item>
