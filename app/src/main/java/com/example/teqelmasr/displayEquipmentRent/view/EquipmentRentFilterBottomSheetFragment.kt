@@ -3,7 +3,6 @@ package com.example.teqelmasr.displayEquipmentRent.view
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentEquipmentRentFilterBottomSheetBinding
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
-import com.example.teqelmasr.displayEquipmentSell.view.EquimentSellBottonSheetFrgmentDirections
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
 import com.example.teqelmasr.model.FilterValues
 import com.example.teqelmasr.model.Product
@@ -21,6 +19,8 @@ import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnProductClickListener {
     private val binding by lazy { FragmentEquipmentRentFilterBottomSheetBinding.inflate(layoutInflater) }
@@ -66,10 +66,13 @@ class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnP
                 filterValues.priceEnd = rangeSlider.values[1]
             }
             applyButton.setOnClickListener {
-                val action =
-                    EquipmentRentFilterBottomSheetFragmentDirections.actionEquipmentRentFilterBottomSheetFragmentToDisplayEquipmentRentFragment()
-                findNavController().navigate(action)
                 filterByProductType()
+                val action =
+                    EquipmentRentFilterBottomSheetFragmentDirections.actionEquipmentRentFilterBottomSheetFragmentToDisplayEquipmentRentFragment(
+                        filterResultList.toTypedArray()
+                    )
+                findNavController().navigate(action)
+                equipmentRentAdapter.setEquipmentRentList(filterResultList)
             }
 
         }
@@ -134,20 +137,24 @@ class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment() , OnP
     }
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
-            equipmentRentAdapter.setEquipmentRentList(it.products!!)
-            allProductList.addAll(it.products)
+           // equipmentRentAdapter.setEquipmentRentList(it.products!!)
+            allProductList.addAll(it.products!!)
 
         }
+
     }
     private fun filterByProductType(){
-        for(i in 0..allProductList.size){
+
+        for(i in 0 until allProductList.size){
         for (cat in typesArray){
-            if (allProductList.get(i).productType.equals(cat)){
-                filterResultList.add(allProductList.get(i))
+            if (allProductList[i].productType.toString().lowercase(Locale.getDefault()).equals(cat)){
+                filterResultList.add(allProductList[i])
             }
 
             }
         }
+        Log.i("TAG", " All products ${allProductList.size}")
+
         Log.i("TAG", " filtered products ${filterResultList.size}")
 
     }

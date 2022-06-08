@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
@@ -29,6 +30,8 @@ import kotlin.collections.ArrayList
 class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     val allProductList = ArrayList<Product>()
     val searchResultList = ArrayList<Product>()
+    private val args by navArgs<DisplayEquipmentRentFragmentArgs>()
+
     private val binding by lazy { FragmentDisplayEquipmentRentBinding.inflate(layoutInflater) }
 
     private val equipmentRentAdapter by lazy {
@@ -91,6 +94,15 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(args.arrayOfFilteredProducts!=null){
+             val arr = args.arrayOfFilteredProducts
+            if (arr != null) {
+                equipmentRentAdapter.setEquipmentRentList(arr.toList())
+            }
+        }
+    }
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentRentAdapter.setEquipmentRentList(it.products!!)

@@ -77,6 +77,10 @@
         <action
             android:id="@+id/action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment"
             app:destination="@id/equipmentRentFilterBottomSheetFragment" />
+        <argument
+            android:name="arrayOfFilteredProducts"
+            app:argType="com.example.teqelmasr.model.Product[]"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/displaySparePartFragment"
@@ -204,5 +208,6 @@
         <action
             android:id="@+id/action_equipmentRentFilterBottomSheetFragment_to_displayEquipmentRentFragment"
             app:destination="@id/displayEquipmentRentFragment" />
+
     </dialog>
 </navigation>

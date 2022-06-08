@@ -12,6 +12,7 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentHomeBinding
 import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragmentDirections
+import com.example.teqelmasr.model.Product
 
 class HomeFragment : Fragment() {
 
@@ -31,7 +32,11 @@ class HomeFragment : Fragment() {
             binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
         }
         binding.equipmentRentBtn.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentRentFragment)
+       //     binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentRentFragment)
+            val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDisplayEquipmentRentFragment(
+                null
+            )
+          findNavController().navigate(action)
         }
         binding.SpareBtn.setOnClickListener {
             val action =
