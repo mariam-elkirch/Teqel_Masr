@@ -54,7 +54,7 @@ class EquimentSellBottonSheetFrgment :  BottomSheetDialogFragment() {
             applyButton.setOnClickListener {
                 val action =
                    EquimentSellBottonSheetFrgmentDirections.
-                   actionEquimentSellBottonSheetFrgmentToDisplayEquipmentSellFragment(null)
+                   actionEquimentSellBottonSheetFrgmentToDisplayEquipmentSellFragment(filterValues)
                 findNavController().navigate(action)
             }
 
