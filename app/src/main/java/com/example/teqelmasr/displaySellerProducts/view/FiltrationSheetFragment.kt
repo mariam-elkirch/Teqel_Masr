@@ -83,13 +83,13 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
 
     private fun appendCategories() {
         if (binding.one.isChecked) {
-            categories.add(binding.firstCategory.text.toString())
+            categories.add("equimentsell")
         }
         if (binding.two.isChecked) {
-            categories.add(binding.secondCategory.text.toString())
+            categories.add("equimentrent")
         }
         if (binding.three.isChecked) {
-            categories.add(binding.thirdCategory.text.toString())
+            categories.add("spare")
         }
 
     }

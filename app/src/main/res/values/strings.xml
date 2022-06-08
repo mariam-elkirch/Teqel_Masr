@@ -46,6 +46,8 @@
     <string name="miscellaneous">Miscellaneous</string>
     <string name="hydraulic_components">Hydraulic Components</string>
     <string name="other">Other</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="enable_connection">Enable Connection</string>
 
 
     <string-array name="type">
