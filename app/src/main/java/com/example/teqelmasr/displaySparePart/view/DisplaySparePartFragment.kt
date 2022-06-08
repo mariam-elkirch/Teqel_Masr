@@ -115,8 +115,27 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
             binding.spareShimmer.stopShimmer()
             binding.spareShimmer.visibility = View.GONE
         }
-        if (args.filterValues != null && !(args.filterValues!!.types.isNullOrEmpty())) {
-            filterData(productItem)
+        if (args.filterValues != null) {
+            if (!(args.filterValues!!.types.isNullOrEmpty())){
+                filterData(productItem)
+            }else {
+                Log.i("TAG", "fetchSpareParts: ${productItem.size}")
+                sparePartsAdapter.setData(productItem)
+                binding.apply {
+                    searchSpareParts.visibility = View.VISIBLE
+                    filterButton.visibility = View.VISIBLE
+                    spareShimmer.stopShimmer()
+                    spareShimmer.visibility = View.GONE
+                }
+            }
+
+            if (args.filterValues!!.priceStart != null && args.filterValues!!.priceEnd != null ){
+                sparePartsList =
+                    productItem.filter { it.variants!![0].price!! >= args.filterValues!!.priceStart!!
+                            && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!  } as ArrayList<Product>
+                sparePartsAdapter.setData(sparePartsList)
+            }
+
         } else {
             Log.i("TAG", "fetchSpareParts: ${productItem.size}")
             sparePartsAdapter.setData(productItem)
@@ -130,10 +149,9 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
     private fun filterData(productItem: List<Product>) {
-        if (args.filterValues != null && !(args.filterValues!!.types.isNullOrEmpty())){
+        if (!(args.filterValues!!.types.isNullOrEmpty())){
             sparePartsList =
                 productItem.filter { it.productType!!.toLowerCase() in args.filterValues!!.types!! } as ArrayList<Product>
-          //  Log.i("TAG", "IN FILTER: ${sparePartsList[0].variants?.get(0)?.price}")
             sparePartsAdapter.setData(sparePartsList)
             binding.apply {
                 searchSpareParts.visibility = View.VISIBLE
