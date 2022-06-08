@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
         app:trackColorActive="@color/dark_blue"
-        app:trackColorInactive="#FFCA97"
+        app:trackColorInactive="@color/cardview_shadow_start_color"
         app:values="@array/sliderValues" />
 
     <View
