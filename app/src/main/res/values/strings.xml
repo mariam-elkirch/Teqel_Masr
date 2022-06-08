@@ -49,6 +49,12 @@
     <string name="no_internet">No Internet Connection</string>
     <string name="enable_connection">Enable Connection</string>
 
+    <string name="filters">Filters</string>
+    <string name="clear_all">Clear All</string>
+    <string name="spare_parts">Spare Parts</string>
+    <string name="equipment_sell">Equipment Sell</string>
+    <string name="equipment_rent">Equipment Rent</string>
+
 
     <string-array name="type">
         <item>Equipment for Sell</item>

@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Equipment Sell"
+                android:text="@string/equipment_sell"
                 android:textColor="#00477A"
                 android:layout_gravity="center"
                 />
@@ -85,7 +85,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Equipment Rent"
+            android:text="@string/equipment_rent"
             android:textColor="#00477A"
             android:layout_gravity="center"
             />
@@ -127,7 +127,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Spare Parts"
+                android:text="@string/spare_parts"
                 android:textColor="#00477A"
                 android:layout_gravity="center"
                 />

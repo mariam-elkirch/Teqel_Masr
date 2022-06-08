@@ -29,7 +29,7 @@ class DetailsSparePartFragment : Fragment() {
             categoryTxt.text = args.product.tags
             typeTxt.text = args.product.productType
             productDesc.text = args.product.bodyHtml
-            vendorTxt.text = args.product.vendor
+            vendorTxt.text = args.product.templateSuffix
             dateTxt.text = args.product.published_at?.slice(IntRange(0, 9))
             Glide.with(requireContext()).load(args.product.image?.src).centerCrop()
                 .placeholder(R.drawable.placeholder).into(binding.imageItem)

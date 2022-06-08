@@ -189,7 +189,7 @@
         android:id="@+id/sparePartsFilterBottomSheetFragment"
         android:name="com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragment"
         android:label="fragment_filter_bottom_sheet"
-        tools:layout="@layout/fragment_filter_bottom_sheet" >
+        tools:layout="@layout/fragment_spare_parts_filter_bottom_sheet" >
         <action
             android:id="@+id/action_sparePartsFilterBottomSheetFragment_to_displaySparePartFragment"
             app:destination="@id/displaySparePartFragment" />

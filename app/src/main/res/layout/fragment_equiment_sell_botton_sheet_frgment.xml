@@ -8,7 +8,7 @@
     tools:context=".displayEquipmentSell.view.EquimentSellBottonSheetFrgment">
 
     <TextView
-        android:id="@+id/pricre_txt"
+        android:id="@+id/price_range_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -32,7 +32,7 @@
         app:haloColor="#E97000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
         app:trackColorActive="#FF7B00"
         app:trackColorInactive="#FFCA97"
