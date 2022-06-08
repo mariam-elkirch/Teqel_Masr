@@ -146,7 +146,7 @@ class AddEquipmentSellFragment : Fragment() {
                     0 -> myproductType = R.string.turbocharger.toString()
                     1 -> {
                         Log.i("tag",position.toString()+"positionnnnnnnn")
-                        myproductType = R.string.filter.toString()
+                        myproductType = R.string.compactors.toString()
                     }
                     2 -> {
                         myproductType = R.string.accumulator.toString()
