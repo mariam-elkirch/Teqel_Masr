@@ -27,6 +27,21 @@
     <string name="price_range">Price Range</string>
     <string name="apply">Apply</string>
     <string name="favourite">favourite</string>
+    <string name="equipment_sell">Equipment Sell</string>
+    <string name="equipment_rent">Equipment Rent</string>
+    <string name="spare_parts">Spare Parts</string>
+    <string name="apply">Apply</string>
+    <string name="price_range">Price Range</string>
+    <string name="type">Type</string>
+    <string name="clear_all">Clear All</string>
+    <string name="accumulator">accumulator</string>
+    <string name="valve">valve</string>
+    <string name="hose">hose</string>
+    <string name="miscellaneous">miscellaneous</string>
+    <string name="turbocharger">turbocharger</string>
+    <string name="filter">filter</string>
+    <string name="hydraulic_components">hydraulic_components</string>
+    <string name="other">other</string>
     <string-array name="type">
         <item>Equipment for Sell</item>
         <item>Equipment for Rent</item>

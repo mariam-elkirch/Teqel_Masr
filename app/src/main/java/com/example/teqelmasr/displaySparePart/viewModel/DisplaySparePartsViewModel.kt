@@ -26,6 +26,7 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
                 if (response.isSuccessful) {
                     sparePartsMutableLiveData.postValue(response.body())
                 } else {
+                    sparePartsMutableLiveData.postValue(ProductItem(products = arrayListOf()))
                     Log.e(
                         "DisplaySparePartsViewModel",
                         "Error fetching data in DisplaySparePartsViewModel ${response.message()}"

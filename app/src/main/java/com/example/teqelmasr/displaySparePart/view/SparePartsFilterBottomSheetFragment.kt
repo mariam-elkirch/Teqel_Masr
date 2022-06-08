@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
-import com.example.teqelmasr.databinding.FragmentFilterBottomSheetBinding
+import com.example.teqelmasr.databinding.FragmentSparePartsFilterBottomSheetBinding
 import com.example.teqelmasr.model.FilterValues
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
 
-    private val binding by lazy { FragmentFilterBottomSheetBinding.inflate(layoutInflater) }
+    private val binding by lazy { FragmentSparePartsFilterBottomSheetBinding.inflate(layoutInflater) }
     var typesArray = mutableSetOf<String>()
 
 
