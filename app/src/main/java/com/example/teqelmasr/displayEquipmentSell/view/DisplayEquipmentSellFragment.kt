@@ -10,22 +10,22 @@ import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.navArgs
+
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
 import com.example.teqelmasr.R
-import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
+
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
-import com.example.teqelmasr.displayEquipmentRent.view.DisplayEquipmentRentFragmentDirections
-import com.example.teqelmasr.displayEquipmentRent.view.DisplayRentEquipmentRecyclerAdapter
-import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
-import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModel
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
+
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,9 +38,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
-
+     var equipmentList = ArrayList<Product>()
+     var equipmentListFilter = ArrayList<Product>()
     private val binding by lazy { FragmentDisplayEquipmentSellBinding.inflate(layoutInflater)  }
-
+    private val args by navArgs<DisplayEquipmentSellFragmentArgs>()
     private val equipmentSellAdapter by lazy {
        DisplaySellEquipmentAdapter(
             requireContext(),
@@ -68,6 +69,7 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         super.onResume()
         Log.i("tag","on Resume")
         fetchEquipmentSell()
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,10 +106,13 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         binding.filterButton.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
 
         binding.swipeRefreshLayout.setOnRefreshListener{
-            fetchEquipmentSell()
+
             Log.i("tag","on Refresh")
+            viewModel.fetchSellEquipments()
         }
         fetchEquipmentSell()
+         Log.i("tag",args.filterValue?.types.toString()+"ttttttttt")
+
 
         return binding.root
     }
@@ -116,16 +121,50 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
     private fun fetchEquipmentSell() {
       binding.swipeRefreshLayout.isRefreshing = true
         viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {
-            equipmentSellAdapter.setEquipmentSellList(it.products!!)
+           // equipmentSellAdapter.setEquipmentSellList(it.products!!)
             binding.shimmersell.stopShimmer()
             Log.i("tag","fetch equipment")
            // binding.swipeRefreshLayout.isRefreshing = false
+         //   equipmentList.addAll(it.products)
+            fillData(it.products!!)
             binding.shimmersell.visibility = View.GONE
             binding.swipeRefreshLayout.isRefreshing = false
-          //
+
         }
     }
+    private fun fillData(productItem: List<Product>) {
+        if (productItem.isNullOrEmpty()) {
+            binding.shimmersell.stopShimmer()
+            binding.shimmersell.visibility = View.GONE
+        }
+        if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty())) {
+            filterData(productItem)
+        } else {
+            Log.i("TAG", "fetchSpareParts: ${productItem.size}")
+          //  sparePartsAdapter.setData(productItem)
+            equipmentSellAdapter.setEquipmentSellList(productItem)
+            binding.apply {
 
+
+                shimmersell.stopShimmer()
+                shimmersell.visibility = View.GONE
+            }
+        }
+    }
+    private fun filterData(productItem: List<Product>) {
+        if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty())){
+            equipmentList =
+                productItem.filter { it.productType!!.toLowerCase() in args.filterValue!!.types!! } as ArrayList<Product>
+            //  Log.i("TAG", "IN FILTER: ${sparePartsList[0].variants?.get(0)?.price}")
+            equipmentSellAdapter.setEquipmentSellList(equipmentList)
+            binding.apply {
+
+
+                shimmersell.stopShimmer()
+                shimmersell.visibility = View.GONE
+            }
+        }
+    }
     override fun onProductClick(product: Product) {
         val action = DisplayEquipmentSellFragmentDirections.actionDisplayEquipmentSellFragmentToDetailsEquipmentSellFragment(product)
         binding.root.findNavController().navigate(action)

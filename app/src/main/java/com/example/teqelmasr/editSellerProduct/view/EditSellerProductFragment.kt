@@ -125,6 +125,7 @@ class EditSellerProductFragment : Fragment() {
         val bb = bos.toByteArray()
         var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
         val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
+        val img = Image(attachment = imageString, filename = "3.png")
         val variant = Variant(
             price = binding.priceTxt.text.trim().toString()
                 .toDouble(),
@@ -141,6 +142,7 @@ class EditSellerProductFragment : Fragment() {
             tags = binding.categorySpinner.selectedItem.toString(),
             productType = binding.typeSpinner.selectedItem.toString(),
             images = imagelist,
+            image = img,
             templateSuffix = binding.vendorTxt.text.trim().toString(),
             options = optionsItems
 

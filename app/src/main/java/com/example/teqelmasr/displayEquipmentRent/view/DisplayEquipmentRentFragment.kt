@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
@@ -29,6 +30,9 @@ import kotlin.collections.ArrayList
 class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     val allProductList = ArrayList<Product>()
     val searchResultList = ArrayList<Product>()
+    val filterResultList = ArrayList<Product>()
+    private val args by navArgs<DisplayEquipmentRentFragmentArgs>()
+
     private val binding by lazy { FragmentDisplayEquipmentRentBinding.inflate(layoutInflater) }
 
     private val equipmentRentAdapter by lazy {
@@ -82,19 +86,42 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                 }
                 false
             })
-            binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
+            binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
 
 
         }
+
+
 
         fetchEquipmentRent()
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(args.filterObj!=null) {
+            for(i in 0 until allProductList.size){
+                for (cat in args.filterObj?.types!!){
+                    if (allProductList[i].productType.toString().lowercase(Locale.getDefault()) == cat){
+                        filterResultList.add(allProductList[i])
+                    }
+
+                }
+               /* allProductList.filter {
+                    args.filterObj!!.types?.filter {
+                        if (.productType.toString().lowercase(Locale.getDefault()))
+
+                    }
+                }*/
+            }
+            equipmentRentAdapter.setEquipmentRentList(filterResultList)
+
+        }
+    }
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentRentAdapter.setEquipmentRentList(it.products!!)
-            searchResultList.addAll(it.products)
+           // searchResultList.addAll(it.products)
             allProductList.addAll(it.products)
             binding.shimmerrent.stopShimmer()
             binding.shimmerrent.visibility = View.GONE

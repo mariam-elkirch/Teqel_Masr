@@ -20,7 +20,7 @@ class DisplayEquipmentSellViewModel (private val repository: RepositoryInterface
         fetchSellEquipments()
     }
 
-    private fun fetchSellEquipments() {
+    fun fetchSellEquipments() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getProductsByCategory(collectionID)
             withContext(Dispatchers.Main) {
