@@ -214,7 +214,7 @@ class AddEquipmentSellFragment : Fragment() {
 
         }
         viewModel.myProducts.observe(viewLifecycleOwner){
-            Log.i("tag",it.toString()+ "product")
+            Log.i("tag","producttttttttt"+it.toString()+ "product")
 
             // val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
             //toast.show()
@@ -239,6 +239,7 @@ class AddEquipmentSellFragment : Fragment() {
         val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
         Log.i("tag",doublePrice.toString()+ "Priceee")
         val img = Image(src = imageString)
+       // val imagelist = listOf(ImagesItem(src = imageString) )
         val varian = listOf(
 
             Variant(price = doublePrice)
