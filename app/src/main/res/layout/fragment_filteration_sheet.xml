@@ -31,7 +31,7 @@
         android:valueTo="100"
         app:haloColor="#00477A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="#E97000"
@@ -39,6 +39,7 @@
         app:trackColorActive="#00477A"
         app:trackColorInactive="@color/cardview_shadow_start_color"
         app:values="@array/sliderValues" />
+
 
     <View
         android:id="@+id/first_view"
@@ -83,7 +84,8 @@
                 android:text="@string/sell_equip_tag"/>
 
             <CheckBox
-                android:id="@+id/one"
+                android:id="@+id/sell_check_box"
+                android:buttonTint="@color/orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </TableRow>
@@ -102,7 +104,8 @@
                 android:text="@string/rent_equip_tag"/>
 
             <CheckBox
-                android:id="@+id/two"
+                android:id="@+id/rent_check_box"
+                android:buttonTint="@color/orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </TableRow>
@@ -120,7 +123,8 @@
                 android:text="@string/spare_tag"/>
 
             <CheckBox
-                android:id="@+id/three"
+                android:id="@+id/spare_check_box"
+                android:buttonTint="@color/orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </TableRow>
@@ -130,8 +134,8 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/type_label"
-        android:text="@string/type"
+        android:id="@+id/equip_label"
+        android:text="@string/equip_type"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="16dp"
         android:fontFamily="sans-serif-medium"
@@ -142,14 +146,77 @@
         android:layout_height="wrap_content"/>
 
     <HorizontalScrollView
-        android:id="@+id/scroll"
-        app:layout_constraintTop_toBottomOf="@id/type_label"
+        android:id="@+id/spare_scroll"
+        app:layout_constraintTop_toBottomOf="@id/equip_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group"
+            android:id="@+id/equip_group"
+            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/eq_chip_one"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/coldplaners" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/eq_chip_two"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compactors" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/eq_chip_three"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/excavators" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/eq_chip_four"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dozers" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/eq_chip_six"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/other" />
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+    <TextView
+        android:id="@+id/spare_label"
+        android:textSize="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#E97000"
+        app:layout_constraintTop_toBottomOf="@id/spare_scroll"
+        android:text="@string/sparetype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <HorizontalScrollView
+        android:id="@+id/equip_scroll"
+        app:layout_constraintTop_toBottomOf="@id/spare_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/spare_group"
             android:padding="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -216,11 +283,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintTop_toBottomOf="@id/scroll"
         android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/equip_scroll"
         android:backgroundTint="#E97000"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="10dp"
+        android:textColor="#00477A"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
 

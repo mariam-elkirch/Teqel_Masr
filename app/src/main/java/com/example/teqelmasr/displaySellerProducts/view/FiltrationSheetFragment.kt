@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
+import androidx.core.view.forEach
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
@@ -43,7 +44,6 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
                 val values = slider.values
                 start = values[0].toString()
                 end = values[1].toString()
-                Log.i(TAG, "start: ${start} end: ${end}")
             }
 
             @SuppressLint("RestrictedApi")
@@ -51,7 +51,6 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
                 val values = slider.values
                 start = values[0].toString()
                 end = values[1].toString()
-                Log.i(TAG, "start: ${start} end: ${end}")
             }
 
         })
@@ -60,21 +59,188 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
             appendCategories()
             appendTypes()
             val filterObj =
-                FilterObj(IntRange(start = start.toDouble().toInt(), endInclusive = end.toDouble().toInt()), categories, types)
+                FilterObj(
+                    IntRange(
+                        start = start.toDouble().toInt(),
+                        endInclusive = end.toDouble().toInt()
+                    ), categories, types
+                )
             val action: NavDirections =
-                FiltrationSheetFragmentDirections.actionFiltrationSheetFragmentToDisplaySellerProductsFragment(filterObj)
+                FiltrationSheetFragmentDirections.actionFiltrationSheetFragmentToDisplaySellerProductsFragment(
+                    filterObj
+                )
             findNavController().navigate(action)
 
         }
+/*
+
+        binding.sellCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if (compoundButton.isChecked && !(binding.spareCheckBox.isChecked)) {
+                binding.spareGroup.forEach { it.isEnabled = false }
+
+            } else if (compoundButton.isChecked && binding.spareCheckBox.isChecked) {
+                binding.spareGroup.forEach { it.isEnabled = true }
+                binding.equipGroup.forEach { it.isEnabled = true }
+
+            } else {
+                if(binding.rentCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = true }
+
+                }
+                if(binding.spareCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = false }
+                }else{
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                }
+
+            }
+        }
+
+        binding.spareCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if (compoundButton.isChecked) {
+                if (binding.sellCheckBox.isChecked || binding.rentCheckBox.isChecked) {
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }else{
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }
+                binding.spareGroup.forEach {
+                    if (!(it.isEnabled)) {
+                        it.isEnabled = true
+                    }
+                }
+            } else {
+
+                if(binding.sellCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                }else{
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                }
+
+            }
+        }
+
+        binding.rentCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if (compoundButton.isChecked && !(binding.spareCheckBox.isChecked)) {
+                binding.spareGroup.forEach { it.isEnabled = false }
+
+            } else if (compoundButton.isChecked && binding.spareCheckBox.isChecked) {
+                binding.spareGroup.forEach { it.isEnabled = true }
+                binding.equipGroup.forEach { it.isEnabled = true }
+
+            } else {
+                if(binding.spareCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = false }
+                }
+                if(binding.sellCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = true }
+
+                }else{
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                }
+
+            }
+        }
+*/
+        binding.sellCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked){
+                if(binding.spareCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+
+                }else{
+                    binding.spareGroup.forEach { it.isEnabled = false }
+
+                }
+            }else{
+                if(binding.rentCheckBox.isChecked && !(binding.spareCheckBox.isChecked)){
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+
+                }else if(binding.rentCheckBox.isChecked && binding.spareCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                    binding.spareGroup.forEach { it.isEnabled = true }
+
+                }else if(!(binding.rentCheckBox.isChecked) && binding.spareCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = false }
+                    binding.spareGroup.forEach { it.isEnabled = true }
+
+
+                }else if(!(binding.rentCheckBox.isChecked) && !(binding.spareCheckBox.isChecked)){
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                }
+            }
+        }
+
+        binding.rentCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked){
+                if(binding.spareCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+
+                }else{
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                }
+            }else{
+                if(binding.sellCheckBox.isChecked && binding.spareCheckBox.isChecked){
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                    binding.spareGroup.forEach { it.isEnabled = true }
+
+                }else if(binding.sellCheckBox.isChecked && !(binding.spareCheckBox.isChecked)){
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+
+                }else if(!(binding.sellCheckBox.isChecked) && !(binding.spareCheckBox.isChecked)){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }else if(!(binding.sellCheckBox.isChecked) && binding.spareCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = false}
+                }
+            }
+        }
+
+        binding.spareCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked){
+                if(binding.sellCheckBox.isChecked && binding.rentCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }else if(!(binding.sellCheckBox.isChecked) && !(binding.rentCheckBox.isChecked)){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = false }
+                }else if(!(binding.sellCheckBox.isChecked) && binding.rentCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }else if(binding.sellCheckBox.isChecked && !(binding.rentCheckBox.isChecked)){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }
+            }else{
+                if(binding.sellCheckBox.isChecked || binding.rentCheckBox.isChecked){
+                    binding.spareGroup.forEach { it.isEnabled = false }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }else if(!(binding.sellCheckBox.isChecked) && !(binding.rentCheckBox.isChecked)){
+                    binding.spareGroup.forEach { it.isEnabled = true }
+                    binding.equipGroup.forEach { it.isEnabled = true }
+                }
+
+            }
+        }
+
+
         return binding.root
     }
 
     private fun appendTypes() {
 
-        for (chip in binding.chipGroup.children) {
-            val currentChip = chip as Chip
-            if (currentChip.isChecked) {
-                types.add(currentChip.text.toString())
+        binding.spareGroup.forEach {
+            if((it as Chip).isChecked){
+                types.add(it.text.toString())
+            }
+        }
+        binding.equipGroup.forEach {
+            if((it as Chip).isChecked){
+                types.add(it.text.toString())
             }
         }
 
@@ -82,13 +248,13 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
     }
 
     private fun appendCategories() {
-        if (binding.one.isChecked) {
+        if (binding.sellCheckBox.isChecked) {
             categories.add("equimentsell")
         }
-        if (binding.two.isChecked) {
+        if (binding.rentCheckBox.isChecked) {
             categories.add("equimentrent")
         }
-        if (binding.three.isChecked) {
+        if (binding.spareCheckBox.isChecked) {
             categories.add("spare")
         }
 
