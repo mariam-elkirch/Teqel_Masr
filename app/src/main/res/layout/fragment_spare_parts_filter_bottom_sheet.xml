@@ -64,12 +64,14 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.66"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/category_label">
 
         <TableLayout
             android:id="@+id/table"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_label"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:stretchColumns="1">
@@ -253,35 +255,34 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
-            <!-- <View
+             <View
                 android:layout_height="1dp"
-                android:background="#D3D3D3" />-->
+                android:background="#D3D3D3" />
 
         </TableLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <View
+    <!--<View
         android:id="@+id/button_view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
         android:background="#D3D3D3"
         app:layout_constraintBottom_toTopOf="@id/apply_button"
-        app:layout_constraintTop_toBottomOf="@id/scroll" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/scroll" />-->
     <Button
         android:id="@+id/apply_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/orange"
         android:text="@string/apply"
+        app:layout_constraintTop_toBottomOf="@id/scroll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9">
-
-
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.1"
+        >
     </Button>
 
     <TextView
