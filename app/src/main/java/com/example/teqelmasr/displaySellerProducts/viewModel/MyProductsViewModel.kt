@@ -13,17 +13,17 @@ import kotlinx.coroutines.withContext
 
 class MyProductsViewModel(private val repo: RepositoryInterface): ViewModel() {
 
-    private var _myProducts: MutableLiveData<ProductItem> = MutableLiveData()
-    var myProducts: LiveData<ProductItem> = _myProducts
+    private var _myProducts: MutableLiveData<ProductItem>? = MutableLiveData()
+    var myProducts: LiveData<ProductItem>? = _myProducts
 
     init {
         getMyProducts()
     }
-    private fun getMyProducts(){
+    fun getMyProducts(){
         viewModelScope.launch {
             val myProductsRes = repo.getMyProducts()
             withContext(Dispatchers.IO){
-                _myProducts.postValue(myProductsRes.body())
+                _myProducts?.postValue(myProductsRes.body())
             }
         }
     }

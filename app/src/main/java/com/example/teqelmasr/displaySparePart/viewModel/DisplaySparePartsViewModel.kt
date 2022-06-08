@@ -15,7 +15,7 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
     private val sparePartsMutableLiveData: MutableLiveData<ProductItem> = MutableLiveData()
     val sparePartsLiveData: LiveData<ProductItem> = sparePartsMutableLiveData
 
-    private val CATEGORY = 289563082938
+    private val CATEGORY = 271217819784
 
     init {
         fetchSpareParts()

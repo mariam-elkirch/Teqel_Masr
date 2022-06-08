@@ -71,10 +71,10 @@ class MyProductsAdapter(private val context: Context, private val onBtnListener:
 
     override fun getItemCount(): Int = productList.size
 
-    fun setData(products: ArrayList<Product>) {
+    fun setData(products: ArrayList<Product>?) {
         Log.i(TAG, "setData: ")
-        productList = products
-        originalList = products
+        productList = products?: ArrayList<Product>()
+        originalList = products?: ArrayList<Product>()
         notifyDataSetChanged()
     }
 

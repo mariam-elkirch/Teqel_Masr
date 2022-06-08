@@ -80,7 +80,7 @@
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
                 android:textColor="#00477A"
-                android:text="Equipment for Sell"/>
+                android:text="@string/sell_equip_tag"/>
 
             <CheckBox
                 android:id="@+id/one"
@@ -99,7 +99,7 @@
                 android:fontFamily="sans-serif"
 
                 android:textColor="#00477A"
-                android:text="Equipment for Rent"/>
+                android:text="@string/rent_equip_tag"/>
 
             <CheckBox
                 android:id="@+id/two"
@@ -117,7 +117,7 @@
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
                 android:textColor="#00477A"
-                android:text="Spare Parts"/>
+                android:text="@string/spare_tag"/>
 
             <CheckBox
                 android:id="@+id/three"
@@ -159,41 +159,53 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="turbocharger" />
+                android:text="@string/turbocharger" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_two"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="selas" />
+                android:text="@string/filter" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_three"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="miscellaneous" />
+                android:text="@string/accumulator" />
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_four"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="valve" />
+                android:text="@string/valve" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_five"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hydraulic Component" />
-
+                android:text="@string/hose" />
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_six"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Other" />
+                android:text="@string/miscellaneous" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_seven"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hydraulic_components" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_eight"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/other" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>

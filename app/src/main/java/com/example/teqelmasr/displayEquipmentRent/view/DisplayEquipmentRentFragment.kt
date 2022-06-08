@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
@@ -35,45 +36,6 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             requireContext(),
             this)}
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.toolbar_menu,menu)
-        val menuItem = menu!!.findItem(R.id.action_search)
-        if (menuItem!=null){
-            val searchView = menuItem.actionView as SearchView
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if(newText!!.isNotEmpty()){
-                        searchResultList.clear()
-                       equipmentRentAdapter.setEquipmentRentList(searchResultList)
-                        val search = newText.lowercase(Locale.getDefault())
-                        allProductList.forEach {
-                            if (it.title?.lowercase(Locale.getDefault())!!.contains(search))
-                            {
-                                searchResultList.add(it)
-                                equipmentRentAdapter.setEquipmentRentList(searchResultList)
-
-                            }
-                        }
-
-                    }
-                    else{
-                        searchResultList.clear()
-                        searchResultList.addAll(allProductList)
-                        equipmentRentAdapter.setEquipmentRentList(searchResultList)
-
-                    }
-                    return true
-                }
-
-            })
-        }
-
-    }
     private val viewModel by lazy {
         ViewModelProvider(
             requireActivity(),
@@ -100,6 +62,28 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             recyclerViewRentEquipment.adapter = equipmentRentAdapter
             recyclerViewRentEquipment.hasFixedSize()
             recyclerViewRentEquipment.layoutManager = LinearLayoutManager(requireContext())
+            searchRentEquipment.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    equipmentRentAdapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    equipmentRentAdapter.filter.filter(newText)
+                    return true
+                }
+
+            })
+            searchRentEquipment.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            })
+            binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
+
 
         }
 
@@ -125,10 +109,19 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     }
 
     override fun onEmptyList(searchKey: String) {
-        TODO("Not yet implemented")
+        binding.apply {
+            noResultsImage.visibility = View.VISIBLE
+            noResultText.text = "No Results for your search \"$searchKey\""
+            noResultText.visibility = View.VISIBLE
+        }
+
     }
 
     override fun onFullList() {
+        binding.apply {
+            noResultsImage.visibility = View.GONE
+            noResultText.visibility = View.GONE
+        }
 
     }
 

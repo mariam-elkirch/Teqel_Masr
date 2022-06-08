@@ -15,7 +15,7 @@ class DisplayEquipmentSellViewModel (private val repository: RepositoryInterface
     private val sellEquipmentMutableLiveData: MutableLiveData<ProductItem> = MutableLiveData()
     val sellEquipmentLiveData: LiveData<ProductItem> =sellEquipmentMutableLiveData
 
-    private val collectionID = 289563181242
+    private val collectionID = 271217655944
     init {
         fetchSellEquipments()
     }

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,9 +23,7 @@ import com.example.teqelmasr.network.Client
 import java.io.ByteArrayOutputStream
 import android.graphics.Bitmap.CompressFormat
 
-import android.graphics.drawable.BitmapDrawable
 
-import android.R
 import android.app.AlertDialog
 import android.view.View.*
 import android.widget.AdapterView
@@ -33,6 +32,7 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import com.example.teqelmasr.R
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.*
 
@@ -55,7 +55,10 @@ class AddEquipmentSellFragment : Fragment() {
     private val pickImage = 100
     private var imageUri: Uri? = null
     lateinit var viewModel: AddProductViewModel
-    lateinit var mytag : String
+    var mytag : String = ""
+     var myproductType : String =""
+    var producttype: String = ""
+    var myproductTypeEquipment : String =""
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,15 +80,10 @@ class AddEquipmentSellFragment : Fragment() {
             startActivityForResult(gallery, pickImage)
         }
         val spinner = binding.spinner
-        val text = spinner.selectedItem.toString()
-       /* if(text.equals("Equipment for Sell")){
-            binding.spinnerSpare.visibility = GONE
-            binding.spinnerEquipment.visibility = VISIBLE
-        }
-        else{
-            binding.spinnerEquipment.visibility = GONE
-            binding.spinnerSpare.visibility = VISIBLE
-        }*/
+         val spinnerspare = binding.spinnerSpare
+        val spinnerEquipment = binding.spinnerEquipment
+
+
       spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                // binding.spinnerSpare.visibility = GONE
@@ -97,7 +95,7 @@ class AddEquipmentSellFragment : Fragment() {
                 if (position == 2){
                 binding.spinnerEquipment.visibility = INVISIBLE
                 binding.spinnerSpare.visibility = VISIBLE
-                     mytag = "spare"
+                     mytag =  "spare"
             }else{
                     binding.spinnerEquipment.visibility = VISIBLE
                     binding.spinnerSpare.visibility = INVISIBLE
@@ -107,6 +105,71 @@ class AddEquipmentSellFragment : Fragment() {
                         mytag = "equimentrent"
                     }
             }
+            }
+
+        }
+
+           spinnerEquipment?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    Log.i("tag",position.toString()+"Imggg"+mytag)
+
+                        when (position) {
+                            0 -> myproductTypeEquipment = "Coldplaners"
+                            1 -> {
+                                Log.i("tag",position.toString()+"positionnnnnnnn")
+                                myproductTypeEquipment = "Compactors"
+                            }
+                            2 -> {
+                                myproductTypeEquipment = "Excavators"
+                            }
+
+                            3 -> {
+                                myproductTypeEquipment = "Dozers"
+                            }
+                            else -> {
+                                myproductTypeEquipment = "Other"
+                            }
+                        }
+                    }
+
+        }
+        spinnerspare?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.i("tag",position.toString()+"Imggg"+mytag)
+
+                when (position) {
+                    0 -> myproductType = "Turbocharger"
+                    1 -> {
+                        Log.i("tag",position.toString()+"positionnnnnnnn")
+                        myproductType = "Filter"
+                    }
+                    2 -> {
+                        myproductType = "Accumulator"
+                    }
+                    3 -> {
+                        myproductType =  "Valve"
+                    }
+                    4 -> {
+                        myproductType = "Hose"
+                    }
+                    5 -> {
+                        myproductType =  "Miscellaneous"
+                    }
+                    6 -> {
+                        myproductType = "Hydraulic Components"
+                    }
+                    else -> {
+                        myproductType = "Other"
+                    }
+                }
             }
 
         }
@@ -154,7 +217,7 @@ class AddEquipmentSellFragment : Fragment() {
 
         }
         viewModel.myProducts.observe(viewLifecycleOwner){
-            Log.i("tag",it.toString()+ "product")
+            Log.i("tag","producttttttttt"+it.toString()+ "product")
 
             // val toast = Toast.makeText(context, "Product added successfully", Toast.LENGTH_SHORT)
             //toast.show()
@@ -172,21 +235,31 @@ class AddEquipmentSellFragment : Fragment() {
         val bos = ByteArrayOutputStream()
         bitmap.compress(CompressFormat.PNG, 100, bos)
         val bb = bos.toByteArray()
-        val imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
+        var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
 
-        Log.i("Tag", "Imgggggggg"+mytag)
+        Log.i("Tag", "Imgggggggg"+imageString)
+        Log.i("tag",myproductType+ "Priceee")
         val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
         Log.i("tag",doublePrice.toString()+ "Priceee")
+      //  val img = Image(src = "https://cdn.shopify.com/s/files/1/0585/8285/9912/products/sell.jpg?v=1654637583",height = 5)
+        val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
         val varian = listOf(
 
             Variant(price = doublePrice)
         )
 
-
+        if(mytag.equals("spare")){
+            producttype = myproductType
+        }
+        else{
+            producttype = myproductTypeEquipment
+        }
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
-            ,bodyHtml = binding.describtionEditText.text.toString()
+            ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype ,images = imagelist
             ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
+
+
         Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())
 
         viewModel.postProduct(product)
