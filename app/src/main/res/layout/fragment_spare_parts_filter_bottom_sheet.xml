@@ -7,7 +7,7 @@
     tools:context=".displaySparePart.view.SparePartsFilterBottomSheetFragment">
 
     <TextView
-        android:id="@+id/pricre_txt"
+        android:id="@+id/price_range_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -17,7 +17,7 @@
         android:textColor="#E97000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/filters_textView" />
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/range_slider"
@@ -31,7 +31,7 @@
         app:haloColor="#E97000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
         app:trackColorActive="#FF7B00"
         app:trackColorInactive="#FFCA97"
@@ -274,29 +274,41 @@
         android:id="@+id/apply_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
         android:text="@string/apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        android:backgroundTint="@color/orange"
-        >
+        app:layout_constraintWidth_percent="0.9">
 
 
     </Button>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/clear_all_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/pricre_txt"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="@color/orange"
+        android:fontFamily="sans-serif"
         android:text="@string/clear_all"
+        android:textColor="@color/orange"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pricre_txt"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintTop_toTopOf="@+id/filters_textView" />
+
+    <TextView
+        android:id="@+id/filters_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/filters"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/price_range_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

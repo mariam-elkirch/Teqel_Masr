@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/pricre_txt"
+        android:id="@+id/price_range_txt"
         android:text="@string/price_range"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="16dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="#E97000"
         app:tickColor="#00477A"
         app:trackColorActive="#00477A"

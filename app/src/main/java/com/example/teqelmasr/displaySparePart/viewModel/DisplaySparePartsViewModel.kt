@@ -15,13 +15,13 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
     private val sparePartsMutableLiveData: MutableLiveData<ProductItem> = MutableLiveData()
     val sparePartsLiveData: LiveData<ProductItem> = sparePartsMutableLiveData
 
-    private val CATEGORY = 271217819784
+    private val collectionID = 271217819784
 
 
     fun fetchSpareParts() {
         Log.i("TAG", "fetchSpareParts: ViewModel")
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getProductsByCategory(productCategory = CATEGORY)
+            val response = repository.getProductsByCategory(productCategory = collectionID)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     sparePartsMutableLiveData.postValue(response.body())
