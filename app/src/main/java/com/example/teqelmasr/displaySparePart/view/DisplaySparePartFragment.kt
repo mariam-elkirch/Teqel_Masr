@@ -46,16 +46,17 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         )[DisplaySparePartsViewModel::class.java]
     }
 
-   /* override fun onResume() {
+    override fun onResume() {
         super.onResume()
         fetchSpareParts()
-    }*/
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Log.i("ARGS", args.filterValues?.priceStart.toString())
+        Log.i("ARGS start", args.filterValues?.priceStart.toString())
+        Log.i("ARGS end", args.filterValues?.priceEnd.toString())
         // Log.i("ARGS", args.filterValues?.types?.elementAt(0).toString())
         setUpUI()
 
@@ -109,36 +110,37 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         }
     }
 
-    private fun fillSparePartsData(productItem: ProductItem) {
-        if (productItem.products.isNullOrEmpty()) {
+    private fun fillSparePartsData(productItem: List<Product>) {
+        if (productItem.isNullOrEmpty()) {
             binding.spareShimmer.stopShimmer()
             binding.spareShimmer.visibility = View.GONE
         }
         if (args.filterValues != null && !(args.filterValues!!.types.isNullOrEmpty())) {
             filterData(productItem)
         } else {
-            Log.i("TAG", "fetchSpareParts: ${productItem.products!!.size}")
-            sparePartsAdapter.setData(productItem.products)
+            Log.i("TAG", "fetchSpareParts: ${productItem.size}")
+            sparePartsAdapter.setData(productItem)
             binding.apply {
                 searchSpareParts.visibility = View.VISIBLE
                 filterButton.visibility = View.VISIBLE
                 spareShimmer.stopShimmer()
                 spareShimmer.visibility = View.GONE
-
             }
         }
     }
 
-    private fun filterData(productItem: ProductItem) {
-        sparePartsList =
-            productItem.products?.filter { it.productType in args.filterValues!!.types!! } as ArrayList<Product>
-        Log.i("TAG", "IN FILTER: ${sparePartsList[0].variants?.get(0)?.price}")
-        sparePartsAdapter.setData(sparePartsList)
-        binding.apply {
-            searchSpareParts.visibility = View.VISIBLE
-            filterButton.visibility = View.VISIBLE
-            spareShimmer.stopShimmer()
-            spareShimmer.visibility = View.GONE
+    private fun filterData(productItem: List<Product>) {
+        if (args.filterValues != null && !(args.filterValues!!.types.isNullOrEmpty())){
+            sparePartsList =
+                productItem.filter { it.productType!!.toLowerCase() in args.filterValues!!.types!! } as ArrayList<Product>
+          //  Log.i("TAG", "IN FILTER: ${sparePartsList[0].variants?.get(0)?.price}")
+            sparePartsAdapter.setData(sparePartsList)
+            binding.apply {
+                searchSpareParts.visibility = View.VISIBLE
+                filterButton.visibility = View.VISIBLE
+                spareShimmer.stopShimmer()
+                spareShimmer.visibility = View.GONE
+            }
         }
     }
 

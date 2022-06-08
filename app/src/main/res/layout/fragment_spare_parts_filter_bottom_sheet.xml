@@ -28,12 +28,12 @@
         android:value="20"
         android:valueFrom="0"
         android:valueTo="1000"
-        app:haloColor="#E97000"
+        app:haloColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
-        app:trackColorActive="#FF7B00"
+        app:trackColorActive="@color/dark_blue"
         app:trackColorInactive="#FFCA97"
         app:values="@array/sliderValues" />
 

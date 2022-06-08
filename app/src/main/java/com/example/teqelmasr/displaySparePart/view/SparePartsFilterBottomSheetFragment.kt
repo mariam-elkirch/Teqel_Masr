@@ -58,35 +58,35 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
     private fun isCheckBoxesChecked() {
         binding.apply {
             if (one.isChecked){
-                typesArray.add(oneText.text.toString())
+                typesArray.add(oneText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (two.isChecked){
-                typesArray.add(twoText.text.toString())
+                typesArray.add(twoText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (three.isChecked){
-                typesArray.add(threeText.text.toString())
+                typesArray.add(threeText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (four.isChecked){
-                typesArray.add(fourText.text.toString())
+                typesArray.add(fourText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (five.isChecked){
-                typesArray.add(fiveText.text.toString())
+                typesArray.add(fiveText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (six.isChecked){
-                typesArray.add(sixText.text.toString())
+                typesArray.add(sixText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (seven.isChecked){
-                typesArray.add(sevenText.text.toString())
+                typesArray.add(sevenText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
             if (fourteen.isChecked){
-                typesArray.add(fourteenText.text.toString())
+                typesArray.add(fourteenText.text.toString().toLowerCase())
                 Log.i("TAG", " types array ${typesArray.size}")
             }
            /* one.setOnCheckedChangeListener { _, isClicked ->

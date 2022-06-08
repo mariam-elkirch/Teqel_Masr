@@ -21,8 +21,9 @@ class Repository private constructor(
     }
 
     override suspend fun getMyProducts(): Response<ProductItem> = remoteSource.getMyProducts()
+    override suspend fun getAllProducts(): Response<ProductItem> = remoteSource.getAllProducts()
 
-   override suspend fun storeProduct(product: ProductPost): Response<ProductItem>{
+    override suspend fun storeProduct(product: ProductPost): Response<ProductItem>{
         return  remoteSource.storeProduct(product)
     }
 
