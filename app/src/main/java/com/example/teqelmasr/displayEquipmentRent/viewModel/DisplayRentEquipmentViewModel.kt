@@ -25,6 +25,7 @@ class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface)
             val response = repository.getProductsByCategory(collectionID)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
+
                     rentEquipmentMutableLiveData.postValue(response.body())
                 } else {
                     Log.e(
