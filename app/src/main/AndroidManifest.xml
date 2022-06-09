@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeqelMasr">
         <activity
-            android:name=".authentication.register.RegisterationActivity"
+            android:name=".authentication.register.view.RegistrationActivity"
             android:exported="true" />
         <activity
             android:name=".home.HomeActivity"

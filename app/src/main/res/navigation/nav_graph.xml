@@ -216,7 +216,7 @@
     </dialog>
     <activity
         android:id="@+id/registerationActivity"
-        android:name="com.example.teqelmasr.authentication.register.RegisterationActivity"
+        android:name="com.example.teqelmasr.authentication.register.view.RegistrationActivity"
         android:label="activity_registeration"
         tools:layout="@layout/activity_registeration" />
 </navigation>
