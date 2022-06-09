@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_add_equipment_sell.xml" value="0.20416666666666666" />
+        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_display_equipment_sell.xml" value="0.20416666666666666" />
+        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_equiment_sell_botton_sheet_frgment.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

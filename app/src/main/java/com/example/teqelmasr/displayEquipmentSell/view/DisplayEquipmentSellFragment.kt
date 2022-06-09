@@ -120,13 +120,13 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
 
     private fun fetchEquipmentSell() {
       binding.swipeRefreshLayout.isRefreshing = true
-        viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {
+        viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {products ->
            // equipmentSellAdapter.setEquipmentSellList(it.products!!)
             binding.shimmersell.stopShimmer()
             Log.i("tag","fetch equipment")
            // binding.swipeRefreshLayout.isRefreshing = false
          //   equipmentList.addAll(it.products)
-            fillData(it.products!!)
+            fillData(products)
             binding.shimmersell.visibility = View.GONE
             binding.swipeRefreshLayout.isRefreshing = false
 
@@ -139,7 +139,14 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         }
         if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty())) {
             filterData(productItem)
-        } else {
+        }
+        if (args.filterValue?.priceStart != null && args.filterValue?.priceEnd != null ){
+            equipmentList =
+                productItem.filter { it.variants!![0].price!! >= args.filterValue!!.priceStart!!
+                        && it.variants!![0].price!! <= args.filterValue!!.priceEnd!!  } as ArrayList<Product>
+            equipmentSellAdapter.setEquipmentSellList(equipmentList)
+        }
+        else {
             Log.i("TAG", "fetchSpareParts: ${productItem.size}")
           //  sparePartsAdapter.setData(productItem)
             equipmentSellAdapter.setEquipmentSellList(productItem)
