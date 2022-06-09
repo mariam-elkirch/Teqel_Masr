@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class FilterValues(
-    var priceStart: Float? = 0f,
-    var priceEnd: Float? = 1000f,
-    var types: Set<String>? = mutableSetOf()
+    var priceStart: Float? = null,
+    var priceEnd: Float? = null,
+    var types: Set<String>? = null
 ) : Parcelable
