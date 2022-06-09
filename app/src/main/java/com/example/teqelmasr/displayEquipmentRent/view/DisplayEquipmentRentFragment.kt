@@ -100,6 +100,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     override fun onResume() {
         super.onResume()
         if(args.filterObj!=null) {
+
             for(i in 0 until allProductList.size){
                 for (cat in args.filterObj?.types!!){
                     if (allProductList[i].productType.toString().lowercase(Locale.getDefault()) == cat){
@@ -107,6 +108,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                     }
 
                 }
+
                /* allProductList.filter {
                     args.filterObj!!.types?.filter {
                         if (.productType.toString().lowercase(Locale.getDefault()))
@@ -120,9 +122,9 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     }
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
-            equipmentRentAdapter.setEquipmentRentList(it.products!!)
+            equipmentRentAdapter.setEquipmentRentList(it)
            // searchResultList.addAll(it.products)
-            allProductList.addAll(it.products)
+            allProductList.addAll(it)
             binding.shimmerrent.stopShimmer()
             binding.shimmerrent.visibility = View.GONE
         }
