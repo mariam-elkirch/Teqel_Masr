@@ -35,22 +35,24 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <SearchView
-        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/search_spare_parts"
-        app:layout_constraintWidth_percent="0.75"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:queryHint="Search Spare Parts"
-        app:layout_constraintBottom_toTopOf="@id/recyclerView_spare_parts"
-        android:background="@drawable/custom_search_background"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/custom_search_background"
         android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent" />
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Search Spare Parts"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView_spare_parts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.75" />
 
     <ImageButton
         android:id="@+id/filter_button"
+        android:visibility="gone"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_filter"
@@ -65,7 +67,7 @@
         android:id="@+id/no_results_image"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/search"
+        android:src="@drawable/ic_no_results"
         app:layout_constraintTop_toBottomOf="@id/search_spare_parts"
         app:layout_constraintBottom_toTopOf="@id/no_result_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        android:textColor="@color/black"
+        android:textColor="@android:color/darker_gray"
         android:textStyle="bold"
         android:textSize="17dp"
         android:textAlignment="center"
@@ -91,6 +93,7 @@
         android:id="@+id/recyclerView_spare_parts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_spare_parts"
         tools:listitem="@layout/spare_part_item"
         />

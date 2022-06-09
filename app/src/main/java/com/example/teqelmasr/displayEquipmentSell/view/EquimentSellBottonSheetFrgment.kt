@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentEquimentSellBottonSheetFrgmentBinding
-import com.example.teqelmasr.databinding.FragmentFilterBottomSheetBinding
+import com.example.teqelmasr.databinding.FragmentSparePartsFilterBottomSheetBinding
 import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragmentDirections
 import com.example.teqelmasr.model.FilterValues
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -54,7 +54,7 @@ class EquimentSellBottonSheetFrgment :  BottomSheetDialogFragment() {
             applyButton.setOnClickListener {
                 val action =
                    EquimentSellBottonSheetFrgmentDirections.
-                   actionEquimentSellBottonSheetFrgmentToDisplayEquipmentSellFragment()
+                   actionEquimentSellBottonSheetFrgmentToDisplayEquipmentSellFragment(filterValues)
                 findNavController().navigate(action)
             }
 

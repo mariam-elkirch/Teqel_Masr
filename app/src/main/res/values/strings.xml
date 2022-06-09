@@ -48,6 +48,18 @@
     <string name="other">Other</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="enable_connection">Enable Connection</string>
+    <string name="sparetype">Spare Parts</string>
+    <string name="equip_type">Equipment</string>
+    <string name="slogan">sell and rent heavy equipment and spare parts</string>
+    <string name="search_text">What are you looking for?</string>
+    <string name="searching_for">What are you searching for?</string>
+    <string name="offer">Offer a Product</string>
+
+    <string name="filters">Filters</string>
+    <string name="clear_all">Clear All</string>
+    <string name="spare_parts">Spare Parts</string>
+    <string name="equipment_sell">Equipment Sell</string>
+    <string name="equipment_rent">Equipment Rent</string>
 
 
     <string-array name="type">
@@ -73,8 +85,8 @@
         <item>Other </item>
     </string-array>
     <string-array name="sliderValues">
-        <item>20</item>
-        <item>70</item>
+        <item>0</item>
+        <item>100</item>
     </string-array>
 
 </resources>

@@ -8,7 +8,7 @@
     tools:context=".displayEquipmentSell.view.EquimentSellBottonSheetFrgment">
 
     <TextView
-        android:id="@+id/pricre_txt"
+        android:id="@+id/price_range_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -32,7 +32,7 @@
         app:haloColor="#E97000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
         app:trackColorActive="#FF7B00"
         app:trackColorInactive="#FFCA97"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/first_view" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll"
+        android:id="@+id/spare_scroll"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.66"
@@ -188,7 +188,7 @@
         android:layout_marginTop="10dp"
         android:background="#D3D3D3"
         app:layout_constraintBottom_toTopOf="@id/apply_button"
-        app:layout_constraintTop_toBottomOf="@id/scroll"
+        app:layout_constraintTop_toBottomOf="@id/spare_scroll"
         />
 
 

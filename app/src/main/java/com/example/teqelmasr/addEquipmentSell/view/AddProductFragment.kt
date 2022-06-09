@@ -57,6 +57,8 @@ class AddEquipmentSellFragment : Fragment() {
     lateinit var viewModel: AddProductViewModel
     var mytag : String = ""
      var myproductType : String =""
+    var producttype: String = ""
+    var myproductTypeEquipment : String =""
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,22 +118,20 @@ class AddEquipmentSellFragment : Fragment() {
                     Log.i("tag",position.toString()+"Imggg"+mytag)
 
                         when (position) {
-                            0 -> myproductType = "Coldplaners"
+                            0 -> myproductTypeEquipment = "Coldplaners"
                             1 -> {
                                 Log.i("tag",position.toString()+"positionnnnnnnn")
-                                myproductType = "Compactors"
+                                myproductTypeEquipment = "Compactors"
                             }
                             2 -> {
-                                myproductType = "Compactors"
+                                myproductTypeEquipment = "Excavators"
                             }
+
                             3 -> {
-                                myproductType = "Excavators"
-                            }
-                            4 -> {
-                                myproductType = "Dozers"
+                                myproductTypeEquipment = "Dozers"
                             }
                             else -> {
-                                myproductType = "Other"
+                                myproductTypeEquipment = "Other"
                             }
                         }
                     }
@@ -241,17 +241,22 @@ class AddEquipmentSellFragment : Fragment() {
         Log.i("tag",myproductType+ "Priceee")
         val doublePrice: Double? = binding.priceEditText.text.toString().toDoubleOrNull()
         Log.i("tag",doublePrice.toString()+ "Priceee")
-        val img = Image(src = imageString)
-       // val imagelist = listOf(ImagesItem(src = imageString) )
+        val img = Image(attachment = imageString, filename = "3.png")
+        val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
         val varian = listOf(
 
             Variant(price = doublePrice)
         )
 
-
+        if(mytag.equals("spare")){
+            producttype = myproductType
+        }
+        else{
+            producttype = myproductTypeEquipment
+        }
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
-            ,bodyHtml = binding.describtionEditText.text.toString(),productType = myproductType , image = img
+            ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype ,images = imagelist, image = img
             ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
 
 

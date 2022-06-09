@@ -29,6 +29,9 @@ data class ImagesItem(
 
 	val alt:@RawValue  Any? = null,
 	val width: Int? = null,
+	val src: String? = null,
+	val filename: String? = null,
+	val attachment: String? = null,
 	@SerializedName("variant_ids")
 	val variantIds: List<@Contextual @RawValue Any?>? = null,
 	val position: Int? = null,
@@ -70,7 +73,10 @@ data class Image(
 	@SerializedName("variant_ids")
 	val variantIds: @RawValue List<@Contextual Any?>? = null,
 	val height: Int? = null,
+	val filename: String? = null,
+	val attachment: String? = null,
 	val src: String? =null,
+
 ): Parcelable, java.io.Serializable
 
 @Parcelize

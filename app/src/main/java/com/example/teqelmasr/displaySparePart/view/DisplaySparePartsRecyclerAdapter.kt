@@ -42,7 +42,7 @@ class DisplaySparePartsRecyclerAdapter(
         val sparePartItem = sparePartsList[position]
         holder.binding.apply {
             itemTitle.text = sparePartItem.title ?: "Unknown"
-            itemPrice.text = sparePartItem.variants?.get(0)?.price.toString()
+            itemPrice.text = "${sparePartItem.variants!![0]?.price.toString()} LE"
             itemCard.setOnClickListener { listener.onProductClick(sparePartItem) }
         }
         Glide.with(context).load(sparePartItem.image?.src).centerCrop()
@@ -58,6 +58,9 @@ class DisplaySparePartsRecyclerAdapter(
                 val filterResults = FilterResults()
                 if (query == null || query.isEmpty()) {
                     filterResults.values = originalSparePartsList
+                    Handler(Looper.getMainLooper()).post {
+                        listener.onFullList()
+                    }
                 } else {
                     val searchKey = query.toString().lowercase(Locale.getDefault())
                     val filteredList = ArrayList<Product>()

@@ -80,20 +80,28 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         }
 
 
-        if (args.filterObj != null /*&& !(args.filterObj!!.categories.isNullOrEmpty())*/ /*&& !(args.filterObj!!.types.isNullOrEmpty())*/) {
+        if (args.filterObj != null) {
             productList =
                 productItem?.products?.filter {
-                    it.productType in args.filterObj!!.types
-                    //it.tags in args.filterObj!!.categories
-                    //it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
+                    it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
                 } as ArrayList<Product>
+            if(!(args.filterObj!!.categories.isNullOrEmpty())){
+                productList = productList.filter { it.tags in args.filterObj!!.categories } as ArrayList<Product>
+            }
+            if(!(args.filterObj!!.types.isNullOrEmpty())){
+                productList = productList.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
+                Log.i(TAG, "FILTER type condition: ${productList.size}")
 
-            Log.i(TAG, "IN FILTER: ${productList.size}")
+            }
+
+            Log.i(TAG, "FILTER: ${productList.size}")
+
             adapter.setData(productList)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
 
-        } else {
+        }
+        else {
             productList = productItem?.products ?: ArrayList<Product>()
             adapter.setData(productItem?.products)
             shimmer.stopShimmer()
