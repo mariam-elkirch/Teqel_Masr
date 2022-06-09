@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeqelMasr">
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".authentication.register.RegisterationActivity"
+            android:exported="true" />
         <activity
             android:name=".home.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".authentication.register.RegisterationActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
