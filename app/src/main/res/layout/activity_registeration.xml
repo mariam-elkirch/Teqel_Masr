@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#F7F8F9"
-    tools:context=".authentication.register.RegisterationActivity">
+    tools:context=".authentication.register.view.RegistrationActivity">
 
     <TextView
         app:layout_constraintStart_toStartOf="@id/name_edt"
@@ -72,6 +72,7 @@
         app:layout_constraintEnd_toEndOf="@id/email_edt"
         app:layout_constraintTop_toBottomOf="@id/pass_label"
         android:layout_marginTop="8dp"
+        android:inputType="textPassword"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
 
@@ -108,11 +109,34 @@
         android:textSize="14sp"
         android:text="@string/login"
         android:textColor="#00477A"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/noto_sans_bold"
         app:layout_constraintStart_toEndOf="@id/have_account_label"
         app:layout_constraintTop_toTopOf="@id/have_account_label"
         android:layout_marginStart="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/register_seller_label"
+        android:text="@string/register_seller"
+        app:layout_constraintStart_toStartOf="@id/have_account_label"
+        app:layout_constraintTop_toBottomOf="@id/have_account_label"
+        android:padding="14sp"
+        android:textColor="#00477A"
+        android:fontFamily="@font/noto_sans"
+        android:layout_marginStart="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <CheckBox
+        android:id="@+id/seller_check"
+        android:buttonTint="@color/orange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/register_seller_label"
+        app:layout_constraintTop_toTopOf="@id/register_seller_label" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

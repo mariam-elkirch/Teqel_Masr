@@ -2,6 +2,7 @@ package com.example.teqelmasr.network
 
 
 import android.util.Log
+import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 
@@ -50,6 +51,12 @@ class Client : RemoteSource {
         val service = ApiManager.getInstance().create(WebService::class.java)
         val res = service.updateProduct(productPost.product?.variants?.get(0)?.product_id!!, productPost)
         Log.i("res", "updateProduct: ${res.raw()}")
+    }
+
+    override suspend fun postCustomer(customer: Customer) {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        val res = service.postCustomer(customer)
+
     }
 
 }
