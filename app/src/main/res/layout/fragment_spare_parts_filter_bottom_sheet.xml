@@ -7,34 +7,34 @@
     tools:context=".displaySparePart.view.SparePartsFilterBottomSheetFragment">
 
     <TextView
-        android:id="@+id/pricre_txt"
+        android:id="@+id/price_range_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-medium"
         android:padding="12dp"
-        android:text="Price Range"
+        android:text="@string/price_range"
         android:textColor="#E97000"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/filters_textView" />
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/range_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:stepSize="5"
         android:value="20"
         android:valueFrom="0"
         android:valueTo="1000"
-        app:haloColor="#E97000"
+        app:haloColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pricre_txt"
+        app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
-        app:trackColorActive="#FF7B00"
-        app:trackColorInactive="#FFCA97"
+        app:trackColorActive="@color/dark_blue"
+        app:trackColorInactive="@color/cardview_shadow_start_color"
         app:values="@array/sliderValues" />
 
     <View
@@ -53,35 +53,39 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:padding="12dp"
-        android:text="Type"
+        android:text="@string/type"
         android:textColor="#E97000"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_view" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/spare_scroll"
+        android:id="@+id/scroll"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.66"
-        app:layout_constraintTop_toBottomOf="@id/category_label"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/category_label">
+
         <TableLayout
             android:id="@+id/table"
-            android:stretchColumns="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_label"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/one_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/turbocharger"
                     android:textColor="#00477A"
-                    android:text="turbocharger"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/one"
@@ -90,18 +94,21 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
+
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/two_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/filter"
                     android:textColor="#00477A"
-                    android:text="filter"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/two"
@@ -110,18 +117,21 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
+
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/three_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/accumulator"
                     android:textColor="#00477A"
-                    android:text="accumulator"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/three"
@@ -130,18 +140,21 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
+
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/four_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/valve"
                     android:textColor="#00477A"
-                    android:text="valve"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/four"
@@ -150,18 +163,21 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
+
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/five_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/hose"
                     android:textColor="#00477A"
-                    android:text="hose"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/five"
@@ -170,18 +186,21 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
+
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/six_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/miscellaneous"
                     android:textColor="#00477A"
-                    android:text="miscellaneous"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/six"
@@ -190,18 +209,21 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
+
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/seven_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/hydraulic_components"
                     android:textColor="#00477A"
-                    android:text="hydraulic_components"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/seven"
@@ -214,15 +236,17 @@
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3" />
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/fourteen_text"
                     android:layout_column="1"
-                    android:padding="12dp"
-                    android:textSize="18sp"
                     android:fontFamily="sans-serif"
+                    android:padding="12dp"
+                    android:text="@string/other"
                     android:textColor="#00477A"
-                    android:text="other"/>
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/fourteen"
@@ -231,36 +255,61 @@
                     android:layout_marginEnd="10dp"
                     android:buttonTint="@color/orange" />
             </TableRow>
-           <!-- <View
+             <View
                 android:layout_height="1dp"
-                android:background="#D3D3D3" />-->
+                android:background="#D3D3D3" />
 
         </TableLayout>
     </androidx.core.widget.NestedScrollView>
-    <View
-       android:id="@+id/button_view"
+
+    <!--<View
+        android:id="@+id/button_view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
         android:background="#D3D3D3"
         app:layout_constraintBottom_toTopOf="@id/apply_button"
-        app:layout_constraintTop_toBottomOf="@id/spare_scroll"
-        />
-
-
+        app:layout_constraintTop_toBottomOf="@id/scroll" />-->
     <Button
         android:id="@+id/apply_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/orange"
-        android:text="Apply"
+        android:text="@string/apply"
+        app:layout_constraintTop_toBottomOf="@id/scroll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9">
-
-
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.1"
+        >
     </Button>
+
+    <TextView
+        android:id="@+id/clear_all_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/clear_all"
+        android:textColor="@color/orange"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/filters_textView" />
+
+    <TextView
+        android:id="@+id/filters_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/filters"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/price_range_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
