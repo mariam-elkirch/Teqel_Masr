@@ -60,6 +60,12 @@
     <string name="spare_parts">Spare Parts</string>
     <string name="equipment_sell">Equipment Sell</string>
     <string name="equipment_rent">Equipment Rent</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="have_acount">already have an account?</string>
+    <string name="login">Login</string>
 
 
     <string-array name="type">

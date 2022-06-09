@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/drawable/bottom_sheet_shape.xml" value="0.196" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/drawable/edit_text_border.xml" value="0.1405" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/drawable/register_btn_background.xml" value="0.1705" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/activity_registeration.xml" value="0.2" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_edit_seller_product.xml" value="0.5347758887171561" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_home.xml" value="0.18704710144927536" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
