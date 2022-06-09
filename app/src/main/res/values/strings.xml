@@ -66,6 +66,7 @@
     <string name="register">Register</string>
     <string name="have_acount">already have an account?</string>
     <string name="login">Login</string>
+    <string name="register_seller">Register as a seller</string>
 
 
     <string-array name="type">

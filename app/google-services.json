@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "621827483901",
+    "project_id": "tiqil-masr",
+    "storage_bucket": "tiqil-masr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621827483901:android:615313247fd3eb8c517694",
+        "android_client_info": {
+          "package_name": "com.example.teqelmasr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBryoncfOAt5wWVEI58cukZipXFeX1MfLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
