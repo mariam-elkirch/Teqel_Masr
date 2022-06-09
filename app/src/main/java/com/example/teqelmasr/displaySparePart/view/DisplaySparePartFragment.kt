@@ -133,26 +133,14 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
                         it.variants!![0].price!! >= args.filterValues!!.priceStart!!
                                 && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!
                     } as ArrayList<Product>
-                sparePartsAdapter.setData(sparePartsList)
-                binding.apply {
-                    searchSpareParts.visibility = View.VISIBLE
-                    filterButton.visibility = View.VISIBLE
-                    spareShimmer.stopShimmer()
-                    spareShimmer.visibility = View.GONE
-                }
+
             }
             //if price is null and types is not empty -> filter with type
             else if (!(args.filterValues!!.types.isNullOrEmpty()) &&
                 (args.filterValues!!.priceStart == null && args.filterValues!!.priceEnd == null)) {
                 sparePartsList =
                     productsList.filter { it.productType!!.toLowerCase() in args.filterValues!!.types!! } as ArrayList<Product>
-                sparePartsAdapter.setData(sparePartsList)
-                binding.apply {
-                    searchSpareParts.visibility = View.VISIBLE
-                    filterButton.visibility = View.VISIBLE
-                    spareShimmer.stopShimmer()
-                    spareShimmer.visibility = View.GONE
-                }
+
             }
             //if price is not null and types is not empty -> filter with both price and type
             else if (!(args.filterValues!!.types.isNullOrEmpty()) &&
@@ -167,15 +155,10 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
                                 && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!)
                     } as ArrayList<Product>
 
-                sparePartsAdapter.setData(sparePartsList)
-                binding.apply {
-                    searchSpareParts.visibility = View.VISIBLE
-                    filterButton.visibility = View.VISIBLE
-                    spareShimmer.stopShimmer()
-                    spareShimmer.visibility = View.GONE
-                }
+
                 Log.i("TAG", "fillSparePartsData: spare parts list size ${sparePartsList.size}")
-            } else {
+            }
+            else {
                 Log.i("TAG", "fillSparePartsData: ${productsList.size}")
                 sparePartsAdapter.setData(productsList)
                 binding.apply {
@@ -185,24 +168,13 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
                     spareShimmer.visibility = View.GONE
                 }
             }
-
-            /*else {
-                Log.i("TAG", "fetchSpareParts: ${productItem.size}")
-                sparePartsAdapter.setData(productItem)
-                binding.apply {
-                    searchSpareParts.visibility = View.VISIBLE
-                    filterButton.visibility = View.VISIBLE
-                    spareShimmer.stopShimmer()
-                    spareShimmer.visibility = View.GONE
-                }
-            }*/
-
-            /*if (args.filterValues!!.priceStart != null && args.filterValues!!.priceEnd != null ){
-                sparePartsList =
-                    productItem.filter { it.variants!![0].price!! >= args.filterValues!!.priceStart!!
-                            && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!  } as ArrayList<Product>
-                sparePartsAdapter.setData(sparePartsList)
-            }*/
+            sparePartsAdapter.setData(sparePartsList)
+            binding.apply {
+                searchSpareParts.visibility = View.VISIBLE
+                filterButton.visibility = View.VISIBLE
+                spareShimmer.stopShimmer()
+                spareShimmer.visibility = View.GONE
+            }
 
         } else {
             Log.i("TAG", "fillSparePartsData: ${productsList.size}")
