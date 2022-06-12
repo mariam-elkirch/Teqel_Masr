@@ -1,11 +1,13 @@
 package com.example.teqelmasr.authentication.register.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModel
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModelFactory
 import com.example.teqelmasr.databinding.ActivityRegisterationBinding
@@ -46,6 +48,11 @@ class RegistrationActivity : AppCompatActivity() {
             } else {
                 registerUser(false)
             }
+        }
+        binding.login.setOnClickListener {
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
+            finish()
         }
 
     }
