@@ -28,9 +28,8 @@ import kotlin.collections.ArrayList
 
 
 class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
-    val allProductList = ArrayList<Product>()
-    val searchResultList = ArrayList<Product>()
-    val filterResultList = ArrayList<Product>()
+    private val allProductList = ArrayList<Product>()
+    private var filterResultList = ArrayList<Product>()
     private val args by navArgs<DisplayEquipmentRentFragmentArgs>()
 
     private val binding by lazy { FragmentDisplayEquipmentRentBinding.inflate(layoutInflater) }
@@ -77,7 +76,6 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                     equipmentRentAdapter.filter.filter(newText)
                     return true
                 }
-
             })
             searchRentEquipment.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
                 binding.apply {
@@ -87,39 +85,16 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                 false
             })
             binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
-
-
         }
-
-
-
         fetchEquipmentRent()
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        if(args.filterObj!=null) {
-
-            for(i in 0 until allProductList.size){
-                for (cat in args.filterObj?.types!!){
-                    if (allProductList[i].productType.toString().lowercase(Locale.getDefault()) == cat){
-                        filterResultList.add(allProductList[i])
-                    }
-
-                }
-
-               /* allProductList.filter {
-                    args.filterObj!!.types?.filter {
-                        if (.productType.toString().lowercase(Locale.getDefault()))
-
-                    }
-                }*/
-            }
-            equipmentRentAdapter.setEquipmentRentList(filterResultList)
-
-        }
+            filterData()
     }
+
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
             equipmentRentAdapter.setEquipmentRentList(it)
@@ -133,8 +108,6 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     override fun onProductClick(product: Product) {
         val action = DisplayEquipmentRentFragmentDirections.actionDisplayEquipmentRentFragmentToDetailsEquipmentRentFragment(product)
         binding.root.findNavController().navigate(action)
-        Log.i("TAG", "${product.title} Inside onProductClick")
-
     }
 
     override fun onEmptyList(searchKey: String) {
@@ -154,5 +127,55 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
 
     }
 
+    private fun filterData(){
+    if(args.filterObj!=null ) {
+
+
+        // filter with type and price
+        if(args.filterObj!!.types!!.isNotEmpty() && args.filterObj!!.priceStart != null && args.filterObj!!.priceEnd != null ) {
+            filterResultList = allProductList.filter {
+                it.productType!!.toString()
+                    .lowercase(Locale.getDefault()) in args.filterObj!!.types!!
+                        && it.variants?.get(0)!!.price!! >= args.filterObj!!.priceStart!!
+                        && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
+            } as ArrayList<Product>
+            updateData(filterResultList)
+            Log.i("TAG", "filter with type and price")
+
+        }
+        // filter with price only
+
+        else if(args.filterObj!!.priceStart != null && args.filterObj!!.priceEnd != null) {
+            filterResultList = allProductList.filter {
+                it.variants?.get(0)!!.price!! >= args.filterObj!!.priceStart!!
+                        && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
+            } as ArrayList<Product>
+            updateData(filterResultList)
+            Log.i("TAG", "filter with price only")
+
+        }
+        // filter with type only
+        else if(args.filterObj!!.types!!.isNotEmpty()){
+            filterResultList = allProductList.filter {
+                it.productType!!.toString()
+                    .lowercase(Locale.getDefault()) in args.filterObj!!.types!!
+            } as ArrayList<Product>
+            updateData(filterResultList)
+            Log.i("TAG", "filter with type only")
+
+        }
+
+
+        else if( args.filterObj!!.types.isNullOrEmpty() && args.filterObj!!.priceEnd ==null){
+                updateData(allProductList)
+            Log.i("TAG", "apply without input ")
+
+        }
+    }
+
+}
+    private fun updateData( data :ArrayList<Product>){
+        equipmentRentAdapter.setEquipmentRentList(data)
+    }
 
 }

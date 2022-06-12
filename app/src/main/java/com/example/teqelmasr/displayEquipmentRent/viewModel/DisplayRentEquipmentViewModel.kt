@@ -16,7 +16,6 @@ class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface)
     private val rentEquipmentMutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
     val rentEquipmentLiveData: LiveData<List<Product>> = rentEquipmentMutableLiveData
 
-    private val collectionID = 271217721480
     init {
         fetchRentEquipments()
     }
