@@ -98,8 +98,14 @@ class RegistrationActivity : AppCompatActivity() {
                         val customer = Customer(customerObj)
                         viewModel.postCustomer(customer)
                     }else{
-                        Log.i(TAG, "registerUser: ${it.result}")
-                        Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
+                        Log.i(TAG, "registerUser: ${it.exception?.message}")
+                        it.exception?.message.let { message ->
+                            when(message){
+                                "The email address is already in use by another account" -> Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                                else -> Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
+                            }
+                        }
+
 
                     }
                 }
@@ -107,25 +113,7 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
     }
-/*
-            else -> {
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if(it.isSuccessful){
 
-                        Toast.makeText(this,"Successfully", Toast.LENGTH_LONG).show()
-
-                        val customerX = CustomerX(first_name = "muhammad", last_name = "kholif", email = email, tags = FirebaseAuth.getInstance().currentUser!!.uid, )
-                        val regCustomer = Customer(customerX)
-
-                        registerUser(regCustomer)
-
-                        startActivity(Intent(this, LoginActivity::class.java))
-
-                    }else{
-                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
-                    }
-                }
-            }*/
 
 
 
