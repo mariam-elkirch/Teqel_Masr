@@ -1,5 +1,7 @@
 package com.example.teqelmasr.location.view
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import androidx.fragment.app.Fragment
@@ -12,6 +14,9 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.example.teqelmasr.R
@@ -20,6 +25,7 @@ import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentMapsBinding
 import com.example.teqelmasr.home.HomeFragmentDirections
 import com.example.teqelmasr.model.Utilities
+import com.example.weathery.location.viewmodel.LocationViewModel
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -39,9 +45,13 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private lateinit var myLongitude: String
     private  var myLat: String =""
     private lateinit var type: String
+    private val LOCATION_PERMISSION_REQUEST_CODE: Int=200
+    lateinit var locationViewModel: LocationViewModel
+    val mylong = MutableLiveData<String>()
 
-
-
+    var mylat= MutableLiveData<String>()
+    var doublelong: Double = 0.0
+    var doublelat: Double = 0.0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +63,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         mapFragment?.getMapAsync(this)
         //  mapFragment=
-
+        prepRequestLocationUpdates()
         binding.searchButton.setOnClickListener(this)
         binding.saveButton.setOnClickListener (this)
 
@@ -130,13 +140,52 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         Log.i("TAG", " " + returnLocationToHome + " ")
 
     }
+    private fun prepRequestLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            requestLocationUpdates()
+        } else {
+            val permissionRequest = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
+        }
+    }
+    private fun requestLocationUpdates() {
+        locationViewModel= ViewModelProvider(this).get(LocationViewModel::class.java)
+        locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it.latitude
+            it.longitude
+            mylat.value=it.latitude
+            mylong.value=it.longitude
 
+            doublelat = it.latitude!!.toDouble()
+             doublelong = it.longitude!!.toDouble()
+            Log.i("TAG",it.latitude+" mylat gps my long "+it.longitude)
+        })
+
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==  PackageManager.PERMISSION_GRANTED) {
+                    requestLocationUpdates()
+                } else {
+                    Toast.makeText(context, "Unable to update location without permission", Toast.LENGTH_LONG).show()
+                }
+            }
+            else -> {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            }
+        }
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.getUiSettings().setZoomControlsEnabled(true)
         mMap.setOnMarkerClickListener(this)
-        val alex = LatLng(31.205753, 29.924526)
+        val alex = LatLng(doublelat, doublelong)
         placeMarkerOnMap(alex)
 
 
