@@ -37,13 +37,25 @@ class EditSellerProductFragment : Fragment() {
     private lateinit var typeAdapter: ArrayAdapter<String>
     private lateinit var categoryAdapter: ArrayAdapter<String>
 
-    private  var equipmentArray : Array<String>? = null
-    private  var spareArray : Array<String>? = null
-    private  var categoryArray : Array<String>? = null
+    private var equipmentArray: Array<String>? = null
+    private var spareArray: Array<String>? = null
+    private var categoryArray: Array<String>? = null
 
 
-    private val factory by lazy { EditProductViewModelFactory(Repository.getInstance(Client.getInstance(),requireContext())) }
-    private val viewModel by lazy { ViewModelProvider(requireActivity(),factory)[EditProductViewModel::class.java] }
+    private val factory by lazy {
+        EditProductViewModelFactory(
+            Repository.getInstance(
+                Client.getInstance(),
+                requireContext()
+            )
+        )
+    }
+    private val viewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            factory
+        )[EditProductViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +64,8 @@ class EditSellerProductFragment : Fragment() {
     ): View? {
 
         equipmentArray = context?.resources?.getStringArray(R.array.equiments)
-       spareArray = context?.resources?.getStringArray(R.array.spare)
-         categoryArray = context?.resources?.getStringArray(R.array.type)
+        spareArray = context?.resources?.getStringArray(R.array.spare)
+        categoryArray = context?.resources?.getStringArray(R.array.type)
 
         setUpUI()
 
@@ -81,7 +93,7 @@ class EditSellerProductFragment : Fragment() {
             }
 
             saveTxt.setOnClickListener {
-                if(!checkChanges()){
+                if (!checkChanges()) {
                     val builder = AlertDialog.Builder(context)
                     builder.setMessage(R.string.save_message)
                         .setPositiveButton(
@@ -90,8 +102,12 @@ class EditSellerProductFragment : Fragment() {
 
                             updateProductObject()
                             dialog.dismiss()
-                            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT).show()
-                            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(null)
+                            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT)
+                                .show()
+                            val action: NavDirections =
+                                EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
+                                    null
+                                )
                             binding.root.findNavController().navigate(action)
 
                         }
@@ -100,7 +116,7 @@ class EditSellerProductFragment : Fragment() {
                         }
                         .create().show()
 
-                }else{
+                } else {
                     Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
                 }
 
@@ -109,12 +125,16 @@ class EditSellerProductFragment : Fragment() {
         }
     }
 
-    private fun checkChanges(): Boolean = (args.currentProduct.title.equals(binding.titleTxt.text.trim().toString())
-            && args.currentProduct.variants?.get(0)?.price.toString() == binding.priceTxt.text.trim().toString()
-            && args.currentProduct.bodyHtml.equals(binding.productDesc.text.trim().toString())
-            && args.currentProduct.tags?.equals(binding.categorySpinner.selectedItem.toString())!!
-            && args.currentProduct.productType!! == binding.typeSpinner.selectedItem
-            && args.currentProduct.templateSuffix.equals(binding.vendorTxt.text.trim().toString()))
+    private fun checkChanges(): Boolean =
+        (args.currentProduct.title.equals(binding.titleTxt.text.trim().toString())
+                && args.currentProduct.variants?.get(0)?.price.toString() == binding.priceTxt.text.trim()
+            .toString()
+                && args.currentProduct.bodyHtml.equals(binding.productDesc.text.trim().toString())
+                && args.currentProduct.tags?.equals(binding.categorySpinner.selectedItem.toString())!!
+                && args.currentProduct.productType!! == binding.typeSpinner.selectedItem
+                && args.currentProduct.templateSuffix.equals(
+            binding.vendorTxt.text.trim().toString()
+        ))
 
 
     private fun updateProductObject() {
@@ -124,7 +144,7 @@ class EditSellerProductFragment : Fragment() {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos)
         val bb = bos.toByteArray()
         var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
-        val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
+        val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png"))
         val img = Image(attachment = imageString, filename = "3.png")
         val variant = Variant(
             price = binding.priceTxt.text.trim().toString()
@@ -167,91 +187,83 @@ class EditSellerProductFragment : Fragment() {
             categoryArray!!
         )
         typeAdapter = when (args.currentProduct.tags) {
-            R.string.spare_tag.toString() -> ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item,spareArray!!)
+            "spare" -> ArrayAdapter<String>(
+                requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                spareArray!!
+            )
             else -> {
-                ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, equipmentArray!!)
+                ArrayAdapter<String>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    equipmentArray!!
+                )
             }
         }
         binding.apply {
             categorySpinner.adapter = categoryAdapter
+            typeSpinner.adapter = typeAdapter
             categorySpinner.setSelection(
                 when (args.currentProduct.tags) {
                     R.string.sell_equip_tag.toString() -> 0
                     R.string.rent_equip_tag.toString() -> 1
-                    else -> { 2 }
+                    else -> {
+                        2
+                    }
                 }
             )
 
-/*            if(args.currentProduct.tags.equals("equimentsell") || args.currentProduct.tags.equals("equimentrent")){
-                typeSpinner.setSelection(when(args.currentProduct.productType){
-                    "coldplaners" -> 0
-                    "compactors" -> 1
-                    "excavators" -> 2
-                    "dozers" -> 3
-                    "asphaltpavers" -> 4
-                    "backhoeloaders" -> 5
-                    "articulatedtrucks" -> 6
-                    else -> {7}
-                })
-            }else{
-                typeSpinner.setSelection(when(args.currentProduct.productType){
-                    "turbocharger" -> 0
-                    "filter" -> 1
-                    "accumulator" -> 2
-                    "valve" -> 3
-                    "hose" -> 4
-                    "miscellaneous" -> 5
-                    "hydraulic_components" -> 6
-                    else -> {7}
-                })
-            }*/
-           categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-               override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                   Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
-                   typeAdapter = when (p0?.selectedItem.toString()) {
-                       R.string.sell_equip_tag.toString() -> ArrayAdapter<String>(
-                           requireContext(),
-                           android.R.layout.simple_spinner_item,
-                           equipmentArray!!
-                       )
-                       R.string.rent_equip_tag.toString() -> ArrayAdapter<String>(
-                           requireContext(),
-                           android.R.layout.simple_spinner_item,
-                           equipmentArray!!
-                       )
-                       R.string.spare_tag.toString() -> ArrayAdapter<String>(
-                           requireContext(),
-                           android.R.layout.simple_spinner_item,
-                           spareArray!!
-                       )
-                       else -> {
-                           ArrayAdapter<String>(
-                               requireContext(),
-                               android.R.layout.simple_spinner_item,
-                               equipmentArray!!
-                           )
-                       }
-                   }
+            categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
+                    typeAdapter = when (p0?.selectedItem.toString()) {
+                        "Equipment for Sell" -> ArrayAdapter<String>(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            equipmentArray!!
+                        )
+                        "Equipment for Rent" -> ArrayAdapter<String>(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            equipmentArray!!
+                        )
+                        "Spare Parts" -> ArrayAdapter<String>(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            spareArray!!
+                        )
+                        else -> {
+                            ArrayAdapter<String>(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                equipmentArray!!
+                            )
+                        }
+                    }
 
-                   typeSpinner.adapter = typeAdapter
+                    typeSpinner.adapter = typeAdapter
 
 
-               }
+                }
 
-               override fun onNothingSelected(p0: AdapterView<*>?) {
-                   typeSpinner.setSelection(when(args.currentProduct.productType){
-                       R.string.turbocharger.toString() -> 0
-                       R.string.filter.toString() -> 1
-                       R.string.accumulator.toString() -> 2
-                       R.string.valve.toString() -> 3
-                       R.string.hose.toString() -> 4
-                       R.string.miscellaneous.toString() -> 5
-                       R.string.hydraulic_components.toString() -> 6
-                       else -> {7}
-                   })
-               }
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    typeSpinner.setSelection(
+                        when (args.currentProduct.productType) {
+                            R.string.turbocharger.toString() -> 0
+                            R.string.filter.toString() -> 1
+                            R.string.accumulator.toString() -> 2
+                            R.string.valve.toString() -> 3
+                            R.string.hose.toString() -> 4
+                            R.string.miscellaneous.toString() -> 5
+                            R.string.hydraulic_components.toString() -> 6
+                            else -> {
+                                7
+                            }
+                        }
+                    )
+                }
 
-           }
+            }
 
         }
     }

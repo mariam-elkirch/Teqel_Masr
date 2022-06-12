@@ -29,9 +29,12 @@
     <string name="favourite">favourite</string>
     <string name="no_products">No Products</string>
 
-    <string name="sell_equip_tag">Equipment for Sell</string>
-    <string name="rent_equip_tag">Equipment for Rent</string>
-    <string name="spare_tag">Spare Parts</string>
+    <string name="sell_equip_tag">equimentsell</string>
+    <string name="rent_equip_tag">equimentrent</string>
+    <string name="spare_tag">spare</string>
+    <string name="sell_equip_txt">Equipment for Sell</string>
+    <string name="rent_equip_txt">Equipment for Rent</string>
+    <string name="spare_txt">Spare Parts</string>
 
     <string name="coldplaners">Coldplaners</string>
     <string name="compactors">Compactors</string>
