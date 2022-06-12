@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeqelMasr">
         <activity
+            android:name=".authentication.register.view.GoogleActivity"
+            android:exported="false" />
+        <activity
             android:name=".authentication.login.LoginActivity"
             android:exported="false" />
         <activity

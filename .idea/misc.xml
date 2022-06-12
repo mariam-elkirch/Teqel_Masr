@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/activity_registeration.xml" value="0.264" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/ic_user.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/side_nav_bar.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable/bottom_sheet_shape.xml" value="0.2046875" />
@@ -20,7 +21,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
