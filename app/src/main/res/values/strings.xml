@@ -79,6 +79,9 @@
     <string name="signin">sign in</string>
     <string name="login">Login</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="already_exists">"Email is already use "</string>
+    <string name="not_valid_pass">Password should be at least 6 characters</string>
+    <string name="badly_formatted">Email not valid</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

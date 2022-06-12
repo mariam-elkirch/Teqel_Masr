@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.teqelmasr.R
 import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModel
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModelFactory
@@ -98,10 +99,12 @@ class RegistrationActivity : AppCompatActivity() {
                         val customer = Customer(customerObj)
                         viewModel.postCustomer(customer)
                     }else{
-                        Log.i(TAG, "registerUser: ${it.exception?.message}")
+                        Log.i(TAG, "registerUser: ${it.exception}")
                         it.exception?.message.let { message ->
-                            when(message){
-                                "The email address is already in use by another account" -> Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                            when(message.toString()){
+                                "The email address is already in use by another account." -> Toast.makeText(this, R.string.already_exists, Toast.LENGTH_LONG).show()
+                                "The given password is invalid." -> Toast.makeText(this, R.string.not_valid_pass, Toast.LENGTH_LONG).show()
+                                "The email address is badly formatted." -> Toast.makeText(this, R.string.badly_formatted, Toast.LENGTH_LONG).show()
                                 else -> Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
                             }
                         }
