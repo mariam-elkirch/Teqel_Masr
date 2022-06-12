@@ -20,7 +20,7 @@ class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface)
         fetchRentEquipments()
     }
 
-    private fun fetchRentEquipments() {
+     fun fetchRentEquipments() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getAllProducts()
             withContext(Dispatchers.Main) {

@@ -66,7 +66,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             recyclerViewRentEquipment.hasFixedSize()
             recyclerViewRentEquipment.layoutManager = LinearLayoutManager(requireContext())
             searchRentEquipment.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+             SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     equipmentRentAdapter.filter.filter(query)
                     return true
@@ -84,7 +84,10 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                 }
                 false
             })
-            binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
+        }
+        binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
+        binding.swipeRefreshLayoutRent.setOnRefreshListener {
+            viewModel.fetchRentEquipments()
         }
         fetchEquipmentRent()
         return binding.root
@@ -93,6 +96,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     override fun onResume() {
         super.onResume()
             filterData()
+        fetchEquipmentRent()
     }
 
     private fun fetchEquipmentRent() {
@@ -102,6 +106,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             allProductList.addAll(it)
             binding.shimmerrent.stopShimmer()
             binding.shimmerrent.visibility = View.GONE
+            binding.swipeRefreshLayoutRent.isRefreshing = false
+
         }
     }
 
@@ -112,6 +118,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
 
     override fun onEmptyList(searchKey: String) {
         binding.apply {
+            Log.i("TAG", "onEmptyList:testtttt ")
             noResultsImage.visibility = View.VISIBLE
             noResultText.text = "No Results for your search \"$searchKey\""
             noResultText.visibility = View.VISIBLE
