@@ -101,6 +101,7 @@ data class Product(
 	val title: String? = null,
 	val status: String? = null,
 	val tags: String? = null,
+	val handle:String? = null
 ):Parcelable, java.io.Serializable
 
 

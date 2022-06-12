@@ -35,6 +35,7 @@ import androidx.navigation.findNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.*
+import com.google.firebase.auth.FirebaseAuth
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -257,7 +258,7 @@ class AddEquipmentSellFragment : Fragment() {
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
             ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype ,images = imagelist, image = img
-            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
+            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian, handle = FirebaseAuth.getInstance().currentUser?.uid.toString()))
 
 
         Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())

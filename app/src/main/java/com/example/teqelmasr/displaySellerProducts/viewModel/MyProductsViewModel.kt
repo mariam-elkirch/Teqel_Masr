@@ -7,14 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.RepositoryInterface
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MyProductsViewModel(private val repo: RepositoryInterface): ViewModel() {
 
-    private var _myProducts: MutableLiveData<ProductItem>? = MutableLiveData()
-    var myProducts: LiveData<ProductItem>? = _myProducts
+    private var _myProducts: MutableLiveData<ArrayList<Product>?>? = MutableLiveData()
+    var myProducts: MutableLiveData<ArrayList<Product>?>? = _myProducts
 
     init {
         getMyProducts()
@@ -23,7 +24,10 @@ class MyProductsViewModel(private val repo: RepositoryInterface): ViewModel() {
         viewModelScope.launch {
             val myProductsRes = repo.getMyProducts()
             withContext(Dispatchers.IO){
-                _myProducts?.postValue(myProductsRes.body())
+                _myProducts?.postValue(myProductsRes.body()?.products?.filter {
+                    it.handle.equals(FirebaseAuth.getInstance().currentUser?.uid.toString().lowercase())
+
+                } as ArrayList<Product>?)
             }
         }
     }
