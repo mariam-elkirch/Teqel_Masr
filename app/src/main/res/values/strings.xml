@@ -75,6 +75,8 @@
     <string name="nav_header_subtitle">user email</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="signin">sign in</string>
+    <string name="where_are_you_going">Choose the Location</string>
+    <string name="location">Location</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

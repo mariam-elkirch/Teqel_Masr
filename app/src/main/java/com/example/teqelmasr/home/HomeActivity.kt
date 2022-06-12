@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat.recreate
+import androidx.core.view.GravityCompat
 
 import androidx.navigation.ui.NavigationUI
 
@@ -41,6 +42,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolBar)
+
         val toggle = ActionBarDrawerToggle(
             this, binding.drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -50,7 +52,12 @@ class HomeActivity : AppCompatActivity() {
         getSupportActionBar()?.setHomeButtonEnabled(true)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        binding.navView.setNavigationItemSelectedListener {
 
+
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
 
         if(!(isNetworkAvailable())){
             val snackBar = Snackbar.make(

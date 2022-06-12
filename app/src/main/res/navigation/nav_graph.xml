@@ -49,6 +49,13 @@
         <action
             android:id="@+id/action_addEquipmentSellFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="mylocation"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/displayEquipmentSellFragment"
@@ -219,4 +226,13 @@
         android:name="com.example.teqelmasr.authentication.register.view.RegistrationActivity"
         android:label="activity_registeration"
         tools:layout="@layout/activity_registeration" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.teqelmasr.location.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment" />
+    </fragment>
 </navigation>
