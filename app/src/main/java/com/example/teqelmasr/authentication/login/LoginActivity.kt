@@ -1,11 +1,16 @@
 package com.example.teqelmasr.authentication.login
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import android.widget.ViewAnimator
 import androidx.appcompat.app.AppCompatActivity
+import com.example.teqelmasr.R
 import com.example.teqelmasr.authentication.register.view.RegistrationActivity
 import com.example.teqelmasr.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -76,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             val user = auth.currentUser
-                            // updateUI(user)
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -84,7 +89,8 @@ class LoginActivity : AppCompatActivity() {
                                 baseContext, "Authentication failed.",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            // updateUI(null)
+                            binding.errorTextView.visibility = View.VISIBLE
+
                         }
                     }
             }
