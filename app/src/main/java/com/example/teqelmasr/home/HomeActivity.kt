@@ -13,6 +13,7 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat.recreate
 
 import androidx.navigation.ui.NavigationUI
@@ -22,6 +23,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.ActivityHomeBinding
 
@@ -36,6 +39,18 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolBar)
+        val toggle = ActionBarDrawerToggle(
+            this, binding.drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        getSupportActionBar()?.setHomeButtonEnabled(true)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
 
         if(!(isNetworkAvailable())){
             val snackBar = Snackbar.make(
@@ -52,7 +67,13 @@ class HomeActivity : AppCompatActivity() {
         val bottomNavigationView = binding.bottomNav
          bottomNavigationView.setBackgroundColor(Color.rgb(0,71,122))
 
+        val navigationDrawerView = binding.navView
+
         val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
+
+        setupActionBarWithNavController(navController,binding.drawerLayout)
+        navigationDrawerView.setupWithNavController(navController)
+
         setupWithNavController(bottomNavigationView, navController)
     }
 

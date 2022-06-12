@@ -1,5 +1,6 @@
 package com.example.teqelmasr.network
 
+import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.ProductPost
@@ -58,5 +59,15 @@ interface WebService {
     )
     @PUT("admin/products/{productID}.json")
     suspend fun updateProduct(@Path("productID") id: Long, @Body product: ProductPost): Response<ProductItem>
+
+
+    @Headers(
+        "X-Shopify-Shop-Api-Call-Limit: 40/40",
+        "Retry-After: 2.0",
+        "X-Shopify-Access-Token: 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"
+    )
+    @POST("admin/customers.json")
+
+    suspend fun postCustomer(@Body customer: Customer): Response<Customer>
 
 }

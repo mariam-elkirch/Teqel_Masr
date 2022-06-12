@@ -38,12 +38,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
-     var equipmentList = ArrayList<Product>()
-     var equipmentListFilter = ArrayList<Product>()
+    var equipmentList = ArrayList<Product>()
+    var equipmentListFilter = ArrayList<Product>()
     private val binding by lazy { FragmentDisplayEquipmentSellBinding.inflate(layoutInflater)  }
     private val args by navArgs<DisplayEquipmentSellFragmentArgs>()
     private val equipmentSellAdapter by lazy {
-       DisplaySellEquipmentAdapter(
+        DisplaySellEquipmentAdapter(
             requireContext(),
             this)
     }
@@ -59,11 +59,11 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             )
         )[DisplayEquipmentSellViewModel::class.java]
     }
-  /*  private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
+    /*  private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
 
-        fetchEquipmentSell()
+          fetchEquipmentSell()
 
-    }*/
+      }*/
 
     override fun onResume() {
         super.onResume()
@@ -84,7 +84,7 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             searchEquipmentSell.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                   equipmentSellAdapter.filter.filter(query)
+                    equipmentSellAdapter.filter.filter(query)
                     return true
                 }
 
@@ -94,7 +94,7 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
                 }
 
             })
-           searchEquipmentSell.setOnCloseListener(SearchView.OnCloseListener() {
+            searchEquipmentSell.setOnCloseListener(SearchView.OnCloseListener() {
                 binding.apply {
                     noResultsImage.visibility = View.GONE
                     noResultText.visibility = View.GONE
@@ -111,38 +111,56 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             viewModel.fetchSellEquipments()
         }
         fetchEquipmentSell()
-         Log.i("tag",args.filterValue?.types.toString()+"ttttttttt")
-
+        Log.i("tag",args.filterValue?.types.toString()+"ttttttttt")
+        Log.i("ARGS start", args.filterValue?.priceStart.toString())
+        Log.i("ARGS end", args.filterValue?.priceEnd.toString())
 
         return binding.root
     }
-  //
+    //
 
     private fun fetchEquipmentSell() {
-      binding.swipeRefreshLayout.isRefreshing = true
-        viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {
-           // equipmentSellAdapter.setEquipmentSellList(it.products!!)
+
+        viewModel.fetchSellEquipments()
+        viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {productsList->
+            // equipmentSellAdapter.setEquipmentSellList(it.products!!)
             binding.shimmersell.stopShimmer()
             Log.i("tag","fetch equipment")
-           // binding.swipeRefreshLayout.isRefreshing = false
-         //   equipmentList.addAll(it.products)
-            fillData(it.products!!)
+            // binding.swipeRefreshLayout.isRefreshing = false
+            //   equipmentList.addAll(it.products)
+            fillData(productsList)
             binding.shimmersell.visibility = View.GONE
             binding.swipeRefreshLayout.isRefreshing = false
 
         }
     }
-    private fun fillData(productItem: List<Product>) {
-        if (productItem.isNullOrEmpty()) {
+    private fun fillData(productsList: List<Product>) {
+        if (productsList.isNullOrEmpty()) {
             binding.shimmersell.stopShimmer()
             binding.shimmersell.visibility = View.GONE
         }
-        if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty())) {
-            filterData(productItem)
-        } else {
-            Log.i("TAG", "fetchSpareParts: ${productItem.size}")
-          //  sparePartsAdapter.setData(productItem)
-            equipmentSellAdapter.setEquipmentSellList(productItem)
+        if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty()) &&
+            (args.filterValue!!.priceStart == null && args.filterValue!!.priceEnd == null)) {
+            filterDataType(productsList)
+        }
+        else if  (args.filterValue != null && args.filterValue!!.types.isNullOrEmpty() &&
+            (args.filterValue!!.priceStart != null && args.filterValue!!.priceEnd != null)
+        ) {
+            filterPrice(productsList)
+
+
+        }
+       else if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty()) &&
+            (args.filterValue!!.priceStart != null && args.filterValue!!.priceEnd != null)
+        ) {
+
+            filterByPriceAndType(productsList)
+
+        }
+        else {
+            Log.i("TAG", "fetchSpareParts: ${productsList.size}")
+            //  sparePartsAdapter.setData(productItem)
+            equipmentSellAdapter.setEquipmentSellList(productsList)
             binding.apply {
 
 
@@ -150,12 +168,14 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
                 shimmersell.visibility = View.GONE
             }
         }
+
     }
-    private fun filterData(productItem: List<Product>) {
-        if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty())){
+
+    private fun filterDataType(productItem: List<Product>) {
+
             equipmentList =
                 productItem.filter { it.productType!!.toLowerCase() in args.filterValue!!.types!! } as ArrayList<Product>
-            //  Log.i("TAG", "IN FILTER: ${sparePartsList[0].variants?.get(0)?.price}")
+
             equipmentSellAdapter.setEquipmentSellList(equipmentList)
             binding.apply {
 
@@ -163,7 +183,42 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
                 shimmersell.stopShimmer()
                 shimmersell.visibility = View.GONE
             }
-        }
+
+    }
+    private fun filterPrice(productsList: List<Product>) {
+
+            equipmentList =
+                productsList.filter {
+                    it.variants!![0].price!! >= args.filterValue!!.priceStart!!
+                            && it.variants!![0].price!! <= args.filterValue!!.priceEnd!!
+                } as ArrayList<Product>
+
+            equipmentSellAdapter.setEquipmentSellList(equipmentList)
+            binding.apply {
+
+
+                shimmersell.stopShimmer()
+                shimmersell.visibility = View.GONE
+            }
+
+    }
+    private fun filterByPriceAndType(productsList: List<Product>) {
+
+            equipmentList =
+                productsList.filter {
+                    it.productType!!.toLowerCase() in args.filterValue!!.types!!
+                            && (it.variants!![0].price!! >= args.filterValue!!.priceStart!!
+                            && it.variants!![0].price!! <= args.filterValue!!.priceEnd!!)
+                } as ArrayList<Product>
+
+            equipmentSellAdapter.setEquipmentSellList(equipmentList)
+            binding.apply {
+
+
+                shimmersell.stopShimmer()
+                shimmersell.visibility = View.GONE
+            }
+
     }
     override fun onProductClick(product: Product) {
         val action = DisplayEquipmentSellFragmentDirections.actionDisplayEquipmentSellFragmentToDetailsEquipmentSellFragment(product)

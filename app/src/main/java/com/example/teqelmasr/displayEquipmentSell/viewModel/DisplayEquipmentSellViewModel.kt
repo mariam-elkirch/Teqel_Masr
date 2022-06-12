@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.RepositoryInterface
 import kotlinx.coroutines.Dispatchers
@@ -12,20 +13,23 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DisplayEquipmentSellViewModel (private val repository: RepositoryInterface) : ViewModel() {
-    private val sellEquipmentMutableLiveData: MutableLiveData<ProductItem> = MutableLiveData()
-    val sellEquipmentLiveData: LiveData<ProductItem> =sellEquipmentMutableLiveData
+    private val sellEquipmentMutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
+    val sellEquipmentLiveData: LiveData<List<Product>> =sellEquipmentMutableLiveData
 
-    private val collectionID = 271217655944
+    //private val collectionID = 271217655944
     init {
         fetchSellEquipments()
     }
 
     fun fetchSellEquipments() {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getProductsByCategory(collectionID)
+           // val response = repository.getProductsByCategory(collectionID)
+            val response = repository.getAllProducts()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-                    sellEquipmentMutableLiveData.postValue(response.body())
+                    sellEquipmentMutableLiveData.postValue(response.body()!!.products!!
+                        .filter { product -> product.tags == "equimentsell" })
+                   // sellEquipmentMutableLiveData.postValue(response.body())
                 } else {
                     Log.e(
                         "DisplaySellEquipmentViewModel",

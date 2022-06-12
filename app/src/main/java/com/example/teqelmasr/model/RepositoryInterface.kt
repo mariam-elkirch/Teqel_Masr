@@ -11,4 +11,7 @@ interface RepositoryInterface {
     suspend fun getProductsByCategory(productCategory: Long) :  Response<ProductItem>
 
     suspend fun updateProduct(productPost: ProductPost)
+
+    suspend fun postCustomer(customer: Customer)
+
 }

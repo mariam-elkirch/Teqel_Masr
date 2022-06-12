@@ -17,7 +17,6 @@ import com.example.teqelmasr.databinding.FragmentDisplaySparePartBinding
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
 import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 
@@ -48,6 +47,7 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
 
     override fun onResume() {
         super.onResume()
+        Log.i("DisplaySparePartFragment", "onResume: ")
         fetchSpareParts()
     }
 
@@ -55,9 +55,10 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i("DisplaySparePartFragment", "onCreateView: ")
         Log.i("ARGS start", args.filterValues?.priceStart.toString())
         Log.i("ARGS end", args.filterValues?.priceEnd.toString())
-        // Log.i("ARGS", args.filterValues?.types?.elementAt(0).toString())
+        Log.i("ARGS", " Types list args size ${args.filterValues?.types?.size}")
         setUpUI()
 
         fetchSpareParts()
@@ -70,9 +71,14 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
             recyclerViewSpareParts.adapter = sparePartsAdapter
             recyclerViewSpareParts.hasFixedSize()
             recyclerViewSpareParts.layoutManager = LinearLayoutManager(requireContext())
-            filterButton.setOnClickListener { findNavController()
-                .navigate(R.id.action_displaySparePartFragment_to_sparePartsFilterBottomSheetFragment) }
+            filterButton.setOnClickListener {
+                findNavController()
+                    .navigate(R.id.action_displaySparePartFragment_to_sparePartsFilterBottomSheetFragment)
+            }
             setUpSearch()
+            refreshLayout.setOnRefreshListener {
+                fetchSpareParts()
+            }
 
         }
     }
@@ -86,6 +92,7 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
                     sparePartsAdapter.filter.filter(query)
                     return true
                 }
+
                 override fun onQueryTextChange(newText: String?): Boolean {
                     sparePartsAdapter.filter.filter(newText)
                     return true
@@ -105,22 +112,55 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
 
     private fun fetchSpareParts() {
         viewModel.fetchSpareParts()
-        viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productItem ->
-            fillSparePartsData(productItem)
+        viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productsList ->
+            binding.refreshLayout.isRefreshing = false
+            fillSparePartsData(productsList)
         }
     }
 
-    private fun fillSparePartsData(productItem: List<Product>) {
-        if (productItem.isNullOrEmpty()) {
+    private fun fillSparePartsData(productsList: List<Product>) {
+        if (productsList.isNullOrEmpty()) {
             binding.spareShimmer.stopShimmer()
             binding.spareShimmer.visibility = View.GONE
         }
         if (args.filterValues != null) {
-            if (!(args.filterValues!!.types.isNullOrEmpty())){
-                filterData(productItem)
-            }else {
-                Log.i("TAG", "fetchSpareParts: ${productItem.size}")
-                sparePartsAdapter.setData(productItem)
+            //if types is empty and price is not null -> filter with price
+            if (args.filterValues!!.types.isNullOrEmpty() &&
+                (args.filterValues!!.priceStart != null && args.filterValues!!.priceEnd != null)
+            ) {
+                sparePartsList =
+                    productsList.filter {
+                        it.variants!![0].price!! >= args.filterValues!!.priceStart!!
+                                && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!
+                    } as ArrayList<Product>
+
+            }
+            //if price is null and types is not empty -> filter with type
+            else if (!(args.filterValues!!.types.isNullOrEmpty()) &&
+                (args.filterValues!!.priceStart == null && args.filterValues!!.priceEnd == null)) {
+                sparePartsList =
+                    productsList.filter { it.productType!!.toLowerCase() in args.filterValues!!.types!! } as ArrayList<Product>
+
+            }
+            //if price is not null and types is not empty -> filter with both price and type
+            else if (!(args.filterValues!!.types.isNullOrEmpty()) &&
+                (args.filterValues!!.priceStart != null && args.filterValues!!.priceEnd != null)
+            ) {
+                Log.i("TAG", "fillSparePartsData: Inside Else")
+
+                sparePartsList =
+                    productsList.filter {
+                        it.productType!!.toLowerCase() in args.filterValues!!.types!!
+                                && (it.variants!![0].price!! >= args.filterValues!!.priceStart!!
+                                && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!)
+                    } as ArrayList<Product>
+
+
+                Log.i("TAG", "fillSparePartsData: spare parts list size ${sparePartsList.size}")
+            }
+            else {
+                Log.i("TAG", "fillSparePartsData: ${productsList.size}")
+                sparePartsAdapter.setData(productsList)
                 binding.apply {
                     searchSpareParts.visibility = View.VISIBLE
                     filterButton.visibility = View.VISIBLE
@@ -128,17 +168,17 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
                     spareShimmer.visibility = View.GONE
                 }
             }
-
-            if (args.filterValues!!.priceStart != null && args.filterValues!!.priceEnd != null ){
-                sparePartsList =
-                    productItem.filter { it.variants!![0].price!! >= args.filterValues!!.priceStart!!
-                            && it.variants!![0].price!! <= args.filterValues!!.priceEnd!!  } as ArrayList<Product>
-                sparePartsAdapter.setData(sparePartsList)
+            sparePartsAdapter.setData(sparePartsList)
+            binding.apply {
+                searchSpareParts.visibility = View.VISIBLE
+                filterButton.visibility = View.VISIBLE
+                spareShimmer.stopShimmer()
+                spareShimmer.visibility = View.GONE
             }
 
         } else {
-            Log.i("TAG", "fetchSpareParts: ${productItem.size}")
-            sparePartsAdapter.setData(productItem)
+            Log.i("TAG", "fillSparePartsData: ${productsList.size}")
+            sparePartsAdapter.setData(productsList)
             binding.apply {
                 searchSpareParts.visibility = View.VISIBLE
                 filterButton.visibility = View.VISIBLE
@@ -149,7 +189,7 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
     private fun filterData(productItem: List<Product>) {
-        if (!(args.filterValues!!.types.isNullOrEmpty())){
+        if (!(args.filterValues!!.types.isNullOrEmpty())) {
             sparePartsList =
                 productItem.filter { it.productType!!.toLowerCase() in args.filterValues!!.types!! } as ArrayList<Product>
             sparePartsAdapter.setData(sparePartsList)
@@ -184,6 +224,16 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
             noResultsImage.visibility = View.GONE
             noResultText.visibility = View.GONE
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("DisplaySparePartFragment", "onPause: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("DisplaySparePartFragment", "onDestroy: ")
     }
 
 }
