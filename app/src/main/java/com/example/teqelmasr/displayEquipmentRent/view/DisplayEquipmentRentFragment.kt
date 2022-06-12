@@ -130,9 +130,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     private fun filterData(){
     if(args.filterObj!=null ) {
 
-
         // filter with type and price
-        if(args.filterObj!!.types!!.isNotEmpty() && args.filterObj!!.priceStart != null && args.filterObj!!.priceEnd != null ) {
+        if(!(args.filterObj!!.types.isNullOrEmpty()) && args.filterObj!!.priceStart != null && args.filterObj!!.priceEnd != null ) {
             filterResultList = allProductList.filter {
                 it.productType!!.toString()
                     .lowercase(Locale.getDefault()) in args.filterObj!!.types!!
@@ -145,7 +144,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
         }
         // filter with price only
 
-        else if(args.filterObj!!.priceStart != null && args.filterObj!!.priceEnd != null) {
+        else if(args.filterObj!!.types.isNullOrEmpty() && args.filterObj!!.priceStart != null && args.filterObj!!.priceEnd != null) {
             filterResultList = allProductList.filter {
                 it.variants?.get(0)!!.price!! >= args.filterObj!!.priceStart!!
                         && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
@@ -155,7 +154,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
 
         }
         // filter with type only
-        else if(args.filterObj!!.types!!.isNotEmpty()){
+        else if(!(args.filterObj!!.types.isNullOrEmpty()) &&
+            args.filterObj!!.priceEnd == null){
             filterResultList = allProductList.filter {
                 it.productType!!.toString()
                     .lowercase(Locale.getDefault()) in args.filterObj!!.types!!
