@@ -219,4 +219,8 @@
         android:name="com.example.teqelmasr.authentication.register.view.RegistrationActivity"
         android:label="activity_registeration"
         tools:layout="@layout/activity_registeration" />
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.example.teqelmasr.market.MarketFragment"
+        android:label="MarketFragment" />
 </navigation>
