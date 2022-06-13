@@ -10,4 +10,5 @@ interface OnProductClickListener {
     fun onProductClick(product: Product)
     fun onEmptyList(searchKey: String)
     fun onFullList()
+
 }

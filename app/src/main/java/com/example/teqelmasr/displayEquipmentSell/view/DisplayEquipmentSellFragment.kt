@@ -140,7 +140,7 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
             binding.shimmersell.visibility = View.GONE
         }
         if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty()) &&
-            (args.filterValue!!.priceStart == null && args.filterValue!!.priceEnd == null)) {
+           args.filterValue!!.priceEnd == null) {
             filterDataType(productsList)
         }
         else if  (args.filterValue != null && args.filterValue!!.types.isNullOrEmpty() &&
