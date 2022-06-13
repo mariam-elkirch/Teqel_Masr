@@ -24,6 +24,9 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
+            android:name=".authentication.register.view.GoogleActivity"
+            android:exported="false" />
+        <activity
             android:name=".authentication.login.LoginActivity"
             android:exported="false" />
         <activity

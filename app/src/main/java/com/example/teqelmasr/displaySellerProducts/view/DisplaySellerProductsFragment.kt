@@ -20,6 +20,7 @@ import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.firebase.auth.FirebaseAuth
 
 
 class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
@@ -35,17 +36,11 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         )
     }
 
-    /*    private val viewModel by lazy {
-            ViewModelProvider(
-                requireActivity(),
-                factory
-            )[MyProductsViewModel::class.java]
-        }*/
     private lateinit var viewModel: MyProductsViewModel
     private lateinit var adapter: MyProductsAdapter
+
     private val args by navArgs<DisplaySellerProductsFragmentArgs>()
 
-    //private lateinit var args: DisplaySellerProductsFragmentArgs
     private lateinit var productList: ArrayList<Product>
 
     override fun onCreateView(
@@ -70,19 +65,21 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         viewModel.myProducts?.observe(viewLifecycleOwner) {
             fillData(it)
+            Log.i(TAG, "SellerProduct: ${it?.size}")
+            Log.i(TAG, "SellerProduct: ${FirebaseAuth.getInstance().currentUser?.uid}")
         }
     }
 
-    private fun fillData(productItem: ProductItem?) = binding.apply {
+    private fun fillData(products: ArrayList<Product>?) = binding.apply {
 
-        if (productItem?.products.isNullOrEmpty()) {
+        if (products.isNullOrEmpty()) {
             noProducts.visibility = View.VISIBLE
         }
 
 
         if (args.filterObj != null) {
             productList =
-                productItem?.products?.filter {
+                products?.filter {
                     it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
                 } as ArrayList<Product>
             if(!(args.filterObj!!.categories.isNullOrEmpty())){
@@ -102,8 +99,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         }
         else {
-            productList = productItem?.products ?: ArrayList<Product>()
-            adapter.setData(productItem?.products)
+            productList = products ?: ArrayList<Product>()
+            adapter.setData(products)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
             Log.i(TAG, "IN ELSE: ${productList.size}")

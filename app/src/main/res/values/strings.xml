@@ -82,6 +82,13 @@
     <string name="location">Location</string>
     <string name="login">Login</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="already_exists">"Email is already use "</string>
+    <string name="not_valid_pass">Password should be at least 6 characters</string>
+    <string name="badly_formatted">Email not valid</string>
+    <string name="web_client_id">621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com</string>
+    <string name="failed">Registration Failed</string>
+    <string name="success_reg">Successfully Registered</string>
+    <string name="My_Products">My Products</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

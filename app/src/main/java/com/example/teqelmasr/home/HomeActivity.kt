@@ -23,14 +23,19 @@ import androidx.navigation.ui.NavigationUI
 
 
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.ActivityHomeBinding
+import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -87,6 +92,7 @@ class HomeActivity : AppCompatActivity() {
         navigationDrawerView.setupWithNavController(navController)
 
         setupWithNavController(bottomNavigationView, navController)
+
     }
 
     private fun isNetworkAvailable(): Boolean {
