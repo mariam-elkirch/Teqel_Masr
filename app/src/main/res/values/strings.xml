@@ -29,9 +29,12 @@
     <string name="favourite">favourite</string>
     <string name="no_products">No Products</string>
 
-    <string name="sell_equip_tag">Equipment for Sell</string>
-    <string name="rent_equip_tag">Equipment for Rent</string>
-    <string name="spare_tag">Spare Parts</string>
+    <string name="sell_equip_tag">equimentsell</string>
+    <string name="rent_equip_tag">equimentrent</string>
+    <string name="spare_tag">spare</string>
+    <string name="sell_equip_txt">Equipment for Sell</string>
+    <string name="rent_equip_txt">Equipment for Rent</string>
+    <string name="spare_txt">Spare Parts</string>
 
     <string name="coldplaners">Coldplaners</string>
     <string name="compactors">Compactors</string>
@@ -65,7 +68,7 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="have_acount">already have an account?</string>
-    <string name="login">Login</string>
+
     <string name="register_seller">Register as a seller</string>
     <string name="logout">Logout</string>
 
@@ -77,6 +80,8 @@
     <string name="signin">sign in</string>
     <string name="where_are_you_going">Choose the Location</string>
     <string name="location">Location</string>
+    <string name="login">Login</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

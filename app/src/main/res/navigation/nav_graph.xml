@@ -235,4 +235,8 @@
             android:id="@+id/action_mapsFragment_to_addEquipmentSellFragment"
             app:destination="@id/addEquipmentSellFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.example.teqelmasr.market.MarketFragment"
+        android:label="MarketFragment" />
 </navigation>

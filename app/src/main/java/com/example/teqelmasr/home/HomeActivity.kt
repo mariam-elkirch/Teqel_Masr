@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -35,11 +36,14 @@ import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private val TAG = "HomeActivity"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         setSupportActionBar(binding.toolBar)
 
@@ -75,6 +79,7 @@ class HomeActivity : AppCompatActivity() {
          bottomNavigationView.setBackgroundColor(Color.rgb(0,71,122))
 
         val navigationDrawerView = binding.navView
+       // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
 
         val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
 
