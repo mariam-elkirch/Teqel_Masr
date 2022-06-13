@@ -247,6 +247,6 @@
     </fragment>
     <fragment
         android:id="@+id/marketFragment"
-        android:name="com.example.teqelmasr.market.MarketFragment"
+        android:name="com.example.teqelmasr.market.view.MarketFragment"
         android:label="MarketFragment" />
 </navigation>
