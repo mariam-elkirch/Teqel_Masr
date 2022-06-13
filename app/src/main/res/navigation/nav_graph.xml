@@ -220,10 +220,4 @@
         android:name="com.example.teqelmasr.authentication.register.view.RegistrationActivity"
         android:label="activity_registeration"
         tools:layout="@layout/activity_registeration" />
-    <activity
-        android:id="@+id/homeActivity"
-        android:name="com.example.teqelmasr.home.HomeActivity"
-        android:label="HomeActivity"
-        tools:layout="@layout/activity_home">
-    </activity>
 </navigation>
