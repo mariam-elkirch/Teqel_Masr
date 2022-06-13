@@ -1,6 +1,8 @@
 package com.example.teqelmasr.location.view
 
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -24,6 +26,7 @@ import com.example.teqelmasr.databinding.FragmentAddEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentMapsBinding
 import com.example.teqelmasr.home.HomeFragmentDirections
+import com.example.teqelmasr.model.LocationDetails
 import com.example.teqelmasr.model.Utilities
 import com.example.weathery.location.viewmodel.LocationViewModel
 
@@ -47,8 +50,10 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private lateinit var type: String
     private val LOCATION_PERMISSION_REQUEST_CODE: Int=200
     lateinit var locationViewModel: LocationViewModel
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     val mylong = MutableLiveData<String>()
-
+    var mylocation = MutableLiveData<LocationDetails>()
     var mylat= MutableLiveData<String>()
     var doublelong: Double = 0.0
     var doublelat: Double = 0.0
@@ -63,6 +68,11 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         mapFragment?.getMapAsync(this)
         //  mapFragment=
+
+        sharedPreferences = requireContext().getSharedPreferences("shared",
+            Context.MODE_PRIVATE)
+        editor =  sharedPreferences.edit()
+
         prepRequestLocationUpdates()
         binding.searchButton.setOnClickListener(this)
         binding.saveButton.setOnClickListener (this)
@@ -124,6 +134,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
 
     private fun placeMarkerOnMap(location: LatLng) {
+       // currentMarker.remove()
         val markerOptions = MarkerOptions().position(location)
         val titleStr = context?.let { Utilities.getAddress(location, context = it) }
         markerOptions.title(titleStr)
@@ -155,9 +166,12 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             it.longitude
             mylat.value=it.latitude
             mylong.value=it.longitude
+            editor.putString("latitude",it.latitude)
+            editor.putString("longitude",it.longitude)
+            editor.apply()
+            editor.commit()
+          mylocation.value = LocationDetails(it.longitude,it.latitude)
 
-            doublelat = it.latitude!!.toDouble()
-             doublelong = it.longitude!!.toDouble()
             Log.i("TAG",it.latitude+" mylat gps my long "+it.longitude)
         })
 
@@ -185,13 +199,24 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         mMap = googleMap
         mMap.getUiSettings().setZoomControlsEnabled(true)
         mMap.setOnMarkerClickListener(this)
+      /*  mylocation.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            doublelat = mylocation.value?.latitude?.toDouble() ?: 0.0
+            doublelong = mylocation.value?.longitude?.toDouble() ?: 0.0
+
+        })*/
+        val sharedlat= sharedPreferences.getString("latitude","default")
+        val sharedlong= sharedPreferences.getString("longitude","default")
+        val doublelat: Double = sharedlat!!.toDouble()
+        val doublelong: Double = sharedlong!!.toDouble()
+        Log.i("tag", sharedlat+"shareddddd"+sharedlong)
         val alex = LatLng(doublelat, doublelong)
         placeMarkerOnMap(alex)
-
-
         onLongClick()
 
         markerDrag()
+
+
+
     }
     fun onLongClick(){
         //currentMarker.remove()
