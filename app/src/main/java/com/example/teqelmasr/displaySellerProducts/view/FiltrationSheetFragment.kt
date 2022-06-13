@@ -70,75 +70,7 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
             findNavController().navigate(action)
 
         }
-/*
 
-        binding.sellCheckBox.setOnCheckedChangeListener { compoundButton, b ->
-            if (compoundButton.isChecked && !(binding.spareCheckBox.isChecked)) {
-                binding.spareGroup.forEach { it.isEnabled = false }
-
-            } else if (compoundButton.isChecked && binding.spareCheckBox.isChecked) {
-                binding.spareGroup.forEach { it.isEnabled = true }
-                binding.equipGroup.forEach { it.isEnabled = true }
-
-            } else {
-                if(binding.rentCheckBox.isChecked){
-                    binding.equipGroup.forEach { it.isEnabled = true }
-
-                }
-                if(binding.spareCheckBox.isChecked){
-                    binding.equipGroup.forEach { it.isEnabled = false }
-                }else{
-                    binding.spareGroup.forEach { it.isEnabled = false }
-                }
-
-            }
-        }
-
-        binding.spareCheckBox.setOnCheckedChangeListener { compoundButton, b ->
-            if (compoundButton.isChecked) {
-                if (binding.sellCheckBox.isChecked || binding.rentCheckBox.isChecked) {
-                    binding.equipGroup.forEach { it.isEnabled = true }
-                }else{
-                    binding.equipGroup.forEach { it.isEnabled = true }
-                }
-                binding.spareGroup.forEach {
-                    if (!(it.isEnabled)) {
-                        it.isEnabled = true
-                    }
-                }
-            } else {
-
-                if(binding.sellCheckBox.isChecked){
-                    binding.spareGroup.forEach { it.isEnabled = false }
-                }else{
-                    binding.spareGroup.forEach { it.isEnabled = true }
-                }
-
-            }
-        }
-
-        binding.rentCheckBox.setOnCheckedChangeListener { compoundButton, b ->
-            if (compoundButton.isChecked && !(binding.spareCheckBox.isChecked)) {
-                binding.spareGroup.forEach { it.isEnabled = false }
-
-            } else if (compoundButton.isChecked && binding.spareCheckBox.isChecked) {
-                binding.spareGroup.forEach { it.isEnabled = true }
-                binding.equipGroup.forEach { it.isEnabled = true }
-
-            } else {
-                if(binding.spareCheckBox.isChecked){
-                    binding.equipGroup.forEach { it.isEnabled = false }
-                }
-                if(binding.sellCheckBox.isChecked){
-                    binding.equipGroup.forEach { it.isEnabled = true }
-
-                }else{
-                    binding.spareGroup.forEach { it.isEnabled = false }
-                }
-
-            }
-        }
-*/
         binding.sellCheckBox.setOnCheckedChangeListener { compoundButton, b ->
             if(compoundButton.isChecked){
                 if(binding.spareCheckBox.isChecked){
