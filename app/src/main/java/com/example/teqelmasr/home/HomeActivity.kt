@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat.recreate
+import androidx.core.view.GravityCompat
 
 import androidx.navigation.ui.NavigationUI
 
@@ -39,13 +41,17 @@ import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private val TAG = "HomeActivity"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         setSupportActionBar(binding.toolBar)
+
         val toggle = ActionBarDrawerToggle(
             this, binding.drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -55,7 +61,12 @@ class HomeActivity : AppCompatActivity() {
         getSupportActionBar()?.setHomeButtonEnabled(true)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        binding.navView.setNavigationItemSelectedListener {
 
+
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
 
         if(!(isNetworkAvailable())){
             val snackBar = Snackbar.make(
@@ -73,6 +84,7 @@ class HomeActivity : AppCompatActivity() {
          bottomNavigationView.setBackgroundColor(Color.rgb(0,71,122))
 
         val navigationDrawerView = binding.navView
+       // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
 
         val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
 

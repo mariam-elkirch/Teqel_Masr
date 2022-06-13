@@ -32,7 +32,10 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.teqelmasr.R
+import com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragmentDirections
+import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentArgs
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.*
 import com.google.firebase.auth.FirebaseAuth
@@ -55,6 +58,7 @@ class AddEquipmentSellFragment : Fragment() {
     private lateinit var binding: FragmentAddEquipmentSellBinding
     private val pickImage = 100
     private var imageUri: Uri? = null
+    private val args by navArgs<AddEquipmentSellFragmentArgs>()
     lateinit var viewModel: AddProductViewModel
     var mytag : String = ""
      var myproductType : String =""
@@ -83,8 +87,12 @@ class AddEquipmentSellFragment : Fragment() {
         val spinner = binding.spinner
          val spinnerspare = binding.spinnerSpare
         val spinnerEquipment = binding.spinnerEquipment
-
-
+        binding.myLocation.setOnClickListener {
+            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment()
+            binding.root.findNavController().navigate(action)
+        }
+        if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals(""))
+      binding.myLocation.setText(args.mylocation)
       spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                // binding.spinnerSpare.visibility = GONE

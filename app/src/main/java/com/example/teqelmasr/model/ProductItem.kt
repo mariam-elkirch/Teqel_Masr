@@ -105,4 +105,3 @@ data class Product(
 ):Parcelable, java.io.Serializable
 
 
-

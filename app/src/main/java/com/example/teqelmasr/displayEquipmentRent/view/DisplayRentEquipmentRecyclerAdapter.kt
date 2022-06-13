@@ -20,9 +20,10 @@ class DisplayRentEquipmentRecyclerAdapter(val context: Context, private val list
     RecyclerView.Adapter<equipmentRentViewHolder>() , Filterable {
 
     private var equipmentRentList = mutableListOf<Product>()
-    private var filteredEquipmentRentList: List<Product> = arrayListOf()
+    private var originalEquipmentRentList: List<Product> = arrayListOf()
     fun setEquipmentRentList(equipmentRentList: List<Product>) {
         this.equipmentRentList = equipmentRentList.toMutableList()
+        this.originalEquipmentRentList = equipmentRentList
         notifyDataSetChanged()
     }
 
@@ -37,10 +38,8 @@ class DisplayRentEquipmentRecyclerAdapter(val context: Context, private val list
         val equipmentRentItem = equipmentRentList[position]
         holder.binding.apply {
             itemTitle.text = equipmentRentItem.title ?: "Unknown"
-           itemPrice.text = equipmentRentItem.variants?.get(0)?.price.toString()
-           itemCard.setOnClickListener {
-           //    val action = DisplayEquipmentRentFragmentDirections.actionDisplayEquipmentRentFragmentToDetailsEquipmentRentFragment(equipmentRentItem)
-                listener.onProductClick(equipmentRentItem) }
+           itemPrice.text = "${equipmentRentItem.variants!![0]?.price.toString()} LE"
+           itemCard.setOnClickListener { listener.onProductClick(equipmentRentItem) }
         }
         Glide.with(context).load(equipmentRentItem.image?.src).centerCrop()
             .placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
@@ -48,16 +47,20 @@ class DisplayRentEquipmentRecyclerAdapter(val context: Context, private val list
     }
 
     override fun getItemCount() = equipmentRentList.size
+
     override fun getFilter(): Filter {
         val filter = object : Filter() {
             override fun performFiltering(query: CharSequence?): FilterResults {
                 val filterResults = FilterResults()
                 if (query == null || query.isEmpty()) {
-                    filterResults.values = filteredEquipmentRentList
+                    filterResults.values = originalEquipmentRentList
+                    Handler(Looper.getMainLooper()).post {
+                        listener.onFullList()
+                    }
                 } else {
                     val searchKey = query.toString().lowercase(Locale.getDefault())
                     val filteredList = ArrayList<Product>()
-                    for (product in filteredEquipmentRentList) {
+                    for (product in originalEquipmentRentList) {
                         if (product.title!!.lowercase(Locale.getDefault()).contains(searchKey)) {
                             filteredList.add(product)
                         }

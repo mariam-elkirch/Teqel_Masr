@@ -68,6 +68,7 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="have_acount">already have an account?</string>
+
     <string name="register_seller">Register as a seller</string>
     <string name="logout">Logout</string>
 
@@ -77,6 +78,8 @@
     <string name="nav_header_subtitle">user email</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="signin">sign in</string>
+    <string name="where_are_you_going">Choose the Location</string>
+    <string name="location">Location</string>
     <string name="login">Login</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="already_exists">"Email is already use "</string>
@@ -113,6 +116,5 @@
         <item>0</item>
         <item>100</item>
     </string-array>
-
 
 </resources>

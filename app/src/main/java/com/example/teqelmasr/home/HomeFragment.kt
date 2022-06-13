@@ -52,7 +52,9 @@ class HomeFragment : Fragment() {
             binding.root.findNavController().navigate(action)
         }
         binding.fab.setOnClickListener { view ->
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_addEquipmentSellFragment)
+           // binding.root.findNavController().navigate(R.id.action_homeFragment_to_addEquipmentSellFragment)
+            val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToAddEquipmentSellFragment(null)
+            binding.root.findNavController().navigate(action)
         }
 
     }
