@@ -38,6 +38,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
     private lateinit var viewModel: MyProductsViewModel
     private lateinit var adapter: MyProductsAdapter
+
     private val args by navArgs<DisplaySellerProductsFragmentArgs>()
 
     private lateinit var productList: ArrayList<Product>

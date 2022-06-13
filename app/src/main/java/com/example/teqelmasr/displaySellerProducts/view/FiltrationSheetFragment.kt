@@ -3,11 +3,9 @@ package com.example.teqelmasr.displaySellerProducts.view
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController

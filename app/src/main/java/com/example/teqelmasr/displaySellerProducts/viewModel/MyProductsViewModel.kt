@@ -25,7 +25,7 @@ class MyProductsViewModel(private val repo: RepositoryInterface): ViewModel() {
             val myProductsRes = repo.getMyProducts()
             withContext(Dispatchers.IO){
                 _myProducts?.postValue(myProductsRes.body()?.products?.filter {
-                    it.handle.equals(FirebaseAuth.getInstance().currentUser?.uid.toString().lowercase())
+                    it.vendor.equals(FirebaseAuth.getInstance().currentUser?.uid.toString())
 
                 } as ArrayList<Product>?)
             }

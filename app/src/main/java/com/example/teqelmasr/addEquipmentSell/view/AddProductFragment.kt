@@ -258,7 +258,7 @@ class AddEquipmentSellFragment : Fragment() {
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
             ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype ,images = imagelist, image = img
-            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian, handle = FirebaseAuth.getInstance().currentUser?.uid.toString()))
+            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian, vendor = FirebaseAuth.getInstance().currentUser?.uid.toString()))
 
 
         Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())

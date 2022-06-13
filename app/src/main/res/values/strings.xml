@@ -85,6 +85,7 @@
     <string name="web_client_id">621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com</string>
     <string name="failed">Registration Failed</string>
     <string name="success_reg">Successfully Registered</string>
+    <string name="My_Products">My Products</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
