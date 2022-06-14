@@ -89,6 +89,8 @@
     <string name="failed">Registration Failed</string>
     <string name="success_reg">Successfully Registered</string>
     <string name="My_Products">My Products</string>
+    <string name="user_type">UserType</string>
+    <string name="seller">Seller</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

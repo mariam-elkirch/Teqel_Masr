@@ -1,6 +1,8 @@
 package com.example.teqelmasr.authentication.register.view
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.ColorSpace
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -12,6 +14,7 @@ import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModel
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModelFactory
 import com.example.teqelmasr.databinding.ActivityRegisterationBinding
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
 import com.example.teqelmasr.model.Repository
@@ -145,6 +148,16 @@ class RegistrationActivity : AppCompatActivity() {
             }
         }
 
+        //save User type into shared preferences
+
+        val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        val userType = when(isSeller){
+            true -> Constants.SELLER_TYPE
+            else -> {Constants.BUYER_TYPE}
+        }
+        editor.putString(Constants.USER_TYPE, userType)
+        editor.apply()
     }
 
 
