@@ -89,6 +89,8 @@
     <string name="failed">Registration Failed</string>
     <string name="success_reg">Successfully Registered</string>
     <string name="My_Products">My Products</string>
+    <string name="language">Language</string>
+    <string name="profile">Profile</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
@@ -116,5 +118,8 @@
         <item>0</item>
         <item>100</item>
     </string-array>
-
+    <string-array name="language">
+        <item>Arablic</item>
+        <item>English</item>
+    </string-array>
 </resources>

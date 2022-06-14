@@ -239,4 +239,9 @@
         android:id="@+id/marketFragment"
         android:name="com.example.teqelmasr.market.MarketFragment"
         android:label="MarketFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.teqelmasr.profile.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

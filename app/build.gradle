@@ -88,8 +88,10 @@ android {
         implementation 'com.google.maps.android:android-maps-utils:2.2.5'
         implementation 'com.google.android.libraries.places:places:2.5.0'
 
-
-
+      //image
+        implementation 'de.hdodenhof:circleimageview:3.1.0'
+      //ads
+        implementation 'com.google.android.gms:play-services-ads:20.5.0'
 
 
     }

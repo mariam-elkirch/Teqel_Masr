@@ -40,6 +40,10 @@ class Repository private constructor(
         remoteSource.postCustomer(customer)
     }
 
+    override suspend fun getCustomer(): Response<CustomerItem> {
+        return  remoteSource.getCustomer()
+    }
+
     override suspend fun deleteProduct(product: Product) {
         remoteSource.deleteProduct(product)
     }

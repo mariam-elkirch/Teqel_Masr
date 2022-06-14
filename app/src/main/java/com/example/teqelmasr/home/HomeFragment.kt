@@ -13,6 +13,8 @@ import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentHomeBinding
 import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragmentDirections
 import com.example.teqelmasr.model.Product
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +30,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MobileAds.initialize(
+            requireContext())
+        loadBannerAd()
         binding.equipmentSellBtn.setOnClickListener {
            // binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
             val action =
@@ -58,5 +63,9 @@ class HomeFragment : Fragment() {
         }
 
     }
+    private fun loadBannerAd() {
 
+        val adRequest = AdRequest.Builder().build()
+        binding.adView?.loadAd(adRequest)
+    }
 }

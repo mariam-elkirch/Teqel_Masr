@@ -2,12 +2,8 @@ package com.example.teqelmasr.network
 
 
 import android.util.Log
-import com.example.teqelmasr.model.Customer
-import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductItem
+import com.example.teqelmasr.model.*
 
-
-import com.example.teqelmasr.model.ProductPost
 
 import retrofit2.Response
 
@@ -58,6 +54,8 @@ class Client : RemoteSource {
         val res = service.postCustomer(customer)
 
     }
+
+    override suspend fun getCustomer(): Response<CustomerItem> = productsService.GetCustomer()
 
 }
 
