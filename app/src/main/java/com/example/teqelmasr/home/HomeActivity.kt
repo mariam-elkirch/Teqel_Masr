@@ -17,6 +17,7 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat.recreate
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 
 import androidx.navigation.ui.NavigationUI
 
@@ -33,6 +34,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.ActivityHomeBinding
 import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
+import com.example.teqelmasr.helper.Constants
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -92,7 +94,11 @@ class HomeActivity : AppCompatActivity() {
         navigationDrawerView.setupWithNavController(navController)
 
         setupWithNavController(bottomNavigationView, navController)
+        if(!(intent.extras?.get(Constants.IS_SELLER) as Boolean)){
 
+            bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
+
+        }
     }
 
     private fun isNetworkAvailable(): Boolean {

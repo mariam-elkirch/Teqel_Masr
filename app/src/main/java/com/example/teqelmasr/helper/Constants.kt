@@ -5,6 +5,9 @@ object Constants {
     const val SELLER_TYPE = "seller"
     const val BUYER_TYPE = "buyer"
     const val LOGIN_FLAG = "loginFlag"
+    const val IS_SELLER = "isSeller"
+
+
 
 
 }
