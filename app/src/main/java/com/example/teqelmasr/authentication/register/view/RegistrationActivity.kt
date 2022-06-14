@@ -108,9 +108,9 @@ class RegistrationActivity : AppCompatActivity() {
                             last_name = FirebaseAuth.getInstance().currentUser!!.uid
                         )
                         if (isSeller) {
-                            customerObj.note = "seller"
+                            customerObj.note = getString(R.string.seller_note)
                         } else {
-                            customerObj.note = "buyer"
+                            customerObj.note = getString(R.string.buyer_note)
 
                         }
                         val customer = Customer(customerObj)
@@ -150,14 +150,14 @@ class RegistrationActivity : AppCompatActivity() {
 
         //save User type into shared preferences
 
-        val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+/*        val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
         val editor = sharedPref.edit()
         val userType = when(isSeller){
             true -> Constants.SELLER_TYPE
             else -> {Constants.BUYER_TYPE}
         }
         editor.putString(Constants.USER_TYPE, userType)
-        editor.apply()
+        editor.apply()*/
     }
 
 

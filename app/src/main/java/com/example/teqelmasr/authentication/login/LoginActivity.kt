@@ -8,10 +8,18 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
+import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.authentication.register.view.RegistrationActivity
 import com.example.teqelmasr.databinding.ActivityLoginBinding
+import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
+import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.home.HomeActivity
+import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.network.Client
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,6 +29,15 @@ class LoginActivity : AppCompatActivity() {
     private val TAG = "LoginActivity"
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private lateinit var auth: FirebaseAuth
+    private val factory by lazy {
+        LoginViewModelFactory(
+            Repository.getInstance(
+                Client.getInstance(),
+                this
+            )
+        )
+    }
+    private lateinit var viewModel: LoginViewModel
 
     /*public override fun onStart() {
         super.onStart()
@@ -36,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+
         auth = Firebase.auth
 
         binding.loginBtn.setOnClickListener {
@@ -74,19 +93,15 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            //set user login into shared preferences
-                            val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
-                            val editor = sharedPref.edit()
-                            editor.putBoolean(Constants.LOGIN_FLAG, true)
-                            editor.apply()
-                            Log.d(TAG, "signInWithEmail:success")
-                            Toast.makeText(baseContext, "Logged in Successfully.", Toast.LENGTH_SHORT).show()
-                            val homeIntent = Intent(this, HomeActivity::class.java)
-                            startActivity(homeIntent)
 
-
-
-
+                            viewModel.getCustomers()
+                            viewModel.customers.observe(this) {
+                                setPreferences(it.note!!)
+                                Log.d(TAG, "signInWithEmail:success")
+                                Toast.makeText(baseContext, "Logged in Successfully.", Toast.LENGTH_SHORT).show()
+                                val homeIntent = Intent(this, HomeActivity::class.java)
+                                startActivity(homeIntent)
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -95,5 +110,18 @@ class LoginActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    private fun setPreferences(userType: String) {
+        //set login flag into shared preferences
+        val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean(Constants.LOGIN_FLAG, true)
+        //set user type into shared preferences
+        editor.putString(Constants.USER_TYPE, userType)
+        editor.apply()
+
+
+
     }
 }

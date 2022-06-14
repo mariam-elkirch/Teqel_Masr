@@ -1,15 +1,9 @@
 package com.example.teqelmasr.network
 
 
-import com.example.teqelmasr.model.Customer
+import com.example.teqelmasr.model.*
 import retrofit2.Response
 import retrofit2.http.Body
-
-import com.example.teqelmasr.model.Product
-
-
-import com.example.teqelmasr.model.ProductItem
-import com.example.teqelmasr.model.ProductPost
 
 
 interface RemoteSource {
@@ -25,5 +19,6 @@ interface RemoteSource {
 
     suspend fun postCustomer(customer: Customer)
 
+    suspend fun getCustomers(): Response<CustomersResponse>
 
 }
