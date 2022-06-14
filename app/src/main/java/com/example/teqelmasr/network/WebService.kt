@@ -70,4 +70,12 @@ interface WebService {
 
     suspend fun postCustomer(@Body customer: Customer): Response<Customer>
 
+    //get customers
+/*    @Headers(
+        "X-Shopify-Shop-Api-Call-Limit: 40/40",
+        "Retry-After: 2.0",
+        "X-Shopify-Access-Token: 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"
+    )
+    @GET("admin/customers.json")
+    suspend fun getCustomers*/
 }

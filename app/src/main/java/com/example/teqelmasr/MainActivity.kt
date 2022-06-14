@@ -18,11 +18,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.i("TAG", "Auth: ${FirebaseAuth.getInstance().currentUser?.uid}")
         //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
+
+        checkSellerLogin()
         Handler().postDelayed({
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000) // 3000 is the delayed time in milliseconds.
+    }
+
+    private fun checkSellerLogin() {
+        TODO("Not yet implemented")
     }
 
 

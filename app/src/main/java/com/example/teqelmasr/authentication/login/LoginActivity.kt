@@ -1,6 +1,7 @@
 package com.example.teqelmasr.authentication.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.teqelmasr.authentication.register.view.RegistrationActivity
 import com.example.teqelmasr.databinding.ActivityLoginBinding
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.home.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -72,10 +74,19 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
+                            //set user login into shared preferences
+                            val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+                            val editor = sharedPref.edit()
+                            editor.putBoolean(Constants.LOGIN_FLAG, true)
+                            editor.apply()
                             Log.d(TAG, "signInWithEmail:success")
                             Toast.makeText(baseContext, "Logged in Successfully.", Toast.LENGTH_SHORT).show()
                             val homeIntent = Intent(this, HomeActivity::class.java)
                             startActivity(homeIntent)
+
+
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
