@@ -79,6 +79,10 @@
     <string name="signin">sign in</string>
     <string name="login">Login</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sure_you_want_to_log_out">Are you sure you want to log out your account?</string>
+    <string name="log_out">Log Out</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

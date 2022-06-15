@@ -1,36 +1,29 @@
 package com.example.teqelmasr.home
 
-import android.app.Activity
+
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.app.ActivityCompat.recreate
-
-import androidx.navigation.ui.NavigationUI
-
-
-
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.teqelmasr.R
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.databinding.ActivityHomeBinding
-
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class HomeActivity : AppCompatActivity() {
@@ -46,7 +39,11 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolBar)
         val toggle = ActionBarDrawerToggle(
-            this, binding.drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            binding.drawerLayout,
+            binding.toolBar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -56,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
         getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
 
 
-        if(!(isNetworkAvailable())){
+        if (!(isNetworkAvailable())) {
             val snackBar = Snackbar.make(
                 findViewById(R.id.home_activity),
                 getString(R.string.no_internet),
@@ -69,17 +66,46 @@ class HomeActivity : AppCompatActivity() {
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
-         bottomNavigationView.setBackgroundColor(Color.rgb(0,71,122))
+        bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
 
         val navigationDrawerView = binding.navView
-       // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
+        // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
 
-        val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
+        val navController: NavController = Navigation.findNavController(this, R.id.hostFragment)
 
-        setupActionBarWithNavController(navController,binding.drawerLayout)
+        setupActionBarWithNavController(navController, binding.drawerLayout)
         navigationDrawerView.setupWithNavController(navController)
 
         setupWithNavController(bottomNavigationView, navController)
+
+        navigationDrawerView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_logout -> {
+                    logOutUser()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun logOutUser() {
+
+        Firebase.auth.signOut()
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.log_out))
+        builder.setMessage(getString(R.string.sure_you_want_to_log_out))
+
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
+
+        builder.setNegativeButton(getString(R.string.no)) { _, _ ->
+        }
+
+        builder.show()
     }
 
     private fun isNetworkAvailable(): Boolean {
