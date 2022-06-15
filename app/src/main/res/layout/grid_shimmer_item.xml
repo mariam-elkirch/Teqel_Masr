@@ -9,18 +9,20 @@
         android:layout_margin="10dp"
         android:elevation="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/second_item_card"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/item_card"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.45"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:padding="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <ImageView
 
@@ -75,13 +77,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/second_item_card"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.45"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content">
 
