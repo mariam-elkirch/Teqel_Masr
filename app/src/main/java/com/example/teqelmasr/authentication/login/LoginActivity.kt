@@ -93,15 +93,10 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-
-                            viewModel.getCustomers()
-                            viewModel.customers.observe(this) {
-                                setPreferences(it.note!!)
                                 Log.d(TAG, "signInWithEmail:success")
                                 Toast.makeText(baseContext, "Logged in Successfully.", Toast.LENGTH_SHORT).show()
                                 val homeIntent = Intent(this, HomeActivity::class.java)
                                 startActivity(homeIntent)
-                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -112,16 +107,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPreferences(userType: String) {
-        //set login flag into shared preferences
-        val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putBoolean(Constants.LOGIN_FLAG, true)
-        //set user type into shared preferences
-        editor.putString(Constants.USER_TYPE, userType)
-        editor.apply()
 
 
-
-    }
 }
