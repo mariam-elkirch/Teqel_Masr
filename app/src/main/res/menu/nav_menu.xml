@@ -9,5 +9,10 @@
         android:id="@+id/favouriteFragment"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="@string/favourite" />
+    <item
+        android:id="@+id/marketFragment"
+        android:icon="@drawable/store"
+        android:title="Market"
+        />
 
 </menu>

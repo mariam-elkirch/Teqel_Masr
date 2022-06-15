@@ -1,23 +1,25 @@
 package com.example.teqelmasr.market.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
-import com.example.teqelmasr.databinding.ActivityRegisterationBinding
 import com.example.teqelmasr.databinding.FragmentMarketBinding
-import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
-import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
+import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
 import com.example.teqelmasr.market.viewModel.MarketViewModel
 import com.example.teqelmasr.market.viewModel.MarketViewModelFactory
+import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 
 
-class MarketFragment : Fragment() {
+class MarketFragment : Fragment(), OnProductClickListener {
 
     private val binding by lazy { FragmentMarketBinding.inflate(layoutInflater) }
     private val viewModel by lazy {
@@ -31,11 +33,26 @@ class MarketFragment : Fragment() {
             )
         )[MarketViewModel::class.java]
     }
+    private val adapter by lazy {
+        MarketRecyclerViewAdapter(
+            requireContext(),
+            this
+        )
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
+        binding.recyclerViewAllProducts.adapter = adapter
+        binding.recyclerViewAllProducts.layoutManager = GridLayoutManager(requireContext(), 2)
 
         getAllProducts()
 
@@ -44,9 +61,28 @@ class MarketFragment : Fragment() {
 
     private fun getAllProducts() {
         viewModel.getAllProducts()
-        viewModel.allProductsLiveData.observe(viewLifecycleOwner){
-
+        viewModel.allProductsLiveData.observe(viewLifecycleOwner) {
+            binding.refreshLayout.isRefreshing = false
+            adapter.setData(it)
+            binding.apply {
+                searchSpareParts.visibility = View.VISIBLE
+                filterButton.visibility = View.VISIBLE
+                spareShimmer.stopShimmer()
+                spareShimmer.visibility = View.GONE
+            }
         }
+    }
+
+    override fun onProductClick(product: Product) {
+
+    }
+
+    override fun onEmptyList(searchKey: String) {
+
+    }
+
+    override fun onFullList() {
+
     }
 
 }

@@ -100,7 +100,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_spare_parts"
-            tools:listitem="@layout/spare_part_item"
+            tools:listitem="@layout/market_item"
             />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
