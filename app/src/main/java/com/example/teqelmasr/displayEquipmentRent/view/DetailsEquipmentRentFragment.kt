@@ -34,7 +34,7 @@ class DetailsEquipmentRentFragment : Fragment() {
     private var sharedPreferences: SharedPreferences? = null
     private var sharedProductIDs = mutableSetOf<String>()
     private var productID : Long? = 0
-   // private var productIdSet = mutableSetOf<String>()
+    private var productIdSet = mutableSetOf<String>()
     var editor:SharedPreferences.Editor? =null
     override fun onAttach(context: Context) {
         super.onAttach(context)
