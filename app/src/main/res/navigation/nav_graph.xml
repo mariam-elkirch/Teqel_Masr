@@ -125,11 +125,15 @@
             app:destination="@id/editSellerProductFragment" />
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_filtrationSheetFragment"
-            app:destination="@id/filtrationSheetFragment" />
+            app:destination="@id/filtrationSheetFragment">
+
+        </action>
         <argument
             android:name="filterObj"
             app:argType="com.example.teqelmasr.model.FilterObj"
+            android:defaultValue="@null"
             app:nullable="true" />
+
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -190,7 +194,13 @@
 
         <action
             android:id="@+id/action_filtrationSheetFragment_to_displaySellerProductsFragment"
-            app:destination="@id/displaySellerProductsFragment"/>
+            app:destination="@id/displaySellerProductsFragment">
+            <argument
+                android:name="filterObj"
+                app:argType="com.example.teqelmasr.model.FilterObj"
+                app:nullable="true" />
+
+        </action>
     </dialog>
     <dialog
         android:id="@+id/sparePartsFilterBottomSheetFragment"
@@ -237,7 +247,7 @@
     </fragment>
     <fragment
         android:id="@+id/marketFragment"
-        android:name="com.example.teqelmasr.market.MarketFragment"
+        android:name="com.example.teqelmasr.market.view.MarketFragment"
         android:label="MarketFragment" />
     <fragment
         android:id="@+id/profileFragment"

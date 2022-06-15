@@ -106,7 +106,7 @@ class EditSellerProductFragment : Fragment() {
                                 .show()
                             val action: NavDirections =
                                 EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
-                                    null
+
                                 )
                             binding.root.findNavController().navigate(action)
 

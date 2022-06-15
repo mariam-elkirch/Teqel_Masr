@@ -208,7 +208,7 @@ class AddEquipmentSellFragment : Fragment() {
                           saveProductObject()
                         dialog.dismiss()
                         Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
-                         val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment(null)
+                         val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
                          binding.root.findNavController().navigate(action)
 
                     }

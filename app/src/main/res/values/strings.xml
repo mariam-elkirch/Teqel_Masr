@@ -91,6 +91,11 @@
     <string name="My_Products">My Products</string>
     <string name="language">Language</string>
     <string name="profile">Profile</string>
+    <string name="user_type">UserType</string>
+    <string name="seller">Seller</string>
+    <string name="have_to_login">You have to login to offer a product</string>
+    <string name="seller_note">seller</string>
+    <string name="buyer_note">buyer</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

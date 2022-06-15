@@ -18,6 +18,8 @@ interface RemoteSource {
     suspend fun updateProduct(product: ProductPost)
 
     suspend fun postCustomer(customer: Customer)
+
+    suspend fun getCustomers(): Response<CustomersResponse>
     suspend fun getCustomer(): Response<CustomerItem>
 
 }

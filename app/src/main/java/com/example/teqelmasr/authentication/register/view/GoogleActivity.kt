@@ -3,6 +3,7 @@ package com.example.teqelmasr.authentication.register.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.teqelmasr.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -26,7 +27,7 @@ class GoogleActivity : AppCompatActivity() {
 
     private fun createGoogleRequest() {
         val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com")
+            .requestIdToken(R.string.default_web_client_id.toString())
             .requestEmail()
             .build()
 
@@ -40,10 +41,16 @@ class GoogleActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQ_ONE_TAP){
             val task  = GoogleSignIn.getSignedInAccountFromIntent(data)
+
             try {
                 val account = task.getResult(ApiException::class.java)
+                Log.i("TAG", "firebaseAuthWithGoogle : account.getId()" + account.getId());
+
                 firebaseAuthWithGoogle(account.idToken.toString())
+
             }catch (e: ApiException){
+                Log.i("TAG", "onActivityResult: ${e.message}")
+                Log.i("TAG", "onActivityResult: ${e.status}")
                 Toast.makeText(
                     this,
                     R.string.failed,

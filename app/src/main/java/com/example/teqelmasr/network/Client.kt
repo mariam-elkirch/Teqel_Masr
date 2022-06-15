@@ -57,6 +57,11 @@ class Client : RemoteSource {
 
     override suspend fun getCustomer(): Response<CustomerItem> = productsService.GetCustomer()
 
+    override suspend fun getCustomers(): Response<CustomersResponse> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return service.getCustomers()
+    }
+
 }
 
 

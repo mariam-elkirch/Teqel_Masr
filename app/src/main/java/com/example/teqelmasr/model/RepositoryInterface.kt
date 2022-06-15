@@ -14,4 +14,8 @@ interface RepositoryInterface {
 
     suspend fun postCustomer(customer: Customer)
     suspend fun getCustomer(): Response<CustomerItem>
+
+    suspend fun getCustomers(): Response<CustomersResponse>
+
+
 }
