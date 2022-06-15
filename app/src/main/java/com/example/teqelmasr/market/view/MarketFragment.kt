@@ -1,16 +1,19 @@
 package com.example.teqelmasr.market.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentMarketBinding
+import com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragmentDirections
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
 import com.example.teqelmasr.market.viewModel.MarketViewModel
 import com.example.teqelmasr.market.viewModel.MarketViewModelFactory
@@ -40,6 +43,12 @@ class MarketFragment : Fragment(), OnProductClickListener {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.i("DisplaySparePartFragment", "onResume: ")
+        getAllProducts()
+    }
+
 
 
     override fun onCreateView(
@@ -53,6 +62,9 @@ class MarketFragment : Fragment(), OnProductClickListener {
 
         binding.recyclerViewAllProducts.adapter = adapter
         binding.recyclerViewAllProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.refreshLayout.setOnRefreshListener {
+            getAllProducts()
+        }
 
         getAllProducts()
 
@@ -74,7 +86,11 @@ class MarketFragment : Fragment(), OnProductClickListener {
     }
 
     override fun onProductClick(product: Product) {
-
+        val action =
+            MarketFragmentDirections.actionMarketFragmentToDetailsSparePartFragment2(
+                product
+            )
+        binding.root.findNavController().navigate(action)
     }
 
     override fun onEmptyList(searchKey: String) {

@@ -56,17 +56,14 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.i("DisplaySparePartFragment", "onCreateView: ")
-        Log.i("ARGS start", args.filterValues?.priceStart.toString())
-        Log.i("ARGS end", args.filterValues?.priceEnd.toString())
-        Log.i("ARGS", " Types list args size ${args.filterValues?.types?.size}")
-        setUpUI()
-
-        fetchSpareParts()
 
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
+        setUpUI()
+
+        fetchSpareParts()
 
         return binding.root
     }

@@ -36,6 +36,7 @@ class MarketRecyclerViewAdapter(
         val currentProduct = allProductsList[position]
         holder.binding.itemTitle.text = currentProduct.title
         holder.binding.itemPrice.text = "${currentProduct.variants!![0]?.price.toString()} LE"
+        holder.binding.itemCard.setOnClickListener { listener.onProductClick(currentProduct) }
         Glide.with(context).load(currentProduct.image?.src).centerCrop()
             .placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
     }
