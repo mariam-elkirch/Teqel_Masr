@@ -248,7 +248,24 @@
     <fragment
         android:id="@+id/marketFragment"
         android:name="com.example.teqelmasr.market.view.MarketFragment"
-        android:label="MarketFragment" />
+        android:label="MarketFragment" >
+        <action
+            android:id="@+id/action_marketFragment_to_detailsMarketFragment"
+            app:destination="@id/detailsMarketFragment" />
+        <action
+            android:id="@+id/action_marketFragment_to_detailsSparePartFragment2"
+            app:destination="@id/detailsSparePartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsMarketFragment"
+        android:name="com.example.teqelmasr.market.view.DetailsMarketFragment"
+        android:label="DetailsMarketFragment"
+        app:popUpTo="@+id/marketFragment"
+        >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.teqelmasr.profile.view.ProfileFragment"

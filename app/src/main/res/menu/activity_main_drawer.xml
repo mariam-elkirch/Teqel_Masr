@@ -20,6 +20,11 @@
             android:id="@+id/profileFragment"
             android:icon="@drawable/ic_user"
             android:title="@string/profile"/>
+        <item
+            android:id="@+id/marketFragment"
+            android:icon="@drawable/store"
+            android:title="Market"
+            />
     </group>
 
 

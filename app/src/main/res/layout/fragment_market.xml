@@ -21,14 +21,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
-            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
+            <include layout="@layout/grid_shimmer_item" />
 
         </LinearLayout>
 
@@ -44,7 +44,7 @@
         android:iconifiedByDefault="false"
         android:queryBackground="@android:color/transparent"
         android:queryHint="Search Spare Parts"
-
+android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/recyclerView_all_products"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -100,7 +100,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_spare_parts"
-            tools:listitem="@layout/spare_part_item"
+            tools:listitem="@layout/market_item"
             />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

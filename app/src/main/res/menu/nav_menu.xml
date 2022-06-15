@@ -10,6 +10,12 @@
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="@string/favourite" />
     <item
+        android:id="@+id/marketFragment"
+        android:icon="@drawable/store"
+        android:title="Market"
+        />
+
+    <item
         android:id="@+id/displaySellerProductsFragment"
         android:icon="@drawable/ic_baseline_construction_24"
         android:title="@string/My_Products" />
