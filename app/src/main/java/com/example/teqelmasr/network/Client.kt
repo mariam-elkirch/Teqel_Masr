@@ -1,6 +1,7 @@
 package com.example.teqelmasr.network
 
 
+import FavProducts
 import FavouriteProduct
 import android.util.Log
 import com.example.teqelmasr.model.Customer
@@ -71,6 +72,11 @@ class Client : RemoteSource {
         val service = ApiManager.getInstance().create(WebService::class.java)
         val res = service.deleteFavProduct(product!!.draftOrder!!.id!!)
         Log.i("TAG", "deleteFavProduct: ${res.code()}")
+    }
+
+    override suspend fun getFavProducts(): Response<FavProducts> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return  service.getFavProducts()
     }
 
 }

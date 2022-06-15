@@ -1,5 +1,6 @@
 package com.example.teqelmasr.model
 
+import FavProducts
 import FavouriteProduct
 import retrofit2.Response
 
@@ -16,6 +17,6 @@ interface RepositoryInterface {
     suspend fun postCustomer(customer: Customer)
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
     suspend fun deleteFavProduct(product: FavouriteProduct)
-
+    suspend fun getFavProducts(): Response<FavProducts>
 
 }

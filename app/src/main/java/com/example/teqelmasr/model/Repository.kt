@@ -1,5 +1,6 @@
 package com.example.teqelmasr.model
 
+import FavProducts
 import FavouriteProduct
 import android.content.Context
 import com.example.teqelmasr.network.RemoteSource
@@ -50,6 +51,10 @@ class Repository private constructor(
 
     override suspend fun deleteFavProduct(product: FavouriteProduct) {
         remoteSource.deleteFavProduct(product)
+    }
+
+    override suspend fun getFavProducts(): Response<FavProducts> {
+        return remoteSource.getFavProducts()
     }
 
 

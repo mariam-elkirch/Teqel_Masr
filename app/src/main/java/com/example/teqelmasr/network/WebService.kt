@@ -1,5 +1,6 @@
 package com.example.teqelmasr.network
 
+import FavProducts
 import FavouriteProduct
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.Product
@@ -87,5 +88,12 @@ interface WebService {
     )
     @DELETE("admin/draft_orders/{productID}.json")
     suspend fun deleteFavProduct(@Path("productID") id: Long): Response<FavouriteProduct>
+
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("admin/draft_orders.json")
+    suspend fun getFavProducts(): Response<FavProducts>
 }
 

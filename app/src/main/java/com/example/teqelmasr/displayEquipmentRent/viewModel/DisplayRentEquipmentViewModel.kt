@@ -17,8 +17,10 @@ import retrofit2.Response
 
 class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface) : ViewModel() {
     private val rentEquipmentMutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
-    val favouriteRespose = MutableLiveData<FavouriteProduct>()
+     val favouriteResponse = MutableLiveData<FavouriteProduct>()
+    private val favoriteListMutableLiveData :MutableLiveData<List<DraftOrder>> = MutableLiveData()
     val rentEquipmentLiveData: LiveData<List<Product>> = rentEquipmentMutableLiveData
+    val favListLiveData : LiveData<List<DraftOrder>> = favoriteListMutableLiveData
    // val response : FavouriteProduct
     init {
         fetchRentEquipments()
@@ -44,7 +46,7 @@ class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface)
     fun addToFavorite(product: FavouriteProduct){
         viewModelScope.launch {
          // var  response = repository.addToFavorite(product).body()!!
-          favouriteRespose.postValue(repository.addToFavorite(product).body())
+          favouriteResponse.postValue(repository.addToFavorite(product).body())
 
         }
 
@@ -52,6 +54,24 @@ class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface)
     fun deleteFavProduct(product: FavouriteProduct){
         viewModelScope.launch {
             repository.deleteFavProduct(product)
+        }
+    }
+    fun getFavProduct(productID : Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getFavProducts()
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+
+
+                    favoriteListMutableLiveData.postValue(response.body()?.draftOrders?.filter { fav -> fav.lineItems[0].productID == productID })
+
+                }else {
+                    Log.e(
+                        "DisplayRentEquipmentViewModel",
+                        "Error fetching data in DisplayRentEquipmentViewModel ${response.message()}"
+                    )
+                }
+            }
         }
     }
 }
