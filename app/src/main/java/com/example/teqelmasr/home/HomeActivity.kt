@@ -17,7 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.core.app.ActivityCompat.recreate
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
@@ -72,14 +72,20 @@ class HomeActivity : AppCompatActivity() {
         getSupportActionBar()?.setHomeButtonEnabled(true)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        binding.navView.setNavigationItemSelectedListener {
-
+        /*  binding.navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_logout -> {
+                    logOutUser()
+                    true
+                }
+                else -> false
+            }
 
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
-        }
+        }*/
 
-        if(!(isNetworkAvailable())){
+        if (!(isNetworkAvailable())) {
             val snackBar = Snackbar.make(
                 findViewById(R.id.home_activity),
                 getString(R.string.no_internet),
@@ -92,26 +98,50 @@ class HomeActivity : AppCompatActivity() {
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
-         bottomNavigationView.setBackgroundColor(Color.rgb(0,71,122))
+        bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
 
         val navigationDrawerView = binding.navView
-       // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
+        // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
 
-        val navController: NavController = Navigation.findNavController(this,R.id.hostFragment)
+        val navController: NavController = Navigation.findNavController(this, R.id.hostFragment)
 
-        setupActionBarWithNavController(navController,binding.drawerLayout)
+        setupActionBarWithNavController(navController, binding.drawerLayout)
         navigationDrawerView.setupWithNavController(navController)
 
         setupWithNavController(bottomNavigationView, navController)
 
-        navigationDrawerView.setNavigationItemSelectedListener { menuItem ->
+        /*  navigationDrawerView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_logout -> {
                     logOutUser()
                     true
                 }
-                else -> false
+                else -> {
+                    true
+                }
             }
+            //true
+        }*/
+        binding.navView.setNavigationItemSelectedListener {
+            // val item: Int = it.getItemId()
+            when (it.itemId) {
+                R.id.nav_logout -> {
+                    logOutUser()
+
+                }
+
+
+            }
+
+            NavigationUI.onNavDestinationSelected(it, navController)
+
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+        if(!(intent.extras?.get(Constants.IS_SELLER) as Boolean)){
+
+            bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
+
         }
     }
 
@@ -132,11 +162,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         builder.show()
-        if(!(intent.extras?.get(Constants.IS_SELLER) as Boolean)){
 
-            bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
-
-        }
     }
 
     private fun isNetworkAvailable(): Boolean {

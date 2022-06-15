@@ -65,10 +65,11 @@ class ProfileFragment : Fragment() {
 
         viewModel.fetchCustomers()
         viewModel.customerLiveData.observe(viewLifecycleOwner) {
-          Log.i("tag",it.get(0).email+"customr obj")
-            binding.emailEdt.setText(it.get(0).email.toString())
-            binding.nameEdt.setText(it.get(0).first_name.toString())
-
+        //  Log.i("tag",it.get(0).email+"customr obj")
+            if(!it.isNullOrEmpty()) {
+                binding.emailEdt.setText(it.get(0).email.toString())
+                binding.nameEdt.setText(it.get(0).first_name.toString())
+            }
         }
     }
 }

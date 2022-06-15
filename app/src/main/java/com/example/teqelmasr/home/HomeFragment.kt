@@ -1,5 +1,6 @@
 package com.example.teqelmasr.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +10,10 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
-import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
+import com.example.teqelmasr.authentication.login.LoginActivity
+
 import com.example.teqelmasr.databinding.FragmentHomeBinding
-import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragmentDirections
+
 import com.example.teqelmasr.model.Product
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
@@ -25,18 +27,19 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-     // binding = FragmentHomeBinding.inflate(inflater, container, false)
+        // binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        return  binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MobileAds.initialize(
-            requireContext())
+            requireContext()
+        )
         loadBannerAd()
         binding.equipmentSellBtn.setOnClickListener {
-           // binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
+            // binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDisplayEquipmentSellFragment(null)
             findNavController().navigate(action)
@@ -71,7 +74,10 @@ class HomeFragment : Fragment() {
                 binding.root.findNavController().navigate(action)
             }
 
+        }
+
     }
+
     private fun loadBannerAd() {
 
         val adRequest = AdRequest.Builder().build()
