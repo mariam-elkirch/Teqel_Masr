@@ -1,6 +1,7 @@
 package com.example.teqelmasr.network
 
 
+import FavouriteProduct
 import com.example.teqelmasr.model.Customer
 import retrofit2.Response
 import retrofit2.http.Body
@@ -24,6 +25,6 @@ interface RemoteSource {
     suspend fun updateProduct(product: ProductPost)
 
     suspend fun postCustomer(customer: Customer)
-
-
+    suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
+    suspend fun deleteFavProduct(product: FavouriteProduct)
 }

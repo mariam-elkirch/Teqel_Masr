@@ -1,6 +1,7 @@
 package com.example.teqelmasr.network
 
 
+import FavouriteProduct
 import android.util.Log
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.Product
@@ -10,6 +11,7 @@ import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.ProductPost
 
 import retrofit2.Response
+import retrofit2.create
 
 class Client : RemoteSource {
     /*override suspend fun getCurrentWeather(units: String, lat: String, lng: String, lang: String): WeatherResponse {
@@ -57,6 +59,18 @@ class Client : RemoteSource {
         val service = ApiManager.getInstance().create(WebService::class.java)
         val res = service.postCustomer(customer)
 
+    }
+
+    override suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        val res = service.addToFavorite(product)
+        Log.i("TAG", "addToFavorite: ${res.code()}")
+        return res
+    }
+    override suspend fun deleteFavProduct(product: FavouriteProduct){
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        val res = service.deleteFavProduct(product!!.draftOrder!!.id!!)
+        Log.i("TAG", "deleteFavProduct: ${res.code()}")
     }
 
 }

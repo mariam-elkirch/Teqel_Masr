@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1835" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1835" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_equipment_rent.xml" value="0.264" />
         <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_equipment_sell.xml" value="0.24909420289855072" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_favourite.xml" value="0.2463768115942029" />
         <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_spare_part.xml" value="0.12360688956433637" />
         <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_display_equipment_rent.xml" value="0.12360688956433637" />
         <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_display_equipment_sell.xml" value="0.12360688956433637" />

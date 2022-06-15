@@ -65,31 +65,12 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             recyclerViewRentEquipment.adapter = equipmentRentAdapter
             recyclerViewRentEquipment.hasFixedSize()
             recyclerViewRentEquipment.layoutManager = LinearLayoutManager(requireContext())
-            searchRentEquipment.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
-             SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    equipmentRentAdapter.filter.filter(query)
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    equipmentRentAdapter.filter.filter(newText)
-                    return true
-                }
-            })
-            searchRentEquipment.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
-                binding.apply {
-                    noResultsImage.visibility = View.GONE
-                    noResultText.visibility = View.GONE
-                }
-                false
-            })
+            search()
         }
         binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
-        binding.swipeRefreshLayoutRent.setOnRefreshListener {
-            viewModel.fetchRentEquipments()
-        }
+        binding.swipeRefreshLayoutRent.setOnRefreshListener { viewModel.fetchRentEquipments() }
         fetchEquipmentRent()
+
         return binding.root
     }
 
@@ -184,5 +165,29 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     private fun updateData( data :ArrayList<Product>){
         equipmentRentAdapter.setEquipmentRentList(data)
     }
+    private fun search(){
+        binding.apply {
+            searchRentEquipment.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    equipmentRentAdapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    equipmentRentAdapter.filter.filter(newText)
+                    return true
+                }
+            })
+            searchRentEquipment.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            })
+        }
+    }
+
 
 }
