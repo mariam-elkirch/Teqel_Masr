@@ -1,7 +1,9 @@
 package com.example.teqelmasr.home
 
-import android.app.Activity
+
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -15,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.recreate
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
@@ -32,6 +35,7 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.teqelmasr.R
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.databinding.ActivityHomeBinding
 import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
 import com.example.teqelmasr.helper.Constants
@@ -39,6 +43,8 @@ import com.example.teqelmasr.helper.Constants
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class HomeActivity : AppCompatActivity() {
@@ -53,9 +59,12 @@ class HomeActivity : AppCompatActivity() {
 
 
         setSupportActionBar(binding.toolBar)
-
         val toggle = ActionBarDrawerToggle(
-            this, binding.drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            binding.drawerLayout,
+            binding.toolBar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -94,6 +103,35 @@ class HomeActivity : AppCompatActivity() {
         navigationDrawerView.setupWithNavController(navController)
 
         setupWithNavController(bottomNavigationView, navController)
+
+        navigationDrawerView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_logout -> {
+                    logOutUser()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun logOutUser() {
+
+        Firebase.auth.signOut()
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.log_out))
+        builder.setMessage(getString(R.string.sure_you_want_to_log_out))
+
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
+
+        builder.setNegativeButton(getString(R.string.no)) { _, _ ->
+        }
+
+        builder.show()
         if(!(intent.extras?.get(Constants.IS_SELLER) as Boolean)){
 
             bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
