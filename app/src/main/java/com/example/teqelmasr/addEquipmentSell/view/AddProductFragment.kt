@@ -32,9 +32,13 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.teqelmasr.R
+import com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragmentDirections
+import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentArgs
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.*
+import com.google.firebase.auth.FirebaseAuth
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,11 +58,13 @@ class AddEquipmentSellFragment : Fragment() {
     private lateinit var binding: FragmentAddEquipmentSellBinding
     private val pickImage = 100
     private var imageUri: Uri? = null
+    private val args by navArgs<AddEquipmentSellFragmentArgs>()
     lateinit var viewModel: AddProductViewModel
     var mytag : String = ""
      var myproductType : String =""
     var producttype: String = ""
     var myproductTypeEquipment : String =""
+    var locationFromMAp : String =""
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +88,15 @@ class AddEquipmentSellFragment : Fragment() {
         val spinner = binding.spinner
          val spinnerspare = binding.spinnerSpare
         val spinnerEquipment = binding.spinnerEquipment
+        binding.myLocation.setOnClickListener {
+            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment()
+            binding.root.findNavController().navigate(action)
+        }
+        if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals("")){
+            locationFromMAp = args.mylocation!!
 
-
+        }
+        binding.myLocation.setText(locationFromMAp)
       spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                // binding.spinnerSpare.visibility = GONE
@@ -199,7 +212,7 @@ class AddEquipmentSellFragment : Fragment() {
                           saveProductObject()
                         dialog.dismiss()
                         Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
-                         val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment(null)
+                         val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
                          binding.root.findNavController().navigate(action)
 
                     }
@@ -243,9 +256,10 @@ class AddEquipmentSellFragment : Fragment() {
         Log.i("tag",doublePrice.toString()+ "Priceee")
         val img = Image(attachment = imageString, filename = "3.png")
         val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
-        val varian = listOf(
+       // if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals(""))
 
-            Variant(price = doublePrice)
+        val varian = listOf(//   args.mylocation
+            Variant(price = doublePrice , option1 = locationFromMAp , sku = binding.telphoneEditText.text.toString() )
         )
 
         if(mytag.equals("spare")){
@@ -257,7 +271,7 @@ class AddEquipmentSellFragment : Fragment() {
 
         var product = ProductPost(Product(title = binding.titleEditText.text.toString(), tags = mytag
             ,bodyHtml = binding.describtionEditText.text.toString(),productType = producttype ,images = imagelist, image = img
-            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian))
+            ,templateSuffix = binding.manfactoryEditText.text.toString(), variants = varian, vendor = FirebaseAuth.getInstance().currentUser?.uid.toString()))
 
 
         Log.i("Tag", "Imgggggggg"+binding.titleEditText.text.toString())
@@ -270,6 +284,13 @@ class AddEquipmentSellFragment : Fragment() {
             binding.titleEditText.setError( "title is required!" )
 
             binding.titleEditText.setHint("please enter title")
+
+        }
+        if(binding.telphoneEditText.getText().toString().trim().equals("")){
+            binding.telphoneEditText.setError( "Telephone is required!" )
+
+            binding.telphoneEditText.setHint("please enter Telephone")
+
 
         }
         if( binding.describtionEditText.getText().toString().trim().equals(""))
@@ -306,8 +327,8 @@ class AddEquipmentSellFragment : Fragment() {
       if((binding.manfactoryEditText.getText().toString().trim().equals(""))
           || binding.priceEditText.getText().toString().trim().equals("")
           || binding.describtionEditText.getText().toString().trim().equals("")
-          || binding.titleEditText.getText().toString().trim().equals(""))
-
+          || binding.titleEditText.getText().toString().trim().equals("")
+          || binding.telphoneEditText.getText().toString().trim().equals(""))
                     return false
         else{
             return true

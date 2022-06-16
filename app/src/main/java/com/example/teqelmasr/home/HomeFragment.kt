@@ -1,42 +1,66 @@
 package com.example.teqelmasr.home
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
+import com.example.teqelmasr.authentication.login.LoginActivity
+import com.example.teqelmasr.authentication.register.view.RegistrationActivity
+
 import com.example.teqelmasr.databinding.FragmentHomeBinding
+import com.example.teqelmasr.helper.Constants
+
+import com.example.teqelmasr.model.Product
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.admanager.AdManagerAdView
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
+    private lateinit var sharedPref: SharedPreferences
 
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-     // binding = FragmentHomeBinding.inflate(inflater, container, false)
+        sharedPref = requireContext().getSharedPreferences(
+            "MyPref",
+            AppCompatActivity.MODE_PRIVATE
+        )
 
-        return  binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MobileAds.initialize(
+            requireContext()
+        )
+        loadBannerAd()
         binding.equipmentSellBtn.setOnClickListener {
-           // binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
+            // binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDisplayEquipmentSellFragment(null)
             findNavController().navigate(action)
         }
         binding.equipmentRentBtn.setOnClickListener {
-       //     binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentRentFragment)
-            val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDisplayEquipmentRentFragment(
-                null
-            )
-          findNavController().navigate(action)
+            //     binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentRentFragment)
+            val action: NavDirections =
+                HomeFragmentDirections.actionHomeFragmentToDisplayEquipmentRentFragment(
+                    null
+                )
+            findNavController().navigate(action)
         }
         binding.SpareBtn.setOnClickListener {
             val action =
@@ -45,13 +69,47 @@ class HomeFragment : Fragment() {
 
         }
         binding.sellertn.setOnClickListener {
-            val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDisplaySellerProductsFragment(null)
-            binding.root.findNavController().navigate(action)
-        }
-        binding.fab.setOnClickListener { view ->
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_addEquipmentSellFragment)
+
+            (sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)).let {
+                    when (it) {
+                        Constants.GUEST_TYPE -> Snackbar.make(
+                            binding.root,
+                            getString(R.string.have_to_login),
+                            Snackbar.LENGTH_INDEFINITE
+                        ).setAction(getString(R.string.login)) {
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        }.setDuration(6000).show()
+
+                        Constants.BUYER_TYPE -> Snackbar.make(
+                            binding.root,
+                            getString(R.string.have_to_seller),
+                            Snackbar.LENGTH_INDEFINITE
+                        ).setAction(getString(R.string.register)) {
+                            startActivity(
+                                Intent(
+                                    requireContext(),
+                                    RegistrationActivity::class.java
+                                )
+                            )
+                        }.setDuration(6000).show()
+
+                        Constants.SELLER_TYPE ->
+                            binding.root.findNavController().navigate(
+                                HomeFragmentDirections.actionHomeFragmentToAddEquipmentSellFragment(
+                                    null
+                                )
+                            )
+                    }
+                }
         }
 
     }
 
+    private fun loadBannerAd() {
+        /* val customAdSize = AdSize(250, 250)
+         val adView = AdManagerAdView(requireContext())
+         adView.setAdSizes(customAdSize)*/
+        val adRequest = AdRequest.Builder().build()
+        binding.adView?.loadAd(adRequest)
+    }
 }

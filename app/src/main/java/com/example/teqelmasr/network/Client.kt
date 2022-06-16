@@ -4,9 +4,7 @@ package com.example.teqelmasr.network
 import FavProducts
 import FavouriteProduct
 import android.util.Log
-import com.example.teqelmasr.model.Customer
-import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductItem
+import com.example.teqelmasr.model.*
 
 
 import com.example.teqelmasr.model.ProductPost
@@ -60,6 +58,13 @@ class Client : RemoteSource {
         val service = ApiManager.getInstance().create(WebService::class.java)
         val res = service.postCustomer(customer)
 
+    }
+
+    override suspend fun getCustomer(): Response<CustomerItem> = productsService.GetCustomer()
+
+    override suspend fun getCustomers(): Response<CustomersResponse> {
+        val service = ApiManager.getInstance().create(WebService::class.java)
+        return service.getCustomers()
     }
 
     override suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct> {

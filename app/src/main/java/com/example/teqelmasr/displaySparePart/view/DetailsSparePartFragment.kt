@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
@@ -24,6 +25,9 @@ class DetailsSparePartFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding.apply {
+            backButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
             titleTxt.text = args.product.title
             priceTxt.text = args.product.variants?.get(0)?.price.toString()
             categoryTxt.text = args.product.tags
@@ -42,10 +46,7 @@ class DetailsSparePartFragment : Fragment() {
                     clicked = false
                 }
             }
-
-
         }
-
         return binding.root
     }
 

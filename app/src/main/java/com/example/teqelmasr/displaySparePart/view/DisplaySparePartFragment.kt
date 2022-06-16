@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -55,10 +56,11 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.i("DisplaySparePartFragment", "onCreateView: ")
-        Log.i("ARGS start", args.filterValues?.priceStart.toString())
-        Log.i("ARGS end", args.filterValues?.priceEnd.toString())
-        Log.i("ARGS", " Types list args size ${args.filterValues?.types?.size}")
+
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
         setUpUI()
 
         fetchSpareParts()

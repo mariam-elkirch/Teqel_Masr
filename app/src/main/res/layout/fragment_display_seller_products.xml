@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".displaySellerProducts.view.DisplaySellerProductsFragment">
 
+
     <TextView
         android:id="@+id/no_products"
         android:text="@string/no_products"
@@ -78,7 +79,12 @@
             app:layout_constraintStart_toEndOf="@id/search_view"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_products_recycler"
         app:layout_constraintTop_toBottomOf="@id/search_view"
@@ -86,5 +92,6 @@
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

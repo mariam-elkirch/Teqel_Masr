@@ -1,6 +1,7 @@
 package com.example.teqelmasr.network
 
 
+import com.example.teqelmasr.model.*
 import FavProducts
 import FavouriteProduct
 import com.example.teqelmasr.model.Customer
@@ -26,6 +27,9 @@ interface RemoteSource {
     suspend fun updateProduct(product: ProductPost)
 
     suspend fun postCustomer(customer: Customer)
+
+    suspend fun getCustomers(): Response<CustomersResponse>
+    suspend fun getCustomer(): Response<CustomerItem>
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
     suspend fun deleteFavProduct(product: FavouriteProduct)
     suspend fun getFavProducts(): Response<FavProducts>

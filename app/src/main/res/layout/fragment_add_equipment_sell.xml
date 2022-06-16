@@ -97,13 +97,40 @@
         app:backgroundTint="@color/orange"
         android:hint="@string/describtion"
         android:inputType="textCapSentences|textMultiLine"
-        app:layout_constraintTop_toBottomOf="@+id/manfactory_editText"
+        app:layout_constraintTop_toBottomOf="@+id/telphone_editText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="40dp"
 
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         />
+
+        <TextView
+            android:id="@+id/myLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="20dp"
+            android:text="@string/location"
+            android:hint="@string/location"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/describtion_editText"
+         />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_location_on_24"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/describtion_editText"
+            app:layout_constraintEnd_toStartOf="@+id/myLocation"
+          />
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/manfactory_editText"
         android:layout_width="match_parent"
@@ -117,6 +144,22 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/telphone_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/orange"
+            android:hint="@string/Telephone"
+            android:maxLines="1"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@+id/manfactory_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,12 +167,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/describtion_editText"
+        app:layout_constraintTop_toBottomOf="@id/myLocation"
         android:paddingStart="70dp"
         android:paddingEnd="70dp"
         android:text="@string/save"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:background="@drawable/rounded_shape"
+        android:layout_marginBottom="10dp"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

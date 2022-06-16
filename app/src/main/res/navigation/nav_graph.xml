@@ -49,6 +49,13 @@
         <action
             android:id="@+id/action_addEquipmentSellFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="mylocation"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/displayEquipmentSellFragment"
@@ -118,11 +125,15 @@
             app:destination="@id/editSellerProductFragment" />
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_filtrationSheetFragment"
-            app:destination="@id/filtrationSheetFragment" />
+            app:destination="@id/filtrationSheetFragment">
+
+        </action>
         <argument
             android:name="filterObj"
             app:argType="com.example.teqelmasr.model.FilterObj"
+            android:defaultValue="@null"
             app:nullable="true" />
+
     </fragment>
     <fragment
         android:id="@+id/detailsSellerProductFragment"
@@ -186,7 +197,13 @@
 
         <action
             android:id="@+id/action_filtrationSheetFragment_to_displaySellerProductsFragment"
-            app:destination="@id/displaySellerProductsFragment"/>
+            app:destination="@id/displaySellerProductsFragment">
+            <argument
+                android:name="filterObj"
+                app:argType="com.example.teqelmasr.model.FilterObj"
+                app:nullable="true" />
+
+        </action>
     </dialog>
     <dialog
         android:id="@+id/sparePartsFilterBottomSheetFragment"
@@ -222,4 +239,39 @@
         android:name="com.example.teqelmasr.authentication.register.view.RegistrationActivity"
         android:label="activity_registeration"
         tools:layout="@layout/activity_registeration" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.teqelmasr.location.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.example.teqelmasr.market.view.MarketFragment"
+        android:label="MarketFragment" >
+        <action
+            android:id="@+id/action_marketFragment_to_detailsMarketFragment"
+            app:destination="@id/detailsMarketFragment" />
+        <action
+            android:id="@+id/action_marketFragment_to_detailsSparePartFragment2"
+            app:destination="@id/detailsSparePartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsMarketFragment"
+        android:name="com.example.teqelmasr.market.view.DetailsMarketFragment"
+        android:label="DetailsMarketFragment"
+        app:popUpTo="@+id/marketFragment"
+        >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.teqelmasr.profile.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
