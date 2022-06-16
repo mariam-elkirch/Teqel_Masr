@@ -59,7 +59,7 @@
             android:id="@+id/action_displayEquipmentSellFragment_to_detailsEquipmentSellFragment"
             app:destination="@id/detailsEquipmentSellFragment"
             app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment"
             app:destination="@id/equimentSellBottonSheetFrgment" />

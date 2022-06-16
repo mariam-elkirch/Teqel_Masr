@@ -1,18 +1,15 @@
 package com.example.teqelmasr.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
-import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentHomeBinding
-import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragmentDirections
-import com.example.teqelmasr.model.Product
 
 class HomeFragment : Fragment() {
 
