@@ -74,7 +74,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">User</string>
+    <string name="nav_header_title">Guest</string>
     <string name="nav_header_subtitle">user email</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="signin">sign in</string>

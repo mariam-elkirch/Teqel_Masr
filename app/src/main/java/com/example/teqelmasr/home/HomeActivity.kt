@@ -111,7 +111,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
 
         val navigationDrawerView = binding.navView
-        // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
 
         val navController: NavController = Navigation.findNavController(this, R.id.hostFragment)
 

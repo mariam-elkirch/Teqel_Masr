@@ -105,7 +105,8 @@ class LoginActivity : AppCompatActivity() {
                             viewModel.customer.observe(this) {
                                 if (!it.isNullOrEmpty()){
                                     editor.putString(Constants.USER_TYPE, it[0].note)
-                                    Log.i(TAG, "onCreate: user type is ${it[0].note}")
+                                    editor.putString(Constants.USER_NAME,it[0].first_name)
+                                    Log.i(TAG, "user name: ${it[0].first_name}")
                                     editor.apply()
 
                                 }else{
