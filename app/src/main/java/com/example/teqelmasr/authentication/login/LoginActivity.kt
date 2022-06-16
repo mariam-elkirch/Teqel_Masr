@@ -31,7 +31,6 @@ import java.util.*
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPreferences
-    private lateinit var dialog: Dialog
     private val TAG = "LoginActivity"
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private lateinit var auth: FirebaseAuth
@@ -66,8 +65,6 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        dialog = Dialog(this)
-        dialog.setContentView(R.layout.custom_progress)
 
         binding.loginBtn.setOnClickListener {
             loginUser()
@@ -144,6 +141,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun displayDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.custom_progress)
         CoroutineScope(Dispatchers.Main).launch {
             dialog.show()
             delay(3000)

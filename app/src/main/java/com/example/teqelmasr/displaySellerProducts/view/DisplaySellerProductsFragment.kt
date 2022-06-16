@@ -78,6 +78,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         if (products.isNullOrEmpty()) {
             noProducts.visibility = View.VISIBLE
+        }else{
+            noProducts.visibility = View.INVISIBLE
         }
 
 

@@ -25,6 +25,7 @@ import android.graphics.Bitmap.CompressFormat
 
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.view.View.*
 import android.widget.AdapterView
 import android.widget.ImageView
@@ -37,8 +38,13 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragmentDirections
 import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentArgs
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
+import com.example.teqelmasr.home.HomeActivity
 import com.example.teqelmasr.model.*
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -211,9 +217,10 @@ class AddEquipmentSellFragment : Fragment() {
                     ) { dialog, _ ->
                           saveProductObject()
                         dialog.dismiss()
-                        Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
+/*                        Toast.makeText(context, com.example.teqelmasr.R.string.save, Toast.LENGTH_SHORT).show()
                          val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
-                         binding.root.findNavController().navigate(action)
+                         binding.root.findNavController().navigate(action)*/
+                        displayDialog()
 
                     }
                     .setNegativeButton(com.example.teqelmasr.R.string.discard) { dialog, _ ->
@@ -334,6 +341,18 @@ class AddEquipmentSellFragment : Fragment() {
             return true
         }
 
+    }
+    private fun displayDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.custom_progress)
+        CoroutineScope(Dispatchers.Main).launch {
+            dialog.show()
+            delay(3000)
+            dialog.dismiss()
+            Toast.makeText(context, R.string.save, Toast.LENGTH_SHORT).show()
+            val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
+            binding.root.findNavController().navigate(action)
+        }
     }
     companion object {
         /**
