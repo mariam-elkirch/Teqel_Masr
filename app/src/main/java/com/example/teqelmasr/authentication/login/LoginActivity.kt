@@ -106,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(Constants.USER_TYPE, it[0].note)
                                     Log.i(TAG, "onCreate: user type is ${it[0].note}")
                                     editor.apply()
+
                                 }
                             }
                             Toast.makeText(
