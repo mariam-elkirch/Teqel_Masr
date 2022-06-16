@@ -154,6 +154,9 @@
         <argument
             android:name="product"
             app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsEquipmentRentFragment_to_displayEquipmentRentFragment"
+            app:destination="@id/displayEquipmentRentFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsEquipmentSellFragment"
