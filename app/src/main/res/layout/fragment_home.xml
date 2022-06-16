@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.25"
         android:layout_height="0dp"
+        android:layout_marginVertical="100dp"
         app:layout_constraintHeight_percent="0.2"
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
@@ -41,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Equipment"
+                android:text="@string/equipment"
                 android:textColor="#00477A"
                 android:paddingBottom="12dp"
                 android:layout_gravity="center"
@@ -72,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+
             >
         <ImageView
             android:layout_width="wrap_content"
@@ -90,7 +92,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rent"
+            android:text="@string/rent"
             android:textColor="#00477A"
             android:paddingBottom="12dp"
             android:layout_gravity="center"
@@ -135,7 +137,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Spare Parts"
+                android:text="@string/spare_parts"
                 android:paddingBottom="12dp"
                 android:textColor="#00477A"
                 android:layout_gravity="center"
@@ -150,10 +152,11 @@
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.92"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="18dp"
         android:backgroundTint="#E97000"
         android:text="@string/offer"
+       android:layout_marginVertical="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/equipmentRentBtn" />
@@ -162,10 +165,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/adView"
+
+        ads:layout_constraintTop_toBottomOf="@+id/sellertn"
         app:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
        ads:layout_constraintStart_toStartOf="parent"
-        ads:adSize="BANNER"
+        ads:adSize="LARGE_BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
 
@@ -179,6 +184,7 @@
         app:layout_constraintWidth_percent="0.13"
         android:layout_marginTop="15dp"
         android:src="@drawable/ic_logo_blue"
+        app:layout_constraintBottom_toTopOf="@+id/slogan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

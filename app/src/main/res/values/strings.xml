@@ -101,6 +101,9 @@
     <string name="seller_note">seller</string>
     <string name="buyer_note">buyer</string>
 
+    <string name="rent">Rent</string>
+    <string name="equipment">Equipment</string>
+
     <string-array name="type">
         <item>Equipment for Sell</item>
         <item>Equipment for Rent</item>

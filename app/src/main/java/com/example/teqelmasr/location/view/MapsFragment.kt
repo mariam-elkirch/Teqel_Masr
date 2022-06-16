@@ -53,7 +53,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     val mylong = MutableLiveData<String>()
-    var mylocation = MutableLiveData<LocationDetails>()
+    var mylocation = LocationDetails("","")
     var mylat= MutableLiveData<String>()
     var doublelong: Double = 0.0
     var doublelat: Double = 0.0
@@ -170,7 +170,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             editor.putString("longitude",it.longitude)
             editor.apply()
             editor.commit()
-          mylocation.value = LocationDetails(it.longitude,it.latitude)
+        //  mylocation = LocationDetails(it.longitude,it.latitude)
 
             Log.i("TAG",it.latitude+" mylat gps my long "+it.longitude)
         })
@@ -204,6 +204,10 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             doublelong = mylocation.value?.longitude?.toDouble() ?: 0.0
 
         })*/
+        val sharedlat= sharedPreferences.getString("latitude","31.205753")
+        val sharedlong= sharedPreferences.getString("longitude","29.924526")
+       // doublelat = mylocation.latitude.toDouble()
+       // doublelong = mylocation.longitude.toDouble()
         val sharedlat= sharedPreferences.getString("latitude","31.205753")
         val sharedlong= sharedPreferences.getString("longitude","29.924526")
         val doublelat: Double = sharedlat!!.toDouble()
