@@ -11,5 +11,21 @@ import kotlinx.coroutines.withContext
 
 class LoginViewModel(private val repo: RepositoryInterface): ViewModel() {
 
+    private var _customer: MutableLiveData<List<CustomerObj>> = MutableLiveData()
+    var customer: MutableLiveData<List<CustomerObj>> = _customer
 
-}
+    init {
+        getCustomer()
+    }
+    private fun getCustomer(){
+        viewModelScope.launch {
+            val customerResponse = repo.getCustomers()
+            withContext(Dispatchers.IO){
+                customer.postValue(customerResponse.body()!!.customers.filter { customerObj ->
+                    customerObj.last_name.equals(FirebaseAuth.getInstance().currentUser?.uid.toString())
+                })
+                }
+            }
+        }
+    }
+
