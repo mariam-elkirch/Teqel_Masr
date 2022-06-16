@@ -64,6 +64,7 @@ class AddEquipmentSellFragment : Fragment() {
      var myproductType : String =""
     var producttype: String = ""
     var myproductTypeEquipment : String =""
+    var locationFromMAp : String =""
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +92,11 @@ class AddEquipmentSellFragment : Fragment() {
             val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment()
             binding.root.findNavController().navigate(action)
         }
-        if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals(""))
-      binding.myLocation.setText(args.mylocation)
+        if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals("")){
+            locationFromMAp = args.mylocation!!
+
+        }
+        binding.myLocation.setText(locationFromMAp)
       spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                // binding.spinnerSpare.visibility = GONE
@@ -252,9 +256,10 @@ class AddEquipmentSellFragment : Fragment() {
         Log.i("tag",doublePrice.toString()+ "Priceee")
         val img = Image(attachment = imageString, filename = "3.png")
         val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png") )
-        val varian = listOf(
+       // if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals(""))
 
-            Variant(price = doublePrice)
+        val varian = listOf(//   args.mylocation
+            Variant(price = doublePrice , option1 = locationFromMAp)
         )
 
         if(mytag.equals("spare")){
