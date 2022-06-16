@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
@@ -56,6 +57,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         observeMyProducts()
 
+        handleRefresher()
 
         return binding.root
     }
@@ -67,6 +69,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
             fillData(it)
             Log.i(TAG, "SellerProduct: ${it?.size}")
             Log.i(TAG, "SellerProduct: ${FirebaseAuth.getInstance().currentUser?.uid}")
+            binding.refresher.isRefreshing = false
+
         }
     }
 
@@ -109,6 +113,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
 
     private fun setUpUI() = binding.apply {
+        refresher.isRefreshing = false
         noProducts.visibility = View.GONE
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
         myProductsRecycler.adapter = adapter
@@ -130,6 +135,14 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         })
 
+    }
+
+    private fun handleRefresher() = binding.refresher.apply {
+        setColorSchemeColors(resources.getColor(R.color.orange,null))
+        setOnRefreshListener {
+            isRefreshing = true
+            observeMyProducts()
+        }
     }
 
     override fun onDeleteClick(product: Product) {

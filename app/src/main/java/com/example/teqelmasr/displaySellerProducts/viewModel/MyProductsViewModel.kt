@@ -17,9 +17,9 @@ class MyProductsViewModel(private val repo: RepositoryInterface): ViewModel() {
     private var _myProducts: MutableLiveData<ArrayList<Product>?>? = MutableLiveData()
     var myProducts: MutableLiveData<ArrayList<Product>?>? = _myProducts
 
-    init {
+/*    init {
         getMyProducts()
-    }
+    }*/
     fun getMyProducts(){
         viewModelScope.launch {
             val myProductsRes = repo.getMyProducts()
