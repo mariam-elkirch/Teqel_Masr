@@ -3,45 +3,34 @@ package com.example.teqelmasr.home
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
-
-import androidx.core.app.ActivityCompat.recreate
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
-
-import androidx.navigation.ui.NavigationUI
-
-
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.authentication.login.LoginActivity
+import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
+import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.databinding.ActivityHomeBinding
-import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
 import com.example.teqelmasr.helper.Constants
-
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
+import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.network.Client
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -51,6 +40,22 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val TAG = "HomeActivity"
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var viewModel: LoginViewModel
+    private val factory by lazy {
+        LoginViewModelFactory(
+            Repository.getInstance(
+                Client.getInstance(),
+                this
+            )
+        )
+    }
+/*
+    override fun onResume() {
+        super.onResume()
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
+            sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
+        Log.i(TAG, "USER_NAME FROM SHARED PREF: ${sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)}")
+    }*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +64,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPref = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
 
 
@@ -110,8 +117,19 @@ class HomeActivity : AppCompatActivity() {
         val bottomNavigationView = binding.bottomNav
         bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
 
+        viewModel.customer.observe(this) {
+            if (!it.isNullOrEmpty()) {
+                binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
+                    it[0].first_name
+            } else {
+                Log.i(TAG, "onCreate: ELSE ")
+
+            }
+
+        }
+
         val navigationDrawerView = binding.navView
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
+
 
         val navController: NavController = Navigation.findNavController(this, R.id.hostFragment)
 
