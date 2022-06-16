@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
@@ -62,7 +63,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
 
     private fun observeMyProducts() {
-
+        viewModel.getMyProducts()
         viewModel.myProducts?.observe(viewLifecycleOwner) {
             fillData(it)
             Log.i(TAG, "SellerProduct: ${it?.size}")
@@ -130,6 +131,14 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         })
 
+    }
+
+    private fun handleRefresher() = binding.refresher.apply {
+        setColorSchemeColors(resources.getColor(R.color.orange,null))
+        setOnRefreshListener {
+            isRefreshing = true
+            observeMyProducts()
+        }
     }
 
     override fun onDeleteClick(product: Product) {
