@@ -100,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val editor: SharedPreferences.Editor = sharedPref.edit()
                             // Sign in success, update UI with the signed-in user's information
+                            viewModel.getCustomer()
                             Log.d(TAG, "signInWithEmail:success")
                             viewModel.customer.observe(this) {
                                 if (!it.isNullOrEmpty()){
@@ -107,7 +108,11 @@ class LoginActivity : AppCompatActivity() {
                                     Log.i(TAG, "onCreate: user type is ${it[0].note}")
                                     editor.apply()
 
+                                }else{
+                                    Log.i(TAG, "onCreate: ELSE ")
+
                                 }
+
                             }
                             Toast.makeText(
                                 baseContext,

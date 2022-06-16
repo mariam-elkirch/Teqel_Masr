@@ -1,18 +1,22 @@
 package com.example.teqelmasr.home
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
 import com.example.teqelmasr.authentication.login.LoginActivity
+import com.example.teqelmasr.authentication.register.view.RegistrationActivity
 
 import com.example.teqelmasr.databinding.FragmentHomeBinding
+import com.example.teqelmasr.helper.Constants
 
 import com.example.teqelmasr.model.Product
 import com.google.android.gms.ads.AdRequest
@@ -23,13 +27,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
+    private lateinit var sharedPref: SharedPreferences
 
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // binding = FragmentHomeBinding.inflate(inflater, container, false)
+        sharedPref = requireContext().getSharedPreferences(
+            "MyPref",
+            AppCompatActivity.MODE_PRIVATE
+        )
 
         return binding.root
     }
@@ -61,7 +69,9 @@ class HomeFragment : Fragment() {
 
         }
         binding.sellertn.setOnClickListener {
-            if (FirebaseAuth.getInstance().currentUser?.uid.isNullOrEmpty()) {
+/*            if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+                    .equals(Constants.SELLER_TYPE))
+            ) {
                 Snackbar.make(
                     binding.root,
                     getString(R.string.have_to_login),
@@ -69,21 +79,52 @@ class HomeFragment : Fragment() {
                 ).setAction(getString(R.string.login)) {
                     startActivity(Intent(requireContext(), LoginActivity::class.java))
                 }.setDuration(6000).show()
-
             } else {
                 val action: NavDirections =
                     HomeFragmentDirections.actionHomeFragmentToAddEquipmentSellFragment(null)
                 binding.root.findNavController().navigate(action)
-            }
+            }*/
 
+
+            (sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)).let {
+                    when (it) {
+                        Constants.GUEST_TYPE -> Snackbar.make(
+                            binding.root,
+                            getString(R.string.have_to_login),
+                            Snackbar.LENGTH_INDEFINITE
+                        ).setAction(getString(R.string.login)) {
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        }.setDuration(6000).show()
+
+                        Constants.BUYER_TYPE -> Snackbar.make(
+                            binding.root,
+                            getString(R.string.have_to_seller),
+                            Snackbar.LENGTH_INDEFINITE
+                        ).setAction(getString(R.string.register)) {
+                            startActivity(
+                                Intent(
+                                    requireContext(),
+                                    RegistrationActivity::class.java
+                                )
+                            )
+                        }.setDuration(6000).show()
+
+                        Constants.SELLER_TYPE ->
+                            binding.root.findNavController().navigate(
+                                HomeFragmentDirections.actionHomeFragmentToAddEquipmentSellFragment(
+                                    null
+                                )
+                            )
+                    }
+                }
         }
 
     }
 
     private fun loadBannerAd() {
-       /* val customAdSize = AdSize(250, 250)
-        val adView = AdManagerAdView(requireContext())
-        adView.setAdSizes(customAdSize)*/
+        /* val customAdSize = AdSize(250, 250)
+         val adView = AdManagerAdView(requireContext())
+         adView.setAdSizes(customAdSize)*/
         val adRequest = AdRequest.Builder().build()
         binding.adView?.loadAd(adRequest)
     }
