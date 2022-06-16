@@ -16,7 +16,9 @@ import com.example.teqelmasr.databinding.FragmentHomeBinding
 
 import com.example.teqelmasr.model.Product
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.admanager.AdManagerAdView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -79,7 +81,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadBannerAd() {
-
+       /* val customAdSize = AdSize(250, 250)
+        val adView = AdManagerAdView(requireContext())
+        adView.setAdSizes(customAdSize)*/
         val adRequest = AdRequest.Builder().build()
         binding.adView?.loadAd(adRequest)
     }
