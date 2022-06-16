@@ -75,9 +75,9 @@ class RegistrationActivity : AppCompatActivity() {
 
 
     private fun registerUser(isSeller: Boolean) {
-        val userName = binding.nameEdt.text.toString()
-        val email = binding.emailEdt.text.toString()
-        val password = binding.passEdt.text.toString()
+        val userName = binding.nameEdt.text.trim().toString()
+        val email = binding.emailEdt.text.trim().toString()
+        val password = binding.passEdt.text.trim().toString()
 
         when {
             TextUtils.isEmpty(userName) -> {
@@ -114,6 +114,7 @@ class RegistrationActivity : AppCompatActivity() {
 
                         }
                         val customer = Customer(customerObj)
+                        Log.i(TAG, "customernote: ${customerObj.note}")
                         viewModel.postCustomer(customer)
                         startActivity(Intent(this, LoginActivity::class.java))
                     } else {

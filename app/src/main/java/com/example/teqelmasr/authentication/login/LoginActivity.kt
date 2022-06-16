@@ -1,5 +1,6 @@
 package com.example.teqelmasr.authentication.login
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.teqelmasr.R
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.authentication.register.view.RegistrationActivity
@@ -20,11 +22,16 @@ import com.example.teqelmasr.network.Client
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPreferences
-
+    private lateinit var dialog: Dialog
     private val TAG = "LoginActivity"
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private lateinit var auth: FirebaseAuth
@@ -59,7 +66,8 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-
+        dialog = Dialog(this)
+        dialog.setContentView(R.layout.custom_progress)
 
         binding.loginBtn.setOnClickListener {
             loginUser()
@@ -101,26 +109,30 @@ class LoginActivity : AppCompatActivity() {
                             val editor: SharedPreferences.Editor = sharedPref.edit()
                             // Sign in success, update UI with the signed-in user's information
                             viewModel.getCustomer()
-                            Log.d(TAG, "signInWithEmail:success")
+                            Log.i(TAG, "signInWithEmail:success")
                             viewModel.customer.observe(this) {
                                 if (!it.isNullOrEmpty()){
                                     editor.putString(Constants.USER_TYPE, it[0].note)
-                                    Log.i(TAG, "onCreate: user type is ${it[0].note}")
+                                    Log.i(TAG, "usertypelogin ${it[0].note}")
                                     editor.apply()
 
                                 }else{
-                                    Log.i(TAG, "onCreate: ELSE ")
+                                    Log.i(TAG, "INOBSERVER: ELSE ")
 
                                 }
-
+                                editor.putString(Constants.USER_TYPE, it[0].note)
+                                //Log.i(TAG, "onCreate: user type is ${it[0].note}")
+                                editor.apply()
+                                Log.i(TAG, "INOBSERVER: ")
                             }
-                            Toast.makeText(
+/*                            Toast.makeText(
                                 baseContext,
                                 "Logged in Successfully.",
                                 Toast.LENGTH_SHORT
-                            ).show()
-                            val homeIntent = Intent(this, HomeActivity::class.java)
-                            startActivity(homeIntent)
+                            ).show()*/
+                            displayDialog()
+/*                            val homeIntent = Intent(this, HomeActivity::class.java)
+                            startActivity(homeIntent)*/
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -128,6 +140,20 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
             }
+        }
+    }
+
+    private fun displayDialog() {
+        CoroutineScope(Dispatchers.Main).launch {
+            dialog.show()
+            delay(3000)
+            dialog.dismiss()
+            Toast.makeText(
+                baseContext,
+                "Logged in Successfully.",
+                Toast.LENGTH_SHORT
+            ).show()
+            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
         }
     }
 
