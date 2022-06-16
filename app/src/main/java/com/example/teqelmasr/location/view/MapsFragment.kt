@@ -204,8 +204,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             doublelong = mylocation.value?.longitude?.toDouble() ?: 0.0
 
         })*/
-        val sharedlat= sharedPreferences.getString("latitude","31.205753")
-        val sharedlong= sharedPreferences.getString("longitude","29.924526")
+
        // doublelat = mylocation.latitude.toDouble()
        // doublelong = mylocation.longitude.toDouble()
         val sharedlat= sharedPreferences.getString("latitude","31.205753")
