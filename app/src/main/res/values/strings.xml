@@ -104,6 +104,7 @@
     <string name="rent">Rent</string>
     <string name="equipment">Equipment</string>
     <string name="have_to_seller">You have to register as a seller</string>
+    <string name="Telephone">Telephone</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

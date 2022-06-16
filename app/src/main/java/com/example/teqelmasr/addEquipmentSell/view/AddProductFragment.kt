@@ -259,7 +259,7 @@ class AddEquipmentSellFragment : Fragment() {
        // if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals(""))
 
         val varian = listOf(//   args.mylocation
-            Variant(price = doublePrice , option1 = locationFromMAp)
+            Variant(price = doublePrice , option1 = locationFromMAp , sku = binding.telphoneEditText.text.toString() )
         )
 
         if(mytag.equals("spare")){
@@ -284,6 +284,13 @@ class AddEquipmentSellFragment : Fragment() {
             binding.titleEditText.setError( "title is required!" )
 
             binding.titleEditText.setHint("please enter title")
+
+        }
+        if(binding.telphoneEditText.getText().toString().trim().equals("")){
+            binding.telphoneEditText.setError( "Telephone is required!" )
+
+            binding.telphoneEditText.setHint("please enter Telephone")
+
 
         }
         if( binding.describtionEditText.getText().toString().trim().equals(""))
@@ -320,8 +327,8 @@ class AddEquipmentSellFragment : Fragment() {
       if((binding.manfactoryEditText.getText().toString().trim().equals(""))
           || binding.priceEditText.getText().toString().trim().equals("")
           || binding.describtionEditText.getText().toString().trim().equals("")
-          || binding.titleEditText.getText().toString().trim().equals(""))
-
+          || binding.titleEditText.getText().toString().trim().equals("")
+          || binding.telphoneEditText.getText().toString().trim().equals(""))
                     return false
         else{
             return true
