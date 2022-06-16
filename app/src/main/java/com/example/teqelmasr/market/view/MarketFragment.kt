@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentMarketBinding
+import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragmentDirections
 import com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragmentDirections
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
 import com.example.teqelmasr.market.viewModel.MarketViewModel
@@ -64,6 +67,11 @@ class MarketFragment : Fragment(), OnProductClickListener {
         binding.recyclerViewAllProducts.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.refreshLayout.setOnRefreshListener {
             getAllProducts()
+        }
+        binding.filterButton.setOnClickListener {
+            val action: NavDirections =
+                MarketFragmentDirections.actionMarketFragmentToFiltrationSheetFragment()
+            findNavController().navigate(action)
         }
 
         getAllProducts()

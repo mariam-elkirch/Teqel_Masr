@@ -250,11 +250,11 @@
         android:name="com.example.teqelmasr.market.view.MarketFragment"
         android:label="MarketFragment" >
         <action
-            android:id="@+id/action_marketFragment_to_detailsMarketFragment"
-            app:destination="@id/detailsMarketFragment" />
-        <action
             android:id="@+id/action_marketFragment_to_detailsSparePartFragment2"
             app:destination="@id/detailsSparePartFragment" />
+        <action
+            android:id="@+id/action_marketFragment_to_filtrationSheetFragment"
+            app:destination="@id/filtrationSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsMarketFragment"
