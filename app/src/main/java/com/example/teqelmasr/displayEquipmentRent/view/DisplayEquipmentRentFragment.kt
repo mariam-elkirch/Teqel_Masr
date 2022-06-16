@@ -2,29 +2,25 @@ package com.example.teqelmasr.displayEquipmentRent.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
-import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
@@ -65,31 +61,12 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             recyclerViewRentEquipment.adapter = equipmentRentAdapter
             recyclerViewRentEquipment.hasFixedSize()
             recyclerViewRentEquipment.layoutManager = LinearLayoutManager(requireContext())
-            searchRentEquipment.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
-             SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    equipmentRentAdapter.filter.filter(query)
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    equipmentRentAdapter.filter.filter(newText)
-                    return true
-                }
-            })
-            searchRentEquipment.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
-                binding.apply {
-                    noResultsImage.visibility = View.GONE
-                    noResultText.visibility = View.GONE
-                }
-                false
-            })
+            search()
         }
         binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
-        binding.swipeRefreshLayoutRent.setOnRefreshListener {
-            viewModel.fetchRentEquipments()
-        }
+        binding.swipeRefreshLayoutRent.setOnRefreshListener { viewModel.fetchRentEquipments() }
         fetchEquipmentRent()
+
         return binding.root
     }
 
@@ -184,5 +161,29 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     private fun updateData( data :ArrayList<Product>){
         equipmentRentAdapter.setEquipmentRentList(data)
     }
+    private fun search(){
+        binding.apply {
+            searchRentEquipment.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    equipmentRentAdapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    equipmentRentAdapter.filter.filter(newText)
+                    return true
+                }
+            })
+            searchRentEquipment.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            })
+        }
+    }
+
 
 }
