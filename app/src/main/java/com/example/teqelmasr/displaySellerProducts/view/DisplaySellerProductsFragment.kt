@@ -57,6 +57,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         observeMyProducts()
 
+        handleRefresher()
 
         return binding.root
     }
@@ -68,6 +69,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
             fillData(it)
             Log.i(TAG, "SellerProduct: ${it?.size}")
             Log.i(TAG, "SellerProduct: ${FirebaseAuth.getInstance().currentUser?.uid}")
+            binding.refresher.isRefreshing = false
+
         }
     }
 
@@ -110,6 +113,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     }
 
     private fun setUpUI() = binding.apply {
+        refresher.isRefreshing = false
         noProducts.visibility = View.GONE
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
         myProductsRecycler.adapter = adapter
