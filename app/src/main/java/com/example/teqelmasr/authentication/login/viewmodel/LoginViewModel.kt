@@ -1,5 +1,7 @@
 package com.example.teqelmasr.authentication.login.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,16 +14,16 @@ import kotlinx.coroutines.withContext
 class LoginViewModel(private val repo: RepositoryInterface): ViewModel() {
 
     private var _customer: MutableLiveData<List<CustomerObj>> = MutableLiveData()
-    var customer: MutableLiveData<List<CustomerObj>> = _customer
+    var customer: LiveData<List<CustomerObj>> = _customer
 
     init {
         getCustomer()
     }
-    private fun getCustomer(){
+    fun getCustomer(){
         viewModelScope.launch {
             val customerResponse = repo.getCustomers()
             withContext(Dispatchers.IO){
-                customer.postValue(customerResponse.body()!!.customers.filter { customerObj ->
+                _customer.postValue(customerResponse.body()!!.customers.filter { customerObj ->
                     customerObj.last_name.equals(FirebaseAuth.getInstance().currentUser?.uid.toString())
                 })
                 }
