@@ -62,7 +62,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
 
     private fun observeMyProducts() {
-
+        viewModel.getMyProducts()
         viewModel.myProducts?.observe(viewLifecycleOwner) {
             fillData(it)
             Log.i(TAG, "SellerProduct: ${it?.size}")
