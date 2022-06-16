@@ -72,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
         getSupportActionBar()?.setHomeButtonEnabled(true)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
         /*  binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_logout -> {
