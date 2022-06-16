@@ -138,11 +138,11 @@ class HomeActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
-        if(!(intent.extras?.get(Constants.IS_SELLER) as Boolean)){
+       /* if(!(intent.extras?.get(Constants.IS_SELLER) as Boolean)){
 
             bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
 
-        }
+        }*/
     }
 
     private fun logOutUser() {
