@@ -115,6 +115,7 @@ class RegistrationActivity : AppCompatActivity() {
                         }
                         val customer = Customer(customerObj)
                         viewModel.postCustomer(customer)
+                        startActivity(Intent(this, LoginActivity::class.java))
                     } else {
                         Log.i(TAG, "registerUser: ${it.exception}")
                         it.exception?.message.let { message ->
