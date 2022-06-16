@@ -42,7 +42,7 @@ class MyProductsAdapter(private val context: Context, private val onBtnListener:
                     .setPositiveButton(
                         R.string.yes
                     ) { dialog, _ ->
-                        onBtnListener.onDeleteClick(currentItem)
+                        onBtnListener.onDeleteClick(currentItem, productList.size)
                         productList.removeAt(position)
                         notifyDataSetChanged()
                         dialog.dismiss()

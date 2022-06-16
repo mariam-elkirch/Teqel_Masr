@@ -347,7 +347,7 @@ class AddEquipmentSellFragment : Fragment() {
         dialog.setContentView(R.layout.custom_progress)
         CoroutineScope(Dispatchers.Main).launch {
             dialog.show()
-            delay(3000)
+            delay(3200)
             dialog.dismiss()
             Toast.makeText(context, R.string.save, Toast.LENGTH_SHORT).show()
             val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()

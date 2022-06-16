@@ -147,8 +147,12 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         }
     }
 
-    override fun onDeleteClick(product: Product) {
+    override fun onDeleteClick(product: Product,listSize: Int) {
+        Log.i(TAG, "onDeleteClick: $listSize")
         viewModel.deleteProduct(product)
+        if(listSize == 1){
+            binding.noProducts.visibility = View.VISIBLE
+        }
     }
 
     override fun onDetailsClick(product: Product) {
