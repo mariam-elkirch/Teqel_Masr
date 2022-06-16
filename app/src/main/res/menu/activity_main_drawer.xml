@@ -8,10 +8,7 @@
                 android:id="@+id/homeFragment"
                 android:icon="@drawable/ic_baseline_home_24"
                 android:title="@string/home"/>
-        <item
-            android:id="@+id/registerationActivity"
-            android:icon="@drawable/ic_baseline_all_out_24"
-            android:title="@string/signin"/>
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_all_out_24"

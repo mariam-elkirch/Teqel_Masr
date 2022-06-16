@@ -73,6 +73,11 @@ class HomeActivity : AppCompatActivity() {
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
+        binding.sininText.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+
+            startActivity(intent)
+        }
         /*  binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_logout -> {
