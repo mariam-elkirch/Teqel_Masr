@@ -69,22 +69,6 @@ class HomeFragment : Fragment() {
 
         }
         binding.sellertn.setOnClickListener {
-/*            if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
-                    .equals(Constants.SELLER_TYPE))
-            ) {
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.have_to_login),
-                    Snackbar.LENGTH_INDEFINITE
-                ).setAction(getString(R.string.login)) {
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
-                }.setDuration(6000).show()
-            } else {
-                val action: NavDirections =
-                    HomeFragmentDirections.actionHomeFragmentToAddEquipmentSellFragment(null)
-                binding.root.findNavController().navigate(action)
-            }*/
-
 
             (sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)).let {
                     when (it) {
