@@ -71,7 +71,10 @@ class AddEquipmentSellFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
+   override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("SOME_VALUE_KEY", binding.telphoneEditText.getText().toString())
+        super.onSaveInstanceState(outState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
