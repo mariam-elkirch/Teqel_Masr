@@ -80,7 +80,11 @@ class ProfileFragment : Fragment() {
                 )
                 val customer = Customer(customerObj)
                 viewModel.updateCustomer(customer)
-                Toast.makeText(requireContext(), getString(R.string.profile_updated), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.profile_updated),
+                    Toast.LENGTH_LONG
+                ).show()
                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
 
