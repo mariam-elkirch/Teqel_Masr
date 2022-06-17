@@ -121,13 +121,14 @@ class LoginActivity : AppCompatActivity() {
                                 }
 
                             }
-                            Toast.makeText(
+                          /*  Toast.makeText(
                                 baseContext,
                                 "Logged in Successfully.",
                                 Toast.LENGTH_SHORT
                             ).show()
                             val homeIntent = Intent(this, HomeActivity::class.java)
-                            startActivity(homeIntent)
+                            startActivity(homeIntent)*/
+                            displayDialog()
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)

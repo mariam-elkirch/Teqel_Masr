@@ -18,6 +18,7 @@ import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentProfileBinding
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModel
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
 import com.example.teqelmasr.model.Product

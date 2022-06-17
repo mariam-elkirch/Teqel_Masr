@@ -251,6 +251,8 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
                 var product = args.enteredProduct
                 Log.i("tag","price"+product?.price+"ffff")
                  product?.address = returnLocationToHome
+
+
                 Log.i("tag",returnLocationToHome+"latitudeeeeee"+product?.price+"ffff")
                 val action: NavDirections = MapsFragmentDirections.actionMapsFragmentToAddEquipmentSellFragment(product)
                 binding.root.findNavController().navigate(action)
