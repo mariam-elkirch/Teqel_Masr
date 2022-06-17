@@ -40,7 +40,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
     var equipmentList = ArrayList<Product>()
-    var equipmentListFilter = ArrayList<Product>()
+
     private val binding by lazy { FragmentDisplayEquipmentSellBinding.inflate(layoutInflater)  }
     private val args by navArgs<DisplayEquipmentSellFragmentArgs>()
     private val equipmentSellAdapter by lazy {
