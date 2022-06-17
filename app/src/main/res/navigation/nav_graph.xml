@@ -133,6 +133,9 @@
             app:argType="com.example.teqelmasr.model.FilterObj"
             android:defaultValue="@null"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment" />
 
     </fragment>
     <fragment

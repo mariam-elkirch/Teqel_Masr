@@ -83,6 +83,10 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         if (products.isNullOrEmpty()) {
             noProducts.visibility = View.VISIBLE
+            floatBtn.visibility = View.VISIBLE
+        } else {
+            noProducts.visibility = View.INVISIBLE
+            floatBtn.visibility = View.INVISIBLE
         }
 
 
@@ -91,11 +95,13 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
                 products?.filter {
                     it.variants?.get(0)?.price?.toInt() in args.filterObj!!.priceRange
                 } as ArrayList<Product>
-            if(!(args.filterObj!!.categories.isNullOrEmpty())){
-                productList = productList.filter { it.tags in args.filterObj!!.categories } as ArrayList<Product>
+            if (!(args.filterObj!!.categories.isNullOrEmpty())) {
+                productList =
+                    productList.filter { it.tags in args.filterObj!!.categories } as ArrayList<Product>
             }
-            if(!(args.filterObj!!.types.isNullOrEmpty())){
-                productList = productList.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
+            if (!(args.filterObj!!.types.isNullOrEmpty())) {
+                productList =
+                    productList.filter { it.productType in args.filterObj!!.types } as ArrayList<Product>
                 Log.i(TAG, "FILTER type condition: ${productList.size}")
 
             }
@@ -106,8 +112,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
 
-        }
-        else {
+        } else {
             productList = products ?: ArrayList<Product>()
             adapter.setData(products)
             shimmer.stopShimmer()
@@ -120,6 +125,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     private fun setUpUI() = binding.apply {
         refresher.isRefreshing = false
         noProducts.visibility = View.GONE
+        floatBtn.visibility = View.GONE
+
         myProductsRecycler.layoutManager = LinearLayoutManager(requireContext())
         myProductsRecycler.adapter = adapter
         filterIcon.setOnClickListener {
@@ -140,18 +147,30 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
         })
 
+        floatBtn.setOnClickListener {
+            val action: NavDirections = DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToAddEquipmentSellFragment(null)
+            findNavController().navigate(action)
+        }
+
     }
 
     private fun handleRefresher() = binding.refresher.apply {
-        setColorSchemeColors(resources.getColor(R.color.orange,null))
+        setColorSchemeColors(resources.getColor(R.color.orange, null))
         setOnRefreshListener {
             isRefreshing = true
             observeMyProducts()
         }
     }
 
-    override fun onDeleteClick(product: Product) {
+    override fun onDeleteClick(product: Product, listSize: Int) {
+        Log.i(TAG, "onDeleteClick: $listSize")
         viewModel.deleteProduct(product)
+        if (listSize == 1) {
+            binding.apply {
+                noProducts.visibility = View.VISIBLE
+                floatBtn.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onDetailsClick(product: Product) {

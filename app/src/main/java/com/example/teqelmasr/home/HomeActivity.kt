@@ -1,6 +1,5 @@
 package com.example.teqelmasr.home
 
-
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -9,6 +8,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -17,9 +17,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
+
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -28,6 +30,7 @@ import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.databinding.ActivityHomeBinding
+import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -129,7 +132,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val navigationDrawerView = binding.navView
-
+        // binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text = "This is my User"
 
         val navController: NavController = Navigation.findNavController(this, R.id.hostFragment)
 

@@ -16,9 +16,9 @@ class LoginViewModel(private val repo: RepositoryInterface): ViewModel() {
     private var _customer: MutableLiveData<List<CustomerObj>> = MutableLiveData()
     var customer: LiveData<List<CustomerObj>> = _customer
 
-    init {
+/*    init {
         getCustomer()
-    }
+    }*/
     fun getCustomer(){
         viewModelScope.launch {
             val customerResponse = repo.getCustomers()
