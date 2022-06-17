@@ -25,16 +25,20 @@ import android.graphics.Bitmap.CompressFormat
 
 
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.view.View.*
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.teqelmasr.R
 import com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragmentDirections
+import com.example.teqelmasr.displayEquipmentSell.view.EquimentSellBottonSheetFrgmentDirections
 import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentArgs
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.model.*
@@ -65,14 +69,17 @@ class AddEquipmentSellFragment : Fragment() {
     var producttype: String = ""
     var myproductTypeEquipment : String =""
     var locationFromMAp : String =""
+    lateinit var productToMap : AddEditProduct
     lateinit var addProductfactory:AddProductViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,18 +92,13 @@ class AddEquipmentSellFragment : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
+
+
+         putDataFromArgs()
         val spinner = binding.spinner
          val spinnerspare = binding.spinnerSpare
         val spinnerEquipment = binding.spinnerEquipment
-        binding.myLocation.setOnClickListener {
-            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment()
-            binding.root.findNavController().navigate(action)
-        }
-        if(!args.mylocation.isNullOrEmpty() && !args.mylocation.equals("")){
-            locationFromMAp = args.mylocation!!
 
-        }
-        binding.myLocation.setText(locationFromMAp)
       spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                // binding.spinnerSpare.visibility = GONE
@@ -119,6 +121,7 @@ class AddEquipmentSellFragment : Fragment() {
                     }
             }
             }
+
 
         }
 
@@ -186,6 +189,17 @@ class AddEquipmentSellFragment : Fragment() {
             }
 
         }
+
+       // Log.i("Tag", "To Map"+binding.titleEditText.getText().toString())
+
+        binding.myLocation.setOnClickListener {
+
+            fillEnteredDataToMap()
+            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment(productToMap)
+            binding.root.findNavController().navigate(action)
+        }
+        putDataFromArgs()
+
         addProductfactory = AddProductViewModelFactory(
             Repository.getInstance(
                 Client.getInstance(),
@@ -194,10 +208,7 @@ class AddEquipmentSellFragment : Fragment() {
         // ViewModelProvider(this,addProductfactory).get(AddProductViewModel::class.java)
         viewModel = ViewModelProvider(requireActivity(), addProductfactory)[AddProductViewModel::class.java]
         binding.saveButton.setOnClickListener {
-
-
              checkDataEnter()
-
 //decode
          /*   val imageBytes = Base64.decode(imageString, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
@@ -239,9 +250,104 @@ class AddEquipmentSellFragment : Fragment() {
             Log.i("tag",it.toString()+ "product")
         }
 
+
         return  binding.root
        // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
     }
+
+    private fun putDataFromArgs() {
+        if(!args.productFromMap?.address.isNullOrEmpty() && !args.productFromMap?.address.equals("")){
+            locationFromMAp = args.productFromMap?.address!!
+
+        }
+        binding.myLocation.setText(locationFromMAp)
+        if(args.productFromMap != null) {
+            binding.titleEditText.setText(args.productFromMap?.title)
+            binding.describtionEditText.setText(args.productFromMap?.describtion)
+            binding.manfactoryEditText.setText(args.productFromMap?.manfactory)
+            binding.priceEditText.setText(args.productFromMap?.price)
+            binding.telphoneEditText.setText(args.productFromMap?.telephone)
+            binding.productImg.setImageURI(args.productFromMap?.imageUri)
+            if(args.productFromMap?.Type.equals("equimentsell")) {
+                binding.spinner.setSelection(0)
+
+                setPositionEquipmentSpinner()
+
+            }
+            else if (args.productFromMap?.Type.equals("equimentrent")){
+                binding.spinner.setSelection(1)
+              setPositionEquipmentSpinner()
+            }
+            else {
+                binding.spinner.setSelection(2)
+                setPositionSparePartsSpinner()
+            }
+
+
+
+        }
+    }
+
+    private fun setPositionEquipmentSpinner() {
+        if(args.productFromMap?.category.equals("Coldplaners")){
+            binding.spinnerEquipment.setSelection(0)
+        }
+        else if(args.productFromMap?.category.equals("Compactors")){
+            binding.spinnerEquipment.setSelection(1)
+        }
+        else if(args.productFromMap?.category.equals("Excavators")){
+            binding.spinnerEquipment.setSelection(2)
+        }
+        else if(args.productFromMap?.category.equals("Dozers")){
+            binding.spinnerEquipment.setSelection(3)
+        }
+        else{
+            binding.spinnerEquipment.setSelection(4)
+        }
+    }
+    private fun setPositionSparePartsSpinner() {
+        if(args.productFromMap?.category.equals("Turbocharger")){
+            binding.spinnerSpare.setSelection(0)
+        }
+        else if(args.productFromMap?.category.equals("Filter")){
+            binding.spinnerSpare.setSelection(1)
+        }
+        else if(args.productFromMap?.category.equals("Accumulator")){
+            binding.spinnerSpare.setSelection(2)
+        }
+
+        else if(args.productFromMap?.category.equals("Valve")){
+            binding.spinnerSpare.setSelection(3)
+        }
+        else if(args.productFromMap?.category.equals("Hose")){
+            binding.spinnerSpare.setSelection(4)
+        }
+        else if(args.productFromMap?.category.equals("Miscellaneous")){
+            binding.spinnerSpare.setSelection(5)
+        }
+        else if(args.productFromMap?.category.equals("Hydraulic Components")){
+            binding.spinnerSpare.setSelection(6)
+        }
+        else{
+            binding.spinnerSpare.setSelection(7)
+        }
+    }
+    private fun fillEnteredDataToMap() {
+        if(mytag.equals("spare")){
+            producttype = myproductType
+        }
+        else{
+            producttype = myproductTypeEquipment
+        }
+        Log.i("Tag", "To Map"+binding.titleEditText.getText().toString())
+        productToMap = AddEditProduct(Type = mytag,category = producttype,
+            title = binding.titleEditText.text.toString(),
+            manfactory = binding.manfactoryEditText.text.toString(),
+            price = binding.priceEditText.text.toString(),telephone = binding.telphoneEditText.text.toString(),
+            imageUri = imageUri,describtion = binding.describtionEditText.text.toString())
+
+    }
+
     private fun saveProductObject() {
         val iv: ImageView = binding.productImg as ImageView
         val bitmap = iv.getDrawable().toBitmap()

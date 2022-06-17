@@ -53,8 +53,8 @@
             android:id="@+id/action_addEquipmentSellFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
         <argument
-            android:name="mylocation"
-            app:argType="string"
+            android:name="ProductFromMap"
+            app:argType="com.example.teqelmasr.model.AddEditProduct"
             app:nullable="true" />
     </fragment>
     <fragment
@@ -244,6 +244,10 @@
         <action
             android:id="@+id/action_mapsFragment_to_addEquipmentSellFragment"
             app:destination="@id/addEquipmentSellFragment" />
+        <argument
+            android:name="EnteredProduct"
+            app:argType="com.example.teqelmasr.model.AddEditProduct"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/marketFragment"
