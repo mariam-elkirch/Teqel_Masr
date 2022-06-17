@@ -16,15 +16,19 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.teqelmasr.R
+import com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragmentArgs
 import com.example.teqelmasr.databinding.FragmentAddEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentMapsBinding
+import com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragmentArgs
 import com.example.teqelmasr.home.HomeFragmentDirections
 import com.example.teqelmasr.model.LocationDetails
 import com.example.teqelmasr.model.Utilities
@@ -40,6 +44,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
 class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickListener , View.OnClickListener {
+    private val args by navArgs<MapsFragmentArgs>()
    private lateinit var  currentMarker: Marker
 
     private lateinit var returnLocationToHome: String
@@ -62,6 +67,9 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         binding = FragmentMapsBinding.inflate(inflater, container, false)
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -240,7 +248,13 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             }
             R.id.saveButton ->{
                 Log.i("tag",returnLocationToHome+"latitudeeeeee")
-                val action: NavDirections = MapsFragmentDirections.actionMapsFragmentToAddEquipmentSellFragment(returnLocationToHome)
+                var product = args.enteredProduct
+                Log.i("tag","price"+product?.price+"ffff")
+                 product?.address = returnLocationToHome
+
+
+                Log.i("tag",returnLocationToHome+"latitudeeeeee"+product?.price+"ffff")
+                val action: NavDirections = MapsFragmentDirections.actionMapsFragmentToAddEquipmentSellFragment(product)
                 binding.root.findNavController().navigate(action)
             }
         }

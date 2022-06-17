@@ -3,27 +3,43 @@ package com.example.teqelmasr.profile.view
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
+import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentProfileBinding
+import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModel
+import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
+import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import com.example.teqelmasr.profile.viewmodel.ProfileViewModel
 import com.example.teqelmasr.profile.viewmodel.ProfileViewModelFactory
 import java.util.*
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [ProfileFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 class ProfileFragment : Fragment() {
+    var customerList = ArrayList<CustomerObj>()
 
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
     private val viewModel by lazy {
@@ -48,12 +64,11 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-
+    ): View? {
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         fetchCustomer()
-
-
         return binding.root
     }
 
@@ -98,6 +113,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun fetchCustomer() {
+
         viewModel.fetchCustomers()
 
 

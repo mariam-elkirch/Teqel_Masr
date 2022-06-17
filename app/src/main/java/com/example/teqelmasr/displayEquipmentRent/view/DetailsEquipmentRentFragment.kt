@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -47,6 +48,9 @@ class DetailsEquipmentRentFragment : Fragment() {
        getSavedFavorite()
         productID = args.product.variants?.get(0)?.product_id
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         setUI(view)
         viewModelFactory = DisplayRentEquipmentViewModelFactory(
             Repository.getInstance(Client.getInstance(),requireContext())

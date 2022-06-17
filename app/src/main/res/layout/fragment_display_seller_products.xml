@@ -94,4 +94,32 @@
         android:layout_height="0dp"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+<!--
+    <Button
+        android:id="@+id/offerBtn"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.92"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E97000"
+        android:text="@string/offer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="20dp"
+        app:maxImageSize="30dp"
+        android:src="@drawable/plus"
+        android:backgroundTint="@color/orange"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

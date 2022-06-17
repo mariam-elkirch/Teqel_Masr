@@ -2,6 +2,7 @@ package com.example.teqelmasr.editSellerProduct.view
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.wifi.WifiConfiguration.AuthAlgorithm.strings
@@ -14,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
@@ -21,11 +23,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
+import com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragmentDirections
 import com.example.teqelmasr.databinding.FragmentEditSellerProductBinding
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModel
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModelFactory
 import com.example.teqelmasr.model.*
 import com.example.teqelmasr.network.Client
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 class EditSellerProductFragment : Fragment() {
@@ -63,6 +70,11 @@ class EditSellerProductFragment : Fragment() {
 
     ): View? {
 
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
+
         equipmentArray = context?.resources?.getStringArray(R.array.equiments)
         spareArray = context?.resources?.getStringArray(R.array.spare)
         categoryArray = context?.resources?.getStringArray(R.array.type)
@@ -92,9 +104,9 @@ class EditSellerProductFragment : Fragment() {
                 pickImageFromGallery()
             }
 
-            saveTxt.setOnClickListener {
+            saveFloating.setOnClickListener {
                 if (!checkChanges()) {
-                    val builder = AlertDialog.Builder(context)
+   /*                 val builder = AlertDialog.Builder(context)
                     builder.setMessage(R.string.save_message)
                         .setPositiveButton(
                             R.string.save
@@ -102,19 +114,14 @@ class EditSellerProductFragment : Fragment() {
 
                             updateProductObject()
                             dialog.dismiss()
-                            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT)
-                                .show()
-                            val action: NavDirections =
-                                EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
-
-                                )
-                            binding.root.findNavController().navigate(action)
+                            displayDialog()
 
                         }
                         .setNegativeButton(R.string.discard) { dialog, _ ->
                             dialog.dismiss()
                         }
-                        .create().show()
+                        .create().show()*/
+                    displayDialog()
 
                 } else {
                     Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
@@ -267,7 +274,22 @@ class EditSellerProductFragment : Fragment() {
 
         }
     }
+    private fun displayDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.custom_progress)
+        CoroutineScope(Dispatchers.Main).launch {
+            dialog.show()
+            delay(2500)
+            dialog.dismiss()
+            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT)
+                .show()
+            val action: NavDirections =
+                EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
 
+                )
+            binding.root.findNavController().navigate(action)
+        }
+    }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

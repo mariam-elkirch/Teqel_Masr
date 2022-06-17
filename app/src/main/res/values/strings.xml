@@ -108,6 +108,7 @@
     <string name="have_to_seller">You have to register as a seller</string>
     <string name="Telephone">Telephone</string>
     <string name="profile_updated">Your Profile is updated</string>
+    <string name="please_wait">Please Wait</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
