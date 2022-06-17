@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.teqelmasr.model.CustomerItem
-import com.example.teqelmasr.model.CustomerObj
-import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.RepositoryInterface
+import com.example.teqelmasr.model.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +38,12 @@ class ProfileViewModel (private val repository: RepositoryInterface) : ViewModel
                     )
                 }
             }
+        }
+    }
+
+    fun updateCustomer(customer: Customer){
+        viewModelScope.launch(Dispatchers.IO) {
+           repository.updateCustomer(customer)
         }
     }
 }

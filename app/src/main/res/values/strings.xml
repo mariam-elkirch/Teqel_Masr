@@ -71,6 +71,8 @@
 
     <string name="register_seller">Register as a seller</string>
     <string name="logout">Logout</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="sure_to_edit_profile">Are you sure you want to edit your profile?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -105,6 +107,7 @@
     <string name="equipment">Equipment</string>
     <string name="have_to_seller">You have to register as a seller</string>
     <string name="Telephone">Telephone</string>
+    <string name="profile_updated">Your Profile is updated</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
