@@ -38,7 +38,9 @@
 
         <activity
             android:name=".home.HomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true">
