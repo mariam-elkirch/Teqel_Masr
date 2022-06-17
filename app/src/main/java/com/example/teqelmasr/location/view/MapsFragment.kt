@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -66,6 +67,9 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         binding = FragmentMapsBinding.inflate(inflater, container, false)
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?

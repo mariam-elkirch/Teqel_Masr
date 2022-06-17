@@ -10,33 +10,21 @@
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:id="@+id/avatarconstrain"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:background="@drawable/gradient"
-    android:layout_height="300dp">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="21dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/iconprofile" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:layout_width="140dp"
+           android:layout_height="140dp"
+           android:layout_gravity="center"
+           android:layout_marginTop="21dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           android:id="@+id/image"
+           app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+           android:src="@drawable/iconprofile" />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatarconstrain"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="0dp">
+
         <TextView
             app:layout_constraintStart_toStartOf="@id/name_edt"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image"
             android:id="@+id/name_label"
             android:textColor="#00477A"
             android:textSize="18sp"
@@ -51,12 +39,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name_label"
-            app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHeight_percent="0.07"
+             android:layout_marginStart="15dp"
+             android:layout_marginEnd="15dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edit_text_border"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="55dp"/>
         <TextView
             android:id="@+id/email_label"
             app:layout_constraintStart_toStartOf="@id/name_edt"
@@ -72,12 +62,15 @@
             android:id="@+id/email_edt"
             app:layout_constraintStart_toStartOf="@id/name_edt"
             app:layout_constraintEnd_toEndOf="@id/name_edt"
-            app:layout_constraintHeight_percent="0.07"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:background="@drawable/edit_text_border"
             app:layout_constraintTop_toBottomOf="@id/email_label"
             android:layout_marginTop="8dp"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="55dp"/>
         <TextView
             android:id="@+id/language_label"
             app:layout_constraintStart_toStartOf="@id/name_edt"
@@ -102,7 +95,7 @@
             android:entries="@array/language"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
-   </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
 <!--
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

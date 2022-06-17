@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -76,6 +77,9 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         savedInstanceState: Bundle?
 
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         binding.apply {
             recyclerViewSellEquipment.adapter = equipmentSellAdapter
             recyclerViewSellEquipment.hasFixedSize()

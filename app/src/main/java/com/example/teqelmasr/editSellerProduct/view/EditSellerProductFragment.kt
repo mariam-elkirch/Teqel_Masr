@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
@@ -62,6 +63,11 @@ class EditSellerProductFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ): View? {
+
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
 
         equipmentArray = context?.resources?.getStringArray(R.array.equiments)
         spareArray = context?.resources?.getStringArray(R.array.spare)
