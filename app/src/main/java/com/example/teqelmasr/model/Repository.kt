@@ -46,6 +46,10 @@ class Repository private constructor(
         return  remoteSource.getCustomer()
     }
 
+    override suspend fun updateCustomer(customer: Customer) {
+        remoteSource.updateCustomer(customer)
+    }
+
     override suspend fun getCustomers(): Response<CustomersResponse> {
         return remoteSource.getCustomers()
     }
