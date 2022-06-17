@@ -94,7 +94,7 @@ class AddEquipmentSellFragment : Fragment() {
         }
 
 
-         putDataFromArgs()
+         putOnEditTextDataFromArgs()
         val spinner = binding.spinner
          val spinnerspare = binding.spinnerSpare
         val spinnerEquipment = binding.spinnerEquipment
@@ -198,7 +198,7 @@ class AddEquipmentSellFragment : Fragment() {
             val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment(productToMap)
             binding.root.findNavController().navigate(action)
         }
-        putDataFromArgs()
+
 
         addProductfactory = AddProductViewModelFactory(
             Repository.getInstance(
@@ -255,7 +255,7 @@ class AddEquipmentSellFragment : Fragment() {
        // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
     }
 
-    private fun putDataFromArgs() {
+    private fun  putOnEditTextDataFromArgs() {
         if(!args.productFromMap?.address.isNullOrEmpty() && !args.productFromMap?.address.equals("")){
             locationFromMAp = args.productFromMap?.address!!
 
