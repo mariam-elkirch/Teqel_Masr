@@ -172,7 +172,11 @@
     <fragment
         android:id="@+id/detailsEquipmentSellFragment"
         android:name="com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragment"
-        android:label="DetailsEquipmentSellFragment" >
+        android:label="DetailsEquipmentSellFragment"
+        tools:layout="@layout/fragment_details_equipment_sell">
+        <action
+            android:id="@+id/action_detailsEquipmentSellFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
         <argument
             android:name="productsell"
             app:argType="com.example.teqelmasr.model.Product" />
@@ -281,5 +285,15 @@
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactInfoFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
+        android:label="fragment_contact_info"
+        tools:layout="@layout/fragment_contact_info" >
+        <argument
+            android:name="ContactObj"
+            app:argType="com.example.teqelmasr.model.ContactInfo"
+            app:nullable="true" />
     </fragment>
 </navigation>
