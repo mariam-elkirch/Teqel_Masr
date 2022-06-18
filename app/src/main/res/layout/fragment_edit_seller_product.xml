@@ -173,6 +173,25 @@
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3"/>
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:textColor="#00477A"
+                    android:text="@string/mobile"/>
+                <EditText
+                    android:id="@+id/mobile_edt"
+                    android:hint="@string/mobile"
+                    android:text="01210474680"
+                    android:textSize="20dp"
+                    android:textColor="#00477A"
+                    android:gravity="right"
+                    android:padding="12dp" />
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3"/>
         </TableLayout>
         <TextView
             app:layout_constraintTop_toBottomOf="@id/details_table"
@@ -199,6 +218,39 @@
             android:layout_width="match_parent"
             app:layout_constraintHeight_percent="0.2"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/address_label"
+            app:layout_constraintTop_toBottomOf="@id/product_desc"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="#E97000"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/address_edt"
+            app:layout_constraintTop_toBottomOf="@id/address_label"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="#00477A"
+            android:fontFamily="@font/noto_sans"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="90dp"
+            app:layout_constraintHeight_percent="0.2"
+            android:layout_height="wrap_content"/>
+        <ImageButton
+            android:id="@+id/edit_location"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:layout_constraintTop_toTopOf="@id/address_edt"
+            app:layout_constraintEnd_toEndOf="@id/address_edt"
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -211,10 +263,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="20dp"
         app:maxImageSize="30dp"
+        android:layout_marginBottom="20dp"
         app:backgroundTint="@color/orange"
         app:tint="@android:color/white"
         android:src="@drawable/ic_baseline_check_24"
-        android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.teqelmasr.favourite
+package com.example.teqelmasr.favourite.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

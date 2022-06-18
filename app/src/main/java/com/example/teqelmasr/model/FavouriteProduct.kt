@@ -21,17 +21,18 @@ data class DraftOrder (
     val noteAttributes: List<NoteAttribute>,
     @SerializedName( "line_items")
     val lineItems: List<LineItem>,
-    val customer: Customer? = null
+    @SerializedName( "customer")
+    val customer: favCustomer
 )
-data class Customer (
-    val id: Long? = null,
-    val email: String? = null,
-    val firstName: String? = null,
-    val lastName: String? = null,
-    val ordersCount: Long? = null,
-    val lastOrderID: Long? = null,
+data class favCustomer (
+    val id: Long? = null ,
+    val email: String? ,
+    val firstName: String? ,
+    val lastName: String? = null ,
+    val ordersCount: Long? = null ,
+    val lastOrderID: Long? = null ,
     val note: String? = null,
-    val phone: String? = null,
+    val phone: String? ,
     val tags: String? = null,
     val lastOrderName: String? = null,
     val currency: String? = null,

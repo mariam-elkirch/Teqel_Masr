@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.teqelmasr.favourite.FavouriteFragment"
+        android:name="com.example.teqelmasr.favourite.view.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" />
     <fragment
@@ -172,7 +172,11 @@
     <fragment
         android:id="@+id/detailsEquipmentSellFragment"
         android:name="com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragment"
-        android:label="DetailsEquipmentSellFragment" >
+        android:label="DetailsEquipmentSellFragment"
+        tools:layout="@layout/fragment_details_equipment_sell">
+        <action
+            android:id="@+id/action_detailsEquipmentSellFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
         <argument
             android:name="productsell"
             app:argType="com.example.teqelmasr.model.Product" />
@@ -188,6 +192,14 @@
         <action
             android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
+        <action
+            android:id="@+id/action_editSellerProductFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment">
+            <argument
+                android:name="currentProduct"
+                app:argType="com.example.teqelmasr.model.Product" />
+
+        </action>
     </fragment>
     <dialog
         android:id="@+id/filtrationSheetFragment"
@@ -251,6 +263,17 @@
             android:name="EnteredProduct"
             app:argType="com.example.teqelmasr.model.AddEditProduct"
             app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.teqelmasr.model.Product"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_mapsFragment_to_editSellerProductFragment"
+            app:destination="@id/editSellerProductFragment"/>
     </fragment>
     <fragment
         android:id="@+id/marketFragment"
@@ -281,5 +304,15 @@
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactInfoFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
+        android:label="fragment_contact_info"
+        tools:layout="@layout/fragment_contact_info" >
+        <argument
+            android:name="ContactObj"
+            app:argType="com.example.teqelmasr.model.ContactInfo"
+            app:nullable="true" />
     </fragment>
 </navigation>
