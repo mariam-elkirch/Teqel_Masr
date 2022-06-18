@@ -109,6 +109,7 @@
     <string name="addedToFav">The Product add to favorite successfully</string>
     <string name="deleteFromFav">The Product deleted from favorite successfully</string>
     <string name="signInFirst">Please Sign in first</string>
+    <string name="EquipmentRent">Equipment For Rent</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

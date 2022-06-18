@@ -84,7 +84,7 @@ class Client : RemoteSource {
         return  service.getFavProducts()
     }
 
-    override suspend fun getSpecificProduct(id: Long): Response<ProductItem> {
+    override suspend fun getSpecificProduct(id: Long): Response<OneProduct> {
         val service = ApiManager.getInstance().create(WebService::class.java)
         return  service.getSpecificProduct(id)   }
 }

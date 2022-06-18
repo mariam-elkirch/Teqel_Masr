@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.teqelmasr.model.OneProduct
+import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.RepositoryInterface
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -20,6 +22,9 @@ class AddToFavoriteViewModel (private val repository: RepositoryInterface) : Vie
    val user = Firebase.auth.currentUser
     private val favoriteListMutableLiveData :MutableLiveData<List<DraftOrder>> = MutableLiveData()
     val favListLiveData : LiveData<List<DraftOrder>> = favoriteListMutableLiveData
+    private val productDetailsMutableLiveData :MutableLiveData<OneProduct> = MutableLiveData()
+    val productDetailsLiveData : LiveData<OneProduct> = productDetailsMutableLiveData
+
     init {
         getFavProduct()
     }
@@ -42,14 +47,13 @@ class AddToFavoriteViewModel (private val repository: RepositoryInterface) : Vie
            }
        }
    }
-    fun getProductDetails() {
+    fun getProductDetails(id : Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getFavProducts()
+            val response = repository.getSpecificProduct(id)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-
-
-                    favoriteListMutableLiveData.postValue(response.body()?.draftOrders?.filter { favProduct -> favProduct.email.equals(user?.email) })
+                    productDetailsMutableLiveData.postValue(response.body())
+                    Log.i("TAG", "getProductDetails: ${response.body()}")
 
                 }else {
                     Log.e(

@@ -40,7 +40,11 @@
         android:id="@+id/favouriteFragment"
         android:name="com.example.teqelmasr.favourite.view.FavouriteFragment"
         android:label="fragment_favourite"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_detailsFavouriteFragment"
+            app:destination="@id/detailsFavouriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addEquipmentSellFragment"
         android:name="com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragment"
@@ -271,4 +275,19 @@
         android:name="com.example.teqelmasr.profile.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detailsFavouriteFragment"
+        android:name="com.example.teqelmasr.favourite.view.DetailsFavouriteFragment"
+        android:label="fragment_details_favourite"
+        tools:layout="@layout/fragment_details_favourite" >
+
+        <argument
+            android:name="productID"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment"
+            app:popUpTo="@id/favouriteFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
