@@ -134,8 +134,6 @@ class ProfileFragment : Fragment() {
 
         viewModel.fetchCustomers()
 
-
-
         viewModel.customerLiveData.observe(viewLifecycleOwner) { customer ->
             if (!customer.isNullOrEmpty()) {
                 binding.emailEdt.setText(customer[0].email.toString())

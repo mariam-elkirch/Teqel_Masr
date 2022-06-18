@@ -105,7 +105,7 @@
 
     <string name="rent">Rent</string>
     <string name="equipment">Equipment</string>
-    <string name="have_to_seller">You have to register as a seller</string>
+    <string name="have_to_seller">You have to change your account type to seller</string>
     <string name="Telephone">Telephone</string>
     <string name="noFavProduct">no favourite products</string>
     <string name="showcontactinfo">Show Contact Info</string>

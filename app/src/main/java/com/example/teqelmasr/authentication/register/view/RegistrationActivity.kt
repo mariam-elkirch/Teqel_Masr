@@ -1,5 +1,6 @@
 package com.example.teqelmasr.authentication.register.view
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.ColorSpace
@@ -15,6 +16,7 @@ import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewM
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModelFactory
 import com.example.teqelmasr.databinding.ActivityRegisterationBinding
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.home.HomeActivity
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
 import com.example.teqelmasr.model.Repository
@@ -27,6 +29,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class RegistrationActivity : AppCompatActivity() {
@@ -35,6 +41,7 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val REQ_ONE_TAP = 2
+    private lateinit var sharedPref: SharedPreferences
 
     private val factory by lazy {
         RegistrationViewModelFactory(
@@ -50,6 +57,7 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
+        sharedPref = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
 
         viewModel = ViewModelProvider(this, factory)[RegistrationViewModel::class.java]
 
@@ -101,22 +109,32 @@ class RegistrationActivity : AppCompatActivity() {
             else -> {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this, R.string.success_reg, Toast.LENGTH_SHORT).show()
+
+                        val editor: SharedPreferences.Editor = sharedPref.edit()
+
                         val customerObj = CustomerObj(
                             first_name = userName,
                             email = email,
                             last_name = FirebaseAuth.getInstance().currentUser!!.uid
                         )
+
                         if (isSeller) {
-                            customerObj.note = getString(R.string.seller_note)
+                            customerObj.note = Constants.SELLER_TYPE
+                            editor.putString(Constants.USER_TYPE, Constants.SELLER_TYPE)
+                            Log.i(TAG, "RegType: seller")
                         } else {
-                            customerObj.note = getString(R.string.buyer_note)
+                            customerObj.note = Constants.BUYER_TYPE
+                            editor.putString(Constants.USER_TYPE, Constants.BUYER_TYPE)
+                            Log.i(TAG, "RegType: buyer")
 
                         }
+                        editor.apply()
                         val customer = Customer(customerObj)
                         Log.i(TAG, "customernote: ${customerObj.note}")
                         viewModel.postCustomer(customer)
-                        startActivity(Intent(this, LoginActivity::class.java))
+
+                        displayDialog()
+
                     } else {
                         Log.i(TAG, "registerUser: ${it.exception}")
                         it.exception?.message.let { message ->
@@ -150,16 +168,21 @@ class RegistrationActivity : AppCompatActivity() {
             }
         }
 
-        //save User type into shared preferences
-
-/*        val sharedPref: SharedPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        val userType = when(isSeller){
-            true -> Constants.SELLER_TYPE
-            else -> {Constants.BUYER_TYPE}
+    }
+    private fun displayDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.custom_progress)
+        CoroutineScope(Dispatchers.Main).launch {
+            dialog.show()
+            delay(1500)
+            dialog.dismiss()
+            Toast.makeText(
+                baseContext,
+                "Registered in Successfully.",
+                Toast.LENGTH_SHORT
+            ).show()
+            startActivity(Intent(this@RegistrationActivity, HomeActivity::class.java))
         }
-        editor.putString(Constants.USER_TYPE, userType)
-        editor.apply()*/
     }
 
 
