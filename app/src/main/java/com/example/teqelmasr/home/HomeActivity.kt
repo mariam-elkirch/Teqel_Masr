@@ -37,6 +37,7 @@ import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFra
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -182,10 +183,11 @@ class HomeActivity : AppCompatActivity() {
         ) {
             bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
 
-        } else if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+        }
+        if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
                 .equals(Constants.GUEST_TYPE)){
+            Log.i(TAG, "onCreate: inside if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE) ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
             val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
-            //navigationView.setNavigationItemSelectedListener(this)
             val menu: Menu = navigationView.menu
             val logOut: MenuItem = menu.findItem(R.id.nav_logout)
             val profile: MenuItem = menu.findItem(R.id.profileFragment)
@@ -212,8 +214,8 @@ class HomeActivity : AppCompatActivity() {
             editor.putString(Constants.USER_TYPE, Constants.GUEST_TYPE)
             editor.apply()
 
-            val homeIntent = Intent(this, HomeActivity::class.java)
-            startActivity(homeIntent)
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
         }
 
         builder.setNegativeButton(getString(R.string.no)) { _, _ ->
