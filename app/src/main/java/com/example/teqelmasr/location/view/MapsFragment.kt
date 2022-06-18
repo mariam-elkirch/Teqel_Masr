@@ -267,17 +267,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             }
             R.id.saveButton -> {
                 Log.i("tag", returnLocationToHome + "latitudeeeeee")
-/*
-                var product = args.enteredProduct
-                Log.i("tag", "price" + product?.price + "ffff")
-                product?.address = returnLocationToHome
-*/
 
-
-                //Log.i("tag", returnLocationToHome + "latitudeeeeee" + product?.price + "ffff")
-                //val action: NavDirections =
-                    //MapsFragmentDirections.actionMapsFragmentToAddEquipmentSellFragment(product)
-                //binding.root.findNavController().navigate(action)
                 when (args.source) {
 
                     Constants.ADD_SOURCE -> {
