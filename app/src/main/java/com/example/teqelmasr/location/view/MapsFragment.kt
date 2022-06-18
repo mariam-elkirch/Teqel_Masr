@@ -29,6 +29,7 @@ import com.example.teqelmasr.databinding.FragmentAddEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentMapsBinding
 import com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragmentArgs
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.home.HomeFragmentDirections
 import com.example.teqelmasr.model.LocationDetails
 import com.example.teqelmasr.model.Utilities
@@ -43,23 +44,24 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
-class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickListener , View.OnClickListener {
+class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+    View.OnClickListener {
     private val args by navArgs<MapsFragmentArgs>()
-   private lateinit var  currentMarker: Marker
+    private lateinit var currentMarker: Marker
 
     private lateinit var returnLocationToHome: String
     private lateinit var mMap: GoogleMap
     private lateinit var binding: FragmentMapsBinding
     private lateinit var myLongitude: String
-    private  var myLat: String =""
+    private var myLat: String = ""
     private lateinit var type: String
-    private val LOCATION_PERMISSION_REQUEST_CODE: Int=200
+    private val LOCATION_PERMISSION_REQUEST_CODE: Int = 200
     lateinit var locationViewModel: LocationViewModel
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     val mylong = MutableLiveData<String>()
-    var mylocation = LocationDetails("","")
-    var mylat= MutableLiveData<String>()
+    var mylocation = LocationDetails("", "")
+    var mylat = MutableLiveData<String>()
     var doublelong: Double = 0.0
     var doublelat: Double = 0.0
     override fun onCreateView(
@@ -77,20 +79,23 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         mapFragment?.getMapAsync(this)
         //  mapFragment=
 
-        sharedPreferences = requireContext().getSharedPreferences("shared",
-            Context.MODE_PRIVATE)
-        editor =  sharedPreferences.edit()
+        sharedPreferences = requireContext().getSharedPreferences(
+            "shared",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences.edit()
 
         prepRequestLocationUpdates()
         binding.searchButton.setOnClickListener(this)
-        binding.saveButton.setOnClickListener (this)
+        binding.saveButton.setOnClickListener(this)
 
-        return  binding.root
+        return binding.root
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
         return p0.isInfoWindowShown
     }
+
     fun searchLocation(view: View) {
         currentMarker.remove()
         val geocoder = Geocoder(context)
@@ -119,6 +124,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         }
 
     }
+
     private fun markerDrag() {
 
         mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
@@ -126,6 +132,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             override fun onMarkerDragStart(marker: Marker) {
 
             }
+
             override fun onMarkerDragEnd(marker: Marker) {
                 Log.d("====", "latitude : " + marker.position.latitude)
 
@@ -142,59 +149,71 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
 
     private fun placeMarkerOnMap(location: LatLng) {
-       // currentMarker.remove()
+        // currentMarker.remove()
         val markerOptions = MarkerOptions().position(location)
         val titleStr = context?.let { Utilities.getAddress(location, context = it) }
         markerOptions.title(titleStr)
         markerOptions.draggable(true)
         Log.d("MActivity", " " + titleStr + " ")
-       binding.textLocation.setText(titleStr)
+        binding.textLocation.setText(titleStr)
 
         currentMarker = mMap.addMarker(markerOptions)!!
         returnLocationToHome = titleStr!!
-        myLat= location.latitude.toString()
-        myLongitude=location.longitude.toString()
+        myLat = location.latitude.toString()
+        myLongitude = location.longitude.toString()
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
         Log.i("TAG", " " + returnLocationToHome + " ")
 
     }
+
     private fun prepRequestLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             requestLocationUpdates()
         } else {
             val permissionRequest = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
         }
     }
-    private fun requestLocationUpdates() {
-        locationViewModel= ViewModelProvider(this).get(LocationViewModel::class.java)
-        locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            it.latitude
-            it.longitude
-            mylat.value=it.latitude
-            mylong.value=it.longitude
-            editor.putString("latitude",it.latitude)
-            editor.putString("longitude",it.longitude)
-            editor.apply()
-            editor.commit()
-        //  mylocation = LocationDetails(it.longitude,it.latitude)
 
-            Log.i("TAG",it.latitude+" mylat gps my long "+it.longitude)
-        })
+    private fun requestLocationUpdates() {
+        locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
+        locationViewModel.getLocationLiveData()
+            .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                it.latitude
+                it.longitude
+                mylat.value = it.latitude
+                mylong.value = it.longitude
+                editor.putString("latitude", it.latitude)
+                editor.putString("longitude", it.longitude)
+                editor.apply()
+                editor.commit()
+                //  mylocation = LocationDetails(it.longitude,it.latitude)
+
+                Log.i("TAG", it.latitude + " mylat gps my long " + it.longitude)
+            })
 
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        when(requestCode) {
+        when (requestCode) {
             LOCATION_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] ==  PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
                 } else {
-                    Toast.makeText(context, "Unable to update location without permission", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        "Unable to update location without permission",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
             else -> {
@@ -207,19 +226,19 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         mMap = googleMap
         mMap.getUiSettings().setZoomControlsEnabled(true)
         mMap.setOnMarkerClickListener(this)
-      /*  mylocation.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            doublelat = mylocation.value?.latitude?.toDouble() ?: 0.0
-            doublelong = mylocation.value?.longitude?.toDouble() ?: 0.0
+        /*  mylocation.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+              doublelat = mylocation.value?.latitude?.toDouble() ?: 0.0
+              doublelong = mylocation.value?.longitude?.toDouble() ?: 0.0
 
-        })*/
+          })*/
 
-       // doublelat = mylocation.latitude.toDouble()
-       // doublelong = mylocation.longitude.toDouble()
-        val sharedlat= sharedPreferences.getString("latitude","31.205753")
-        val sharedlong= sharedPreferences.getString("longitude","29.924526")
+        // doublelat = mylocation.latitude.toDouble()
+        // doublelong = mylocation.longitude.toDouble()
+        val sharedlat = sharedPreferences.getString("latitude", "31.205753")
+        val sharedlong = sharedPreferences.getString("longitude", "29.924526")
         val doublelat: Double = sharedlat!!.toDouble()
         val doublelong: Double = sharedlong!!.toDouble()
-        Log.i("tag", sharedlat+"shareddddd"+sharedlong)
+        Log.i("tag", sharedlat + "shareddddd" + sharedlong)
         val alex = LatLng(doublelat, doublelong)
         placeMarkerOnMap(alex)
         onLongClick()
@@ -227,12 +246,11 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         markerDrag()
 
 
-
     }
-    fun onLongClick(){
+
+    fun onLongClick() {
         //currentMarker.remove()
-        mMap.setOnMapLongClickListener {
-                latlng ->
+        mMap.setOnMapLongClickListener { latlng ->
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latlng))
             val getcoordinates = LatLng(latlng.latitude, latlng.longitude) //catch coordinates from
             currentMarker.remove()
@@ -240,22 +258,42 @@ class MapsFragment : Fragment() , OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             markerDrag()
         }
     }
+
     override fun onClick(v: View?) {
 
         when (v?.id) {
             R.id.searchButton -> {
                 searchLocation(v)
             }
-            R.id.saveButton ->{
-                Log.i("tag",returnLocationToHome+"latitudeeeeee")
-                var product = args.enteredProduct
-                Log.i("tag","price"+product?.price+"ffff")
-                 product?.address = returnLocationToHome
+            R.id.saveButton -> {
+                Log.i("tag", returnLocationToHome + "latitudeeeeee")
+
+                when (args.source) {
+
+                    Constants.ADD_SOURCE -> {
+                        var product = args.enteredProduct
+                        Log.i("tag", "price" + product?.price + "ffff")
+                        product?.address = returnLocationToHome
 
 
-                Log.i("tag",returnLocationToHome+"latitudeeeeee"+product?.price+"ffff")
-                val action: NavDirections = MapsFragmentDirections.actionMapsFragmentToAddEquipmentSellFragment(product)
-                binding.root.findNavController().navigate(action)
+                        val action: NavDirections =
+                            MapsFragmentDirections.actionMapsFragmentToAddEquipmentSellFragment(
+                                product
+                            )
+                        binding.root.findNavController().navigate(action)
+                    }
+                    Constants.EDIT_SOURCE -> {
+                        val product = args.currentProduct
+                        product?.variants?.get(0)?.option1 = returnLocationToHome
+                        val action: NavDirections =
+                            MapsFragmentDirections.actionMapsFragmentToEditSellerProductFragment(
+                                args.currentProduct!!
+                            )
+                        binding.root.findNavController().navigate(action)
+
+                    }
+                }
             }
         }
-    }}
+    }
+}
