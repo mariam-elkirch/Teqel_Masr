@@ -119,7 +119,7 @@ class HomeActivity : AppCompatActivity() {
         }
         val bottomNavigationView = binding.bottomNav
         bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
-
+        viewModel.getCustomer()
         viewModel.customer.observe(this) {
             if (!it.isNullOrEmpty()) {
                 binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
