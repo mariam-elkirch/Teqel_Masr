@@ -1,45 +1,40 @@
 package com.example.teqelmasr.profile.view
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.teqelmasr.R
-import com.example.teqelmasr.databinding.FragmentDisplayEquipmentSellBinding
 import com.example.teqelmasr.databinding.FragmentProfileBinding
-import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModel
-import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.home.HomeActivity
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
-import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import com.example.teqelmasr.profile.viewmodel.ProfileViewModel
 import com.example.teqelmasr.profile.viewmodel.ProfileViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    var customerList = ArrayList<CustomerObj>()
+
+    private lateinit var sharedPref: SharedPreferences
 
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
     private val viewModel by lazy {
@@ -65,6 +60,11 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        sharedPref = requireContext().getSharedPreferences("MyPref",
+            AppCompatActivity.MODE_PRIVATE
+        )
+
+
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
@@ -73,6 +73,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateCustomer(customerId: Long, customerName: String, customerType: String) {
+
+        val editor: SharedPreferences.Editor = sharedPref.edit()
 
 
         val id = binding.radioGroup.checkedRadioButtonId
@@ -93,10 +95,20 @@ class ProfileFragment : Fragment() {
                         .lowercase(Locale.getDefault()),
                     id = customerId
                 )
+                editor.putString(Constants.USER_TYPE,radioButton.text.toString().lowercase(Locale.getDefault()))
+                editor.apply()
+
                 val customer = Customer(customerObj)
                 viewModel.updateCustomer(customer)
-                Toast.makeText(requireContext(), getString(R.string.profile_updated), Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+                //displayWaitingDialog()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.profile_updated),
+                    Toast.LENGTH_LONG
+                ).show()
+                //findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+                startActivity(Intent(requireContext(), HomeActivity::class.java))
+
             }
 
             builder.setNegativeButton(getString(R.string.no)) { _, _ ->
@@ -106,6 +118,16 @@ class ProfileFragment : Fragment() {
         }
 
 
+    }
+
+    private fun displayWaitingDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.custom_progress)
+        CoroutineScope(Dispatchers.Main).launch {
+            dialog.show()
+            delay(3000)
+            dialog.dismiss()
+        }
     }
 
     private fun fetchCustomer() {

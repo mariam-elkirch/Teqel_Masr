@@ -52,8 +52,8 @@ class HomeActivity : AppCompatActivity() {
             )
         )
     }
-/*
-    override fun onResume() {
+
+   /* override fun onResume() {
         super.onResume()
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
             sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
@@ -63,6 +63,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.i(TAG, "onCreate: ")
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
