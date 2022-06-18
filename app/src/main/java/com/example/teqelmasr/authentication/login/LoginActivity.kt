@@ -121,13 +121,7 @@ class LoginActivity : AppCompatActivity() {
                                 }
 
                             }
-                          /*  Toast.makeText(
-                                baseContext,
-                                "Logged in Successfully.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            val homeIntent = Intent(this, HomeActivity::class.java)
-                            startActivity(homeIntent)*/
+
                             displayDialog()
                         } else {
                             // If sign in fails, display a message to the user.

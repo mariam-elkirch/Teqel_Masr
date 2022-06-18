@@ -188,6 +188,14 @@
         <action
             android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment" />
+        <action
+            android:id="@+id/action_editSellerProductFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment">
+            <argument
+                android:name="currentProduct"
+                app:argType="com.example.teqelmasr.model.Product" />
+
+        </action>
     </fragment>
     <dialog
         android:id="@+id/filtrationSheetFragment"
@@ -251,6 +259,17 @@
             android:name="EnteredProduct"
             app:argType="com.example.teqelmasr.model.AddEditProduct"
             app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.teqelmasr.model.Product"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_mapsFragment_to_editSellerProductFragment"
+            app:destination="@id/editSellerProductFragment"/>
     </fragment>
     <fragment
         android:id="@+id/marketFragment"

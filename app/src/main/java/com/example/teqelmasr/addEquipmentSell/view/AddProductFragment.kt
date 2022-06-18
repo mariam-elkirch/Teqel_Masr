@@ -43,6 +43,7 @@ import com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragm
 import com.example.teqelmasr.displayEquipmentSell.view.EquimentSellBottonSheetFrgmentDirections
 import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentArgs
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
@@ -204,7 +205,7 @@ class AddEquipmentSellFragment : Fragment() {
         binding.myLocation.setOnClickListener {
 
             fillEnteredDataToMap()
-            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment(productToMap)
+            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment(productToMap,Constants.ADD_SOURCE,null)
             binding.root.findNavController().navigate(action)
         }
 
