@@ -107,12 +107,6 @@
     <string name="equipment">Equipment</string>
     <string name="have_to_seller">You have to register as a seller</string>
     <string name="Telephone">Telephone</string>
-    <string name="profile_updated">Your Profile is updated</string>
-    <string name="please_wait">Please Wait</string>
-    <string name="showcontactinfo">Show Contact Info</string>
-    <string name="mobile">Mobile</string>
-    <string name="address">Address</string>
-    <string name="dummy_address">sidi bishr, alexandria, egypt</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

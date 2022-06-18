@@ -1,5 +1,5 @@
 package com.example.teqelmasr.displayEquipmentRent.view
-
+import android.widget.Toast
 import DraftOrder
 import FavouriteProduct
 import LineItem
@@ -21,11 +21,15 @@ import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
+import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
-
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import favCustomer
 
 class DetailsEquipmentRentFragment : Fragment() {
+    val user = Firebase.auth.currentUser
     private val args by navArgs<DetailsEquipmentRentFragmentArgs>()
     lateinit var viewModel : DisplayRentEquipmentViewModel
     private lateinit var viewModelFactory : DisplayRentEquipmentViewModelFactory
@@ -35,27 +39,33 @@ class DetailsEquipmentRentFragment : Fragment() {
     private var sharedPreferences: SharedPreferences? = null
     private var sharedProductIDs = mutableSetOf<String>()
     private var productID : Long? = 0
-    private var productIdSet = mutableSetOf<String>()
-    var editor:SharedPreferences.Editor? =null
+     var product : FavouriteProduct? = null
+  //  private var productIdSet = mutableSetOf<String>()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPreferences  = requireActivity().getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
+        viewModelFactory = DisplayRentEquipmentViewModelFactory(
+            Repository.getInstance(Client.getInstance(),requireContext())
+        )
+        viewModel = ViewModelProvider(requireActivity(),viewModelFactory)[DisplayRentEquipmentViewModel::class.java]
+viewModel.getFavProducts()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       getSavedFavorite()
+        if (user != null) {
+            Log.i("TAG", " User is signed in")
+        }else {
+            Log.i("TAG", " No user is signed in")
+        }
+        getSavedFavorite()
         productID = args.product.variants?.get(0)?.product_id
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         setUI(view)
-        viewModelFactory = DisplayRentEquipmentViewModelFactory(
-            Repository.getInstance(Client.getInstance(),requireContext())
-        )
-        viewModel = ViewModelProvider(requireActivity(),viewModelFactory)[DisplayRentEquipmentViewModel::class.java]
         getFavoriteProduct()
         return view
 
@@ -83,9 +93,11 @@ private fun setUI(view : View){
     var productImg = view.findViewById<ImageView>(R.id.image_item)
     Glide.with(activity?.baseContext!!).load(args.product.image?.src).centerCrop()
         .placeholder(R.drawable.placeholder).into(productImg)
+   if (user!=null){
     val image = listOf(NoteAttribute(name = "image",value = args.product.image?.src))
     val productInfo = listOf(LineItem(productID = args.product!!.variants?.get(0)!!.product_id!!,variant_id =args.product!!.variants?.get(0)!!.id!! ,taxable = false,title = args.product!!.title!!,1, args.product.variants?.get(0)?.price.toString()))
-    var product = FavouriteProduct(DraftOrder(email = "noor@gmail.com",note = "",noteAttributes = image,lineItems = productInfo ) )
+     product = FavouriteProduct(DraftOrder(user.email?:"unknown user",note = "",noteAttributes = image,lineItems = productInfo , customer = favCustomer(email = user.email, firstName =user.displayName,phone = user.phoneNumber)) )
+ }
     var favIcon = view?.findViewById<ImageView>(R.id.fav_icon)
     var addedToFavorite = view?.findViewById<ImageView>(R.id.favFill_icon)
     if (isFavorite){
@@ -96,19 +108,27 @@ private fun setUI(view : View){
         favIcon?.visibility = View.VISIBLE
     }
     favIcon?.setOnClickListener {
+         if (user!=null&&product!=null){
         favIcon.visibility = View.GONE
         addedToFavorite?.visibility = View.VISIBLE
-        viewModel.addToFavorite(product)
+        viewModel.addToFavorite(product!!)
         // the post response take into object
         viewModel.favouriteResponse.observe(requireActivity()) {
             favProduct = FavouriteProduct(it.draftOrder)
             saveFavorite(favProduct!!)
+            Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
+
+        }
+        } else{
+            Toast.makeText(activity, R.string.signInFirst, Toast.LENGTH_SHORT).show()
         }
     }
 
     addedToFavorite?.setOnClickListener {
         if (favProduct!=null) {
             viewModel.deleteFavProduct(favProduct!!)
+            Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
+
         }
         removeFromShared(productID.toString())
         addedToFavorite?.visibility = View.GONE
@@ -116,26 +136,31 @@ private fun setUI(view : View){
 
     }
 }
-private fun saveFavorite(product : FavouriteProduct){
-     editor = sharedPreferences!!.edit()
-    Log.i("TAG", "saveFavorite Before add: ${sharedProductIDs.size}")
-    sharedProductIDs.add(product.draftOrder.lineItems[0].productID.toString() )
-    Log.i("TAG", "saveFavorite after add: ${sharedProductIDs.size}")
-
-    editor?.putStringSet("favID",sharedProductIDs)
-    editor?.apply()
-    editor?.commit()
+private fun saveFavorite(product : FavouriteProduct?){
+    var editor:SharedPreferences.Editor = sharedPreferences!!.edit()
+    sharedProductIDs.add(product?.draftOrder!!.lineItems[0].productID.toString() )
+    editor.clear()
+    editor.putStringSet("favID",sharedProductIDs)
+   editor.apply()
+    editor.commit()
 }
 private fun getSavedFavorite() {
     productID = args.product.variants?.get(0)?.product_id
-    Log.i("TAG", "getSavedFavorite: hello ${sharedProductIDs.size}")
     sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
-    Log.i("TAG", "getSavedFavorite: ${sharedProductIDs.size}")
-    if (sharedProductIDs.isNotEmpty()){
+    if (sharedProductIDs.isNotEmpty()) {
         isFavorite = productID.toString() in sharedProductIDs
     }
+    if (sharedProductIDs.size == 0) {
+        viewModel.allFavListLiveData.observe(requireActivity()) {
+            for (fav in it) {
+                favProduct = FavouriteProduct(fav)
+                saveFavorite(favProduct ?: null)
+                getSavedFavorite()
+                setUI(requireView())
+            }
+        }
+    }
 }
-
     private fun removeFromShared(id : String) {
         sharedProductIDs.remove(id)
          sharedPreferences?.edit()?.clear()?.commit()
@@ -146,11 +171,9 @@ private fun getSavedFavorite() {
         viewModel.getFavProduct(productID!!)
         viewModel.favListLiveData.observe(requireActivity()) {
             if (viewModel.favListLiveData.value?.size != 0) {
-                Log.i("TAG", "onCreateView: yes iam fav item")
                 // take the response in object to send it to delete method
                 favProduct = FavouriteProduct(it[0])
             } else {
-                Log.i("TAG", "onCreateView:  iam not fav item")
             }
         }
     }

@@ -69,5 +69,9 @@ class Repository private constructor(
         return remoteSource.getFavProducts()
     }
 
+    override suspend fun getSpecificProduct(id: Long): Response<ProductItem> {
+        return remoteSource.getSpecificProduct(id)
+    }
+
 
 }

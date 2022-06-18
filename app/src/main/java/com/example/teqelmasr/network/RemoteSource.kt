@@ -13,6 +13,7 @@ import com.example.teqelmasr.model.Product
 
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.ProductPost
+import retrofit2.http.Path
 
 
 interface RemoteSource {
@@ -35,5 +36,5 @@ interface RemoteSource {
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
     suspend fun deleteFavProduct(product: FavouriteProduct)
     suspend fun getFavProducts(): Response<FavProducts>
-
+    suspend fun getSpecificProduct(id: Long): Response<ProductItem>
 }
