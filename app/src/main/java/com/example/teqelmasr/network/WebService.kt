@@ -113,5 +113,12 @@ interface WebService {
     )
     @GET("admin/draft_orders.json")
     suspend fun getFavProducts(): Response<FavProducts>
+
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("admin/products/products/{ProductID}.json")
+    suspend fun getSpecificProduct(@Path("ProductID") id: Long): Response<ProductItem>
 }
 

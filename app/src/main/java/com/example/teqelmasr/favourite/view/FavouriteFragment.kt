@@ -1,4 +1,4 @@
-package com.example.teqelmasr.favourite
+package com.example.teqelmasr.favourite.view
 
 import FavouriteProduct
 import android.os.Bundle
@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teqelmasr.databinding.FragmentFavouriteBinding
-import com.example.teqelmasr.displayEquipmentRent.view.DisplayRentEquipmentRecyclerAdapter
-import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
-import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
+import com.example.teqelmasr.favourite.FavouriteRecyclerAdapter
 import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModel
 import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModelFactory
 import com.example.teqelmasr.model.Repository
@@ -54,7 +52,13 @@ class FavouriteFragment : Fragment() {
     fun fetchAllFavProducts(){
         viewModel.getFavProduct()
         viewModel.favListLiveData.observe(viewLifecycleOwner){
-            favouriteAdapter.setFavouriteList(it)
+            if (viewModel.favListLiveData.value.isNullOrEmpty()){
+                binding.nofav.visibility = View.VISIBLE
+                favouriteAdapter.setFavouriteList(it)
+            }else {
+                favouriteAdapter.setFavouriteList(it)
+                binding.nofav.visibility = View.GONE
+            }
         }
     }
 

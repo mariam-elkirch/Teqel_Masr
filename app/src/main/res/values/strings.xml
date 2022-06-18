@@ -105,6 +105,10 @@
     <string name="equipment">Equipment</string>
     <string name="have_to_seller">You have to register as a seller</string>
     <string name="Telephone">Telephone</string>
+    <string name="noFavProduct">No favorite Product</string>
+    <string name="addedToFav">The Product add to favorite successfully</string>
+    <string name="deleteFromFav">The Product deleted from favorite successfully</string>
+    <string name="signInFirst">Please Sign in first</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

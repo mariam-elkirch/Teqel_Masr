@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.teqelmasr.favourite.FavouriteFragment"
+        android:name="com.example.teqelmasr.favourite.view.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" />
     <fragment
@@ -66,7 +66,7 @@
             android:id="@+id/action_displayEquipmentSellFragment_to_detailsEquipmentSellFragment"
             app:destination="@id/detailsEquipmentSellFragment"
             app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment"
             app:destination="@id/equimentSellBottonSheetFrgment" />
@@ -165,9 +165,6 @@
         <argument
             android:name="product"
             app:argType="com.example.teqelmasr.model.Product" />
-        <action
-            android:id="@+id/action_detailsEquipmentRentFragment_to_displayEquipmentRentFragment"
-            app:destination="@id/displayEquipmentRentFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsEquipmentSellFragment"
