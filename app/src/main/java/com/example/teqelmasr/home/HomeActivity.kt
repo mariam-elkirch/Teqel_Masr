@@ -181,6 +181,7 @@ class HomeActivity : AppCompatActivity() {
 
         }
         Log.i("TAG", "usertype: ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
+        Log.i(TAG, "usertype: ${Firebase.auth.currentUser?.uid}")
 
     }
 
@@ -193,6 +194,9 @@ class HomeActivity : AppCompatActivity() {
         builder.setMessage(getString(R.string.sure_you_want_to_log_out))
 
         builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            val editor = sharedPref.edit()
+            editor.putString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+            editor.apply()
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
         }
