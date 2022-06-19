@@ -8,6 +8,10 @@ object Constants {
     const val USER_NAME = "userName"
     const val LOGIN_FLAG = "loginFlag"
     const val IS_SELLER = "isSeller"
+    const val ADD_SOURCE = "add"
+
+    const val EDIT_SOURCE = "edit"
+
 
 
 

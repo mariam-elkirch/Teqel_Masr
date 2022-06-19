@@ -2,8 +2,10 @@ package com.example.teqelmasr.editSellerProduct.view
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.net.wifi.WifiConfiguration.AuthAlgorithm.strings
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
@@ -21,11 +24,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
+import com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragmentDirections
 import com.example.teqelmasr.databinding.FragmentEditSellerProductBinding
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModel
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModelFactory
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.*
 import com.example.teqelmasr.network.Client
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 class EditSellerProductFragment : Fragment() {
@@ -36,7 +45,7 @@ class EditSellerProductFragment : Fragment() {
     private val TAG = "EditSellerProductFragment"
     private lateinit var typeAdapter: ArrayAdapter<String>
     private lateinit var categoryAdapter: ArrayAdapter<String>
-
+    private lateinit var imageUri: Uri
     private var equipmentArray: Array<String>? = null
     private var spareArray: Array<String>? = null
     private var categoryArray: Array<String>? = null
@@ -63,6 +72,12 @@ class EditSellerProductFragment : Fragment() {
 
     ): View? {
 
+        Log.i(TAG, "ADDRESS: ${args.currentProduct.variants?.get(0)?.option1}")
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
+
         equipmentArray = context?.resources?.getStringArray(R.array.equiments)
         spareArray = context?.resources?.getStringArray(R.array.spare)
         categoryArray = context?.resources?.getStringArray(R.array.type)
@@ -81,6 +96,7 @@ class EditSellerProductFragment : Fragment() {
             productDesc.setText(args.currentProduct.bodyHtml)
             titleTxt.setText(args.currentProduct.title)
             priceTxt.setText(args.currentProduct.variants?.get(0)?.price.toString())
+            addressEdt.text = args.currentProduct.variants?.get(0)?.option1
 
             Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop()
                 .placeholder(
@@ -92,29 +108,46 @@ class EditSellerProductFragment : Fragment() {
                 pickImageFromGallery()
             }
 
-            saveTxt.setOnClickListener {
+            editLocation.setOnClickListener {
+
+                val iv: ImageView = binding.imageItem as ImageView
+                val bitmap = iv.getDrawable().toBitmap()
+                val bos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos)
+                val bb = bos.toByteArray()
+                var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
+                val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png"))
+                val img = Image(attachment = imageString, filename = "3.png")
+                val variant = Variant(
+                    price = binding.priceTxt.text.trim().toString()
+                        .toDouble(),
+                    id = args.currentProduct.variants?.get(0)?.id,
+                    product_id = args.currentProduct.variants?.get(0)?.product_id,
+                    option1 = args.currentProduct.variants?.get(0)?.option1
+                )
+                val optionsItem = OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
+                val optionsItems: List<OptionsItem> = listOf(optionsItem)
+                val variants: List<Variant> = listOf(variant)
+                val product = Product(
+                    title = binding.titleTxt.text.trim().toString(),
+                    bodyHtml = binding.productDesc.text.trim().toString(),
+                    variants = variants,
+                    tags = binding.categorySpinner.selectedItem.toString(),
+                    productType = binding.typeSpinner.selectedItem.toString(),
+                    images = imagelist,
+                    image = img,
+                    templateSuffix = binding.vendorTxt.text.trim().toString(),
+                    options = optionsItems
+
+                )
+                val action = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToMapsFragment(product, null,Constants.EDIT_SOURCE)
+                binding.root.findNavController().navigate(action)
+            }
+
+            saveFloating.setOnClickListener {
                 if (!checkChanges()) {
-                    val builder = AlertDialog.Builder(context)
-                    builder.setMessage(R.string.save_message)
-                        .setPositiveButton(
-                            R.string.save
-                        ) { dialog, _ ->
 
-                            updateProductObject()
-                            dialog.dismiss()
-                            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT)
-                                .show()
-                            val action: NavDirections =
-                                EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
-
-                                )
-                            binding.root.findNavController().navigate(action)
-
-                        }
-                        .setNegativeButton(R.string.discard) { dialog, _ ->
-                            dialog.dismiss()
-                        }
-                        .create().show()
+                    displayDialog()
 
                 } else {
                     Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
@@ -150,7 +183,8 @@ class EditSellerProductFragment : Fragment() {
             price = binding.priceTxt.text.trim().toString()
                 .toDouble(),
             id = args.currentProduct.variants?.get(0)?.id,
-            product_id = args.currentProduct.variants?.get(0)?.product_id
+            product_id = args.currentProduct.variants?.get(0)?.product_id,
+            option1 = args.currentProduct.variants?.get(0)?.option1
         )
         val optionsItem = OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
         val optionsItems: List<OptionsItem> = listOf(optionsItem)
@@ -267,14 +301,30 @@ class EditSellerProductFragment : Fragment() {
 
         }
     }
+    private fun displayDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.custom_progress)
+        CoroutineScope(Dispatchers.Main).launch {
+            dialog.show()
+            delay(2500)
+            dialog.dismiss()
+            Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT)
+                .show()
+            val action: NavDirections =
+                EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
 
+                )
+            binding.root.findNavController().navigate(action)
+        }
+    }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == IMAGE_REQ_CODE && resultCode == Activity.RESULT_OK) {
-            binding.imageItem.setImageURI(data?.data)
+        if (requestCode == IMAGE_REQ_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            imageUri = data.data!!
+            binding.imageItem.setImageURI(data.data)
         }
 
     }

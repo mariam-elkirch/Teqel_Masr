@@ -29,6 +29,8 @@ interface RemoteSource {
 
     suspend fun postCustomer(customer: Customer)
 
+    suspend fun updateCustomer(customer: Customer)
+
     suspend fun getCustomers(): Response<CustomersResponse>
     suspend fun getCustomer(): Response<CustomerItem>
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>

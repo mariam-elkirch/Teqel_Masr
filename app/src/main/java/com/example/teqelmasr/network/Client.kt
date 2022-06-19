@@ -60,6 +60,10 @@ class Client : RemoteSource {
 
     }
 
+    override suspend fun updateCustomer(customer: Customer) {
+        productsService.updateCustomer(customer.customer?.id!!,customer)
+    }
+
     override suspend fun getCustomer(): Response<CustomerItem> = productsService.GetCustomer()
 
     override suspend fun getCustomers(): Response<CustomersResponse> {

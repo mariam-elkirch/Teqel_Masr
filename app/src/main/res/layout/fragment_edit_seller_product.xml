@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editSellerProduct.view.EditSellerProductFragment">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +30,7 @@
             app:layout_constraintHeight_percent="0.4"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
-        <TextView
+       <!-- <TextView
             android:id="@+id/save_txt"
             android:text="@string/save"
             android:clickable="true"
@@ -38,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"/>-->
         <androidx.cardview.widget.CardView
             android:id="@+id/info_card"
             app:layout_constraintTop_toBottomOf="@id/image_item"
@@ -168,6 +173,25 @@
             <View
                 android:layout_height="1dp"
                 android:background="#D3D3D3"/>
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:textColor="#00477A"
+                    android:text="@string/mobile"/>
+                <EditText
+                    android:id="@+id/mobile_edt"
+                    android:hint="@string/mobile"
+                    android:text="01210474680"
+                    android:textSize="20dp"
+                    android:textColor="#00477A"
+                    android:gravity="right"
+                    android:padding="12dp" />
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#D3D3D3"/>
         </TableLayout>
         <TextView
             app:layout_constraintTop_toBottomOf="@id/details_table"
@@ -194,8 +218,55 @@
             android:layout_width="match_parent"
             app:layout_constraintHeight_percent="0.2"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/address_label"
+            app:layout_constraintTop_toBottomOf="@id/product_desc"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="#E97000"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/address_edt"
+            app:layout_constraintTop_toBottomOf="@id/address_label"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="#00477A"
+            android:fontFamily="@font/noto_sans"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="90dp"
+            app:layout_constraintHeight_percent="0.2"
+            android:layout_height="wrap_content"/>
+        <ImageButton
+            android:id="@+id/edit_location"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:layout_constraintTop_toTopOf="@id/address_edt"
+            app:layout_constraintEnd_toEndOf="@id/address_edt"
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/saveFloating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="20dp"
+        app:maxImageSize="30dp"
+        android:layout_marginBottom="20dp"
+        app:backgroundTint="@color/orange"
+        app:tint="@android:color/white"
+        android:src="@drawable/ic_baseline_check_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -39,7 +40,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
     var equipmentList = ArrayList<Product>()
-    var equipmentListFilter = ArrayList<Product>()
+
     private val binding by lazy { FragmentDisplayEquipmentSellBinding.inflate(layoutInflater)  }
     private val args by navArgs<DisplayEquipmentSellFragmentArgs>()
     private val equipmentSellAdapter by lazy {
@@ -76,6 +77,9 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         savedInstanceState: Bundle?
 
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         binding.apply {
             recyclerViewSellEquipment.adapter = equipmentSellAdapter
             recyclerViewSellEquipment.hasFixedSize()

@@ -44,28 +44,28 @@ data class ImagesItem(
 @Serializable
 
 data class Variant(
-	val barcode: String? =null,
-	@Contextual
+    val barcode: String? =null,
+    @Contextual
 	val compare_at_price: @RawValue Any? = null,
-	val created_at: String? =null,
-	val fulfillment_service: String? =null,
-	val grams: Int? = 0,
-	val id: Long? = 0,
-	val inventory_item_id: Long? = 0,
-	val inventory_management: String? = null,
-	val inventory_policy: String? = null,
-	val inventory_quantity: Int? = 0,
-	val option1: String? = null,
-	val position: Int? = 0,
-	val price: Double? = 0.0,
-	val product_id: Long? =0,
-	val requires_shipping: Boolean ? = true,
-	val sku: String? = null,
-	val taxable: Boolean? = true,
-	val title: String? = null,
-	val updated_at: String? = null,
-	val weight: Double? = 0.0,
-	val weight_unit: String? = null
+    val created_at: String? =null,
+    val fulfillment_service: String? =null,
+    val grams: Int? = 0,
+    val id: Long? = 0,
+    val inventory_item_id: Long? = 0,
+    val inventory_management: String? = null,
+    val inventory_policy: String? = null,
+    val inventory_quantity: Int? = 0,
+    var option1: String? = null,
+    val position: Int? = 0,
+    val price: Double? = 0.0,
+    val product_id: Long? =0,
+    val requires_shipping: Boolean ? = true,
+    val sku: String? = null,
+    val taxable: Boolean? = true,
+    val title: String? = null,
+    val updated_at: String? = null,
+    val weight: Double? = 0.0,
+    val weight_unit: String? = null
 ):Parcelable, java.io.Serializable
 
 @Parcelize

@@ -17,6 +17,8 @@ interface RepositoryInterface {
     suspend fun postCustomer(customer: Customer)
     suspend fun getCustomer(): Response<CustomerItem>
 
+    suspend fun updateCustomer(customer: Customer)
+
     suspend fun getCustomers(): Response<CustomersResponse>
 
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
