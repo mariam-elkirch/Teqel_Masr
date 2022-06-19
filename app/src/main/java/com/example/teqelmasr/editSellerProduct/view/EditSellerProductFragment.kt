@@ -83,14 +83,62 @@ class EditSellerProductFragment : Fragment() {
         categoryArray = context?.resources?.getStringArray(R.array.type)
 
         setUpUI()
+        setUpTypeSpinner()
+        setUpRadioGroup()
 
-        //setUpSpinners()
-        setSpinners()
         return binding.root
     }
 
-    private fun setSpinners() {
-        binding.categorySpinner.adapter = MySpinnerAdapter(requireContext(), R.layout.custom_spinner, categoryArray!!)
+    private fun setUpRadioGroup() {
+        binding.offerGroup.apply {
+            args.currentProduct.tags.let {
+                when(it){
+                    "equimentsell" -> binding.sellBtn.isChecked = true
+                    "equimentrent" -> binding.rentBtn.isChecked = true
+                    else -> {
+                        this.visibility = View.GONE
+                        binding.apply {
+                            offer.visibility = View.GONE
+                            view.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setUpTypeSpinner() {
+        args.currentProduct.tags.let {
+            binding.typeSpinner.apply {
+                when(it){
+                    "spare" -> {
+                        adapter = ArrayAdapter<String>(requireContext(),R.layout.support_simple_spinner_dropdown_item,spareArray!!)
+                        setSelection(
+                            when(args.currentProduct.productType){
+                                getString(R.string.turbocharger) -> 0
+                                getString(R.string.filter) -> 1
+                                getString(R.string.valve) -> 2
+                                getString(R.string.hose) -> 3
+                                getString(R.string.miscellaneous) -> 4
+                                getString(R.string.hydraulic_components) -> 5
+                                else -> {6}
+                            }
+                        )
+                    }else -> {
+                        adapter = ArrayAdapter<String>(requireContext(),R.layout.support_simple_spinner_dropdown_item,equipmentArray!!)
+                        setSelection(
+                            when(args.currentProduct.productType){
+                                getString(R.string.coldplaners) -> 0
+                                getString(R.string.compactors) -> 1
+                                getString(R.string.excavators) -> 2
+                                getString(R.string.dozers) -> 3
+                                else -> {4}
+                            }
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun setUpUI() {
@@ -101,7 +149,15 @@ class EditSellerProductFragment : Fragment() {
             titleTxt.setText(args.currentProduct.title)
             priceTxt.setText(args.currentProduct.variants?.get(0)?.price.toString())
             addressEdt.text = args.currentProduct.variants?.get(0)?.option1
-
+            categoryTxt.text = args.currentProduct.tags.let {
+                when (it) {
+                    "spare" -> getString(R.string.spare_parts)
+                    "equimentrent" -> getString(R.string.equipment_rent)
+                    else -> {
+                        getString(R.string.equipment_sell)
+                    }
+                }
+            }
             Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop()
                 .placeholder(
                     R.drawable.placeholder
@@ -129,14 +185,18 @@ class EditSellerProductFragment : Fragment() {
                     product_id = args.currentProduct.variants?.get(0)?.product_id,
                     option1 = args.currentProduct.variants?.get(0)?.option1
                 )
-                val optionsItem = OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
+                val optionsItem =
+                    OptionsItem(product_id = args.currentProduct.options?.get(0)?.product_id)
                 val optionsItems: List<OptionsItem> = listOf(optionsItem)
                 val variants: List<Variant> = listOf(variant)
                 val product = Product(
                     title = binding.titleTxt.text.trim().toString(),
                     bodyHtml = binding.productDesc.text.trim().toString(),
                     variants = variants,
-                    tags = binding.categorySpinner.selectedItem.toString(),
+                    tags = when(binding.sellBtn.isChecked){
+                              true -> "equimentsell"
+                        else -> {"equimentrent"}
+                    },
                     productType = binding.typeSpinner.selectedItem.toString(),
                     images = imagelist,
                     image = img,
@@ -144,11 +204,17 @@ class EditSellerProductFragment : Fragment() {
                     options = optionsItems
 
                 )
-                val action = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToMapsFragment(product, null,Constants.EDIT_SOURCE)
+                val action =
+                    EditSellerProductFragmentDirections.actionEditSellerProductFragmentToMapsFragment(
+                        product,
+                        null,
+                        Constants.EDIT_SOURCE
+                    )
                 binding.root.findNavController().navigate(action)
             }
 
             saveFloating.setOnClickListener {
+
                 if (!checkChanges()) {
                     updateProductObject()
                     displayDialog()
@@ -156,8 +222,6 @@ class EditSellerProductFragment : Fragment() {
                 } else {
                     Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
                 }
-
-
             }
         }
     }
@@ -167,7 +231,7 @@ class EditSellerProductFragment : Fragment() {
                 && args.currentProduct.variants?.get(0)?.price.toString() == binding.priceTxt.text.trim()
             .toString()
                 && args.currentProduct.bodyHtml.equals(binding.productDesc.text.trim().toString())
-                && args.currentProduct.tags?.equals(binding.categorySpinner.selectedItem.toString())!!
+                && checkTag()
                 && args.currentProduct.productType!! == binding.typeSpinner.selectedItem
                 && args.currentProduct.templateSuffix.equals(
             binding.vendorTxt.text.trim().toString()
@@ -197,8 +261,10 @@ class EditSellerProductFragment : Fragment() {
             title = binding.titleTxt.text.trim().toString(),
             bodyHtml = binding.productDesc.text.trim().toString(),
             variants = variants,
-            tags = binding.categorySpinner.selectedItem.toString(),
-            productType = binding.typeSpinner.selectedItem.toString(),
+            tags = when(binding.sellBtn.isChecked){
+                true -> "equimentsell"
+                else -> {"equimentrent"}
+            },            productType = binding.typeSpinner.selectedItem.toString(),
             images = imagelist,
             image = img,
             templateSuffix = binding.vendorTxt.text.trim().toString(),
@@ -206,94 +272,19 @@ class EditSellerProductFragment : Fragment() {
 
         )
         val productPost = ProductPost(product)
-
         //update product
         viewModel.updateProduct(productPost)
     }
+    private fun checkTag(): Boolean =
+        (args.currentProduct.tags.equals("equimentsell") && binding.sellBtn.isChecked
+                || args.currentProduct.tags.equals("equimentrent") && binding.rentBtn.isChecked)
+
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_REQ_CODE)
     }
-
-
-    private fun setUpSpinners() {
-        categoryAdapter = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            categoryArray!!
-        )
-        Log.i(TAG, "setUpSpinners: ${args.currentProduct.tags}")
-        typeAdapter = when (args.currentProduct.tags) {
-            "spare" -> ArrayAdapter<String>(
-                requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                spareArray!!
-            )
-            else -> {
-                ArrayAdapter<String>(
-                    requireContext(),
-                    android.R.layout.simple_spinner_dropdown_item,
-                    equipmentArray!!
-                )
-            }
-        }
-        binding.apply {
-            categorySpinner.adapter = categoryAdapter
-            typeSpinner.adapter = typeAdapter
-            categorySpinner.setSelection(
-                when (args.currentProduct.tags) {
-                    R.string.sell_equip_tag.toString() -> 0
-                    R.string.rent_equip_tag.toString() -> 1
-                    else -> {
-                        2
-                    }
-                }
-            )
-
-            /*categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
-                    typeAdapter = when (p0?.selectedItem.toString()) {
-                        "Equipment for Sell" -> ArrayAdapter<String>(
-                            requireContext(),
-                            android.R.layout.simple_spinner_item,
-                            equipmentArray!!
-                        )
-                        "Equipment for Rent" -> ArrayAdapter<String>(
-                            requireContext(),
-                            android.R.layout.simple_spinner_item,
-                            equipmentArray!!
-                        )
-                        "Spare Parts" -> ArrayAdapter<String>(
-                            requireContext(),
-                            android.R.layout.simple_spinner_item,
-                            spareArray!!
-                        )
-                        else -> {
-                            ArrayAdapter<String>(
-                                requireContext(),
-                                android.R.layout.simple_spinner_item,
-                                equipmentArray!!
-                            )
-                        }
-                    }
-
-                    typeSpinner.adapter = typeAdapter
-
-
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-
-                }
-
-            }
-*/
-        }
-    }
-
 
     private fun displayDialog() {
         val dialog = Dialog(requireContext())
@@ -304,10 +295,7 @@ class EditSellerProductFragment : Fragment() {
             dialog.dismiss()
             Toast.makeText(context, R.string.item_updated, Toast.LENGTH_SHORT)
                 .show()
-            val action: NavDirections =
-                EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment(
-
-                )
+            val action: NavDirections = EditSellerProductFragmentDirections.actionEditSellerProductFragmentToDisplaySellerProductsFragment()
             binding.root.findNavController().navigate(action)
         }
     }
@@ -322,6 +310,6 @@ class EditSellerProductFragment : Fragment() {
         }
 
     }
-
-
 }
+
+

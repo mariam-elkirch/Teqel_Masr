@@ -135,14 +135,20 @@
                     android:textSize="18sp"
                     android:textColor="#00477A"
                     android:text="@string/category"/>
-                <Spinner
-
+                <TextView
+                    android:id="@+id/category_txt"
+                    android:layout_column="1"
+                    android:padding="12dp"
+                    android:gravity="right"
+                    android:textSize="18sp"
+                    android:textColor="#00477A" />
+<!--                <Spinner
                     android:id="@+id/category_spinner"
                     android:textSize="18sp"
                     android:textColor="#00477A"
                     android:gravity="right"
                     android:dropDownWidth="wrap_content"
-                    android:padding="12dp" />
+                    android:padding="12dp" />-->
             </TableRow>
             <View
                 android:layout_height="1dp"
@@ -248,8 +254,6 @@
             android:textColor="#00477A"
             android:fontFamily="@font/noto_sans"
             android:layout_width="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="90dp"
             app:layout_constraintHeight_percent="0.2"
             android:layout_height="wrap_content"/>
         <ImageButton
@@ -260,7 +264,61 @@
             android:layout_marginEnd="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+            <View
+                android:id="@+id/view"
+                app:layout_constraintTop_toBottomOf="@id/address_edt"
+                android:layout_width="match_parent"
+                android:background="#D3D3D3"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="1dp"/>
+        <TextView
+            android:id="@+id/offer"
+            app:layout_constraintStart_toStartOf="@id/address_label"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            android:text="@string/offer_for"
+            android:textSize="20sp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="#E97000"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
+        <RadioGroup
+            android:id="@+id/offer_group"
+            app:layout_constraintTop_toBottomOf="@id/offer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/sell_btn"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sell"
+                android:textSize="18sp"
+                android:textColor="#00477A"
+                android:layout_marginStart="16dp"
+                android:buttonTint="@color/orange"/>
+
+            <RadioButton
+                android:id="@+id/rent_btn"
+                android:padding="5dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/rent"
+                android:textSize="18sp"
+                android:textColor="#00477A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/orange"/>
+
+        </RadioGroup>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
