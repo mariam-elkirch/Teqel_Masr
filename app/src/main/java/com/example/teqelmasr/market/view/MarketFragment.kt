@@ -182,7 +182,7 @@ class MarketFragment : Fragment(), OnProductClickListener {
     override fun onEmptyList(searchKey: String) {
         binding.apply {
             noResultsImage.visibility = View.VISIBLE
-            noResultText.text = "No Results for your search \"$searchKey\""
+            noResultText.text = "${getString(R.string.no_search_results)} \"$searchKey\""
             noResultText.visibility = View.VISIBLE
         }
     }

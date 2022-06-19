@@ -118,6 +118,7 @@
     <string name="profile_updated">Profile Updated</string>
     <string name="skip">Skip</string>
     <string name="switch_account">Switch Account</string>
+    <string name="no_search_results">No Results for your search</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
