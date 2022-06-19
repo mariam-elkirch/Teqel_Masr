@@ -5,6 +5,7 @@ import FavouriteProduct
 import LineItem
 import NoteAttribute
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -12,19 +13,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
+import com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragmentDirections
+import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.model.ContactInfo
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import favCustomer
@@ -92,6 +100,26 @@ private fun setUI(view : View){
     var productImg = view.findViewById<ImageView>(R.id.image_item)
     Glide.with(activity?.baseContext!!).load(args.product.image?.src).centerCrop()
         .placeholder(R.drawable.placeholder).into(productImg)
+    var show: Button = view.findViewById(R.id.showButton)
+    show.setOnClickListener{
+        if (user != null) {
+            Log.i("TAG", " User is signed in")
+            Log.i("tag",args.product.variants?.get(0)?.title.toString()+"args title")
+            var contact = ContactInfo(args.product.variants?.get(0)?.sku.toString(),args.product.variants?.get(0)?.title.toString())
+            val action = DetailsEquipmentRentFragmentDirections.actionDetailsEquipmentRentFragmentToContactInfoFragment(contact,
+                Constants.RENT_SOURCE)
+            view.findNavController().navigate(action)
+        }else {
+            Snackbar.make(
+                view,
+                getString(R.string.loginContactInfo),
+                Snackbar.LENGTH_INDEFINITE
+            ).setAction(getString(R.string.login)) {
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+            }.setDuration(6000).show()
+        }
+
+    }
    if (user!=null){
     val image = listOf(NoteAttribute(name = "image",value = args.product.image?.src))
     val productInfo = listOf(LineItem(productID = args.product!!.variants?.get(0)!!.product_id!!,variant_id =args.product!!.variants?.get(0)!!.id!! ,taxable = false,title = args.product!!.title!!,1, args.product.variants?.get(0)?.price.toString()))
