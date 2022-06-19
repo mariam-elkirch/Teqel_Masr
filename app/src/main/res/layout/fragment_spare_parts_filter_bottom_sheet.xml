@@ -24,10 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:stepSize="5"
+        android:stepSize="1000"
         android:value="20"
         android:valueFrom="0"
-        android:valueTo="1000"
+        android:valueTo="50000000"
         app:haloColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         app:thumbColor="@color/orange"
         app:trackColorActive="@color/dark_blue"
         app:trackColorInactive="@color/cardview_shadow_start_color"
-        app:values="@array/sliderValues" />
+        app:values="@array/spareSliderValues" />
 
     <View
         android:id="@+id/first_view"
@@ -284,18 +284,6 @@
         app:layout_constraintHeight_percent="0.1"
         >
     </Button>
-
-    <TextView
-        android:id="@+id/clear_all_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/clear_all"
-        android:textColor="@color/orange"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/filters_textView" />
 
     <TextView
         android:id="@+id/filters_textView"
