@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:padding="12dp"
+    android:layout_margin="8dp"
     android:layout_height="match_parent"
-    android:background="#F7F8F9">
+    android:background="@drawable/edit_text_border">
 
     <TextView
         android:id="@+id/value"
@@ -13,11 +15,10 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="3dp"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18dp" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/ic_filter"/>
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>
