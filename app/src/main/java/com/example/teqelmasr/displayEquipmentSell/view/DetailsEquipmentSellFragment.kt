@@ -202,7 +202,7 @@ class DetailsEquipmentSellFragment : Fragment() {
                 Log.i("TAG", "getFavoriteProduct: sorry iam not favorite ")
 
             }
-    //   setUI(requireView())
+    // setUI(requireView())
         }
     }
 }
