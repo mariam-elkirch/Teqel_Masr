@@ -19,6 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.slider.RangeSlider
+import java.text.NumberFormat
 
 
 class FiltrationSheetFragment() : BottomSheetDialogFragment() {
@@ -57,6 +58,12 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
             }
 
         })
+        binding.rangeSlider.setLabelFormatter { value: Float ->
+            val format = NumberFormat.getInstance()
+            format.maximumFractionDigits = 0
+
+            format.format(value.toDouble())
+        }
 
         binding.applyBtn.setOnClickListener {
             appendCategories()
