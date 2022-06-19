@@ -12,6 +12,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +37,7 @@ import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFra
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -52,8 +56,8 @@ class HomeActivity : AppCompatActivity() {
             )
         )
     }
-/*
-    override fun onResume() {
+
+   /* override fun onResume() {
         super.onResume()
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
             sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
@@ -63,6 +67,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.i(TAG, "onCreate: ")
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -118,8 +125,9 @@ class HomeActivity : AppCompatActivity() {
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
-        bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
-
+        //bottomNavigationView.itemActiveIndicatorColor = getColorStateList(R.color.primary_purple)
+        //bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
+        viewModel.getCustomer()
         viewModel.customer.observe(this) {
             if (!it.isNullOrEmpty()) {
                 binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
@@ -177,7 +185,20 @@ class HomeActivity : AppCompatActivity() {
             bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
 
         }
+        if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+                .equals(Constants.GUEST_TYPE)){
+            Log.i(TAG, "onCreate: inside if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE) ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
+            val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+            val menu: Menu = navigationView.menu
+            val logOut: MenuItem = menu.findItem(R.id.nav_logout)
+            val profile: MenuItem = menu.findItem(R.id.profileFragment)
+            logOut.isVisible = false
+            profile.isVisible = false
+        }
+
+
         Log.i("TAG", "usertype: ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
+        Log.i(TAG, "usertype: ${Firebase.auth.currentUser?.uid}")
 
     }
 
@@ -190,8 +211,13 @@ class HomeActivity : AppCompatActivity() {
         builder.setMessage(getString(R.string.sure_you_want_to_log_out))
 
         builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            val editor = sharedPref.edit()
+            editor.putString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+            editor.apply()
+
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
+            //rewan
         }
 
         builder.setNegativeButton(getString(R.string.no)) { _, _ ->

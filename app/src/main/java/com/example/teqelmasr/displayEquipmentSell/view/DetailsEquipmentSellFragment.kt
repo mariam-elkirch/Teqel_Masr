@@ -6,6 +6,7 @@ import LineItem
 import NoteAttribute
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,12 +25,17 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
 import com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragmentDirections
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragmentArgs
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModel
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
 import com.example.teqelmasr.model.ContactInfo
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import com.google.firebase.auth.ktx.auth
@@ -71,7 +77,7 @@ class DetailsEquipmentSellFragment : Fragment() {
         }else {
             Log.i("TAG", " No user is signed in")
         }
-        getSavedFavorite()
+
         productID = args.productsell.variants?.get(0)?.product_id
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -90,9 +96,23 @@ class DetailsEquipmentSellFragment : Fragment() {
         var date: TextView = view.findViewById(R.id.date_txt)
         var show: Button = view.findViewById(R.id.showButton)
         show.setOnClickListener{
-            var contact = ContactInfo(args.productsell.variants?.get(0)?.option1)
-            val action = DetailsEquipmentSellFragmentDirections.actionDetailsEquipmentSellFragmentToContactInfoFragment(contact)
-            view.findNavController().navigate(action)
+            if (user != null) {
+                Log.i("TAG", " User is signed in")
+                Log.i("tag",args.productsell.variants?.get(0)?.title.toString()+"args title")
+                var contact = ContactInfo(args.productsell.variants?.get(0)?.sku.toString(),args.productsell.variants?.get(0)?.title.toString())
+                val action = DetailsEquipmentSellFragmentDirections.actionDetailsEquipmentSellFragmentToContactInfoFragment(contact,
+                    Constants.SELL_SOURCE)
+                view.findNavController().navigate(action)
+            }else {
+                Snackbar.make(
+                    view,
+                    getString(R.string.loginContactInfo),
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction(getString(R.string.login)) {
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                }.setDuration(6000).show()
+            }
+
         }
         val dateInString = args.productsell.updated_at
         if (dateInString != null) {

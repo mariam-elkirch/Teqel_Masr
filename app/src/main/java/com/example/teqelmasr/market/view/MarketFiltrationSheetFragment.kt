@@ -1,19 +1,19 @@
-package com.example.teqelmasr.displaySellerProducts.view
+package com.example.teqelmasr.market.view
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEach
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentFilterationSheetBinding
-import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.databinding.FragmentMarketFiltrationSheetBinding
+import com.example.teqelmasr.displaySellerProducts.view.FiltrationSheetFragmentDirections
 import com.example.teqelmasr.model.FilterObj
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,24 +21,19 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.slider.RangeSlider
 
 
-class FiltrationSheetFragment() : BottomSheetDialogFragment() {
+class MarketFiltrationSheetFragment : BottomSheetDialogFragment() {
 
-    private val TAG = "BottomSheet"
-    private lateinit var binding: FragmentFilterationSheetBinding
+    private val binding by lazy { FragmentMarketFiltrationSheetBinding.inflate(layoutInflater) }
     private lateinit var start: String
     private lateinit var end: String
     private var categories: ArrayList<String> = ArrayList()
     private var types: ArrayList<String> = ArrayList()
-    private val args by navArgs<FiltrationSheetFragmentArgs>()
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        Log.i(TAG, "onCreateView:sourceFragment ${args.sourceFragment}")
-        binding = FragmentFilterationSheetBinding.inflate(layoutInflater)
+    ): View {
         start = binding.rangeSlider.values[0].toString()
         end = binding.rangeSlider.values[1].toString()
         binding.rangeSlider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
@@ -68,20 +63,11 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
                         endInclusive = end.toDouble().toInt()
                     ), categories, types
                 )
-            if (args.sourceFragment == Constants.DISPLAY_SELLER){
-                val action: NavDirections =
-                    FiltrationSheetFragmentDirections.actionFiltrationSheetFragmentToDisplaySellerProductsFragment(
-                        filterObj
-                    )
-                findNavController().navigate(action)
-            } else if (args.sourceFragment == Constants.MARKET_FRAGMENT){
-                val action: NavDirections =
-                    FiltrationSheetFragmentDirections.actionFiltrationSheetFragmentToMarketFragment(
-                        filterObj
-                    )
-                findNavController().navigate(action)
-            }
-
+            val action: NavDirections =
+                FiltrationSheetFragmentDirections.actionFiltrationSheetFragmentToDisplaySellerProductsFragment(
+                    filterObj
+                )
+            findNavController().navigate(action)
 
         }
 
@@ -170,11 +156,20 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
 
             }
         }
-
-
         return binding.root
     }
+    private fun appendCategories() {
+        if (binding.sellCheckBox.isChecked) {
+            categories.add("equimentsell")
+        }
+        if (binding.rentCheckBox.isChecked) {
+            categories.add("equimentrent")
+        }
+        if (binding.spareCheckBox.isChecked) {
+            categories.add("spare")
+        }
 
+    }
     private fun appendTypes() {
 
         binding.spareGroup.forEach {
@@ -191,21 +186,10 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
 
     }
 
-    private fun appendCategories() {
-        if (binding.sellCheckBox.isChecked) {
-            categories.add("equimentsell")
-        }
-        if (binding.rentCheckBox.isChecked) {
-            categories.add("equimentrent")
-        }
-        if (binding.spareCheckBox.isChecked) {
-            categories.add("spare")
-        }
-
-    }
 
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), theme)
+
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -11,73 +10,79 @@
     tools:openDrawer="start">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/home_activity"
-        tools:context=".home.HomeActivity"
-       >
+        tools:context=".home.HomeActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/orange"
+            android:background="#F7F8F9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView android:layout_width="wrap_content"
+
+                <TextView
                     android:id="@+id/sininText"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
-                    android:textSize="20dp"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/signin"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toStartOf="@id/signinicon"
-                     tools:ignore="RtlCompat"/>
-                <ImageView android:layout_width="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlCompat" />
+
+                <ImageView
+                    android:id="@+id/signinicon"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
-                  android:id="@+id/signinicon"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_baseline_login_24"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_baseline_login_24" tools:ignore="RtlCompat"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlCompat" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/nav_menu"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="#F7F8F9"
             app:labelVisibilityMode="labeled"
-            android:background="#303F9F"
-            app:itemIconTint="@android:color/white"
-            app:itemTextColor="@android:color/white"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/nav_menu" />
+
         <fragment
             android:id="@+id/hostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolBar"
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/toolBar"
 
 
             app:navGraph="@navigation/nav_graph" />
         <!--        app:navGraph="@navigation/nav_graph"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

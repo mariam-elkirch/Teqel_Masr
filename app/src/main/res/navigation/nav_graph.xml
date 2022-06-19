@@ -35,6 +35,9 @@
             app:destination="@id/addEquipmentSellFragment"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
@@ -164,6 +167,9 @@
         <argument
             android:name="product"
             app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsSparePartFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsEquipmentRentFragment"
@@ -219,6 +225,19 @@
                 app:argType="com.example.teqelmasr.model.FilterObj"
                 app:nullable="true" />
 
+
+        </action>
+        <argument
+            android:name="sourceFragment"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_filtrationSheetFragment_to_marketFragment"
+            app:destination="@id/marketFragment"
+            >
+            <argument
+                android:name="filterObj"
+                app:argType="com.example.teqelmasr.model.FilterObj"
+                app:nullable="true" />
         </action>
     </dialog>
     <dialog
@@ -289,6 +308,11 @@
         <action
             android:id="@+id/action_marketFragment_to_filtrationSheetFragment"
             app:destination="@id/filtrationSheetFragment" />
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterObj"
+            android:defaultValue="@null"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/detailsMarketFragment"
@@ -305,20 +329,24 @@
         android:name="com.example.teqelmasr.profile.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
-    <action
-        android:id="@+id/action_profileFragment_to_homeFragment"
-        app:destination="@id/homeFragment" />
-</fragment>
-<fragment
-android:id="@+id/contactInfoFragment"
-android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
-android:label="fragment_contact_info"
-tools:layout="@layout/fragment_contact_info" >
-<argument
-    android:name="ContactObj"
-    app:argType="com.example.teqelmasr.model.ContactInfo"
-    app:nullable="true" />
-</fragment>
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/contactInfoFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
+        android:label="fragment_contact_info"
+        tools:layout="@layout/fragment_contact_info" >
+        <argument
+            android:name="ContactObj"
+            app:argType="com.example.teqelmasr.model.ContactInfo"
+            app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
     <fragment
         android:id="@+id/detailsFavouriteFragment"
         android:name="com.example.teqelmasr.favourite.view.DetailsFavouriteFragment"

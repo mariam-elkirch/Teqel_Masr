@@ -18,6 +18,7 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
@@ -52,7 +53,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-
 
         adapter = MyProductsAdapter(requireContext(), this)
         viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
@@ -131,7 +131,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         myProductsRecycler.adapter = adapter
         filterIcon.setOnClickListener {
             val action: NavDirections =
-                DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToFiltrationSheetFragment()
+                DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToFiltrationSheetFragment(Constants.DISPLAY_SELLER)
             findNavController().navigate(action)
         }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
