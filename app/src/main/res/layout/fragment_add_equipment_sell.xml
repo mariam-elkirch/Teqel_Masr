@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_image_24"
+        android:src="@drawable/ic_baseline_add_a_photo_24"
         app:siRadius="6dp"
         android:scaleType="fitXY"
         app:siBorderWidth="6dp"
@@ -161,19 +161,20 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/saveButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/myLocation"
+
+        android:layout_marginTop="20dp"
         android:paddingStart="70dp"
         android:paddingEnd="70dp"
         android:text="@string/save"
-        android:layout_marginTop="20dp"
         android:textColor="@color/white"
-        android:background="@drawable/rounded_shape"
+        android:layout_margin="10dp"
         android:layout_marginBottom="10dp"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
