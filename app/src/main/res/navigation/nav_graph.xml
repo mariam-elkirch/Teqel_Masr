@@ -43,7 +43,11 @@
         android:id="@+id/favouriteFragment"
         android:name="com.example.teqelmasr.favourite.view.FavouriteFragment"
         android:label="fragment_favourite"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_detailsFavouriteFragment"
+            app:destination="@id/detailsFavouriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addEquipmentSellFragment"
         android:name="com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragment"
@@ -136,11 +140,9 @@
             app:argType="com.example.teqelmasr.model.FilterObj"
             android:defaultValue="@null"
             app:nullable="true" />
-
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_addEquipmentSellFragment"
             app:destination="@id/addEquipmentSellFragment" />
-
 
     </fragment>
     <fragment
@@ -165,6 +167,9 @@
         <argument
             android:name="product"
             app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsSparePartFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsEquipmentRentFragment"
@@ -328,7 +333,7 @@
             android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/contactInfoFragment"
         android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
         android:label="fragment_contact_info"
@@ -337,5 +342,24 @@
             android:name="ContactObj"
             app:argType="com.example.teqelmasr.model.ContactInfo"
             app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/detailsFavouriteFragment"
+        android:name="com.example.teqelmasr.favourite.view.DetailsFavouriteFragment"
+        android:label="fragment_details_favourite"
+        tools:layout="@layout/fragment_details_favourite" >
+
+        <argument
+            android:name="productID"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment"
+            app:popUpTo="@id/favouriteFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

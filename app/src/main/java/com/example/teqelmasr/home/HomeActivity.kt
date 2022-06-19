@@ -125,8 +125,8 @@ class HomeActivity : AppCompatActivity() {
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
-        bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
-
+        //bottomNavigationView.itemActiveIndicatorColor = getColorStateList(R.color.primary_purple)
+        //bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
         viewModel.getCustomer()
         viewModel.customer.observe(this) {
             if (!it.isNullOrEmpty()) {
@@ -136,6 +136,7 @@ class HomeActivity : AppCompatActivity() {
                 Log.i(TAG, "onCreate: ELSE ")
 
             }
+
         }
 
         val navigationDrawerView = binding.navView
@@ -216,6 +217,7 @@ class HomeActivity : AppCompatActivity() {
 
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
+            //rewan
         }
 
         builder.setNegativeButton(getString(R.string.no)) { _, _ ->

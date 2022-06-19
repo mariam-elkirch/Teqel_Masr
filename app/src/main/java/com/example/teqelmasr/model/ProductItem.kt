@@ -14,6 +14,9 @@ data class ProductItem(
 data class ProductPost(
 	val product: Product? = null
 )
+data class OneProduct(
+	val product: Product
+)
 @Parcelize
 @Serializable
 data class OptionsItem(

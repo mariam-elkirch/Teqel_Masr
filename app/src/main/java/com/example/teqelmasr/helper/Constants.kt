@@ -14,9 +14,9 @@ object Constants {
     const val MARKET_FRAGMENT = "market_fragment"
 
     const val EDIT_SOURCE = "edit"
-
-
-
+    const val SELL_SOURCE = "sell"
+    const val RENT_SOURCE = "rent"
+    const val SPARE_SOURCE = "spare"
 
 
 }

@@ -10,5 +10,7 @@
     <color name="orange">#E97000</color>
     <color name="dark_blue">#00477A</color>
     <color name="red">#FF0000</color>
+    <color name="primary_purple">#00477A</color>
+
 
 </resources>

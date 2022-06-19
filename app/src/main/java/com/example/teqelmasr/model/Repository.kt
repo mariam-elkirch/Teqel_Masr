@@ -3,6 +3,7 @@ package com.example.teqelmasr.model
 import FavProducts
 import FavouriteProduct
 import android.content.Context
+import android.util.Log
 import com.example.teqelmasr.network.RemoteSource
 import retrofit2.Response
 
@@ -69,7 +70,7 @@ class Repository private constructor(
         return remoteSource.getFavProducts()
     }
 
-    override suspend fun getSpecificProduct(id: Long): Response<ProductItem> {
+    override suspend fun getSpecificProduct(id: Long): Response<OneProduct> {
         return remoteSource.getSpecificProduct(id)
     }
 
