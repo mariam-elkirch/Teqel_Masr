@@ -77,12 +77,11 @@ class DetailsEquipmentSellFragment : Fragment() {
         }else {
             Log.i("TAG", " No user is signed in")
         }
-
         productID = args.productsell.variants?.get(0)?.product_id
+        getSavedFavorite(view)
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-
         setUI(view)
         getFavoriteProduct()
         return view
@@ -185,7 +184,7 @@ class DetailsEquipmentSellFragment : Fragment() {
         editor.apply()
         editor.commit()
     }
-    private fun getSavedFavorite() {
+    private fun getSavedFavorite(view: View) {
         productID = args.productsell.variants?.get(0)?.product_id
         sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
         if (sharedProductIDs.isNotEmpty()) {
@@ -196,8 +195,8 @@ class DetailsEquipmentSellFragment : Fragment() {
                 for (fav in it) {
                     favProduct = FavouriteProduct(fav)
                     saveFavorite(favProduct ?: null)
-                    getSavedFavorite()
-                    setUI(requireView())
+                    getSavedFavorite(view)
+                    setUI(view)
                 }
             }
         }

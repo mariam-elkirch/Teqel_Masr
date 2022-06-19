@@ -61,9 +61,9 @@ class DetailsEquipmentRentFragment : Fragment() {
         }else {
             Log.i("TAG", " No user is signed in")
         }
-        getSavedFavorite()
-        productID = args.product.variants?.get(0)?.product_id
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
+        productID = args.product.variants?.get(0)?.product_id
+        getSavedFavorite(view)
         setUI(view)
         getFavoriteProduct()
         return view
@@ -143,7 +143,7 @@ private fun saveFavorite(product : FavouriteProduct?){
    editor.apply()
     editor.commit()
 }
-private fun getSavedFavorite() {
+private fun getSavedFavorite(view: View) {
     productID = args.product.variants?.get(0)?.product_id
     sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
     if (sharedProductIDs.isNotEmpty()) {
@@ -154,8 +154,8 @@ private fun getSavedFavorite() {
             for (fav in it) {
                 favProduct = FavouriteProduct(fav)
                 saveFavorite(favProduct ?: null)
-                getSavedFavorite()
-                setUI(requireView())
+                getSavedFavorite(view)
+                setUI(view)
             }
         }
     }

@@ -48,6 +48,9 @@ class HomeActivity : AppCompatActivity() {
     private val TAG = "HomeActivity"
     private lateinit var sharedPref: SharedPreferences
     private lateinit var viewModel: LoginViewModel
+    private val sharedPrefFile = "favorite"
+    private lateinit var sharedPreferences: SharedPreferences
+
     private val factory by lazy {
         LoginViewModelFactory(
             Repository.getInstance(
@@ -67,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        sharedPreferences  = applicationContext.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
         Log.i(TAG, "onCreate: ")
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -217,7 +220,7 @@ class HomeActivity : AppCompatActivity() {
 
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
-            //rewan
+            sharedPreferences.edit().clear().apply()
         }
 
         builder.setNegativeButton(getString(R.string.no)) { _, _ ->
