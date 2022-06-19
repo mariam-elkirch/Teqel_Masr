@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:fontFamily="@font/noto_sans"
-                android:text="Type"
+                android:text="@string/switch_account"
                 android:textColor="#00477A"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/language_label"

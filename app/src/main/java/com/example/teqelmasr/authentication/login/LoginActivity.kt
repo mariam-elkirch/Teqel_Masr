@@ -74,6 +74,13 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+        binding.skipTextView.setOnClickListener {
+            val editor = sharedPref.edit()
+            editor.putString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+            editor.apply()
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
         binding.register.setOnClickListener {
             val registerIntent = Intent(this, RegistrationActivity::class.java)
             startActivity(registerIntent)

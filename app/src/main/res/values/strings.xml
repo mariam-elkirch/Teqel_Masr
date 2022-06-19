@@ -116,6 +116,8 @@
     <string name="signInFirst">Sign in First</string>
     <string name="deleteFromFav">deleted From Favourite</string>
     <string name="profile_updated">Profile Updated</string>
+    <string name="skip">Skip</string>
+    <string name="switch_account">Switch Account</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

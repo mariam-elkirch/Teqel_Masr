@@ -115,6 +115,12 @@ class ProfileFragment : Fragment() {
             }
 
             builder.show()
+        } else{
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_changes),
+                Toast.LENGTH_LONG
+            ).show()
         }
 
 
