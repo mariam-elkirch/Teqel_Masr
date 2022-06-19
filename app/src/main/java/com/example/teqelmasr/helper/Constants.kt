@@ -11,9 +11,9 @@ object Constants {
     const val ADD_SOURCE = "add"
 
     const val EDIT_SOURCE = "edit"
-
-
-
+    const val SELL_SOURCE = "sell"
+    const val RENT_SOURCE = "rent"
+    const val SPARE_SOURCE = "spare"
 
 
 }

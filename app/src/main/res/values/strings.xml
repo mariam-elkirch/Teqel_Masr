@@ -116,6 +116,8 @@
     <string name="signInFirst">Sign in First</string>
     <string name="deleteFromFav">deleted From Favourite</string>
     <string name="profile_updated">Profile Updated</string>
+    <string name="call">Call</string>
+    <string name="loginContactInfo">You have to Login to show contact Info</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

@@ -1,6 +1,8 @@
 package com.example.teqelmasr.displayEquipmentSell.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +17,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
 import com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragmentDirections
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragmentArgs
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.ContactInfo
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +38,7 @@ private const val ARG_PARAM2 = "param2"
 class DetailsEquipmentSellFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private val args by navArgs<DetailsEquipmentSellFragmentArgs>()
-
+    private val user = Firebase.auth.currentUser
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,9 +54,23 @@ class DetailsEquipmentSellFragment : Fragment() {
         var date: TextView = view.findViewById(R.id.date_txt)
         var show: Button = view.findViewById(R.id.showButton)
         show.setOnClickListener{
-            var contact = ContactInfo(args.productsell.variants?.get(0)?.option1)
-            val action = DetailsEquipmentSellFragmentDirections.actionDetailsEquipmentSellFragmentToContactInfoFragment(contact)
-            view.findNavController().navigate(action)
+            if (user != null) {
+                Log.i("TAG", " User is signed in")
+                Log.i("tag",args.productsell.variants?.get(0)?.title.toString()+"args title")
+                var contact = ContactInfo(args.productsell.variants?.get(0)?.sku.toString(),args.productsell.variants?.get(0)?.title.toString())
+                val action = DetailsEquipmentSellFragmentDirections.actionDetailsEquipmentSellFragmentToContactInfoFragment(contact,
+                    Constants.SELL_SOURCE)
+                view.findNavController().navigate(action)
+            }else {
+                Snackbar.make(
+                    view,
+                    getString(R.string.loginContactInfo),
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction(getString(R.string.login)) {
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                }.setDuration(6000).show()
+            }
+
         }
         val dateInString = args.productsell.updated_at
         if (dateInString != null) {

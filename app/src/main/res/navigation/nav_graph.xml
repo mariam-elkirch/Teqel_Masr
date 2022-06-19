@@ -160,6 +160,9 @@
         <argument
             android:name="product"
             app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsSparePartFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsEquipmentRentFragment"
@@ -305,7 +308,7 @@
             android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/contactInfoFragment"
         android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
         android:label="fragment_contact_info"
@@ -314,5 +317,9 @@
             android:name="ContactObj"
             app:argType="com.example.teqelmasr.model.ContactInfo"
             app:nullable="true" />
-    </fragment>
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
 </navigation>
