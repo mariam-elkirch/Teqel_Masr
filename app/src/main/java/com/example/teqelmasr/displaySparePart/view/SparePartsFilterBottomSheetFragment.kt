@@ -12,6 +12,9 @@ import com.example.teqelmasr.databinding.FragmentSparePartsFilterBottomSheetBind
 import com.example.teqelmasr.model.FilterValues
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.math.RoundingMode
+import java.text.NumberFormat
+import java.util.*
 
 
 class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
@@ -30,10 +33,19 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        var filterValues = FilterValues()
+        val filterValues = FilterValues()
+        filterValues.priceEnd = 10000f
 
         filterValues.types = typesArray
         binding.apply {
+
+            rangeSlider.setLabelFormatter { value: Float ->
+                val format = NumberFormat.getInstance()
+                format.maximumFractionDigits = 0
+               // format.roundingMode = RoundingMode.CEILING
+               // format.currency = Currency.getInstance("EGP")
+                format.format(value.toDouble())
+            }
 
             rangeSlider.addOnChangeListener { _, _, _ ->
                 filterValues.priceStart = rangeSlider.values[0]

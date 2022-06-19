@@ -24,7 +24,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/iconprofile" />
+                android:src="@drawable/user" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/save_button"

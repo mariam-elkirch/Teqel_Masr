@@ -64,6 +64,8 @@ class ProfileFragment : Fragment() {
             AppCompatActivity.MODE_PRIVATE
         )
 
+        displayWaitingDialog()
+
 
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -128,10 +130,11 @@ class ProfileFragment : Fragment() {
 
     private fun displayWaitingDialog() {
         val dialog = Dialog(requireContext())
+        dialog.setCancelable(false)
         dialog.setContentView(R.layout.custom_progress)
         CoroutineScope(Dispatchers.Main).launch {
             dialog.show()
-            delay(3000)
+            delay(2000)
             dialog.dismiss()
         }
     }
