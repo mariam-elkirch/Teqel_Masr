@@ -261,10 +261,17 @@ class EditSellerProductFragment : Fragment() {
             title = binding.titleTxt.text.trim().toString(),
             bodyHtml = binding.productDesc.text.trim().toString(),
             variants = variants,
-            tags = when(binding.sellBtn.isChecked){
-                true -> "equimentsell"
-                else -> {"equimentrent"}
-            },            productType = binding.typeSpinner.selectedItem.toString(),
+
+            tags = when(args.currentProduct.tags){
+                        "spare" -> "spare"
+                else -> {
+                    when(binding.sellBtn.isChecked){
+                        true -> "equimentsell"
+                        else -> {"equimentsell"}
+                    }
+                }
+            },
+            productType = binding.typeSpinner.selectedItem.toString(),
             images = imagelist,
             image = img,
             templateSuffix = binding.vendorTxt.text.trim().toString(),
@@ -276,8 +283,17 @@ class EditSellerProductFragment : Fragment() {
         viewModel.updateProduct(productPost)
     }
     private fun checkTag(): Boolean =
-        (args.currentProduct.tags.equals("equimentsell") && binding.sellBtn.isChecked
-                || args.currentProduct.tags.equals("equimentrent") && binding.rentBtn.isChecked)
+        when(args.currentProduct.tags){
+            "spare" -> true
+            else -> {
+                (args.currentProduct.tags.equals("equimentsell") && binding.sellBtn.isChecked
+                        || args.currentProduct.tags.equals("equimentrent") && binding.rentBtn.isChecked)
+            }
+        }
+
+
+
+
 
 
     private fun pickImageFromGallery() {
