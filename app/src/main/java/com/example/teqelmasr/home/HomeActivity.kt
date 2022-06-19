@@ -52,8 +52,8 @@ class HomeActivity : AppCompatActivity() {
             )
         )
     }
-/*
-    override fun onResume() {
+
+   /* override fun onResume() {
         super.onResume()
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
             sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
@@ -63,6 +63,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.i(TAG, "onCreate: ")
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -118,8 +121,9 @@ class HomeActivity : AppCompatActivity() {
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
-        bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
-
+        //bottomNavigationView.itemActiveIndicatorColor = getColorStateList(R.color.primary_purple)
+        //bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
+        viewModel.getCustomer()
         viewModel.customer.observe(this) {
             if (!it.isNullOrEmpty()) {
                 binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
@@ -178,6 +182,7 @@ class HomeActivity : AppCompatActivity() {
 
         }
         Log.i("TAG", "usertype: ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
+        Log.i(TAG, "usertype: ${Firebase.auth.currentUser?.uid}")
 
     }
 
@@ -190,6 +195,9 @@ class HomeActivity : AppCompatActivity() {
         builder.setMessage(getString(R.string.sure_you_want_to_log_out))
 
         builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            val editor = sharedPref.edit()
+            editor.putString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+            editor.apply()
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
         }

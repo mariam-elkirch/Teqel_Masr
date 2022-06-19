@@ -84,13 +84,8 @@ class HomeFragment : Fragment() {
                             binding.root,
                             getString(R.string.have_to_seller),
                             Snackbar.LENGTH_INDEFINITE
-                        ).setAction(getString(R.string.register)) {
-                            startActivity(
-                                Intent(
-                                    requireContext(),
-                                    RegistrationActivity::class.java
-                                )
-                            )
+                        ).setAction(getString(R.string.profile)) {
+                            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
                         }.setDuration(6000).show()
 
                         Constants.SELLER_TYPE ->

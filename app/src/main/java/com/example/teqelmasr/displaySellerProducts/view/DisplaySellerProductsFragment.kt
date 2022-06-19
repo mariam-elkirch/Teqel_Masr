@@ -53,7 +53,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
 
-
         adapter = MyProductsAdapter(requireContext(), this)
         viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
 

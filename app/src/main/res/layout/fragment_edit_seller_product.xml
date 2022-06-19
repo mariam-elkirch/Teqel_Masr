@@ -64,10 +64,20 @@
                     android:layout_marginTop="10dp"
                     android:id="@+id/price_txt"
                     android:textColor="#E97000"
-                    android:hint="275,000 LE"
                     android:textSize="20sp"
                     android:fontFamily="@font/noto_sans_bold"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/le"
+                    android:text="@string/le"
+                    android:textSize="20sp"
+                    android:textColor="#E97000"
+                    android:fontFamily="@font/noto_sans_bold"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toEndOf="@id/price_txt"
+                    app:layout_constraintTop_toTopOf="@id/price_txt"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <EditText

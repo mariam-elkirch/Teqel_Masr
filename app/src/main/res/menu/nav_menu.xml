@@ -11,7 +11,7 @@
         android:title="@string/favourite" />
     <item
         android:id="@+id/marketFragment"
-        android:icon="@drawable/store"
+        android:icon="@drawable/ic_baseline_store_mall_directory_24"
         android:title="Market"
         />
 
