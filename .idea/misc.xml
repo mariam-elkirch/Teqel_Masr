@@ -16,14 +16,16 @@
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/activity_main.xml" value="0.15715579710144928" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/activity_registeration.xml" value="0.125" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/custom_progress.xml" value="0.2223731884057971" />
-        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/custom_spinner.xml" value="0.4" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/custom_spinner.xml" value="0.2" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_details_equipment_sell.xml" value="0.20516304347826086" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_details_seller_product.xml" value="0.536" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_details_spare_part.xml" value="0.2234375" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_equipment_sell.xml" value="0.234375" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_seller_products.xml" value="0.15353260869565216" />
-        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_edit_seller_product.xml" value="0.264" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_edit_profile.xml" value="0.17617753623188406" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_edit_seller_product.xml" value="0.152" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_profile.xml" value="0.17617753623188406" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/my_products_list_item.xml" value="0.14990942028985507" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/nav_header_main2.xml" value="0.21557971014492755" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.17239583333333333" />

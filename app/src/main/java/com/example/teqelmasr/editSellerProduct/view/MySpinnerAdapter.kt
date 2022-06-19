@@ -26,7 +26,7 @@ class MySpinnerAdapter(context: Context, resource: Int, objects: Array<String>):
     }
     private fun getCustomView(position: Int, convertView: View?, parent: ViewGroup): View{
         val row = LayoutInflater.from(parent.context).inflate(R.layout.custom_spinner, parent, false)
-        val label: TextView = row.findViewById(R.id.value)
+        val label: TextView = row.findViewById(R.id.spinner_item_value)
         label.text = values[position]
         return row
     }

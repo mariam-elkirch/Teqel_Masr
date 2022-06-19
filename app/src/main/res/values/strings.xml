@@ -61,8 +61,8 @@
     <string name="filters">Filters</string>
     <string name="clear_all">Clear All</string>
     <string name="spare_parts">Spare Parts</string>
-    <string name="equipment_sell">Equipment Sell</string>
-    <string name="equipment_rent">Equipment Rent</string>
+    <string name="equipment_sell">Equipment for Sell</string>
+    <string name="equipment_rent">Equipment for Rent</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -110,13 +110,15 @@
     <string name="noFavProduct">no favourite products</string>
     <string name="showcontactinfo">Show Contact Info</string>
     <string name="mobile">mobile</string>
-    <string name="address">address</string>
+    <string name="address">Address</string>
     <string name="please_wait">Please wait</string>
     <string name="addedToFav">added To Favourite</string>
     <string name="signInFirst">Sign in First</string>
     <string name="deleteFromFav">deleted From Favourite</string>
     <string name="profile_updated">Profile Updated</string>
     <string name="le">LE</string>
+    <string name="offer_for">Offer for</string>
+    <string name="sell">Sell</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
