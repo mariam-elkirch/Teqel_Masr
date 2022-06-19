@@ -18,6 +18,7 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
+import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
@@ -130,7 +131,7 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         myProductsRecycler.adapter = adapter
         filterIcon.setOnClickListener {
             val action: NavDirections =
-                DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToFiltrationSheetFragment()
+                DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToFiltrationSheetFragment(Constants.DISPLAY_SELLER)
             findNavController().navigate(action)
         }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

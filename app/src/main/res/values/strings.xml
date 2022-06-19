@@ -116,6 +116,9 @@
     <string name="signInFirst">Sign in First</string>
     <string name="deleteFromFav">deleted From Favourite</string>
     <string name="profile_updated">Profile Updated</string>
+    <string name="skip">Skip</string>
+    <string name="switch_account">Switch Account</string>
+    <string name="no_search_results">No Results for your search</string>
     <string name="call">Call</string>
     <string name="loginContactInfo">You have to Login to show contact Info</string>
     <string name="le">LE</string>

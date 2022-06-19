@@ -12,6 +12,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -181,6 +184,18 @@ class HomeActivity : AppCompatActivity() {
             bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
 
         }
+        if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+                .equals(Constants.GUEST_TYPE)){
+            Log.i(TAG, "onCreate: inside if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE) ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
+            val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+            val menu: Menu = navigationView.menu
+            val logOut: MenuItem = menu.findItem(R.id.nav_logout)
+            val profile: MenuItem = menu.findItem(R.id.profileFragment)
+            logOut.isVisible = false
+            profile.isVisible = false
+        }
+
+
         Log.i("TAG", "usertype: ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
         Log.i(TAG, "usertype: ${Firebase.auth.currentUser?.uid}")
 
@@ -198,6 +213,7 @@ class HomeActivity : AppCompatActivity() {
             val editor = sharedPref.edit()
             editor.putString(Constants.USER_TYPE, Constants.GUEST_TYPE)
             editor.apply()
+
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
         }

@@ -136,9 +136,11 @@
             app:argType="com.example.teqelmasr.model.FilterObj"
             android:defaultValue="@null"
             app:nullable="true" />
+
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_addEquipmentSellFragment"
             app:destination="@id/addEquipmentSellFragment" />
+
 
     </fragment>
     <fragment
@@ -221,6 +223,19 @@
                 app:argType="com.example.teqelmasr.model.FilterObj"
                 app:nullable="true" />
 
+
+        </action>
+        <argument
+            android:name="sourceFragment"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_filtrationSheetFragment_to_marketFragment"
+            app:destination="@id/marketFragment"
+            >
+            <argument
+                android:name="filterObj"
+                app:argType="com.example.teqelmasr.model.FilterObj"
+                app:nullable="true" />
         </action>
     </dialog>
     <dialog
@@ -291,6 +306,11 @@
         <action
             android:id="@+id/action_marketFragment_to_filtrationSheetFragment"
             app:destination="@id/filtrationSheetFragment" />
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterObj"
+            android:defaultValue="@null"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/detailsMarketFragment"
