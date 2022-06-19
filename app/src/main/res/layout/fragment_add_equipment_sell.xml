@@ -27,12 +27,27 @@
         app:siBorderWidth="6dp"
         app:siBorderColor="@color/orange"
         app:siSquare="true"/>
+        <TextView
+            android:id="@+id/textType"
+            android:layout_column="1"
+            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/productImg"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            android:textColor="#00477A"
+            android:text="@string/type"/>
     <Spinner
         android:id="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/productImg"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_width="fill_parent"
+
+        app:layout_constraintStart_toEndOf="@+id/textType"
+        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        app:layout_constraintTop_toTopOf="@+id/textType"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="true"
         android:layout_marginStart="30dp"
