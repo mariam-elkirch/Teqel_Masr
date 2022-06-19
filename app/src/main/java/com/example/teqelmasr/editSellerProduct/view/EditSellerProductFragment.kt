@@ -84,9 +84,13 @@ class EditSellerProductFragment : Fragment() {
 
         setUpUI()
 
-        setUpSpinners()
-
+        //setUpSpinners()
+        setSpinners()
         return binding.root
+    }
+
+    private fun setSpinners() {
+        binding.categorySpinner.adapter = MySpinnerAdapter(requireContext(), R.layout.custom_spinner, categoryArray!!)
     }
 
     private fun setUpUI() {
@@ -146,7 +150,7 @@ class EditSellerProductFragment : Fragment() {
 
             saveFloating.setOnClickListener {
                 if (!checkChanges()) {
-
+                    updateProductObject()
                     displayDialog()
 
                 } else {
@@ -220,6 +224,7 @@ class EditSellerProductFragment : Fragment() {
             android.R.layout.simple_spinner_dropdown_item,
             categoryArray!!
         )
+        Log.i(TAG, "setUpSpinners: ${args.currentProduct.tags}")
         typeAdapter = when (args.currentProduct.tags) {
             "spare" -> ArrayAdapter<String>(
                 requireContext(),
@@ -247,7 +252,7 @@ class EditSellerProductFragment : Fragment() {
                 }
             )
 
-            categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            /*categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     Log.i(TAG, "onItemSelected: ${p0?.selectedItem.toString()}")
                     typeAdapter = when (p0?.selectedItem.toString()) {
@@ -281,26 +286,15 @@ class EditSellerProductFragment : Fragment() {
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    typeSpinner.setSelection(
-                        when (args.currentProduct.productType) {
-                            R.string.turbocharger.toString() -> 0
-                            R.string.filter.toString() -> 1
-                            R.string.accumulator.toString() -> 2
-                            R.string.valve.toString() -> 3
-                            R.string.hose.toString() -> 4
-                            R.string.miscellaneous.toString() -> 5
-                            R.string.hydraulic_components.toString() -> 6
-                            else -> {
-                                7
-                            }
-                        }
-                    )
+
                 }
 
             }
-
+*/
         }
     }
+
+
     private fun displayDialog() {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.custom_progress)
