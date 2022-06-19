@@ -32,7 +32,25 @@ android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageView
+                android:gravity="right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/fav_icon"
+                android:src="@drawable/ic_heart_outline"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                />
 
+            <ImageView
+                android:id="@+id/favFill_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/ic_heart_fill"
+                android:visibility="invisible"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                />
             <TextView
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

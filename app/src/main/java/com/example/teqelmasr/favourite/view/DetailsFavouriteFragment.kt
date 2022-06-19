@@ -1,60 +1,75 @@
 package com.example.teqelmasr.favourite.view
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
+import com.example.teqelmasr.databinding.FragmentDetailsFavouriteBinding
+import com.example.teqelmasr.displayEquipmentRent.view.DisplayEquipmentRentFragmentArgs
+import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModel
+import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModelFactory
+import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.network.Client
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsFavouriteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailsFavouriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val args by navArgs<DetailsFavouriteFragmentArgs>()
+private val binding by lazy {FragmentDetailsFavouriteBinding.inflate(layoutInflater)}
+    private var isFavorite : Boolean = true
+    private val viewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            factory = AddToFavoriteViewModelFactory(
+                Repository.getInstance(
+                    Client.getInstance(),
+                    requireContext()
+                )
+            )
+        )[AddToFavoriteViewModel::class.java]
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModel.getProductDetails(args.productID)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details_favourite, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailsFavouriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailsFavouriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        binding.apply {
+            Log.i("TAG", "onCreateView: ${args.productID}")
+            viewModel.productDetailsLiveData.observe(requireActivity()) {
+            Glide.with(activity?.baseContext!!).load(it.product.images?.get(0)?.src).centerCrop()
+                .placeholder(R.drawable.placeholder).into(imageItem)
+                titleTxt.text = it.product.title
+                priceTxt.text = it.product.variants?.get(0)?.price.toString()
+                val dateInString = it.product.updated_at.toString()
+                if (dateInString != null) {
+                    val dateAfterCut = dateInString.substringBefore('T')
+                    dateTxt.text = "${dateAfterCut}"
                 }
-            }
+                categoryTxt.text = context?.resources?.getString(R.string.EquipmentRent)
+                typeTxt.text = it.product.productType
+                vendorTxt.text = it.product.templateSuffix
+                productDesc.text = it.product.bodyHtml
+                if (isFavorite){
+                    favIcon?.visibility = View.GONE
+                    favFillIcon?.visibility = View.VISIBLE
+                }else{
+                    favFillIcon?.visibility = View.GONE
+                    favIcon?.visibility = View.VISIBLE
+                }
+                favFillIcon.setOnClickListener {
+
+                }
+        }
+        }
+        return binding.root
     }
 }

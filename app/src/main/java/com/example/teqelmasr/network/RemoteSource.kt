@@ -36,5 +36,5 @@ interface RemoteSource {
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
     suspend fun deleteFavProduct(product: FavouriteProduct)
     suspend fun getFavProducts(): Response<FavProducts>
-    suspend fun getSpecificProduct(id: Long): Response<ProductItem>
+    suspend fun getSpecificProduct(id: Long): Response<OneProduct>
 }

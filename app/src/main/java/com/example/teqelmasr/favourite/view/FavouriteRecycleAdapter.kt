@@ -7,15 +7,24 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.SparePartItemBinding
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
+import com.example.teqelmasr.favourite.view.FavouriteFragmentDirections
+import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModel
+import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModelFactory
 import com.example.teqelmasr.model.Product
+import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.network.Client
 import java.util.*
 
 
@@ -24,6 +33,7 @@ class FavouriteRecyclerAdapter(val context: Context) :
 
     private var favouriteList = mutableListOf<DraftOrder>()
     private var originalfavouriteList: List<DraftOrder> = arrayListOf()
+
     fun setFavouriteList(favouriteList: List<DraftOrder>) {
         this.favouriteList = favouriteList.toMutableList()
         this.originalfavouriteList = favouriteList
@@ -42,7 +52,11 @@ class FavouriteRecyclerAdapter(val context: Context) :
         holder.binding.apply {
             itemTitle.text = favouriteItem.lineItems.get(0).title ?: "Unknown"
             itemPrice.text = "${favouriteItem.lineItems.get(0).price} LE"
-         //   itemCard.setOnClickListener { listener.onProductClick(favouriteItem) }
+            itemCard.setOnClickListener {
+                v ->
+                val action = FavouriteFragmentDirections.actionFavouriteFragmentToDetailsFavouriteFragment(favouriteItem.lineItems.get(0).productID)
+                v.findNavController().navigate(action)
+                 }
         }
         if (favouriteItem.noteAttributes.isNotEmpty()) {
             Glide.with(context).load(favouriteItem.noteAttributes.get(0).value).centerCrop()

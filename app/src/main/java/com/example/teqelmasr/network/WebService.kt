@@ -123,10 +123,11 @@ interface WebService {
     suspend fun getFavProducts(): Response<FavProducts>
 
     @Headers(
-        "Accept: application/json",
-        "X-Shopify-Access-Token: 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",
+        "X-Shopify-Shop-Api-Call-Limit: 40/40",
+        "Retry-After: 2.0",
+        "X-Shopify-Access-Token: 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"
     )
-    @GET("admin/products/products/{ProductID}.json")
-    suspend fun getSpecificProduct(@Path("ProductID") id: Long): Response<ProductItem>
+    @GET("admin/products/{ProductID}.json")
+    suspend fun getSpecificProduct(@Path("ProductID") id: Long): Response<OneProduct>
 }
 

@@ -1,5 +1,7 @@
 package com.example.teqelmasr.displayEquipmentSell.view
-
+import NoteAttribute
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +12,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,33 +24,63 @@ import com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragmentDirec
 import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragmentArgs
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
+import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
+import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModel
+import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
 import com.example.teqelmasr.model.ContactInfo
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
+
+import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.network.Client
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import favCustomer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsEquipmentSellFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailsEquipmentSellFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private val args by navArgs<DetailsEquipmentSellFragmentArgs>()
     private val user = Firebase.auth.currentUser
+    private val args by navArgs<DetailsEquipmentSellFragmentArgs>()
+    lateinit var viewModel : DisplayEquipmentSellViewModel
+    private lateinit var viewModelFactory : DisplayEquipmentSellViewModelFactory
+    private  var favProduct : FavouriteProduct? = null
+    private val sharedPrefFile = "favorite"
+    private var isFavorite : Boolean = false
+    private var sharedPreferences: SharedPreferences? = null
+    private var sharedProductIDs = mutableSetOf<String>()
+    private var productID : Long? = 0
+    var product : FavouriteProduct? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModelFactory = DisplayEquipmentSellViewModelFactory(
+            Repository.getInstance(Client.getInstance(),requireContext())
+        )
+        viewModel = ViewModelProvider(requireActivity(),viewModelFactory)[DisplayEquipmentSellViewModel::class.java]
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_sell, container, false)
+
+        getFavoriteProduct()
+        productID = args.productsell.variants?.get(0)?.product_id
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
+    setUI(view)
+
+
+
+        return view
+    }
+
+    private fun setUI(view : View){
         var title: TextView = view.findViewById(R.id.title_txt)
         title.text= args.productsell.title
         var price: TextView = view.findViewById(R.id.price_txt)
@@ -91,7 +125,49 @@ class DetailsEquipmentSellFragment : Fragment() {
         var productImg = view.findViewById<ImageView>(R.id.image_item)
         Glide.with(activity?.baseContext!!).load(args.productsell.image?.src).centerCrop()
             .placeholder(R.drawable.placeholder).into(productImg)
+        if (user!=null){
+            val image = listOf(NoteAttribute(name = "image",value = args.productsell.image?.src))
+            val productInfo = listOf(LineItem(productID = args.productsell!!.variants?.get(0)!!.product_id!!,variant_id =args.productsell!!.variants?.get(0)!!.id!! ,taxable = false,title = args.productsell!!.title!!,1, args.productsell.variants?.get(0)?.price.toString()))
+            product = FavouriteProduct(DraftOrder(user.email?:"unknown user",note = "",noteAttributes = image,lineItems = productInfo , customer = favCustomer(email = user.email, firstName =user.displayName,phone = user.phoneNumber)) )
+        }
+        var favIcon = view?.findViewById<ImageView>(R.id.fav_icon)
+        var addedToFavorite = view?.findViewById<ImageView>(R.id.favFill_icon)
+        if (isFavorite){
+            favIcon?.visibility = View.GONE
+            addedToFavorite?.visibility = View.VISIBLE
+        }else{
+            addedToFavorite?.visibility = View.GONE
+            favIcon?.visibility = View.VISIBLE
+        }
+        favIcon?.setOnClickListener {
+            if (user!=null&&product!=null){
+                favIcon.visibility = View.GONE
+                addedToFavorite?.visibility = View.VISIBLE
+                viewModel.addToFavorite(product!!)
+                // the post response take into object
+                viewModel.favouriteResponse.observe(requireActivity()) {
+                    favProduct = FavouriteProduct(it.draftOrder)
+                //    saveFavorite(favProduct!!)
+                    Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
 
-        return view
+                }
+            } else{
+                Toast.makeText(activity, R.string.signInFirst, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        addedToFavorite?.setOnClickListener {
+            if (favProduct!=null) {
+                viewModel.deleteFavProduct(favProduct!!)
+                Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
+
+            }
+         //   removeFromShared(productID.toString())
+            addedToFavorite?.visibility = View.GONE
+            favIcon?.visibility = View.VISIBLE
+
+        }
+
+
     }
 }

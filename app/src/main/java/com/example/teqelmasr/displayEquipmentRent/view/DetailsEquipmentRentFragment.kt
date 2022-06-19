@@ -6,6 +6,7 @@ import LineItem
 import NoteAttribute
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -28,8 +29,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import favCustomer
 
+
 class DetailsEquipmentRentFragment : Fragment() {
-    val user = Firebase.auth.currentUser
+    private val user = Firebase.auth.currentUser
     private val args by navArgs<DetailsEquipmentRentFragmentArgs>()
     lateinit var viewModel : DisplayRentEquipmentViewModel
     private lateinit var viewModelFactory : DisplayRentEquipmentViewModelFactory
@@ -48,7 +50,7 @@ class DetailsEquipmentRentFragment : Fragment() {
             Repository.getInstance(Client.getInstance(),requireContext())
         )
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory)[DisplayRentEquipmentViewModel::class.java]
-viewModel.getFavProducts()
+        viewModel.getFavProducts()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,9 +64,6 @@ viewModel.getFavProducts()
         getSavedFavorite()
         productID = args.product.variants?.get(0)?.product_id
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
-        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         setUI(view)
         getFavoriteProduct()
         return view
@@ -83,7 +82,7 @@ private fun setUI(view : View){
     }
     Log.i("TAG", "onCreateView: test product id ${productID} ${isFavorite} ")
     var category = view.findViewById<TextView>(R.id.category_txt)
-    category?.text = "Equipment For Rent"
+    category?.text = context?.resources?.getString(R.string.EquipmentRent)
     var type = view.findViewById<TextView>(R.id.type_txt)
     type?.text = args.product.productType
     var manufactor = view.findViewById<TextView>(R.id.vendor_txt)

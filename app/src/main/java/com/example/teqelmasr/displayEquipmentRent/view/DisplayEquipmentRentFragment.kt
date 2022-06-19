@@ -1,6 +1,5 @@
 package com.example.teqelmasr.displayEquipmentRent.view
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -76,7 +74,9 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
             })
         }
         binding.filterButtonRentEquipment.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment) }
-        binding.swipeRefreshLayoutRent.setOnRefreshListener { viewModel.fetchRentEquipments() }
+        binding.swipeRefreshLayoutRent.setOnRefreshListener { viewModel.fetchRentEquipments()
+            onFullList()
+        }
         fetchEquipmentRent()
 
         return binding.root
@@ -134,7 +134,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                         && it.variants?.get(0)!!.price!! >= args.filterObj!!.priceStart!!
                         && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
             } as ArrayList<Product>
-            updateData(filterResultList)
+
+            equipmentRentAdapter.setEquipmentRentList(filterResultList)
             Log.i("TAG", "filter with type and price")
 
         }
@@ -145,7 +146,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                 it.variants?.get(0)!!.price!! >= args.filterObj!!.priceStart!!
                         && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
             } as ArrayList<Product>
-            updateData(filterResultList)
+            equipmentRentAdapter.setEquipmentRentList(filterResultList)
             Log.i("TAG", "filter with price only")
 
         }
@@ -156,14 +157,14 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                 it.productType!!.toString()
                     .lowercase(Locale.getDefault()) in args.filterObj!!.types!!
             } as ArrayList<Product>
-            updateData(filterResultList)
+            equipmentRentAdapter.setEquipmentRentList(filterResultList)
             Log.i("TAG", "filter with type only")
 
         }
 
 
         else if( args.filterObj!!.types.isNullOrEmpty() && args.filterObj!!.priceEnd ==null){
-                updateData(allProductList)
+            equipmentRentAdapter.setEquipmentRentList(filterResultList)
             Log.i("TAG", "apply without input ")
 
         }
@@ -171,6 +172,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
 
 }
     private fun updateData( data :ArrayList<Product>){
+        Log.i("TAG", "updateData: ${data.size}")
         equipmentRentAdapter.setEquipmentRentList(data)
     }
     private fun search(){
