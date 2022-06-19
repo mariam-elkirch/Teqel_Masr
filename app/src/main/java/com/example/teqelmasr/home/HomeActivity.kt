@@ -121,7 +121,8 @@ class HomeActivity : AppCompatActivity() {
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
-        bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
+        //bottomNavigationView.itemActiveIndicatorColor = getColorStateList(R.color.primary_purple)
+        //bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
         viewModel.getCustomer()
         viewModel.customer.observe(this) {
             if (!it.isNullOrEmpty()) {
