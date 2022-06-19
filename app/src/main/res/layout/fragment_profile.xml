@@ -17,6 +17,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profie_image"
+                android:layout_marginTop="34dp"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
@@ -44,7 +45,7 @@
             android:id="@+id/name_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="44dp"
             android:fontFamily="@font/noto_sans"
             android:text="@string/name"
             android:textColor="#00477A"
