@@ -22,7 +22,7 @@ interface RepositoryInterface {
     suspend fun getCustomers(): Response<CustomersResponse>
 
     suspend fun addToFavorite(product: FavouriteProduct) : Response<FavouriteProduct>
-    suspend fun deleteFavProduct(product: FavouriteProduct)
+    suspend fun deleteFavProduct(id: Long)
     suspend fun getFavProducts(): Response<FavProducts>
     suspend fun getSpecificProduct(id: Long): Response<OneProduct>
 

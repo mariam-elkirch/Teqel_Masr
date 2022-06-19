@@ -3,34 +3,40 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/drawable/myproduct_btn_background_1.xml" value="0.139" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/custom_progress.xml" value="0.21105072463768115" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/favorite_product_item.xml" value="0.21603260869565216" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_equipment_rent.xml" value="0.10507246376811594" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_equipment_sell.xml" value="0.21105072463768115" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_favourite.xml" value="0.136" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_details_spare_part.xml" value="0.12360688956433637" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_display_equipment_rent.xml" value="0.10507246376811594" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/fragment_favourite.xml" value="0.12360688956433637" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/loading_item.xml" value="0.16927083333333334" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/my_products_list_item.xml" value="0.21603260869565216" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/spare_part_item.xml" value="0.21603260869565216" />
+        <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/menu/nav_menu.xml" value="0.19583333333333333" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_details_seller_product.xml" value="0.1408514492753623" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_equipment_sell.xml" value="0.234375" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_seller_products.xml" value="0.15353260869565216" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/ic_magnifying_glass.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/ic_user.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/side_nav_bar.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/tv_shape.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable-v24/tv_shape_location.xml" value="0.2169230769230769" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable/bottom_sheet_shape.xml" value="0.2046875" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/drawable/contact_info_bottom_sheet.xml" value="0.16296296296296298" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable/gradient.xml" value="0.2123076923076923" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.215625" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/activity_registeration.xml" value="0.20416666666666666" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/custom_progress.xml" value="0.1078125" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_add_equipment_rent.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_add_equipment_sell.xml" value="0.20416666666666666" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_add_spare_part.xml" value="0.19947916666666668" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_contact_info.xml" value="0.19947916666666668" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_details_equipment_rent.xml" value="0.19947916666666668" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_details_equipment_sell.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_details_seller_product.xml" value="0.19947916666666668" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_details_spare_part.xml" value="0.19947916666666668" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_display_equipment_sell.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_display_spare_part.xml" value="0.18854166666666666" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_edit_seller_product.xml" value="0.1" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_equiment_sell_botton_sheet_frgment.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_equipment_rent_filter_bottom_sheet.xml" value="0.20416666666666666" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
-        <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_filteration_sheet.xml" value="0.19947916666666668" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_maps.xml" value="0.18628359592215013" />
         <entry key="..\:/Teqel_Masr/app/src/main/res/layout/fragment_profile.xml" value="0.19947916666666668" />

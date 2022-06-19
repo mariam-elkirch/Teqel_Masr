@@ -62,8 +62,8 @@ class Repository private constructor(
         return remoteSource.addToFavorite(product)
     }
 
-    override suspend fun deleteFavProduct(product: FavouriteProduct) {
-        remoteSource.deleteFavProduct(product)
+    override suspend fun deleteFavProduct(id: Long) {
+        remoteSource.deleteFavProduct(id)
     }
 
     override suspend fun getFavProducts(): Response<FavProducts> {

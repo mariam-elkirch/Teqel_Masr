@@ -1,6 +1,7 @@
 package com.example.teqelmasr.favourite.viewModel
 
 import DraftOrder
+import FavouriteProduct
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,6 +25,7 @@ class AddToFavoriteViewModel (private val repository: RepositoryInterface) : Vie
     val favListLiveData : LiveData<List<DraftOrder>> = favoriteListMutableLiveData
     private val productDetailsMutableLiveData :MutableLiveData<OneProduct> = MutableLiveData()
     val productDetailsLiveData : LiveData<OneProduct> = productDetailsMutableLiveData
+    val favouriteResponse = MutableLiveData<FavouriteProduct>()
 
     init {
         getFavProduct()
@@ -63,5 +65,17 @@ class AddToFavoriteViewModel (private val repository: RepositoryInterface) : Vie
                 }
             }
         }
+    }
+    fun deleteFavProduct(id: Long){
+        viewModelScope.launch {
+            repository.deleteFavProduct(id)
+        }
+    }
+    fun addToFavorite(product: FavouriteProduct){
+        viewModelScope.launch {
+            // var  response = repository.addToFavorite(product).body()!!
+            favouriteResponse.postValue(repository.addToFavorite(product).body())
+        }
+
     }
 }

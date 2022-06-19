@@ -60,7 +60,7 @@ class DisplayEquipmentSellViewModel (private val repository: RepositoryInterface
     }
     fun deleteFavProduct(product: FavouriteProduct){
         viewModelScope.launch {
-            repository.deleteFavProduct(product)
+            repository.deleteFavProduct(product?.draftOrder!!.id!!)
         }
     }
     fun getFavProduct(productID : Long) {
