@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -71,6 +72,33 @@ class MarketFragment : Fragment(), OnProductClickListener {
         return binding.root
     }
 
+    private fun setUpSearch() {
+        binding.apply {
+
+            searchSpareParts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    adapter.filter.filter(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    adapter.filter.filter(newText)
+                    return true
+                }
+            })
+
+            searchSpareParts.setOnCloseListener(SearchView.OnCloseListener() {
+                Log.i("Tag", "onCreateView: setOnCloseListener")
+                binding.apply {
+                    noResultsImage.visibility = View.GONE
+                    noResultText.visibility = View.GONE
+                }
+                false
+            })
+        }
+    }
+
     private fun setUpUI(){
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -80,6 +108,11 @@ class MarketFragment : Fragment(), OnProductClickListener {
         binding.recyclerViewAllProducts.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.refreshLayout.setOnRefreshListener {
             getAllProducts()
+        }
+        setUpSearch()
+        binding.refreshLayout.setOnRefreshListener {
+            getAllProducts()
+            onFullList()
         }
         binding.filterButton.setOnClickListener {
             val action: NavDirections =
@@ -147,11 +180,18 @@ class MarketFragment : Fragment(), OnProductClickListener {
     }
 
     override fun onEmptyList(searchKey: String) {
-
+        binding.apply {
+            noResultsImage.visibility = View.VISIBLE
+            noResultText.text = "No Results for your search \"$searchKey\""
+            noResultText.visibility = View.VISIBLE
+        }
     }
 
     override fun onFullList() {
-
+        binding.apply {
+            noResultsImage.visibility = View.GONE
+            noResultText.visibility = View.GONE
+        }
     }
 
 }
