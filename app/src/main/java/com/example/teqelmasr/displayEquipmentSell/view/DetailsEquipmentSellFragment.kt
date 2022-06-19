@@ -1,4 +1,7 @@
 package com.example.teqelmasr.displayEquipmentSell.view
+import DraftOrder
+import FavouriteProduct
+import LineItem
 import NoteAttribute
 import android.content.Context
 import android.content.SharedPreferences
@@ -67,7 +70,7 @@ class DetailsEquipmentSellFragment : Fragment() {
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_sell, container, false)
 
-        getFavoriteProduct()
+        //getFavoriteProduct()
         productID = args.productsell.variants?.get(0)?.product_id
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)

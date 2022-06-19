@@ -37,6 +37,7 @@ import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFra
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -216,6 +217,7 @@ class HomeActivity : AppCompatActivity() {
 
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
+            //rewan
         }
 
         builder.setNegativeButton(getString(R.string.no)) { _, _ ->
