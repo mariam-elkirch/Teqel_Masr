@@ -73,7 +73,6 @@ class DisplayEquipmentSellViewModel (private val repository: RepositoryInterface
                     favoriteListMutableLiveData.postValue(response.body()?.draftOrders?.filter { fav -> fav.lineItems[0].productID == productID &&
                             fav.email == user?.email
                     })
-
                 }else {
                     Log.e(
                         "DisplayRentEquipmentViewModel",
