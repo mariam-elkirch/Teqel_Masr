@@ -37,15 +37,15 @@ class DetailsSparePartFragment : Fragment() {
             dateTxt.text = args.product.published_at?.slice(IntRange(0, 9))
             Glide.with(requireContext()).load(args.product.image?.src).centerCrop()
                 .placeholder(R.drawable.placeholder).into(binding.imageItem)
-            favoriteButton.setOnClickListener {
-                if (!clicked) {
-                    favoriteButton.setBackgroundResource(R.drawable.ic_heart_fill)
-                    clicked = true
-                } else {
-                    favoriteButton.setBackgroundResource(R.drawable.ic_heart_outline)
-                    clicked = false
-                }
-            }
+//            favIcon.setOnClickListener {
+//                if (!clicked) {
+//                    favoriteButton.setBackgroundResource(R.drawable.ic_heart_fill)
+//                    clicked = true
+//                } else {
+//                    favoriteButton.setBackgroundResource(R.drawable.ic_heart_outline)
+//                    clicked = false
+//                }
+//            }
         }
         return binding.root
     }

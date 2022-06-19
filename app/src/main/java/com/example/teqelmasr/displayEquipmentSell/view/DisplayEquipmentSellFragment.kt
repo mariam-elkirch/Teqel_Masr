@@ -225,6 +225,7 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
 
     }
     override fun onProductClick(product: Product) {
+        viewModel.getFavProduct(product?.variants?.get(0)?.product_id!!)
         val action = DisplayEquipmentSellFragmentDirections.actionDisplayEquipmentSellFragmentToDetailsEquipmentSellFragment(product)
         binding.root.findNavController().navigate(action)
         Log.i("TAG", "${product.title} Inside onProductClick")
