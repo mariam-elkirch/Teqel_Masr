@@ -288,7 +288,7 @@
         android:backgroundTint="#E97000"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="10dp"
-        android:textColor="#00477A"
+        android:textColor="@color/white"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
 
