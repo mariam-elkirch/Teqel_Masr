@@ -370,6 +370,9 @@
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_contactInfoFragment2"
+            app:destination="@id/contactInfoFragment" />
 
     </fragment>
 </navigation>

@@ -205,6 +205,23 @@
             android:fontFamily="@font/noto_sans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/showButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_desc"
+            android:paddingStart="70dp"
+            android:paddingEnd="70dp"
+            android:text="@string/showcontactinfo"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_shape"
+            android:layout_marginBottom="10dp"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
