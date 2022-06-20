@@ -24,6 +24,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -37,6 +38,8 @@ import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFra
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
@@ -129,6 +132,7 @@ class HomeActivity : AppCompatActivity() {
                 }            }
             snackBar.show()
         }
+
         val bottomNavigationView = binding.bottomNav
 
         if (isNetworkAvailable()) {
@@ -270,24 +274,10 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-/*        val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        fragmentTransaction.replace(R.id.hostFragment, DisplaySellerProductsFragment())
 
-        fragmentTransaction.commit()*/
-
-        //Log.i("TAG", "onBackPressed: ${binding.root.findNavController().currentDestination}")
-
-        //val fragmentInstance = supportFragmentManager.findFragmentById(R.id.hostFragment)
-        //fragmentInstance?.onCreate(null)
-        //Toast.makeText(this, "${fragmentInstance?.onCreate(null)}", Toast.LENGTH_SHORT).show()
-/*
-        if(fragmentInstance is DisplaySellerProductsFragment){
-            Toast.makeText(this, "${fragmentInstance.id}", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show()
-        }*/
-//        val action: NavDirections = DetailsSellerProductFragmentDirections.actionDetailsSellerProductFragmentToDisplaySellerProductsFragment(null)
-//        binding.root.findNavController().navigate(action)
     }
+
+
+
 }

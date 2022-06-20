@@ -13,28 +13,23 @@
         <action
             android:id="@+id/action_homeFragment_to_displayEquipmentSellFragment"
             app:destination="@id/displayEquipmentSellFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true" />
+           />
         <action
             android:id="@+id/action_homeFragment_to_displayEquipmentRentFragment"
             app:destination="@id/displayEquipmentRentFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true" />
+            />
         <action
             android:id="@+id/action_homeFragment_to_displaySparePartFragment"
             app:destination="@id/displaySparePartFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+           />
         <action
             android:id="@+id/action_homeFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+           />
         <action
             android:id="@+id/action_homeFragment_to_addEquipmentSellFragment"
             app:destination="@id/addEquipmentSellFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+            />
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -72,8 +67,7 @@
         <action
             android:id="@+id/action_displayEquipmentSellFragment_to_detailsEquipmentSellFragment"
             app:destination="@id/detailsEquipmentSellFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+            />
         <action
             android:id="@+id/action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment"
             app:destination="@id/equimentSellBottonSheetFrgment" />
@@ -90,8 +84,7 @@
         <action
             android:id="@+id/action_displayEquipmentRentFragment_to_detailsEquipmentRentFragment"
             app:destination="@id/detailsEquipmentRentFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+           />
         <action
             android:id="@+id/action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment"
             app:destination="@id/equipmentRentFilterBottomSheetFragment" />
@@ -124,9 +117,7 @@
         tools:layout="@layout/fragment_display_seller_products" >
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_detailsSellerProductFragment"
-            app:destination="@id/detailsSellerProductFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/detailsSellerProductFragment" />
         <action
             android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
             app:destination="@id/editSellerProductFragment" />
@@ -321,7 +312,6 @@
         android:id="@+id/detailsMarketFragment"
         android:name="com.example.teqelmasr.market.view.DetailsMarketFragment"
         android:label="DetailsMarketFragment"
-        app:popUpTo="@+id/marketFragment"
         >
         <argument
             android:name="product"
@@ -365,8 +355,7 @@
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_favouriteFragment"
             app:destination="@id/favouriteFragment"
-            app:popUpTo="@id/favouriteFragment"
-            app:popUpToInclusive="true"/>
+           />
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
