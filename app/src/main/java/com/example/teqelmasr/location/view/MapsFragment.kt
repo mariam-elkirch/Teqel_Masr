@@ -85,7 +85,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         )
         editor = sharedPreferences.edit()
 
-        prepRequestLocationUpdates()
+
         binding.searchButton.setOnClickListener(this)
         binding.saveButton.setOnClickListener(this)
 
@@ -167,60 +167,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     }
 
-    private fun prepRequestLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            requestLocationUpdates()
-        } else {
-            val permissionRequest = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-            requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
-        }
-    }
 
-    private fun requestLocationUpdates() {
-        locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
-        locationViewModel.getLocationLiveData()
-            .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                it.latitude
-                it.longitude
-                mylat.value = it.latitude
-                mylong.value = it.longitude
-                editor.putString("latitude", it.latitude)
-                editor.putString("longitude", it.longitude)
-                editor.apply()
-                editor.commit()
-                //  mylocation = LocationDetails(it.longitude,it.latitude)
-
-                Log.i("TAG", it.latitude + " mylat gps my long " + it.longitude)
-            })
-
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            LOCATION_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    requestLocationUpdates()
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Unable to update location without permission",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
-            else -> {
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            }
-        }
-    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap

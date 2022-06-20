@@ -19,6 +19,7 @@ import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -48,6 +49,14 @@ class EquipmentRentFilterBottomSheetFragment : BottomSheetDialogFragment()  {
                 filterValues.priceStart = rangePriceSlider.values[0]
                 filterValues.priceEnd = rangePriceSlider.values[1]
             }
+            rangePriceSlider.setLabelFormatter { value: Float ->
+                val format = NumberFormat.getInstance()
+                format.maximumFractionDigits = 0
+                // format.roundingMode = RoundingMode.CEILING
+                // format.currency = Currency.getInstance("EGP")
+                format.format(value.toDouble())
+            }
+
             applyButton.setOnClickListener {
                 val action =
                     EquipmentRentFilterBottomSheetFragmentDirections.actionEquipmentRentFilterBottomSheetFragmentToDisplayEquipmentRentFragment(
