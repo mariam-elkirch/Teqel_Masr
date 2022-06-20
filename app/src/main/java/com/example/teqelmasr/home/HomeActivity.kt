@@ -199,7 +199,18 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+        binding.bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> {
+                    Log.i("tag","homeeeeeeeee")
 
+                }
+
+
+
+            }
+            true
+        }
         if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
                 .equals(Constants.SELLER_TYPE))
         ) {
