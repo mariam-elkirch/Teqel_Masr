@@ -126,6 +126,7 @@
     <string name="le">LE</string>
     <string name="offer_for">Offer for</string>
     <string name="sell">Sell</string>
+    <string name="clickToChooseLocation">Choose your Location</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
