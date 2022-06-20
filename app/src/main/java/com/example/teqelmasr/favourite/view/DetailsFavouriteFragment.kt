@@ -6,6 +6,7 @@ import LineItem
 import NoteAttribute
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,12 +19,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
+import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.databinding.FragmentDetailsFavouriteBinding
 import com.example.teqelmasr.displayEquipmentRent.view.DisplayEquipmentRentFragmentArgs
+import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentDirections
 import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModel
 import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModelFactory
+import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.model.ContactInfo
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import favCustomer
@@ -36,6 +42,7 @@ class DetailsFavouriteFragment : Fragment() {
     private val args by navArgs<DetailsFavouriteFragmentArgs>()
     private val user = Firebase.auth.currentUser
    private lateinit var product : FavouriteProduct
+  lateinit var contactInfo : ContactInfo
     private val binding by lazy {FragmentDetailsFavouriteBinding.inflate(layoutInflater)}
     private var isFavorite : Boolean = true
     private val viewModel by lazy {
@@ -75,10 +82,15 @@ class DetailsFavouriteFragment : Fragment() {
                     val dateAfterCut = dateInString.substringBefore('T')
                     dateTxt.text = "${dateAfterCut}"
                 }
-                categoryTxt.text = context?.resources?.getString(R.string.EquipmentRent)
+                when(it.product.tags){
+                    Constants.SPARE_TAG ->categoryTxt.text =context?.resources?.getString(R.string.spare_parts)
+                    Constants.RENT_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentRent)
+                    Constants.SELL_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentSell)
+                }
                 typeTxt.text = it.product.productType
                 vendorTxt.text = it.product.templateSuffix
                 productDesc.text = it.product.bodyHtml
+                 contactInfo = ContactInfo(it.product.variants?.get(0)?.sku.toString(),it.product.variants?.get(0)?.title.toString())
                 val image = listOf(NoteAttribute(name = "image",value = it.product.images?.get(0)?.src))
                 val productInfo = listOf(LineItem(productID = it.product!!.variants?.get(0)!!.product_id!!,variant_id =it.product!!.variants?.get(0)!!.id!! ,taxable = false,title = it.product!!.title!!,1, it.product.variants?.get(0)?.price.toString()))
                 product = FavouriteProduct(DraftOrder(user?.email?:"unknown user",note = "",noteAttributes = image,lineItems = productInfo , customer = favCustomer(email = user?.email, firstName =user?.displayName,phone = user?.phoneNumber)) )
@@ -103,7 +115,26 @@ class DetailsFavouriteFragment : Fragment() {
                     }
 
                 }
+               showButton.setOnClickListener{
+                    if (user != null) {
+
+
+                        val action = DetailsFavouriteFragmentDirections.actionDetailsFavouriteFragmentToContactInfoFragment2(contactInfo,
+                            Constants.RENT_SOURCE)
+                        binding.root.findNavController().navigate(action)
+                    }else {
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.loginContactInfo),
+                            Snackbar.LENGTH_INDEFINITE
+                        ).setAction(getString(R.string.login)) {
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        }.setDuration(6000).show()
+                    }
+
+                }
         }
+
         }
         return binding.root
     }

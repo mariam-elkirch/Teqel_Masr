@@ -87,7 +87,8 @@ class DetailsEquipmentSellFragment : Fragment() {
         var title: TextView = view.findViewById(R.id.title_txt)
         title.text= args.productsell.title
         var price: TextView = view.findViewById(R.id.price_txt)
-        price.text= args.productsell.variants?.get(0)?.price.toString()
+        price.text= "${args.productsell.variants?.get(0)?.price.toString()} LE"
+        //"${equipmentSellItem.variants!![0]?.price.toString()} LE"
         var date: TextView = view.findViewById(R.id.date_txt)
         var show: Button = view.findViewById(R.id.showButton)
         show.setOnClickListener{
@@ -118,7 +119,7 @@ class DetailsEquipmentSellFragment : Fragment() {
 
 
         var category = view.findViewById<TextView>(R.id.category_txt)
-        category.text = "Equipment For Sell"
+        category.text = context?.resources?.getString(R.string.EquipmentSell)
         var type = view.findViewById<TextView>(R.id.type_txt)
         type.text = args.productsell.productType
         var manufactor = view.findViewById<TextView>(R.id.vendor_txt)
