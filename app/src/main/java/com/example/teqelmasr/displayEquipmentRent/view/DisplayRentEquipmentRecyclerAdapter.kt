@@ -21,6 +21,7 @@ class DisplayRentEquipmentRecyclerAdapter(val context: Context, private val list
 
     private var equipmentRentList = mutableListOf<Product>()
     private var originalEquipmentRentList: List<Product> = arrayListOf()
+
     fun setEquipmentRentList(equipmentRentList: List<Product>) {
         this.equipmentRentList = equipmentRentList.toMutableList()
         this.originalEquipmentRentList = equipmentRentList
