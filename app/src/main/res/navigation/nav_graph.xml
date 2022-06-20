@@ -355,10 +355,14 @@
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_favouriteFragment"
             app:destination="@id/favouriteFragment"
-           />
+            app:popUpTo="@id/favouriteFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_contactInfoFragment2"
+            app:destination="@id/contactInfoFragment" />
 
     </fragment>
 </navigation>

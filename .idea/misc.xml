@@ -17,6 +17,7 @@
         <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/layout/spare_part_item.xml" value="0.21603260869565216" />
         <entry key="..\:/ITI fundementals/graduationn teqel masr/app/src/main/res/menu/nav_menu.xml" value="0.19583333333333333" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/activity_home.xml" value="0.15806159420289856" />
+        <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/activity_test.xml" value="0.21770833333333334" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_details_seller_product.xml" value="0.1408514492753623" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_equipment_sell.xml" value="0.234375" />
         <entry key="..\:/ITI/Graduation Project/App/app/src/main/res/layout/fragment_display_seller_products.xml" value="0.15353260869565216" />
@@ -56,7 +57,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

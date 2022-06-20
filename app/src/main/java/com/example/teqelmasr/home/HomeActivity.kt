@@ -19,6 +19,8 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.NavController
@@ -35,6 +37,7 @@ import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.databinding.ActivityHomeBinding
 import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
+import com.example.teqelmasr.favourite.view.FavouriteFragment
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -204,15 +207,13 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.bottomNav.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeFragment -> {
-                    Log.i("tag","homeeeeeeeee")
+            if(it.itemId != R.id.homeFragment){
+                navController.navigateUp()
+            }/*else{
+                supportFragmentManager.beginTransaction().replace(R.id.hostFragment, HomeFragment()).commit()
+            }*/
 
-                }
-
-
-
-            }
+            NavigationUI.onNavDestinationSelected(it, navController)
             true
         }
         if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
