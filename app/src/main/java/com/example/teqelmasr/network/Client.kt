@@ -77,9 +77,9 @@ class Client : RemoteSource {
         Log.i("TAG", "addToFavorite: ${res.code()}")
         return res
     }
-    override suspend fun deleteFavProduct(product: FavouriteProduct){
+    override suspend fun deleteFavProduct(id: Long){
         val service = ApiManager.getInstance().create(WebService::class.java)
-        val res = service.deleteFavProduct(product!!.draftOrder!!.id!!)
+        val res = service.deleteFavProduct(id)
         Log.i("TAG", "deleteFavProduct: ${res.code()}")
     }
 

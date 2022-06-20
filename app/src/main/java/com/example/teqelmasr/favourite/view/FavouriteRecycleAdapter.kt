@@ -2,6 +2,7 @@ package com.example.teqelmasr.favourite
 
 import DraftOrder
 import FavouriteProduct
+import android.app.Dialog
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -11,29 +12,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teqelmasr.R
+import com.example.teqelmasr.databinding.FavoriteProductItemBinding
 import com.example.teqelmasr.databinding.SparePartItemBinding
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
+import com.example.teqelmasr.favourite.view.FavouriteFragment
 import com.example.teqelmasr.favourite.view.FavouriteFragmentDirections
+import com.example.teqelmasr.favourite.view.OnFavoriteClickListener
 import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModel
 import com.example.teqelmasr.favourite.viewModel.AddToFavoriteViewModelFactory
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 
-class FavouriteRecyclerAdapter(val context: Context) :
+class FavouriteRecyclerAdapter(val context: Context,val onClick :OnFavoriteClickListener ) :
     RecyclerView.Adapter<FavouriteViewHolder>()  {
 
     private var favouriteList = mutableListOf<DraftOrder>()
     private var originalfavouriteList: List<DraftOrder> = arrayListOf()
-
     fun setFavouriteList(favouriteList: List<DraftOrder>) {
         this.favouriteList = favouriteList.toMutableList()
         this.originalfavouriteList = favouriteList
@@ -42,7 +51,7 @@ class FavouriteRecyclerAdapter(val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = SparePartItemBinding.inflate(inflater, parent, false)
+        val binding = FavoriteProductItemBinding.inflate(inflater, parent, false)
         return FavouriteViewHolder(binding)
     }
 
@@ -53,10 +62,12 @@ class FavouriteRecyclerAdapter(val context: Context) :
             itemTitle.text = favouriteItem.lineItems.get(0).title ?: "Unknown"
             itemPrice.text = "${favouriteItem.lineItems.get(0).price} LE"
             itemCard.setOnClickListener {
-                v ->
-                val action = FavouriteFragmentDirections.actionFavouriteFragmentToDetailsFavouriteFragment(favouriteItem.lineItems.get(0).productID)
-                v.findNavController().navigate(action)
-                 }
+                    val action =
+                        FavouriteFragmentDirections.actionFavouriteFragmentToDetailsFavouriteFragment(
+                            favouriteItem.lineItems.get(0).productID,favouriteItem?.id!!)
+                    it.findNavController().navigate(action)
+            }
+            deleteFavButton.setOnClickListener { onClick.onFavoriteClick(FavouriteProduct(favouriteItem)) }
         }
         if (favouriteItem.noteAttributes.isNotEmpty()) {
             Glide.with(context).load(favouriteItem.noteAttributes.get(0).value).centerCrop()
@@ -110,5 +121,5 @@ class FavouriteRecyclerAdapter(val context: Context) :
 //    }
 }
 
-class FavouriteViewHolder(val binding: SparePartItemBinding) :
+class FavouriteViewHolder(val binding: FavoriteProductItemBinding) :
     RecyclerView.ViewHolder(binding.root)
