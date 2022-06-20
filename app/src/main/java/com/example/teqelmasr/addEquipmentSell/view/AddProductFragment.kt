@@ -1,5 +1,6 @@
 package com.example.teqelmasr.addEquipmentSell.view
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
@@ -27,13 +28,18 @@ import android.graphics.Bitmap.CompressFormat
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.view.View.*
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -45,6 +51,7 @@ import com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragmentArgs
 import com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragmentDirections
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.*
+import com.example.weathery.location.viewmodel.LocationViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -78,6 +85,18 @@ class AddEquipmentSellFragment : Fragment() {
     var locationFromMAp : String =""
     lateinit var productToMap : AddEditProduct
     lateinit var addProductfactory:AddProductViewModelFactory
+
+
+    private val LOCATION_PERMISSION_REQUEST_CODE: Int = 200
+    lateinit var locationViewModel: LocationViewModel
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+    val mylong = MutableLiveData<String>()
+    var mylocation = LocationDetails("", "")
+    var mylat = MutableLiveData<String>()
+    var doublelong: Double = 0.0
+    var doublelat: Double = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -102,7 +121,11 @@ class AddEquipmentSellFragment : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
-
+        sharedPreferences = requireContext().getSharedPreferences(
+            "shared",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences.edit()
 
          putOnEditTextDataFromArgs()
         val spinner = binding.spinner
@@ -261,7 +284,7 @@ class AddEquipmentSellFragment : Fragment() {
             Log.i("tag",it.toString()+ "product")
         }
 
-
+        prepRequestLocationUpdates()
         return  binding.root
        // return inflater.inflate(R.layout.fragment_add_equipment_sell, container, false)
     }
@@ -450,6 +473,60 @@ class AddEquipmentSellFragment : Fragment() {
             imageUri = data?.data
                     binding.productImg.setImageURI(imageUri)
 
+        }
+    }
+    private fun prepRequestLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            requestLocationUpdates()
+        } else {
+            val permissionRequest = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    private fun requestLocationUpdates() {
+        locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
+        locationViewModel.getLocationLiveData()
+            .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                it.latitude
+                it.longitude
+                mylat.value = it.latitude
+                mylong.value = it.longitude
+                editor.putString("latitude", it.latitude)
+                editor.putString("longitude", it.longitude)
+                editor.apply()
+                editor.commit()
+                //  mylocation = LocationDetails(it.longitude,it.latitude)
+
+                Log.i("TAG", it.latitude + " mylat gps my long " + it.longitude)
+            })
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    requestLocationUpdates()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Unable to update location without permission",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+            else -> {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            }
         }
     }
     private fun checkData(): Boolean {

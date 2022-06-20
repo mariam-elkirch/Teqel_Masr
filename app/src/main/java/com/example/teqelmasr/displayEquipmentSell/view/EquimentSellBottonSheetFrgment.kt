@@ -15,6 +15,7 @@ import com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFr
 import com.example.teqelmasr.model.FilterValues
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.text.NumberFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +48,14 @@ class EquimentSellBottonSheetFrgment :  BottomSheetDialogFragment() {
         filterValues.types = typesArray
         binding.apply {
             configureTypesCheckBoxes()
+            rangeSlider.setLabelFormatter { value: Float ->
+                val format = NumberFormat.getInstance()
+                format.maximumFractionDigits = 0
+                // format.roundingMode = RoundingMode.CEILING
+                // format.currency = Currency.getInstance("EGP")
+                format.format(value.toDouble())
+            }
+
             rangeSlider.addOnChangeListener { _, _, _ ->
                 filterValues.priceStart = rangeSlider.values[0]
                 filterValues.priceEnd = rangeSlider.values[1]
