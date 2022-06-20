@@ -119,7 +119,7 @@ class DetailsEquipmentSellFragment : Fragment() {
 
 
         var category = view.findViewById<TextView>(R.id.category_txt)
-        category.text = "Equipment For Sell"
+        category.text = context?.resources?.getString(R.string.EquipmentSell)
         var type = view.findViewById<TextView>(R.id.type_txt)
         type.text = args.productsell.productType
         var manufactor = view.findViewById<TextView>(R.id.vendor_txt)

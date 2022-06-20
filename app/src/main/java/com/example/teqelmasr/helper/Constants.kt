@@ -18,5 +18,4 @@ object Constants {
     const val RENT_SOURCE = "rent"
     const val SPARE_SOURCE = "spare"
 
-
 }

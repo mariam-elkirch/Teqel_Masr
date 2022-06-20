@@ -28,7 +28,7 @@ class DetailsSparePartFragment : Fragment() {
     private val binding by lazy { FragmentDetailsSparePartBinding.inflate(layoutInflater) }
     private val args by navArgs<DetailsSparePartFragmentArgs>()
     private var clicked = false
-
+    private var mycategory = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
