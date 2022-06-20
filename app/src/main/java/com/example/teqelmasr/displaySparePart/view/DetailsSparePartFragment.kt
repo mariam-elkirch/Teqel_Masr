@@ -39,7 +39,8 @@ class DetailsSparePartFragment : Fragment() {
                 findNavController().popBackStack()
             }
             titleTxt.text = args.product.title
-            priceTxt.text = args.product.variants?.get(0)?.price.toString()
+            priceTxt.text = "${args.product.variants?.get(0)?.price.toString()} LE"
+
             categoryTxt.text = args.product.tags
             typeTxt.text = args.product.productType
             productDesc.text = args.product.bodyHtml
