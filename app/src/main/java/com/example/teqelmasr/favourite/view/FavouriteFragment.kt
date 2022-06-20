@@ -18,12 +18,12 @@ import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 
 
-class FavouriteFragment : Fragment() {
+class FavouriteFragment : Fragment(),OnFavoriteClickListener {
     private val allFavProductList = ArrayList<FavouriteProduct>()
     private val binding by lazy { FragmentFavouriteBinding.inflate(layoutInflater) }
     private val favouriteAdapter by lazy {
         FavouriteRecyclerAdapter(
-            requireContext())
+            requireContext(),this)
     }
     private val viewModel by lazy {
         ViewModelProvider(
@@ -51,6 +51,7 @@ class FavouriteFragment : Fragment() {
          recyclerViewFav.layoutManager = LinearLayoutManager(requireContext())
      }
         fetchAllFavProducts()
+
         return binding.root
     }
 
@@ -62,9 +63,15 @@ class FavouriteFragment : Fragment() {
                 favouriteAdapter.setFavouriteList(it)
             }else {
                 favouriteAdapter.setFavouriteList(it)
+                favouriteAdapter.notifyDataSetChanged()
                 binding.nofav.visibility = View.GONE
             }
         }
+    }
+
+    override fun onFavoriteClick(product: FavouriteProduct) {
+        viewModel.deleteFavProduct(product?.draftOrder?.id!!)
+        fetchAllFavProducts()
     }
 
 }
