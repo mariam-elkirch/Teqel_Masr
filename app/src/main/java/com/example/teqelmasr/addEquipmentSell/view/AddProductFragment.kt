@@ -143,14 +143,14 @@ class AddEquipmentSellFragment : Fragment() {
                 if (position == 2){
                 binding.spinnerEquipment.visibility = INVISIBLE
                 binding.spinnerSpare.visibility = VISIBLE
-                     mytag =  "spare"
+                     mytag =  Constants.SPARE_TAG
             }else{
                     binding.spinnerEquipment.visibility = VISIBLE
                     binding.spinnerSpare.visibility = INVISIBLE
                     if(position == 0)
-                        mytag = "equimentsell"
+                        mytag = Constants.SELL_EQ_TAG
                     else{
-                        mytag = "equimentrent"
+                        mytag = Constants.RENT_EQ_TAG
                     }
             }
             }

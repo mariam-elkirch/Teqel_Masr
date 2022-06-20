@@ -58,12 +58,12 @@ class HomeActivity : AppCompatActivity() {
         )
     }
 
-   /* override fun onResume() {
-        super.onResume()
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
-            sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
-        Log.i(TAG, "USER_NAME FROM SHARED PREF: ${sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)}")
-    }*/
+    /* override fun onResume() {
+         super.onResume()
+         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
+             sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)
+         Log.i(TAG, "USER_NAME FROM SHARED PREF: ${sharedPref.getString(Constants.USER_NAME, Constants.GUEST_TYPE)}")
+     }*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,10 +91,13 @@ class HomeActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        getSupportActionBar()?.setHomeButtonEnabled(true)
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.apply {
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+            setDisplayShowTitleEnabled(false)
+        }
+
         binding.sininText.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
 
@@ -133,16 +136,19 @@ class HomeActivity : AppCompatActivity() {
                 Snackbar.LENGTH_SHORT
             )
             snackBar.setAction(getString(R.string.enable_connection)) {
-                val panelIntent = Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
-                startActivityForResult(panelIntent, 0)
-            }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
+                } else {
+                    startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+                }            }
             snackBar.show()
         }
         val bottomNavigationView = binding.bottomNav
 
-        //bottomNavigationView.itemActiveIndicatorColor = getColorStateList(R.color.primary_purple)
-        //bottomNavigationView.setBackgroundColor(Color.rgb(0, 71, 122))
-        viewModel.getCustomer()
+        if (isNetworkAvailable()) {
+            viewModel.getCustomer()
+
+        }
         viewModel.customer.observe(this) {
             if (!it.isNullOrEmpty()) {
                 binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
@@ -200,9 +206,18 @@ class HomeActivity : AppCompatActivity() {
             bottomNavigationView.menu.findItem(R.id.displaySellerProductsFragment).isVisible = false
 
         }
-        if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
-                .equals(Constants.GUEST_TYPE)){
-            Log.i(TAG, "onCreate: inside if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE) ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
+        if (sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
+                .equals(Constants.GUEST_TYPE)
+        ) {
+            Log.i(
+                TAG,
+                "onCreate: inside if(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE) ${
+                    sharedPref.getString(
+                        Constants.USER_TYPE,
+                        Constants.GUEST_TYPE
+                    )
+                }"
+            )
             val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
             val menu: Menu = navigationView.menu
             val logOut: MenuItem = menu.findItem(R.id.nav_logout)

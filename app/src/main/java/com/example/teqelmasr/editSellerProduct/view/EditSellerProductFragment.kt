@@ -93,8 +93,8 @@ class EditSellerProductFragment : Fragment() {
         binding.offerGroup.apply {
             args.currentProduct.tags.let {
                 when(it){
-                    "equimentsell" -> binding.sellBtn.isChecked = true
-                    "equimentrent" -> binding.rentBtn.isChecked = true
+                    Constants.SELL_EQ_TAG -> binding.sellBtn.isChecked = true
+                    Constants.RENT_EQ_TAG -> binding.rentBtn.isChecked = true
                     else -> {
                         this.visibility = View.GONE
                         binding.apply {
@@ -111,7 +111,7 @@ class EditSellerProductFragment : Fragment() {
         args.currentProduct.tags.let {
             binding.typeSpinner.apply {
                 when(it){
-                    "spare" -> {
+                    Constants.SPARE_TAG -> {
                         adapter = ArrayAdapter<String>(requireContext(),R.layout.support_simple_spinner_dropdown_item,spareArray!!)
                         setSelection(
                             when(args.currentProduct.productType){
@@ -151,8 +151,8 @@ class EditSellerProductFragment : Fragment() {
             addressEdt.text = args.currentProduct.variants?.get(0)?.option1
             categoryTxt.text = args.currentProduct.tags.let {
                 when (it) {
-                    "spare" -> getString(R.string.spare_parts)
-                    "equimentrent" -> getString(R.string.equipment_rent)
+                    Constants.SPARE_TAG -> getString(R.string.spare_parts)
+                    Constants.RENT_EQ_TAG -> getString(R.string.equipment_rent)
                     else -> {
                         getString(R.string.equipment_sell)
                     }
@@ -194,8 +194,8 @@ class EditSellerProductFragment : Fragment() {
                     bodyHtml = binding.productDesc.text.trim().toString(),
                     variants = variants,
                     tags = when(binding.sellBtn.isChecked){
-                              true -> "equimentsell"
-                        else -> {"equimentrent"}
+                              true -> Constants.SELL_EQ_TAG
+                        else -> {Constants.RENT_EQ_TAG}
                     },
                     productType = binding.typeSpinner.selectedItem.toString(),
                     images = imagelist,
@@ -263,11 +263,11 @@ class EditSellerProductFragment : Fragment() {
             variants = variants,
 
             tags = when(args.currentProduct.tags){
-                        "spare" -> "spare"
+                        Constants.SPARE_TAG -> Constants.SPARE_TAG
                 else -> {
                     when(binding.sellBtn.isChecked){
-                        true -> "equimentsell"
-                        else -> {"equimentsell"}
+                        true -> Constants.SELL_EQ_TAG
+                        else -> {Constants.RENT_EQ_TAG}
                     }
                 }
             },
@@ -284,10 +284,10 @@ class EditSellerProductFragment : Fragment() {
     }
     private fun checkTag(): Boolean =
         when(args.currentProduct.tags){
-            "spare" -> true
+            Constants.SPARE_TAG -> true
             else -> {
-                (args.currentProduct.tags.equals("equimentsell") && binding.sellBtn.isChecked
-                        || args.currentProduct.tags.equals("equimentrent") && binding.rentBtn.isChecked)
+                (args.currentProduct.tags.equals(Constants.SELL_EQ_TAG) && binding.sellBtn.isChecked
+                        || args.currentProduct.tags.equals(Constants.RENT_EQ_TAG) && binding.rentBtn.isChecked)
             }
         }
 
