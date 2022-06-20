@@ -12,11 +12,14 @@ object Constants {
     const val ADD_SOURCE = "add"
     const val DISPLAY_SELLER = "display_seller_fragment"
     const val MARKET_FRAGMENT = "market_fragment"
-
     const val EDIT_SOURCE = "edit"
     const val SELL_SOURCE = "sell"
     const val RENT_SOURCE = "rent"
     const val SPARE_SOURCE = "spare"
+    const val SELL_EQ_TAG = "equimentsell"
+    const val RENT_EQ_TAG = "equimentrent"
+    const val SPARE_TAG = "spare"
+
 
 
 }
