@@ -51,7 +51,7 @@ class SparePartsFilterBottomSheetFragment : BottomSheetDialogFragment() {
                 filterValues.priceStart = rangeSlider.values[0]
                 filterValues.priceEnd = rangeSlider.values[1]
             }
-            applyButton.setOnClickListener {
+            applyBtn.setOnClickListener {
 
                 isCheckBoxesChecked()
 

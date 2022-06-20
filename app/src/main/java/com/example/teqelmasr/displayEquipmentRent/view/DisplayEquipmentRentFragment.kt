@@ -26,7 +26,7 @@ import java.util.*
 
 
 class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
-    private val allProductList = ArrayList<Product>()
+    private var allProductList = ArrayList<Product>()
     private var filterResultList = ArrayList<Product>()
     private val args by navArgs<DisplayEquipmentRentFragmentArgs>()
 
@@ -84,15 +84,17 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
 
     override fun onResume() {
         super.onResume()
-            filterData()
-        fetchEquipmentRent()
+            //filterData()
+        //fetchEquipmentRent()
     }
 
     private fun fetchEquipmentRent() {
         viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
-            equipmentRentAdapter.setEquipmentRentList(it)
-           // searchResultList.addAll(it.products)
-            allProductList.addAll(it)
+            Log.i("TAG", "fetchEquipmentRent: ${it.size}")
+            //equipmentRentAdapter.setEquipmentRentList(it)
+           //searchResultList.addAll(it.products)
+            allProductList= it as ArrayList<Product>
+            filterData()
             binding.shimmerrent.stopShimmer()
             binding.shimmerrent.visibility = View.GONE
             binding.swipeRefreshLayoutRent.isRefreshing = false
@@ -134,8 +136,9 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                         && it.variants?.get(0)!!.price!! >= args.filterObj!!.priceStart!!
                         && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
             } as ArrayList<Product>
-
+            Log.i("TAG", "filterData: ${filterResultList.size}")
             equipmentRentAdapter.setEquipmentRentList(filterResultList)
+
             Log.i("TAG", "filter with type and price")
 
         }
@@ -147,6 +150,8 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                         && it.variants?.get(0)!!.price!! <= args.filterObj!!.priceEnd!!
             } as ArrayList<Product>
             equipmentRentAdapter.setEquipmentRentList(filterResultList)
+            Log.i("TAG", "filterData:price ${filterResultList.size}")
+
             Log.i("TAG", "filter with price only")
 
         }
@@ -158,16 +163,23 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
                     .lowercase(Locale.getDefault()) in args.filterObj!!.types!!
             } as ArrayList<Product>
             equipmentRentAdapter.setEquipmentRentList(filterResultList)
+
+            Log.i("TAG", "filterData:type ${filterResultList.size}")
+
             Log.i("TAG", "filter with type only")
 
         }
 
 
         else if( args.filterObj!!.types.isNullOrEmpty() && args.filterObj!!.priceEnd ==null){
+            filterResultList = allProductList
             equipmentRentAdapter.setEquipmentRentList(filterResultList)
+
             Log.i("TAG", "apply without input ")
 
         }
+    }else{
+        equipmentRentAdapter.setEquipmentRentList(allProductList)
     }
 
 }
