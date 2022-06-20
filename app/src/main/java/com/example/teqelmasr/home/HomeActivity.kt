@@ -90,10 +90,13 @@ class HomeActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        getSupportActionBar()?.setHomeButtonEnabled(true)
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
+        getSupportActionBar()?.apply {
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+            setDisplayShowTitleEnabled(false)
+        }
+
         binding.sininText.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
 
