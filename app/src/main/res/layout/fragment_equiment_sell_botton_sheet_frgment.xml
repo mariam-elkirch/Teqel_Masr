@@ -34,7 +34,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/price_range_txt"
         app:thumbColor="@color/orange"
-        app:trackColorActive="@color/dark_blue"
+        app:tickColor="@color/white"
+        app:trackColorActive="@color/orange"
         app:trackColorInactive="@color/cardview_shadow_start_color"
         app:values="@array/equipmentsliderValues" />
 
