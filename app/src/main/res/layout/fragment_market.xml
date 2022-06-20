@@ -11,11 +11,12 @@
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/spare_shimmer"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_spare_parts">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +45,6 @@
         android:iconifiedByDefault="false"
         android:queryBackground="@android:color/transparent"
         android:queryHint="Search Spare Parts"
-android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/recyclerView_all_products"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,6 @@ android:visibility="gone"
 
     <ImageButton
         android:id="@+id/filter_button"
-        android:visibility="gone"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_filter"
