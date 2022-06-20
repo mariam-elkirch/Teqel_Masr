@@ -82,7 +82,11 @@ class DetailsFavouriteFragment : Fragment() {
                     val dateAfterCut = dateInString.substringBefore('T')
                     dateTxt.text = "${dateAfterCut}"
                 }
-                categoryTxt.text = context?.resources?.getString(R.string.EquipmentRent)
+                when(it.product.tags){
+                    Constants.SPARE_TAG ->categoryTxt.text =context?.resources?.getString(R.string.spare_parts)
+                    Constants.RENT_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentRent)
+                    Constants.SELL_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentSell)
+                }
                 typeTxt.text = it.product.productType
                 vendorTxt.text = it.product.templateSuffix
                 productDesc.text = it.product.bodyHtml

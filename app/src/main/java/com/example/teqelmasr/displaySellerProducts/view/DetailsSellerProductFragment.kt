@@ -46,7 +46,11 @@ class DetailsSellerProductFragment : Fragment() {
             priceTxt.text = "${args.currentProduct.variants?.get(0)?.price.toString()} ${getString(R.string.le)}"
             dateTxt.text = args.currentProduct.published_at?.slice(IntRange(0,9))
             titleTxt.text = args.currentProduct.title
-            categoryTxt.text = args.currentProduct.tags
+            when(args.currentProduct.tags){
+                Constants.SPARE_TAG ->categoryTxt.text =context?.resources?.getString(R.string.spare_parts)
+                Constants.RENT_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentRent)
+                Constants.SELL_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentSell)
+            }
             typeTxt.text = args.currentProduct.productType
             Log.i(TAG, "${args.currentProduct.productType}")
             vendorTxt.text = args.currentProduct.templateSuffix
