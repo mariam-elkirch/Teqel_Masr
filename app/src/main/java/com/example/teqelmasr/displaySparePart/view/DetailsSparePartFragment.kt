@@ -28,7 +28,7 @@ class DetailsSparePartFragment : Fragment() {
     private val binding by lazy { FragmentDetailsSparePartBinding.inflate(layoutInflater) }
     private val args by navArgs<DetailsSparePartFragmentArgs>()
     private var clicked = false
-
+    private var mycategory = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,8 +39,13 @@ class DetailsSparePartFragment : Fragment() {
                 findNavController().popBackStack()
             }
             titleTxt.text = args.product.title
-            priceTxt.text = args.product.variants?.get(0)?.price.toString()
-            categoryTxt.text = args.product.tags
+            priceTxt.text = "${args.product.variants?.get(0)?.price.toString()} LE"
+            when(args.product.tags){
+                Constants.SPARE_TAG ->categoryTxt.text =context?.resources?.getString(R.string.spare_parts)
+                Constants.RENT_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentRent)
+                Constants.SELL_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentSell)
+            }
+         //args.product.tags
             typeTxt.text = args.product.productType
             productDesc.text = args.product.bodyHtml
             vendorTxt.text = args.product.templateSuffix

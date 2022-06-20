@@ -49,6 +49,7 @@ import com.google.firebase.ktx.Firebase
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val TAG = "HomeActivity"
+    private val user = Firebase.auth.currentUser
     private lateinit var sharedPref: SharedPreferences
     private lateinit var viewModel: LoginViewModel
     private val factory by lazy {
@@ -104,6 +105,19 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
 
             startActivity(intent)
+        }
+        binding.signinicon.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+
+            startActivity(intent)
+        }
+        if(user != null){
+            binding.signinicon.visibility = View.INVISIBLE
+            binding.sininText.visibility = View.INVISIBLE
+        }
+        else{
+            binding.signinicon.visibility = View.VISIBLE
+            binding.sininText.visibility = View.VISIBLE
         }
         /*  binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -189,7 +203,18 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+        binding.bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> {
+                    Log.i("tag","homeeeeeeeee")
 
+                }
+
+
+
+            }
+            true
+        }
         if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
                 .equals(Constants.SELLER_TYPE))
         ) {

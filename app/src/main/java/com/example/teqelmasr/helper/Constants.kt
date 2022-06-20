@@ -21,5 +21,4 @@ object Constants {
     const val SPARE_TAG = "spare"
 
 
-
 }
