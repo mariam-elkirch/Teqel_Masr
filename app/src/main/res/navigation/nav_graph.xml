@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_homeFragment_to_displayEquipmentSellFragment"
             app:destination="@id/displayEquipmentSellFragment"
-            />
+           />
         <action
             android:id="@+id/action_homeFragment_to_displayEquipmentRentFragment"
             app:destination="@id/displayEquipmentRentFragment"
@@ -21,11 +21,11 @@
         <action
             android:id="@+id/action_homeFragment_to_displaySparePartFragment"
             app:destination="@id/displaySparePartFragment"
-            />
+           />
         <action
             android:id="@+id/action_homeFragment_to_displaySellerProductsFragment"
             app:destination="@id/displaySellerProductsFragment"
-            />
+           />
         <action
             android:id="@+id/action_homeFragment_to_addEquipmentSellFragment"
             app:destination="@id/addEquipmentSellFragment"
@@ -84,7 +84,7 @@
         <action
             android:id="@+id/action_displayEquipmentRentFragment_to_detailsEquipmentRentFragment"
             app:destination="@id/detailsEquipmentRentFragment"
-            />
+           />
         <action
             android:id="@+id/action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment"
             app:destination="@id/equipmentRentFilterBottomSheetFragment" />

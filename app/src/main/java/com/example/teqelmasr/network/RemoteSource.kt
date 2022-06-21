@@ -20,7 +20,7 @@ interface RemoteSource {
     suspend fun storeProduct(product: ProductPost): Response<ProductItem>
     suspend fun getProductsByCategory(productCategory: Long) : Response<ProductItem>
 
-    suspend fun getMyProducts(): Response<ProductItem>
+    suspend fun getMyProducts(): ProductItem
     suspend fun getAllProducts(): Response<ProductItem>
 
     suspend fun deleteProduct(product: Product)
