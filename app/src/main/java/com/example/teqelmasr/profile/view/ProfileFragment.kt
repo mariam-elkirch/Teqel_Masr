@@ -151,8 +151,8 @@ class ProfileFragment : Fragment() {
                 binding.emailEdt.setText(customer[0].email.toString())
                 binding.nameEdt.setText(customer[0].first_name.toString())
                 when (customer[0].note!!) {
-                    getString(R.string.seller_note) -> binding.sellerRadioButton.isChecked = true
-                    getString(R.string.buyer_note) -> binding.buyerRadioButton.isChecked = true
+                    Constants.SELLER_TYPE -> binding.sellerRadioButton.isChecked = true
+                    Constants.BUYER_TYPE -> binding.buyerRadioButton.isChecked = true
                 }
                 binding.saveButton.setOnClickListener {
                     updateCustomer(customer[0].id!!, customer[0].first_name!!, customer[0].note!!)
