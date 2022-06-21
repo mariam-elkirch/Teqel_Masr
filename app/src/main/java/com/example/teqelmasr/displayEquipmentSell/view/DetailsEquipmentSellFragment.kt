@@ -1,4 +1,5 @@
 package com.example.teqelmasr.displayEquipmentSell.view
+
 import DraftOrder
 import FavouriteProduct
 import LineItem
@@ -59,27 +60,30 @@ class DetailsEquipmentSellFragment : Fragment() {
     var product : FavouriteProduct? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        sharedPreferences  = requireActivity().getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
         viewModelFactory = DisplayEquipmentSellViewModelFactory(
             Repository.getInstance(Client.getInstance(),requireContext())
         )
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory)[DisplayEquipmentSellViewModel::class.java]
+        viewModel.getFavProducts()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_sell, container, false)
-
-        //getFavoriteProduct()
+        if (user != null) {
+            Log.i("TAG", " User is signed in")
+        }else {
+            Log.i("TAG", " No user is signed in")
+        }
         productID = args.productsell.variants?.get(0)?.product_id
+        getSavedFavorite(view)
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-
-    setUI(view)
-
-
-
+        setUI(view)
+        getFavoriteProduct()
         return view
     }
 
@@ -151,7 +155,7 @@ class DetailsEquipmentSellFragment : Fragment() {
                 // the post response take into object
                 viewModel.favouriteResponse.observe(requireActivity()) {
                     favProduct = FavouriteProduct(it.draftOrder)
-                //    saveFavorite(favProduct!!)
+                   saveFavorite(favProduct!!)
                     Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
 
                 }
@@ -166,12 +170,51 @@ class DetailsEquipmentSellFragment : Fragment() {
                 Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
 
             }
-         //   removeFromShared(productID.toString())
+            removeFromShared(productID.toString())
             addedToFavorite?.visibility = View.GONE
             favIcon?.visibility = View.VISIBLE
 
         }
 
+    }
+    private fun saveFavorite(product : FavouriteProduct?){
+        var editor:SharedPreferences.Editor = sharedPreferences!!.edit()
+        sharedProductIDs.add(product?.draftOrder!!.lineItems[0].productID.toString() )
+        editor.clear()
+        editor.putStringSet("favID",sharedProductIDs)
+        editor.apply()
+        editor.commit()
+    }
+    private fun getSavedFavorite(view: View) {
+        productID = args.productsell.variants?.get(0)?.product_id
+        sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
+        if (sharedProductIDs.isNotEmpty()) {
+            isFavorite = productID.toString() in sharedProductIDs
+        }
+        if (sharedProductIDs.size == 0) {
+            viewModel.allFavListLiveData.observe(requireActivity()) {
+                for (fav in it) {
+                    favProduct = FavouriteProduct(fav)
+                    saveFavorite(favProduct ?: null)
+                    getSavedFavorite(view)
+                    setUI(view)
+                }
+            }
+        }
+    }
+    private fun removeFromShared(id : String) {
+        sharedProductIDs.remove(id)
+        sharedPreferences?.edit()?.clear()?.commit()
+        sharedPreferences?.edit()?.putStringSet("favID",sharedProductIDs)?.commit()
 
     }
+    private fun getFavoriteProduct(){
+     //   viewModel.getFavProduct(productID!!)
+        viewModel.favListLiveData.observe(requireActivity()) {
+            if (viewModel.favListLiveData.value?.size != 0) {
+                favProduct = FavouriteProduct(it[0])
+            }
+        }
+
+}
 }
