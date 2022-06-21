@@ -210,11 +210,23 @@ class HomeActivity : AppCompatActivity() {
 
                        Log.i("tag","popppppppp")
                     }*/
+            Log.i("tag",navController.currentDestination.toString()+"outerdestnation")
                     if(navController.currentDestination?.id != R.id.homeFragment){
                         navController.popBackStack()
                         Log.i("tag",navController.currentDestination.toString()+"destnation")
                     }
-
+            if(navController.currentDestination?.id == R.id.displayEquipmentSellFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"displaydestnation")
+            }
+            if(navController.currentDestination?.id == R.id.displayEquipmentRentFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"rentdisplaydestnation")
+            }
+            if(navController.currentDestination?.id == R.id.displaySparePartFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"sparedisplaydestnation")
+            }
               //  }
 
 
