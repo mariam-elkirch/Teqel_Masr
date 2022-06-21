@@ -14,7 +14,7 @@ interface WebService {
 
     @Headers(
         "Accept: application/json",
-        "X-Shopify-Access-Token: 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",
+        "X-Shopify-Access-Token: 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",
     )
     @GET("admin/collections/{CollectionID}/products.json")
     suspend fun getProducts(@Path("CollectionID") id: Long): Response<ProductItem>
@@ -22,7 +22,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
          "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @POST("admin/products.json")
 
@@ -31,14 +31,14 @@ interface WebService {
     //get seller products
     @Headers(
         "Accept: application/json",
-        "X-Shopify-Access-Token: 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",
+        "X-Shopify-Access-Token: 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",
     )
     @GET("admin/products.json")
     suspend fun getMyProducts(): Response<ProductItem>
 
     @Headers(
         "Accept: application/json",
-        "X-Shopify-Access-Token: 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",
+        "X-Shopify-Access-Token: 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",
     )
     @GET("admin/products.json")
     suspend fun getAllProducts(): Response<ProductItem>
@@ -48,7 +48,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @DELETE("admin/products/{productID}.json")
     suspend fun deleteProduct(@Path("productID") id: Long)
@@ -58,7 +58,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @PUT("admin/products/{productID}.json")
     suspend fun updateProduct(@Path("productID") id: Long, @Body product: ProductPost): Response<ProductItem>
@@ -67,7 +67,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @POST("admin/customers.json")
 
@@ -76,7 +76,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @PUT("admin/customers/{customer_id}.json")
     suspend fun updateCustomer(@Path("customer_id") id: Long, @Body customer: Customer): Response<Customer>
@@ -85,14 +85,14 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @GET("admin/customers.json")
     suspend fun getCustomers(): Response<CustomersResponse>
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @GET("admin/customers.json")
 
@@ -101,7 +101,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @POST("admin/draft_orders.json")
 
@@ -110,14 +110,14 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @DELETE("admin/draft_orders/{productID}.json")
     suspend fun deleteFavProduct(@Path("productID") id: Long): Response<FavouriteProduct>
 
     @Headers(
         "Accept: application/json",
-        "X-Shopify-Access-Token: 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",
+        "X-Shopify-Access-Token: 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",
     )
     @GET("admin/draft_orders.json")
     suspend fun getFavProducts(): Response<FavProducts>
@@ -125,7 +125,7 @@ interface WebService {
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
-        "X-Shopify-Access-Token: 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"
+        "X-Shopify-Access-Token: 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"
     )
     @GET("admin/products/{ProductID}.json")
     suspend fun getSpecificProduct(@Path("ProductID") id: Long): Response<OneProduct>
