@@ -206,16 +206,6 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
-        binding.bottomNav.setOnNavigationItemSelectedListener {
-            if(it.itemId != R.id.homeFragment){
-                navController.navigateUp()
-            }/*else{
-                supportFragmentManager.beginTransaction().replace(R.id.hostFragment, HomeFragment()).commit()
-            }*/
-
-            NavigationUI.onNavDestinationSelected(it, navController)
-            true
-        }
         if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
                 .equals(Constants.SELLER_TYPE))
         ) {
