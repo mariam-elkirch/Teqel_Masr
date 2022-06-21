@@ -4,6 +4,6 @@ import FavouriteProduct
 import com.example.teqelmasr.model.Product
 
 interface OnFavoriteClickListener {
-    fun onFavoriteClick(product: FavouriteProduct)
+    fun onFavoriteClick(product: FavouriteProduct , listSize : Int)
 
 }

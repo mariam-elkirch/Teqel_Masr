@@ -85,7 +85,7 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     override fun onResume() {
         super.onResume()
             //filterData()
-        //fetchEquipmentRent()
+      //  fetchEquipmentRent()
     }
 
     private fun fetchEquipmentRent() {
