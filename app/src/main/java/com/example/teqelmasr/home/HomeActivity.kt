@@ -200,15 +200,24 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.bottomNav.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeFragment -> {
-                    Log.i("tag","homeeeeeeeee")
+          //  when (it.itemId) {
+              //  R.id.homeFragment -> {
 
-                }
+                 /*  if (!navController.popBackStack()) {
+
+                       Log.i("tag","popppppppp")
+                    }*/
+                    if(navController.currentDestination?.id != R.id.homeFragment){
+                        navController.popBackStack()
+                        Log.i("tag",navController.currentDestination.toString()+"destnation")
+                    }
+
+              //  }
 
 
 
-            }
+           // }
+            NavigationUI.onNavDestinationSelected(it, navController)
             true
         }
         if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)

@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
         )
         loadBannerAd()
         binding.equipmentSellBtn.setOnClickListener {
+
             // binding.root.findNavController().navigate(R.id.action_homeFragment_to_displayEquipmentSellFragment)
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDisplayEquipmentSellFragment(null)
