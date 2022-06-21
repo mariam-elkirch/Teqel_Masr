@@ -35,7 +35,7 @@ class Client : RemoteSource {
     override suspend fun getProductsByCategory(productCategory: Long) =
         productsService.getProducts(productCategory)
 
-    override suspend fun getMyProducts(): Response<ProductItem> {
+    override suspend fun getMyProducts(): ProductItem {
         val service = ApiManager.getInstance().create(WebService::class.java)
         return service.getMyProducts()
     }

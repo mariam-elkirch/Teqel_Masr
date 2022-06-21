@@ -6,7 +6,7 @@ import retrofit2.Response
 
 interface RepositoryInterface {
 
-    suspend fun getMyProducts(): Response<ProductItem>
+    suspend fun getMyProducts(): ProductItem
     suspend fun getAllProducts(): Response<ProductItem>
     suspend fun storeProduct(product: ProductPost): Response<ProductItem>
     suspend fun deleteProduct(product: Product)

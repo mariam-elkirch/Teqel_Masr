@@ -34,7 +34,7 @@ interface WebService {
         "X-Shopify-Access-Token: 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",
     )
     @GET("admin/products.json")
-    suspend fun getMyProducts(): Response<ProductItem>
+    suspend fun getMyProducts(): ProductItem
 
     @Headers(
         "Accept: application/json",
