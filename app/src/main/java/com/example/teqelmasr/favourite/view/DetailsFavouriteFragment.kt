@@ -73,8 +73,11 @@ class DetailsFavouriteFragment : Fragment() {
         binding.apply {
             Log.i("TAG", "onCreateView: ${args.productID}")
             viewModel.productDetailsLiveData.observe(requireActivity()) {
-            Glide.with(activity?.baseContext!!).load(it.product.images?.get(0)?.src).centerCrop()
-                .placeholder(R.drawable.placeholder).into(imageItem)
+                if(isAdded){
+                    Glide.with(activity?.baseContext!!).load(it.product.images?.get(0)?.src).centerCrop()
+                        .placeholder(R.drawable.placeholder).into(imageItem)
+                }
+
                 titleTxt.text = it.product.title
                 priceTxt.text = it.product.variants?.get(0)?.price.toString()
                 val dateInString = it.product.updated_at.toString()

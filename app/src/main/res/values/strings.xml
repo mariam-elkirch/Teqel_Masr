@@ -115,7 +115,7 @@
     <string name="address">Address</string>
     <string name="please_wait">Please wait</string>
     <string name="addedToFav">added To Favourite</string>
-
+<string name="deleteFavItem">Are you sure delete this item from favourite?</string>
     <string name="deleteFromFav">deleted From Favourite</string>
     <string name="profile_updated">Profile Updated</string>
     <string name="signInFirst">Please Sign in first</string>
