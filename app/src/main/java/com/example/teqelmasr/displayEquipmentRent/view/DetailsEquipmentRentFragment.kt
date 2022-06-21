@@ -81,7 +81,7 @@ private fun setUI(view : View){
     var title:TextView = view.findViewById(R.id.title_txt)
     title.text= args.product.title
     var price:TextView = view.findViewById(R.id.price_txt)
-    price.text= "${args.product.variants?.get(0)?.price.toString()} LE"
+    price.text= "${args.product.variants?.get(0)?.price.toString()} " + getString(R.string.currency)
 
     var date:TextView = view.findViewById(R.id.date_txt)
     val dateInString = args.product.updated_at

@@ -64,7 +64,7 @@
                 android:backgroundTint="#00477A"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="18dp"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/item_image" />
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Edit"
+                android:text="@string/edit"
                 android:textSize="12dp"
                 android:backgroundTint="#00477A"
                 app:layout_constraintStart_toEndOf="@id/deleteBtn"
@@ -82,7 +82,7 @@
 
             <TextView
                 android:id="@+id/details"
-                android:text="Details"
+                android:text="@string/details"
                 android:backgroundTint= "@color/white"
                 android:textSize="13dp"
                 android:padding="12dp"
