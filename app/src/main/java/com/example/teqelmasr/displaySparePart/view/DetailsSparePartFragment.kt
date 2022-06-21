@@ -39,7 +39,7 @@ class DetailsSparePartFragment : Fragment() {
                 findNavController().popBackStack()
             }
             titleTxt.text = args.product.title
-            priceTxt.text = "${args.product.variants?.get(0)?.price.toString()} LE"
+            priceTxt.text = "${args.product.variants?.get(0)?.price.toString()} " + getString(R.string.currency)
             when(args.product.tags){
                 Constants.SPARE_TAG ->categoryTxt.text =context?.resources?.getString(R.string.spare_parts)
                 Constants.RENT_EQ_TAG ->categoryTxt.text =context?.resources?.getString(R.string.EquipmentRent)

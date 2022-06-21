@@ -19,14 +19,11 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -37,12 +34,9 @@ import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.databinding.ActivityHomeBinding
 import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
-import com.example.teqelmasr.favourite.view.FavouriteFragment
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
@@ -55,6 +49,9 @@ class HomeActivity : AppCompatActivity() {
     private val user = Firebase.auth.currentUser
     private lateinit var sharedPref: SharedPreferences
     private lateinit var viewModel: LoginViewModel
+    private val sharedPrefFile = "favorite"
+    private lateinit var sharedPreferences: SharedPreferences
+
     private val factory by lazy {
         LoginViewModelFactory(
             Repository.getInstance(
@@ -74,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        sharedPreferences  = applicationContext.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
         Log.i(TAG, "onCreate: ")
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -149,7 +146,6 @@ class HomeActivity : AppCompatActivity() {
                 }            }
             snackBar.show()
         }
-
         val bottomNavigationView = binding.bottomNav
 
         if (isNetworkAvailable()) {
@@ -206,6 +202,39 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+        binding.bottomNav.setOnNavigationItemSelectedListener {
+          //  when (it.itemId) {
+              //  R.id.homeFragment -> {
+
+                 /*  if (!navController.popBackStack()) {
+
+                       Log.i("tag","popppppppp")
+                    }*/
+            Log.i("tag",navController.currentDestination.toString()+"outerdestnation")
+                    if(navController.currentDestination?.id != R.id.homeFragment){
+                        navController.popBackStack()
+                        Log.i("tag",navController.currentDestination.toString()+"destnation")
+                    }
+            if(navController.currentDestination?.id == R.id.displayEquipmentSellFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"displaydestnation")
+            }
+            if(navController.currentDestination?.id == R.id.displayEquipmentRentFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"rentdisplaydestnation")
+            }
+            if(navController.currentDestination?.id == R.id.displaySparePartFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"sparedisplaydestnation")
+            }
+              //  }
+
+
+
+           // }
+            NavigationUI.onNavDestinationSelected(it, navController)
+            true
+        }
         if (!(sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)
                 .equals(Constants.SELLER_TYPE))
         ) {
@@ -253,7 +282,7 @@ class HomeActivity : AppCompatActivity() {
 
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
-            //rewan
+            sharedPreferences.edit().clear().apply()
         }
 
         builder.setNegativeButton(getString(R.string.no)) { _, _ ->
@@ -290,10 +319,24 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+/*        val fragmentTransaction = supportFragmentManager.beginTransaction()
 
+        fragmentTransaction.replace(R.id.hostFragment, DisplaySellerProductsFragment())
 
+        fragmentTransaction.commit()*/
+
+        //Log.i("TAG", "onBackPressed: ${binding.root.findNavController().currentDestination}")
+
+        //val fragmentInstance = supportFragmentManager.findFragmentById(R.id.hostFragment)
+        //fragmentInstance?.onCreate(null)
+        //Toast.makeText(this, "${fragmentInstance?.onCreate(null)}", Toast.LENGTH_SHORT).show()
+/*
+        if(fragmentInstance is DisplaySellerProductsFragment){
+            Toast.makeText(this, "${fragmentInstance.id}", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show()
+        }*/
+//        val action: NavDirections = DetailsSellerProductFragmentDirections.actionDetailsSellerProductFragmentToDisplaySellerProductsFragment(null)
+//        binding.root.findNavController().navigate(action)
     }
-
-
-
 }

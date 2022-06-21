@@ -90,8 +90,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser() {
 
-        val email = binding.emailEditText.text.toString()
-        val password = binding.passEditText.text.toString()
+        val email = binding.emailEditText.text.toString().trim()
+        val password = binding.passEditText.text.toString().trim()
 
         Log.i(TAG, "onCreate: email is $email and password is $password")
 

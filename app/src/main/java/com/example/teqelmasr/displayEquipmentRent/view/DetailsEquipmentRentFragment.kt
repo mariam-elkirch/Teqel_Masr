@@ -69,9 +69,9 @@ class DetailsEquipmentRentFragment : Fragment() {
         }else {
             Log.i("TAG", " No user is signed in")
         }
-        getSavedFavorite()
-        productID = args.product.variants?.get(0)?.product_id
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
+        productID = args.product.variants?.get(0)?.product_id
+        getSavedFavorite(view)
         setUI(view)
         getFavoriteProduct()
         return view
@@ -81,7 +81,7 @@ private fun setUI(view : View){
     var title:TextView = view.findViewById(R.id.title_txt)
     title.text= args.product.title
     var price:TextView = view.findViewById(R.id.price_txt)
-    price.text= "${args.product.variants?.get(0)?.price.toString()} LE"
+    price.text= "${args.product.variants?.get(0)?.price.toString()} " + getString(R.string.currency)
 
     var date:TextView = view.findViewById(R.id.date_txt)
     val dateInString = args.product.updated_at
@@ -144,19 +144,35 @@ private fun setUI(view : View){
         viewModel.favouriteResponse.observe(requireActivity()) {
             favProduct = FavouriteProduct(it.draftOrder)
             saveFavorite(favProduct!!)
-            Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
-
+            if(isAdded) {
+                Toast.makeText(
+                    requireActivity(),
+                    activity?.resources?.getString(R.string.addedToFav),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         } else{
-            Toast.makeText(activity, R.string.signInFirst, Toast.LENGTH_SHORT).show()
+             Snackbar.make(
+                 view,
+                 getString(R.string.have_to_login),
+                 Snackbar.LENGTH_INDEFINITE
+             ).setAction(getString(R.string.login)) {
+                 startActivity(Intent(requireContext(), LoginActivity::class.java))
+             }.setDuration(6000).show()
         }
     }
 
     addedToFavorite?.setOnClickListener {
         if (favProduct!=null) {
             viewModel.deleteFavProduct(favProduct!!)
-            Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
-
+            if (isAdded) {
+                Toast.makeText(
+                    requireActivity(),
+                    activity?.resources?.getString(R.string.deleteFromFav),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         removeFromShared(productID.toString())
         addedToFavorite?.visibility = View.GONE
@@ -172,7 +188,7 @@ private fun saveFavorite(product : FavouriteProduct?){
    editor.apply()
     editor.commit()
 }
-private fun getSavedFavorite() {
+private fun getSavedFavorite(view: View) {
     productID = args.product.variants?.get(0)?.product_id
     sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
     if (sharedProductIDs.isNotEmpty()) {
@@ -183,8 +199,8 @@ private fun getSavedFavorite() {
             for (fav in it) {
                 favProduct = FavouriteProduct(fav)
                 saveFavorite(favProduct ?: null)
-                getSavedFavorite()
-                setUI(requireView())
+                getSavedFavorite(view)
+                setUI(view)
             }
         }
     }

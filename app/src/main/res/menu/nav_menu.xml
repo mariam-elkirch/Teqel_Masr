@@ -12,7 +12,7 @@
     <item
         android:id="@+id/marketFragment"
         android:icon="@drawable/ic_baseline_store_mall_directory_24"
-        android:title="Market"
+        android:title="@string/market"
         />
 
     <item

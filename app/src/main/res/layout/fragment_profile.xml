@@ -142,7 +142,7 @@
                     android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/seller"
+                    android:text="@string/seller_note"
                     android:layout_marginStart="16dp"
                     android:buttonTint="@color/orange"
                     />

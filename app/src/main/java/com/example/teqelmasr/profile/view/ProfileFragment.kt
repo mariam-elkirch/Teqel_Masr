@@ -97,7 +97,10 @@ class ProfileFragment : Fragment() {
                         .lowercase(Locale.getDefault()),
                     id = customerId
                 )
-                editor.putString(Constants.USER_TYPE,radioButton.text.toString().lowercase(Locale.getDefault()))
+                when(radioButton.text.toString().lowercase(Locale.getDefault())){
+                    getString(R.string.seller_note) -> editor.putString(Constants.USER_TYPE,Constants.SELLER_TYPE)
+                    getString(R.string.buyer_note) -> editor.putString(Constants.USER_TYPE,Constants.BUYER_TYPE)
+                }
                 editor.apply()
 
                 val customer = Customer(customerObj)
@@ -148,8 +151,8 @@ class ProfileFragment : Fragment() {
                 binding.emailEdt.setText(customer[0].email.toString())
                 binding.nameEdt.setText(customer[0].first_name.toString())
                 when (customer[0].note!!) {
-                    Constants.SELLER_TYPE -> binding.sellerRadioButton.isChecked = true
-                    Constants.BUYER_TYPE -> binding.buyerRadioButton.isChecked = true
+                    getString(R.string.seller_note) -> binding.sellerRadioButton.isChecked = true
+                    getString(R.string.buyer_note) -> binding.buyerRadioButton.isChecked = true
                 }
                 binding.saveButton.setOnClickListener {
                     updateCustomer(customer[0].id!!, customer[0].first_name!!, customer[0].note!!)

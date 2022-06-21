@@ -307,6 +307,9 @@
             app:argType="com.example.teqelmasr.model.FilterObj"
             android:defaultValue="@null"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_marketFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsMarketFragment"
@@ -355,8 +358,7 @@
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_favouriteFragment"
             app:destination="@id/favouriteFragment"
-            app:popUpTo="@id/favouriteFragment"
-            app:popUpToInclusive="true"/>
+            />
         <action
             android:id="@+id/action_detailsFavouriteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -366,3 +368,4 @@
 
     </fragment>
 </navigation>
+

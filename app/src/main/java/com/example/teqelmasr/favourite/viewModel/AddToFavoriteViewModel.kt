@@ -36,10 +36,7 @@ class AddToFavoriteViewModel (private val repository: RepositoryInterface) : Vie
            val response = repository.getFavProducts()
            withContext(Dispatchers.Main) {
                if (response.isSuccessful) {
-
-
                    favoriteListMutableLiveData.postValue(response.body()?.draftOrders?.filter { favProduct -> favProduct.email.equals(user?.email) })
-
                }else {
                    Log.e(
                        "DisplayRentEquipmentViewModel",

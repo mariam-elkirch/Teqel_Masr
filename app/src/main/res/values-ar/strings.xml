@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="skip">تخطي</string>
+    <string name="home">الرئيسية</string>
+    <string name="title">العنوان</string>
+    <string name="describtion">الوصف</string>
+    <string name="manfactory">المصنع</string>
+    <string name="save">حفظ</string>
+    <string name="my_products_txt">منتجاتي</string>
+    <string name="price">السعر</string>
+    <string name="delete_message">متأكد إنك عايز تمسحه؟</string>
+    <string name="cancel">إلغاء</string>
+    <string name="item_deleted">تم المسح بنجاح</string>
+    <string name="category">الفئة</string>
+    <string name="type">النوع</string>
+    <string name="description">الوصف</string>
+    <string name="details">التفاصيل</string>
+    <string name="what_are_you_searching_for">بتدور على إيه؟</string>
+    <string name="save_message">عايز تحفظ التغييرات؟</string>
+    <string name="item_updated">تم ااتحديث بنجاح</string>
+    <string name="no_changes">مفيش تغييرات</string>
+    <string name="apply">تطبيق</string>
+    <string name="favourite">المفضلة</string>
+    <string name="sell_equip_txt">معدات للبيع</string>
+    <string name="rent_equip_txt">معدات للإيجار</string>
+    <string name="spare_txt">قطع غيار</string>
+    <string name="other">أخرى</string>
+    <string name="no_internet">مفيش اتصال انترنت</string>
+    <string name="sparetype">قطع غيار</string>
+    <string name="equip_type">معدات</string>
+    <string name="slogan">أفضل مكان لبيع وتأجير قطع الغيار و المعدات الثقيلة</string>
+    <string name="search_text">بتدور على إيه؟</string>
+    <string name="searching_for">بتدور على إيه؟</string>
+    <string name="offer">اعرض حاجة للبيع أو الإيجار</string>
+    <string name="currency">ج.م</string>
+    <string name="name">الإسم</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة السر</string>
+    <string name="register">إنشاء حساب جديد</string>
+    <string name="have_acount">عندك حساب؟</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="edit_profile">تعديل الصفحة الشخصية</string>
+    <string name="sure_to_edit_profile">متأكد إنك عايز تعدل بيانات صفحتك الشخصية؟</string>
+    <string name="nav_header_title">ضيف</string>
+    <string name="signin">تسجيل الدخول</string>
+    <string name="where_are_you_going">اختار مكانك</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="dont_have_an_account">معندكش حساب؟</string>
+    <string name="sure_you_want_to_log_out">متأكد إنك عايز تخرج من حسابك؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لأ</string>
+    <string name="already_exists">الإيميل دا مستخدم بالفعل مع حساب تاني</string>
+    <string name="not_valid_pass">كلمة السر لازم تكون أكتر من ست حروف</string>
+    <string name="badly_formatted">الإيميل غير صالح</string>
+    <string name="failed">"عملية إنشاء الحساب فشلت "</string>
+    <string name="success_reg">تم إنشاء حساب جديد بنجاح</string>
+    <string name="My_Products">منتجاتي</string>
+    <string name="language">اللغة</string>
+    <string name="profile">الصفحة الشخصية</string>
+    <string name="have_to_login">لازم تدخل من حسابك علشان تقدر تعرض منتج</string>
+    <string name="have_to_seller">لازم تغير نوع حسابك لبائع</string>
+    <string name="Telephone">رقم التلفون</string>
+    <string name="showcontactinfo">اعرض بيانات البائع</string>
+    <string name="address">العنوان</string>
+    <string name="please_wait">من فضلك انتظر</string>
+    <string name="switch_account">تغيير نوع الحساب</string>
+    <string name="no_search_results">مفيش نتائج للبحث عن</string>
+    <string name="call">اتصل</string>
+    <string name="loginContactInfo">لازم تدخل من حسابك علشان تشوف بيانات البائع</string>
+    <string name="le">ج.م</string>
+    <string name="offer_for">نوع عرض المنتج</string>
+    <string name="clickToChooseLocation">اختار مكانك</string>
+    <string name="market">السوق</string>
+    <string name="coldplaners">ماكينات الكشط على البارد</string>
+    <string name="compactors">المطاحن</string>
+    <string name="excavators">حفارات</string>
+    <string name="dozers">جرارات</string>
+
+    <string name="turbocharger">شاحن توربيني</string>
+    <string name="filter">منقي</string>
+    <string name="accumulator">المجمع</string>
+    <string name="valve">صمام</string>
+    <string name="hose">خرطوم</string>
+    <string name="miscellaneous">متفرقات</string>
+    <string name="hydraulic_components">المكونات الهيدروليكية</string>
+    <string-array name="type">
+        <item>معدات للبيع</item>
+        <item>معدات للايجار</item>
+        <item>قطع غيار</item>
+    </string-array>
+    <string-array name="equiments">
+        <item>ماكينات الكشط على البارد</item>
+        <item>المطاحن</item>
+        <item>حفارات</item>
+        <item>جرارات</item>
+        <item>أخرى</item>
+    </string-array>
+    <string-array name="spare">
+        <item>شاحن توربيني</item>
+        <item>منقي </item>
+        <item>المجمع </item>
+        <item>صمام </item>
+        <item> خرطوم </item>
+        <item> متفرقات </item>
+        <item>المكونات الهيدروليكية</item>
+        <item>أخرى </item>
+    </string-array>
+    <string name="vendor">المنتج</string>
+    <string name="discard">تجاهل</string>
+    <string name="delete">حذف</string>
+    <string name="edit">تعديل</string>
+    <string name="mobile">رقم التلفون</string>
+    <string name="price_range">نطاق السعر</string>
+    <string name="app_name">تقيل مصر</string>
+    <string name="rent">معدات للإيجار</string>
+    <string name="equipment">معدات للبيع</string>
+    <string name="spare_parts">قطع غيار</string>
+    <string name="enable_connection">افتح الاتصال</string>
+    <string name="register_seller">إنشاء حساب كبائع</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="buyer_note">مشتري</string>
+    <string name="seller_note">بائع</string>
+    <string name="seller">بائع</string>
+
+</resources>

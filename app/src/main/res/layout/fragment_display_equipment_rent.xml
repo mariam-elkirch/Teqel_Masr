@@ -14,7 +14,7 @@
         app:layout_constraintWidth_percent="0.75"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:queryHint="Search"
+        android:queryHint="@string/what_are_you_searching_for"
         app:layout_constraintBottom_toTopOf="@id/swipeRefreshLayoutRent"
         android:background="@drawable/custom_search_background"
         android:layout_margin="10dp"
