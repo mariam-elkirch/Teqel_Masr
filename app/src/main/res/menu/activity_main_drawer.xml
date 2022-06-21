@@ -19,8 +19,8 @@
             android:title="@string/profile"/>
         <item
             android:id="@+id/marketFragment"
-            android:icon="@drawable/store"
-            android:title="Market"
+            android:icon="@drawable/ic_baseline_store_mall_directory_24"
+            android:title="@string/market"
             />
     </group>
 

@@ -92,6 +92,12 @@ class FiltrationSheetFragment() : BottomSheetDialogFragment() {
 
         }
 
+        binding.apply {
+            firstCategory.text = getString(R.string.sell_equip_txt)
+            secondCategory.text = getString(R.string.rent_equip_txt)
+            thirdCategory.text = getString(R.string.spare_parts)
+        }
+
         binding.sellCheckBox.setOnCheckedChangeListener { compoundButton, b ->
             if(compoundButton.isChecked){
                 if(binding.spareCheckBox.isChecked){

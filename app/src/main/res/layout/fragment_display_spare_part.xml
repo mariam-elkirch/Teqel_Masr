@@ -84,9 +84,21 @@
         android:visibility="gone"
         android:textColor="@android:color/darker_gray"
         android:textStyle="bold"
-        android:textSize="17dp"
+        android:textSize="17sp"
         android:textAlignment="center"
         />
+
+    <TextView
+        android:id="@+id/no_products"
+        android:text="@string/no_products"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#D3D3D3"
+        android:textSize="40sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"

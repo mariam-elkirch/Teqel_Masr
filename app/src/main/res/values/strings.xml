@@ -29,9 +29,9 @@
     <string name="favourite">Favourite</string>
     <string name="no_products">No Products</string>
 
-    <string name="sell_equip_tag">equimentsell</string>
-    <string name="rent_equip_tag">equimentrent</string>
-    <string name="spare_tag">spare</string>
+    <string name="sell_equip_tag" translatable="false">equimentsell</string>
+    <string name="rent_equip_tag" translatable="false">equimentrent</string>
+    <string name="spare_tag" translatable="false">spare</string>
     <string name="sell_equip_txt">Equipment for Sell</string>
     <string name="rent_equip_txt">Equipment for Rent</string>
     <string name="spare_txt">Spare Parts</string>
@@ -58,6 +58,8 @@
     <string name="searching_for">What are you searching for?</string>
     <string name="offer">Offer a Product</string>
 
+    <string name="currency">L.E</string>
+
     <string name="filters">Filters</string>
     <string name="clear_all">Clear All</string>
     <string name="spare_parts">Spare Parts</string>
@@ -74,11 +76,11 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="sure_to_edit_profile">Are you sure you want to edit your profile?</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title">Guest</string>
-    <string name="nav_header_subtitle">user email</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_subtitle" translatable="false">user email</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="signin">sign in</string>
     <string name="where_are_you_going">Choose the Location</string>
     <string name="location">Location</string>
@@ -91,7 +93,7 @@
     <string name="already_exists">"Email is already use "</string>
     <string name="not_valid_pass">Password should be at least 6 characters</string>
     <string name="badly_formatted">Email not valid</string>
-    <string name="web_client_id">621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com</string>
+    <string name="web_client_id" translatable="false">621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com</string>
     <string name="failed">Registration Failed</string>
     <string name="success_reg">Successfully Registered</string>
     <string name="My_Products">My Products</string>
@@ -128,6 +130,9 @@
     <string name="sell">Sell</string>
     <string name="clickToChooseLocation">Choose your Location</string>
     <string name="EquipmentSell">Equipment For Sell</string>
+    <string name="market">Market</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />-->
     <SearchView
         android:id="@+id/search_view"
-        android:queryHint="What are you searching for?"
+        android:queryHint="@string/what_are_you_searching_for"
         android:background="@drawable/custom_search_background"
         android:layout_margin="10dp"
         android:iconifiedByDefault="false"
