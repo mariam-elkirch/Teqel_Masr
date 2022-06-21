@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -56,27 +57,44 @@ class FavouriteRecyclerAdapter(val context: Context,val onClick :OnFavoriteClick
     }
 
     override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
-        Log.i("TAG", "list size ${favouriteList.size}" )
+        Log.i("TAG", "list size ${favouriteList.size}")
         val favouriteItem = favouriteList[position]
         holder.binding.apply {
-            itemTitle.text = favouriteItem.lineItems.get(0).title ?: "Unknown"
-            itemPrice.text = "${favouriteItem.lineItems.get(0).price} LE"
-            itemCard.setOnClickListener {
+            if (favouriteItem != null) {
+                itemTitle.text = favouriteItem.lineItems.get(0).title ?: "Unknown"
+                itemPrice.text = "${favouriteItem.lineItems.get(0).price} LE"
+                itemCard.setOnClickListener {
                     val action =
                         FavouriteFragmentDirections.actionFavouriteFragmentToDetailsFavouriteFragment(
-                            favouriteItem.lineItems.get(0).productID,favouriteItem?.id!!)
+                            favouriteItem.lineItems.get(0).productID, favouriteItem?.id!!
+                        )
                     it.findNavController().navigate(action)
+                }
+                deleteFavButton.setOnClickListener {
+                    val builder = AlertDialog.Builder(context)
+                    builder.setMessage(R.string.deleteFavItem).setPositiveButton("yes"){
+                            dialog, _ ->    onClick.onFavoriteClick(FavouriteProduct((favouriteItem)),favouriteList.size)
+                        favouriteList.removeAt(position)
+                        notifyDataSetChanged()
+                        Toast.makeText(context,R.string.deleteFromFav,Toast.LENGTH_SHORT).show()
+                        dialog.dismiss()
+                    }
+                        .setNegativeButton("cancel"){
+                                dialog,_ -> dialog.dismiss()
+                            dialog.dismiss()
+                        }.create().show()
+
+                }
             }
-            deleteFavButton.setOnClickListener { onClick.onFavoriteClick(FavouriteProduct(favouriteItem)) }
-        }
-        if (favouriteItem.noteAttributes.isNotEmpty()) {
-            Glide.with(context).load(favouriteItem.noteAttributes.get(0).value).centerCrop()
-                .placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
-        }else{
-            holder.binding.itemImage.setImageResource(R.drawable.placeholder)
+
+            if (favouriteItem.noteAttributes.isNotEmpty()) {
+                Glide.with(context).load(favouriteItem.noteAttributes.get(0).value).centerCrop()
+                    .placeholder(R.drawable.placeholder).into(holder.binding.itemImage)
+            } else {
+                holder.binding.itemImage.setImageResource(R.drawable.placeholder)
+            }
         }
     }
-
     override fun getItemCount() = favouriteList.size
 
 //    override fun getFilter(): Filter {

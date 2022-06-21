@@ -144,19 +144,35 @@ private fun setUI(view : View){
         viewModel.favouriteResponse.observe(requireActivity()) {
             favProduct = FavouriteProduct(it.draftOrder)
             saveFavorite(favProduct!!)
-            Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
-
+            if(isAdded) {
+                Toast.makeText(
+                    requireActivity(),
+                    activity?.resources?.getString(R.string.addedToFav),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         } else{
-            Toast.makeText(activity, R.string.signInFirst, Toast.LENGTH_SHORT).show()
+             Snackbar.make(
+                 view,
+                 getString(R.string.have_to_login),
+                 Snackbar.LENGTH_INDEFINITE
+             ).setAction(getString(R.string.login)) {
+                 startActivity(Intent(requireContext(), LoginActivity::class.java))
+             }.setDuration(6000).show()
         }
     }
 
     addedToFavorite?.setOnClickListener {
         if (favProduct!=null) {
             viewModel.deleteFavProduct(favProduct!!)
-            Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
-
+            if (isAdded) {
+                Toast.makeText(
+                    requireActivity(),
+                    activity?.resources?.getString(R.string.deleteFromFav),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         removeFromShared(productID.toString())
         addedToFavorite?.visibility = View.GONE

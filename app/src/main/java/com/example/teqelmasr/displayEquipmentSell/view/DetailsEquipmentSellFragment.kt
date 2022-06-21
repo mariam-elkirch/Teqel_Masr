@@ -1,5 +1,4 @@
 package com.example.teqelmasr.displayEquipmentSell.view
-
 import DraftOrder
 import FavouriteProduct
 import LineItem
@@ -72,11 +71,8 @@ class DetailsEquipmentSellFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_sell, container, false)
-        if (user != null) {
-            Log.i("TAG", " User is signed in")
-        }else {
-            Log.i("TAG", " No user is signed in")
-        }
+
+        //getFavoriteProduct()
         productID = args.productsell.variants?.get(0)?.product_id
         getSavedFavorite(view)
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
@@ -155,20 +151,28 @@ class DetailsEquipmentSellFragment : Fragment() {
                 // the post response take into object
                 viewModel.favouriteResponse.observe(requireActivity()) {
                     favProduct = FavouriteProduct(it.draftOrder)
-                   saveFavorite(favProduct!!)
-                    Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
-
+                    saveFavorite(favProduct!!)
+                    if (isAdded) {
+                        Toast.makeText(activity, R.string.addedToFav, Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else{
-                Toast.makeText(activity, R.string.signInFirst, Toast.LENGTH_SHORT).show()
-            }
+                    Snackbar.make(
+                        view,
+                        getString(R.string.have_to_login),
+                        Snackbar.LENGTH_INDEFINITE
+                    ).setAction(getString(R.string.login)) {
+                        startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    }.setDuration(6000).show()
+                }
         }
 
         addedToFavorite?.setOnClickListener {
             if (favProduct!=null) {
                 viewModel.deleteFavProduct(favProduct!!)
-                Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
-
+                if (isAdded) {
+                    Toast.makeText(context, R.string.deleteFromFav, Toast.LENGTH_SHORT).show()
+                }
             }
             removeFromShared(productID.toString())
             addedToFavorite?.visibility = View.GONE
@@ -209,12 +213,12 @@ class DetailsEquipmentSellFragment : Fragment() {
 
     }
     private fun getFavoriteProduct(){
-     //   viewModel.getFavProduct(productID!!)
+        //   viewModel.getFavProduct(productID!!)
         viewModel.favListLiveData.observe(requireActivity()) {
             if (viewModel.favListLiveData.value?.size != 0) {
                 favProduct = FavouriteProduct(it[0])
             }
         }
 
-}
+    }
 }
