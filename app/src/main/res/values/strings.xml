@@ -2,7 +2,7 @@
     <string name="app_name">Teqel Masr</string>
     <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title">Title</string>
     <string name="describtion">describtion</string>
     <string name="manfactory">Manfactory</string>
@@ -18,7 +18,7 @@
     <string name="vendor">Vendor</string>
     <string name="description">Description</string>
     <string name="details">Details</string>
-    <string name="dummy_desc">It is the job of the turbocharger to compress more air flowing into the engine\'s cylinder. When air is compressed the oxygen molecules are packed closer together. This increase in air means that more fuel can be added for the same si</string>
+    <string name="dummy_desc" translatable="false">It is the job of the turbocharger to compress more air flowing into the engine\'s cylinder. When air is compressed the oxygen molecules are packed closer together. This increase in air means that more fuel can be added for the same si</string>
     <string name="what_are_you_searching_for">What are you searching for?</string>
     <string name="save_message">Save Changes?</string>
     <string name="item_updated">Item Updated</string>
@@ -99,7 +99,7 @@
     <string name="My_Products">My Products</string>
     <string name="language">Language</string>
     <string name="profile">Profile</string>
-    <string name="user_type">UserType</string>
+    <string name="user_type" translatable="false">UserType</string>
     <string name="seller">Seller</string>
     <string name="have_to_login">You have to login to offer a product</string>
     <string name="seller_note">seller</string>
@@ -133,6 +133,8 @@
     <string name="market">Market</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="name_error">name can\'t be empty</string>
+    <string name="logged_in">Logged in Successfully</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

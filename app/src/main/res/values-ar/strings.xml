@@ -78,7 +78,7 @@
     <string name="dozers">جرارات</string>
 
     <string name="turbocharger">شاحن توربيني</string>
-    <string name="filter">منقي</string>
+    <string name="filter">فلتر</string>
     <string name="accumulator">المجمع</string>
     <string name="valve">صمام</string>
     <string name="hose">خرطوم</string>
@@ -122,5 +122,15 @@
     <string name="buyer_note">مشتري</string>
     <string name="seller_note">بائع</string>
     <string name="seller">بائع</string>
+    <string name="sell">معدات للبيع</string>
+    <string name="logged_in">تم تسجيل الدخول بنجاح</string>
+    <string name="addedToFav">"تمت الإضافة إلى المفضلة "</string>
+    <string name="no_products">لا يوجد منتجات</string>
+    <string name="deleteFavItem">متأكد إنك عايز تمسحه من المفضلة؟</string>
+    <string name="deleteFromFav">تم المسح من المفضلة</string>
+    <string name="profile_updated">تم تحديث الصفحة الشخصية</string>
+    <string name="signInFirst">من فضلك سجل الدخول</string>
+    <string name="name_error">من فضلك أدخل الإسم</string>
+    <string name="noFavProduct">لا يوجد منتجات في المفضلة</string>
 
 </resources>

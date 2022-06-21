@@ -149,7 +149,7 @@ class LoginActivity : AppCompatActivity() {
             dialog.dismiss()
             Toast.makeText(
                 baseContext,
-                "Logged in Successfully.",
+                getString(R.string.logged_in),
                 Toast.LENGTH_SHORT
             ).show()
             startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
