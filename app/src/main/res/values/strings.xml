@@ -135,6 +135,10 @@
     <string name="edit">Edit</string>
     <string name="name_error">name can\'t be empty</string>
     <string name="logged_in">Logged in Successfully</string>
+    <string name="forgetpassword">Forgot password</string>
+    <string name="Emailsent"> Email Sent </string>
+    <string name="checkEmail">Make sure the email you entered is correct</string>
+    <string name="enterEmail">Please Enter your email</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>
