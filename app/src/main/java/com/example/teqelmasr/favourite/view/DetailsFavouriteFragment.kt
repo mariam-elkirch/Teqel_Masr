@@ -97,27 +97,8 @@ class DetailsFavouriteFragment : Fragment() {
                 val image = listOf(NoteAttribute(name = "image",value = it.product.images?.get(0)?.src))
                 val productInfo = listOf(LineItem(productID = it.product!!.variants?.get(0)!!.product_id!!,variant_id =it.product!!.variants?.get(0)!!.id!! ,taxable = false,title = it.product!!.title!!,1, it.product.variants?.get(0)?.price.toString()))
                 product = FavouriteProduct(DraftOrder(user?.email?:"unknown user",note = "",noteAttributes = image,lineItems = productInfo , customer = favCustomer(email = user?.email, firstName =user?.displayName,phone = user?.phoneNumber)) )
-                if (isFavorite){
-                    favIcon?.visibility = View.GONE
-                    favFillIcon?.visibility = View.VISIBLE
-                }else{
-                    favFillIcon?.visibility = View.GONE
-                    favIcon?.visibility = View.VISIBLE
-                }
-                favFillIcon.setOnClickListener {
-                    viewModel.deleteFavProduct(args.draftOrderID)
-                    favIcon.visibility = View.VISIBLE
-                    favFillIcon.visibility = View.GONE
 
-                }
-                favIcon.setOnClickListener {
-                    if(product!=null){
-                        favIcon.visibility = View.GONE
-                        favFillIcon?.visibility = View.VISIBLE
-                        viewModel.addToFavorite(product!!)
-                    }
 
-                }
                showButton.setOnClickListener{
                     if (user != null) {
 
