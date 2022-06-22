@@ -5,10 +5,16 @@ import android.location.Address
 import android.location.Geocoder
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.io.IOException
 
 class Utilities {
-    companion object{
+
+
+    companion object {
+
+
         fun getAddress(latLng: LatLng, context: Context): String {
 
             val geocoder = Geocoder(context)
@@ -30,5 +36,16 @@ class Utilities {
             }
 
             return addressText
-        }}
+        }
+
+        fun isUserLoggedIn(): Boolean {
+            var isExist : Boolean
+            if(Firebase.auth.currentUser != null)
+             isExist = true
+            else{
+                isExist = false
+            }
+            return isExist
+        }
+    }
 }

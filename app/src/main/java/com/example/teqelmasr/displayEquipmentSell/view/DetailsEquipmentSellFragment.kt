@@ -37,6 +37,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 
 import com.example.teqelmasr.model.Repository
+import com.example.teqelmasr.model.Utilities
 import com.example.teqelmasr.network.Client
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -96,7 +97,7 @@ class DetailsEquipmentSellFragment : Fragment() {
         var date: TextView = view.findViewById(R.id.date_txt)
         var show: Button = view.findViewById(R.id.showButton)
         show.setOnClickListener{
-            if (user != null) {
+            if (Utilities.isUserLoggedIn()) {
                 Log.i("TAG", " User is signed in")
                 Log.i("tag",args.productsell.variants?.get(0)?.title.toString()+"args title")
                 var contact = ContactInfo(args.productsell.variants?.get(0)?.sku.toString(),args.productsell.variants?.get(0)?.title.toString())

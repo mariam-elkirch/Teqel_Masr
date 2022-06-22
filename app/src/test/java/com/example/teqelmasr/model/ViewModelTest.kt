@@ -18,12 +18,11 @@ import org.robolectric.annotation.Config
 class ViewModelTest : TestCase() {
     private lateinit var repository: Repository
     private lateinit var fakeDataSource: FakeDataSource
-    private lateinit var viewModel: MyProductsViewModel
-    private  lateinit var factory : MyProductsViewModelFactory
+
     val context = ApplicationProvider.getApplicationContext<Context>()
 
     @Before
-    fun obtainRepoInstance() {
+    fun obtainViewModelInstance() {
         fakeDataSource = FakeDataSource()
         repository = Repository.getInstance(fakeDataSource, context)
     }
