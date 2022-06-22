@@ -73,6 +73,21 @@ class LoginActivity : AppCompatActivity() {
 
 
         }
+        binding.forgetPass.setOnClickListener {
+            val emailAddress = binding.emailEditText.text.toString()
+            if (!(emailAddress.isNullOrEmpty())) {
+                Firebase.auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener{
+                   task -> if (task.isSuccessful){
+                     Toast.makeText(baseContext,R.string.Emailsent,Toast.LENGTH_SHORT).show()
+                }
+                    else{
+                    Toast.makeText(baseContext,R.string.checkEmail,Toast.LENGTH_SHORT).show()
+                }
+                }
+            }else{
+                Toast.makeText(baseContext,R.string.enterEmail,Toast.LENGTH_SHORT).show()
+            }
+        }
 
         binding.skipTextView.setOnClickListener {
             val editor = sharedPref.edit()
