@@ -1,5 +1,6 @@
 package com.example.teqelmasr.displaySparePart.viewModel
 
+import FavouriteProduct
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +16,7 @@ import kotlinx.coroutines.withContext
 class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : ViewModel() {
     private val sparePartsMutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
     val sparePartsLiveData: LiveData<List<Product>> = sparePartsMutableLiveData
+    val favouriteResponse = MutableLiveData<FavouriteProduct>()
 
     //private val filteredSparePartsMutableLiveData: MutableLiveData<List<Product>> =
  //       MutableLiveData()
@@ -39,6 +41,20 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
                     )
                 }
             }
+        }
+    }
+    fun addToFavorite(product: FavouriteProduct){
+        viewModelScope.launch {
+            // var  response = repository.addToFavorite(product).body()!!
+            favouriteResponse.postValue(repository.addToFavorite(product).body())
+
+        }
+
+    }
+
+    fun deleteFavProduct(product: FavouriteProduct){
+        viewModelScope.launch {
+            repository.deleteFavProduct(product?.draftOrder!!.id!!)
         }
     }
 

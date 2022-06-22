@@ -200,7 +200,10 @@ class DetailsEquipmentSellFragment : Fragment() {
                 for (fav in it) {
                     favProduct = FavouriteProduct(fav)
                     saveFavorite(favProduct ?: null)
-                    getSavedFavorite(view)
+                    sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
+                    if (sharedProductIDs.isNotEmpty()) {
+                        isFavorite = productID.toString() in sharedProductIDs
+                    }
                     setUI(view)
                 }
             }

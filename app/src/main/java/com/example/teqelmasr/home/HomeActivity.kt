@@ -282,6 +282,7 @@ class HomeActivity : AppCompatActivity() {
 
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
+            Log.i(TAG, "logOutUser: "+sharedPreferences.getStringSet("favID", mutableSetOf()))
             sharedPreferences.edit().clear().apply()
         }
 
