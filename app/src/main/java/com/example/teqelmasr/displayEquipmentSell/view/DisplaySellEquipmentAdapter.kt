@@ -39,7 +39,7 @@ class DisplaySellEquipmentAdapter (val context: Context, private val listener: O
         val equipmentSellItem = equipmentSellList[position]
         holder.binding.apply {
             itemTitle.text = equipmentSellItem.title ?: "Unknown"
-            itemPrice.text = "${equipmentSellItem.variants!![0]?.price.toString()} LE"//equipmentSellItem.variants?.get(0)?.price.toString()
+            itemPrice.text = "${equipmentSellItem.variants!![0]?.price.toString()} " + context.getString(R.string.currency)//equipmentSellItem.variants?.get(0)?.price.toString()
             itemCard.setOnClickListener {
                // val action = DisplayEquipmentRentFragmentDirections.actionDisplayEquipmentRentFragmentToDetailsEquipmentRentFragment(equipmentRentItem)
                 listener.onProductClick(equipmentSellItem) }

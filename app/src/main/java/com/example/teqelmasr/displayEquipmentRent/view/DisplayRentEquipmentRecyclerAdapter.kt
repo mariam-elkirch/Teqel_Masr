@@ -39,7 +39,7 @@ class DisplayRentEquipmentRecyclerAdapter(val context: Context, private val list
         val equipmentRentItem = equipmentRentList[position]
         holder.binding.apply {
             itemTitle.text = equipmentRentItem.title ?: "Unknown"
-           itemPrice.text = "${equipmentRentItem.variants!![0]?.price.toString()} LE"
+           itemPrice.text = "${equipmentRentItem.variants!![0]?.price.toString()} " + context.getString(R.string.currency)
            itemCard.setOnClickListener { listener.onProductClick(equipmentRentItem) }
         }
         Glide.with(context).load(equipmentRentItem.image?.src).centerCrop()
