@@ -535,6 +535,7 @@ class AddEquipmentSellFragment : Fragment() {
           || binding.describtionEditText.getText().toString().trim().equals("")
           || binding.titleEditText.getText().toString().trim().equals("")
           || binding.telphoneEditText.getText().toString().trim().equals(""))
+
                     return false
         else{
             return true
