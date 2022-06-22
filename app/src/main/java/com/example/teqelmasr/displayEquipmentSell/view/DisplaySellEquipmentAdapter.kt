@@ -56,6 +56,9 @@ class DisplaySellEquipmentAdapter (val context: Context, private val listener: O
                 val filterResults = FilterResults()
                 if (query == null || query.isEmpty()) {
                     filterResults.values = filteredEquipmentSellList
+                    Handler(Looper.getMainLooper()).post {
+                        listener.onFullList()
+                    }
                 } else {
                     val searchKey = query.toString().lowercase(Locale.getDefault())
                     val filteredList = ArrayList<Product>()

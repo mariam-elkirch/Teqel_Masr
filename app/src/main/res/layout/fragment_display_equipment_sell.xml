@@ -56,11 +56,23 @@
         app:layout_constraintBottom_toBottomOf="@id/search_equipment_sell"
         />
 
+
+    <TextView
+        android:id="@+id/no_products"
+        android:text="@string/no_products"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#D3D3D3"
+        android:textSize="40sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <ImageView
         android:id="@+id/no_results_image"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/search"
+        android:src="@drawable/ic_no_results"
         app:layout_constraintTop_toBottomOf="@id/search_equipment_sell"
         app:layout_constraintBottom_toTopOf="@id/no_result_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        android:textColor="@color/black"
+        android:textColor="@android:color/darker_gray"
         android:textStyle="bold"
         android:textSize="17dp"
         android:textAlignment="center"

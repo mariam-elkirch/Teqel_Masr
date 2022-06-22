@@ -81,6 +81,7 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         binding.apply {
+            noProducts.visibility = View.GONE
             recyclerViewSellEquipment.adapter = equipmentSellAdapter
             recyclerViewSellEquipment.hasFixedSize()
 
@@ -97,15 +98,16 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
                     return true
                 }
 
+
             })
-            searchEquipmentSell.setOnCloseListener(SearchView.OnCloseListener() {
+
+            searchEquipmentSell.setOnCloseListener(android.widget.SearchView.OnCloseListener() {
                 binding.apply {
                     noResultsImage.visibility = View.GONE
                     noResultText.visibility = View.GONE
                 }
                 false
             })
-
         }
         binding.filterButton.setOnClickListener { findNavController().navigate(R.id.action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment) }
 
@@ -113,6 +115,9 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
 
             Log.i("tag","on Refresh")
             viewModel.fetchSellEquipments()
+            onFullList()
+            binding.searchEquipmentSell.setQuery("", false)
+            binding.searchEquipmentSell.clearFocus()
         }
         fetchEquipmentSell()
         Log.i("tag",args.filterValue?.types.toString()+"ttttttttt")
@@ -142,6 +147,9 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
         if (productsList.isNullOrEmpty()) {
             binding.shimmersell.stopShimmer()
             binding.shimmersell.visibility = View.GONE
+            binding.noProducts.visibility = View.VISIBLE
+        } else {
+            binding.noProducts.visibility = View.INVISIBLE
         }
         if (args.filterValue != null && !(args.filterValue!!.types.isNullOrEmpty()) &&
            args.filterValue!!.priceEnd == null) {
@@ -233,10 +241,23 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
     }
 
     override fun onEmptyList(searchKey: String) {
-
+        binding.apply {
+            noResultsImage.visibility = View.VISIBLE
+            noResultText.text = "${getString(R.string.no_search_results)} \"$searchKey\""
+            noResultText.visibility = View.VISIBLE
+            binding.noProducts.visibility = View.GONE
+        }
+    }
+    override fun onPause() {
+        super.onPause()
+        binding.noProducts.visibility = View.GONE
     }
 
     override fun onFullList() {
-
+        binding.apply {
+            noResultsImage.visibility = View.GONE
+            noResultText.visibility = View.GONE
+            binding.noProducts.visibility = View.GONE
+        }
     }
 }
