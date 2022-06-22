@@ -58,6 +58,9 @@
             android:name="ProductFromMap"
             app:argType="com.example.teqelmasr.model.AddEditProduct"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/displayEquipmentSellFragment"

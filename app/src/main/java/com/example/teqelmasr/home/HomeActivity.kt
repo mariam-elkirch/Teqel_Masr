@@ -227,8 +227,20 @@ class HomeActivity : AppCompatActivity() {
                 navController.popBackStack()
                 Log.i("tag",navController.currentDestination.toString()+"sparedisplaydestnation")
             }
+         /*   if(navController.currentDestination?.id == R.id.displaySellerProductsFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"sellerdisplaydestnation")
+            }
+          /*  if(navController.currentDestination?.id == R.id.addEquipmentSellFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"sellerdisplaydestnation")
+            }*/
+            if(navController.currentDestination?.id == R.id.mapsFragment){
+                navController.popBackStack()
+                Log.i("tag",navController.currentDestination.toString()+"sellerdisplaydestnation")
+            }
               //  }
-
+*/
 
 
            // }

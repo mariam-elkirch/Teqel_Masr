@@ -426,7 +426,7 @@ class AddEquipmentSellFragment : Fragment() {
             delay(3200)
             dialog.dismiss()
             Toast.makeText(context, R.string.save, Toast.LENGTH_SHORT).show()
-            val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToDisplaySellerProductsFragment()
+            val action: NavDirections = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToHomeFragment()
             binding.root.findNavController().navigate(action)
         }
     }
