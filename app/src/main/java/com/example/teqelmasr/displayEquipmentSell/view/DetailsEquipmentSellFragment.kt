@@ -57,6 +57,9 @@ class DetailsEquipmentSellFragment : Fragment() {
     private var sharedPreferences: SharedPreferences? = null
     private var sharedProductIDs = mutableSetOf<String>()
     private var productID : Long? = 0
+    private lateinit var favIcon  : ImageView
+    private lateinit var addedToFavorite  : ImageView
+
     var product : FavouriteProduct? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -75,7 +78,7 @@ class DetailsEquipmentSellFragment : Fragment() {
 
         //getFavoriteProduct()
         productID = args.productsell.variants?.get(0)?.product_id
-        getSavedFavorite(view)
+        getSavedFavorite()
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
@@ -135,8 +138,8 @@ class DetailsEquipmentSellFragment : Fragment() {
             val productInfo = listOf(LineItem(productID = args.productsell!!.variants?.get(0)!!.product_id!!,variant_id =args.productsell!!.variants?.get(0)!!.id!! ,taxable = false,title = args.productsell!!.title!!,1, args.productsell.variants?.get(0)?.price.toString()))
             product = FavouriteProduct(DraftOrder(user.email?:"unknown user",note = "",noteAttributes = image,lineItems = productInfo , customer = favCustomer(email = user.email, firstName =user.displayName,phone = user.phoneNumber)) )
         }
-        var favIcon = view?.findViewById<ImageView>(R.id.fav_icon)
-        var addedToFavorite = view?.findViewById<ImageView>(R.id.favFill_icon)
+         favIcon = view.findViewById(R.id.fav_icon)
+         addedToFavorite = view.findViewById(R.id.favFill_icon)
         if (isFavorite){
             favIcon?.visibility = View.GONE
             addedToFavorite?.visibility = View.VISIBLE
@@ -190,7 +193,7 @@ class DetailsEquipmentSellFragment : Fragment() {
         editor.apply()
         editor.commit()
     }
-    private fun getSavedFavorite(view: View) {
+    private fun getSavedFavorite() {
         productID = args.productsell.variants?.get(0)?.product_id
         sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
         if (sharedProductIDs.isNotEmpty()) {
@@ -205,7 +208,13 @@ class DetailsEquipmentSellFragment : Fragment() {
                     if (sharedProductIDs.isNotEmpty()) {
                         isFavorite = productID.toString() in sharedProductIDs
                     }
-                    setUI(view)
+                    if (isFavorite){
+                        favIcon?.visibility = View.GONE
+                        addedToFavorite?.visibility = View.VISIBLE
+                    }else{
+                        addedToFavorite?.visibility = View.GONE
+                        favIcon?.visibility = View.VISIBLE
+                    }
                 }
             }
         }

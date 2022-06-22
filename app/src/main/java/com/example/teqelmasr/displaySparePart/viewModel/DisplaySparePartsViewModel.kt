@@ -1,5 +1,6 @@
 package com.example.teqelmasr.displaySparePart.viewModel
 
+import DraftOrder
 import FavouriteProduct
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.RepositoryInterface
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,13 +20,11 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
     private val sparePartsMutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
     val sparePartsLiveData: LiveData<List<Product>> = sparePartsMutableLiveData
     val favouriteResponse = MutableLiveData<FavouriteProduct>()
-
-    //private val filteredSparePartsMutableLiveData: MutableLiveData<List<Product>> =
- //       MutableLiveData()
-   // val filteredSparePartsLiveData: LiveData<List<Product>> = filteredSparePartsMutableLiveData
-
-    private val collectionID = 271217819784
-
+    private val favoriteListMutableLiveData :MutableLiveData<List<DraftOrder>> = MutableLiveData()
+    val favListLiveData : LiveData<List<DraftOrder>> = favoriteListMutableLiveData
+    private val allFavoriteListMutableLiveData :MutableLiveData<List<DraftOrder>> = MutableLiveData()
+    val allFavListLiveData : LiveData<List<DraftOrder>> = allFavoriteListMutableLiveData
+    val user = Firebase.auth.currentUser
 
     fun fetchSpareParts() {
         Log.i("TAG", "fetchSpareParts: ViewModel")
@@ -74,4 +75,38 @@ class DisplaySparePartsViewModel(private val repository: RepositoryInterface) : 
             }
         }
     }*/
+   fun getFavProduct(productID : Long) {
+       viewModelScope.launch(Dispatchers.IO) {
+           val response = repository.getFavProducts()
+           withContext(Dispatchers.Main) {
+               if (response.isSuccessful) {
+
+
+                   favoriteListMutableLiveData.postValue(response.body()?.draftOrders?.filter { fav -> fav.lineItems[0].productID == productID &&
+                           fav.email == user?.email
+                   })
+               }else {
+                   Log.e(
+                       "DisplayRentEquipmentViewModel",
+                       "Error fetching data in DisplayRentEquipmentViewModel ${response.message()}"
+                   )
+               }
+           }
+       }
+   }
+    fun getFavProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getFavProducts()
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    allFavoriteListMutableLiveData.postValue(response.body()?.draftOrders?.filter { fav -> fav.email == user?.email })
+                }else {
+                    Log.e(
+                        "DisplayRentEquipmentViewModel",
+                        "Error fetching data in DisplayRentEquipmentViewModel ${response.message()}"
+                    )
+                }
+            }
+        }
+    }
 }

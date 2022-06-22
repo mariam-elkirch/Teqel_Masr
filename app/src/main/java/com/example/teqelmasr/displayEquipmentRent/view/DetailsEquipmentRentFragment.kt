@@ -50,6 +50,8 @@ class DetailsEquipmentRentFragment : Fragment() {
     private var sharedProductIDs = mutableSetOf<String>()
     private var productID : Long? = 0
      var product : FavouriteProduct? = null
+    private lateinit var favIcon  : ImageView
+    private lateinit var addedToFavorite  : ImageView
   //  private var productIdSet = mutableSetOf<String>()
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -71,7 +73,7 @@ class DetailsEquipmentRentFragment : Fragment() {
         }
         val view:View = inflater.inflate(R.layout.fragment_details_equipment_rent, container, false)
         productID = args.product.variants?.get(0)?.product_id
-        getSavedFavorite(view)
+        getSavedFavorite()
         setUI(view)
         getFavoriteProduct()
         return view
@@ -126,8 +128,8 @@ private fun setUI(view : View){
     val productInfo = listOf(LineItem(productID = args.product!!.variants?.get(0)!!.product_id!!,variant_id =args.product!!.variants?.get(0)!!.id!! ,taxable = false,title = args.product!!.title!!,1, args.product.variants?.get(0)?.price.toString()))
      product = FavouriteProduct(DraftOrder(user.email?:"unknown user",note = "",noteAttributes = image,lineItems = productInfo , customer = favCustomer(email = user.email, firstName =user.displayName,phone = user.phoneNumber)) )
  }
-    var favIcon = view?.findViewById<ImageView>(R.id.fav_icon)
-    var addedToFavorite = view?.findViewById<ImageView>(R.id.favFill_icon)
+    favIcon = view.findViewById(R.id.fav_icon)
+    addedToFavorite = view.findViewById(R.id.favFill_icon)
     if (isFavorite){
         favIcon?.visibility = View.GONE
         addedToFavorite?.visibility = View.VISIBLE
@@ -188,7 +190,7 @@ private fun saveFavorite(product : FavouriteProduct?){
    editor.apply()
     editor.commit()
 }
-private fun getSavedFavorite(view: View) {
+private fun getSavedFavorite() {
     productID = args.product.variants?.get(0)?.product_id
     sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
     if (sharedProductIDs.isNotEmpty()) {
@@ -199,10 +201,29 @@ private fun getSavedFavorite(view: View) {
             for (fav in it) {
                 favProduct = FavouriteProduct(fav)
                 saveFavorite(favProduct ?: null)
+                sharedProductIDs = sharedPreferences!!.getStringSet("favID", mutableSetOf())!!
+                if (sharedProductIDs.isNotEmpty()) {
+                    isFavorite = productID.toString() in sharedProductIDs
+                }
+                if (isFavorite){
+                    favIcon?.visibility = View.GONE
+                    addedToFavorite?.visibility = View.VISIBLE
+                }else{
+                    addedToFavorite?.visibility = View.GONE
+                    favIcon?.visibility = View.VISIBLE
+                }
+            }
+        }
+        /*
+        viewModel.allFavListLiveData.observe(requireActivity()) {
+            for (fav in it) {
+                favProduct = FavouriteProduct(fav)
+                saveFavorite(favProduct ?: null)
                 getSavedFavorite(view)
                 setUI(view)
             }
         }
+         */
     }
 }
     private fun removeFromShared(id : String) {
