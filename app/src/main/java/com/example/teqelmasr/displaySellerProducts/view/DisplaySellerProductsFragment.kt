@@ -184,8 +184,8 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     override fun onEditClick(product: Product) {
         val action: NavDirections =
             DisplaySellerProductsFragmentDirections.actionDisplaySellerProductsFragmentToEditSellerProductFragment(
-                product
-            )
+                product,
+            null,null)
         binding.root.findNavController().navigate(action)
     }
 

@@ -76,6 +76,7 @@ class AddEquipmentSellFragment : Fragment() {
     private lateinit var binding: FragmentAddEquipmentSellBinding
     private val pickImage = 100
     private var imageUri: Uri? = null
+   // private lateinit var imageUri: Uri
     private val args by navArgs<AddEquipmentSellFragmentArgs>()
     lateinit var viewModel: AddProductViewModel
     var mytag : String = ""
