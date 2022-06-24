@@ -45,7 +45,7 @@ class EditSellerProductFragment : Fragment() {
     private val TAG = "EditSellerProductFragment"
     private lateinit var typeAdapter: ArrayAdapter<String>
     private lateinit var categoryAdapter: ArrayAdapter<String>
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
     private var equipmentArray: Array<String>? = null
     private var spareArray: Array<String>? = null
     private var categoryArray: Array<String>? = null
