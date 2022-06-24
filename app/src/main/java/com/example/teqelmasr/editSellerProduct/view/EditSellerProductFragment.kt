@@ -208,7 +208,8 @@ class EditSellerProductFragment : Fragment() {
                     EditSellerProductFragmentDirections.actionEditSellerProductFragmentToMapsFragment(
                         product,
                         null,
-                        Constants.EDIT_SOURCE
+                        Constants.EDIT_SOURCE,
+                        imageUri.toString()
                     )
                 binding.root.findNavController().navigate(action)
             }

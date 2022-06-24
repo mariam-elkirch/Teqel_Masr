@@ -228,7 +228,7 @@ class AddEquipmentSellFragment : Fragment() {
         binding.myLocation.setOnClickListener {
 
             fillEnteredDataToMap()
-            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment(productToMap,Constants.ADD_SOURCE,null)
+            val action = AddEquipmentSellFragmentDirections.actionAddEquipmentSellFragmentToMapsFragment(productToMap,Constants.ADD_SOURCE,null,null)
             binding.root.findNavController().navigate(action)
         }
 

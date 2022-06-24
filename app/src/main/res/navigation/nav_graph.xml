@@ -294,6 +294,10 @@
         <action
             android:id="@+id/action_mapsFragment_to_editSellerProductFragment"
             app:destination="@id/editSellerProductFragment"/>
+        <argument
+            android:name="imageUri"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/marketFragment"
