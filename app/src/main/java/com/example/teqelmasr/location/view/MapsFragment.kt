@@ -31,6 +31,7 @@ import com.example.teqelmasr.databinding.FragmentMapsBinding
 import com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragmentArgs
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.home.HomeFragmentDirections
+import com.example.teqelmasr.model.AddEditProduct
 import com.example.teqelmasr.model.LocationDetails
 import com.example.teqelmasr.model.Utilities
 import com.example.weathery.location.viewmodel.LocationViewModel
@@ -231,10 +232,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                     }
                     Constants.EDIT_SOURCE -> {
                         val product = args.currentProduct
+                        Log.i("tag",args.imageUri+"image Map")
                         product?.variants?.get(0)?.option1 = returnLocationToHome
                         val action: NavDirections =
                             MapsFragmentDirections.actionMapsFragmentToEditSellerProductFragment(
-                                args.currentProduct!!
+                                args.currentProduct!!,args.imageUri,
+                         AddEditProduct(imageUri = args.enteredProduct?.imageUri)
                             )
                         binding.root.findNavController().navigate(action)
 

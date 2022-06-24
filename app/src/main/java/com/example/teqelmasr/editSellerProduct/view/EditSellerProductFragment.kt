@@ -45,7 +45,7 @@ class EditSellerProductFragment : Fragment() {
     private val TAG = "EditSellerProductFragment"
     private lateinit var typeAdapter: ArrayAdapter<String>
     private lateinit var categoryAdapter: ArrayAdapter<String>
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
     private var equipmentArray: Array<String>? = null
     private var spareArray: Array<String>? = null
     private var categoryArray: Array<String>? = null
@@ -149,6 +149,17 @@ class EditSellerProductFragment : Fragment() {
             titleTxt.setText(args.currentProduct.title)
             priceTxt.setText(args.currentProduct.variants?.get(0)?.price.toString())
             addressEdt.text = args.currentProduct.variants?.get(0)?.option1
+            if(args.imageURI != null){
+                Log.i(TAG,args.imageURI.toString()+"imge")
+                imageItem.setImageURI(args.editObject?.imageUri)
+            }
+            else{
+                Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop()
+                    .placeholder(
+                        R.drawable.placeholder
+                    )
+                    .into(binding.imageItem)
+            }
             categoryTxt.text = args.currentProduct.tags.let {
                 when (it) {
                     Constants.SPARE_TAG -> getString(R.string.spare_parts)
@@ -158,11 +169,7 @@ class EditSellerProductFragment : Fragment() {
                     }
                 }
             }
-            Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop()
-                .placeholder(
-                    R.drawable.placeholder
-                )
-                .into(binding.imageItem)
+
 
             imageItem.setOnClickListener {
                 pickImageFromGallery()
@@ -204,10 +211,12 @@ class EditSellerProductFragment : Fragment() {
                     options = optionsItems
 
                 )
+                Log.i(TAG,imageUri.toString()+"image Go To Map")
+                val imageView: ImageView = binding.imageItem as ImageView
                 val action =
                     EditSellerProductFragmentDirections.actionEditSellerProductFragmentToMapsFragment(
                         product,
-                        null,
+                        AddEditProduct(imageUri = imageUri),
                         Constants.EDIT_SOURCE,
                         imageUri.toString()
                     )
@@ -298,6 +307,7 @@ class EditSellerProductFragment : Fragment() {
 
 
     private fun pickImageFromGallery() {
+
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_REQ_CODE)
@@ -317,7 +327,7 @@ class EditSellerProductFragment : Fragment() {
         }
     }
 
-    @Deprecated("Deprecated in Java")
+   /* @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -326,6 +336,14 @@ class EditSellerProductFragment : Fragment() {
             binding.imageItem.setImageURI(data.data)
         }
 
+    }*/
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_REQ_CODE) {
+            imageUri = data?.data!!
+            binding.imageItem.setImageURI(data?.data)
+
+        }
     }
 }
 

@@ -207,6 +207,14 @@
                 app:argType="com.example.teqelmasr.model.Product" />
 
         </action>
+        <argument
+            android:name="imageURI"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="EditObject"
+            app:argType="com.example.teqelmasr.model.AddEditProduct"
+            app:nullable="true" />
     </fragment>
     <dialog
         android:id="@+id/filtrationSheetFragment"
