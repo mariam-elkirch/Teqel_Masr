@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -71,6 +72,43 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         fetchCustomer()
+        binding.spinnerProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.i("tag",position.toString()+"langggggggg")
+
+                when (position) {
+                    0 -> {
+                        val config = context?.resources?.configuration
+
+                        val locale = Locale("en")
+                        Locale.setDefault(locale)
+                        config?.setLocale(locale)
+
+                        context?.createConfigurationContext(config!!)
+                        context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
+                    }
+                    1 -> {
+                        val config = context?.resources?.configuration
+
+                        val locale = Locale("ar")
+                        Locale.setDefault(locale)
+                        config?.setLocale(locale)
+
+                        context?.createConfigurationContext(config!!)
+                        context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
+                    }
+
+                    else -> {
+
+                    }
+                }
+            }
+
+        }
         return binding.root
     }
 

@@ -184,7 +184,7 @@ class EditSellerProductFragment : Fragment() {
                 val bb = bos.toByteArray()
                 var imageString: String = Base64.encodeToString(bb, Base64.DEFAULT)
                 val imagelist = listOf(ImagesItem(attachment = imageString, filename = "3.png"))
-                val img = Image(attachment = imageString, filename = "3.png")
+                val img = Image(attachment = imageString, filename = "3.png",src = args.currentProduct.image?.src)
                 val variant = Variant(
                     price = binding.priceTxt.text.trim().toString()
                         .toDouble(),

@@ -175,7 +175,7 @@
         <item>100000000</item>
     </string-array>
     <string-array name="language">
-        <item>Arablic</item>
         <item>English</item>
+        <item>Arabic</item>
     </string-array>
 </resources>
