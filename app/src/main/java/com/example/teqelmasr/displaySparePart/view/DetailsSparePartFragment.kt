@@ -61,9 +61,6 @@ class DetailsSparePartFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding.apply {
-            backButton.setOnClickListener {
-                findNavController().popBackStack()
-            }
             titleTxt.text = args.product.title
             priceTxt.text = "${args.product.variants?.get(0)?.price.toString()} " + getString(R.string.currency)
             when(args.product.tags){
