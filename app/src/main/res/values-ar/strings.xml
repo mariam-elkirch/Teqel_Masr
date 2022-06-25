@@ -116,6 +116,10 @@
         <item>المكونات الهيدروليكية</item>
         <item>أخرى </item>
     </string-array>
+    <string-array name="language">
+        <item>الانجليزيه</item>
+        <item>العربيه</item>
+    </string-array>
     <string name="vendor">المنتج</string>
     <string name="discard">تجاهل</string>
     <string name="delete">حذف</string>
