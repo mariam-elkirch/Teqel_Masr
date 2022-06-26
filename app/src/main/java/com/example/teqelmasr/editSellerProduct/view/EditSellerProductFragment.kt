@@ -117,11 +117,12 @@ class EditSellerProductFragment : Fragment() {
                             when(args.currentProduct.productType){
                                 getString(R.string.turbocharger) -> 0
                                 getString(R.string.filter) -> 1
-                                getString(R.string.valve) -> 2
-                                getString(R.string.hose) -> 3
-                                getString(R.string.miscellaneous) -> 4
-                                getString(R.string.hydraulic_components) -> 5
-                                else -> {6}
+                                getString(R.string.accumulator) -> 2
+                                getString(R.string.valve) -> 3
+                                getString(R.string.hose) -> 4
+                                getString(R.string.miscellaneous) -> 5
+                                getString(R.string.hydraulic_components) -> 6
+                                else -> {7}
                             }
                         )
                     }else -> {
@@ -149,11 +150,12 @@ class EditSellerProductFragment : Fragment() {
             titleTxt.setText(args.currentProduct.title)
             priceTxt.setText(args.currentProduct.variants?.get(0)?.price.toString())
             addressEdt.text = args.currentProduct.variants?.get(0)?.option1
-            if(args.imageURI != null){
+            if(args.editObject?.imageUri != null){
                 Log.i(TAG,args.imageURI.toString()+"imge")
                 imageItem.setImageURI(args.editObject?.imageUri)
             }
             else{
+                Log.i(TAG, "image else: ${(args.currentProduct.image?.src.toString())}")
                 Glide.with(requireContext()).load(args.currentProduct.image?.src).centerCrop()
                     .placeholder(
                         R.drawable.placeholder
