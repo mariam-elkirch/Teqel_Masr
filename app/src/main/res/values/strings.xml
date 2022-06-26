@@ -105,8 +105,8 @@
     <string name="seller_note">seller</string>
     <string name="buyer_note">buyer</string>
 
-    <string name="rent">Rent</string>
-    <string name="equipment">Equipment</string>
+    <string name="rent">Equipment for Rent</string>
+    <string name="equipment">Equipment for Sell</string>
     <string name="have_to_seller">You have to change your account type to seller</string>
     <string name="Telephone">Telephone</string>
     <string name="noFavProduct">no favourite products</string>
