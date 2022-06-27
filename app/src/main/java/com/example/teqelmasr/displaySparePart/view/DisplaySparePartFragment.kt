@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentDisplaySparePartBinding
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -109,11 +111,17 @@ class DisplaySparePartFragment : Fragment(), OnProductClickListener {
     }
 
     private fun fetchSpareParts() {
-        viewModel.fetchSpareParts()
-        viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productsList ->
-            binding.refreshLayout.isRefreshing = false
-            fillSparePartsData(productsList)
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.fetchSpareParts()
+            viewModel.sparePartsLiveData.observe(viewLifecycleOwner) { productsList ->
+                binding.refreshLayout.isRefreshing = false
+                fillSparePartsData(productsList)
+            }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+
         }
+
     }
 
     private fun fillSparePartsData(productsList: List<Product>) {

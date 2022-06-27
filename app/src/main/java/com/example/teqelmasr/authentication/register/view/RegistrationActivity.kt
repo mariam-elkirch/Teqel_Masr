@@ -16,6 +16,7 @@ import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewM
 import com.example.teqelmasr.authentication.register.viewModel.RegistrationViewModelFactory
 import com.example.teqelmasr.databinding.ActivityRegisterationBinding
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.home.HomeActivity
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
@@ -62,11 +63,17 @@ class RegistrationActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[RegistrationViewModel::class.java]
 
         binding.registerBtn.setOnClickListener {
-            if (binding.sellerCheck.isChecked) {
-                registerUser(true)
-            } else {
-                registerUser(false)
+            if (NetworkCheck.isNetworkAvailable(this)){
+                if (binding.sellerCheck.isChecked) {
+                    registerUser(true)
+                } else {
+                    registerUser(false)
+                }
+            }else{
+                Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show()
+
             }
+
         }
         binding.login.setOnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)
@@ -74,11 +81,6 @@ class RegistrationActivity : AppCompatActivity() {
             finish()
         }
 
-
-
-/*        binding.googleSign.setOnClickListener {
-            startActivity(Intent(this, GoogleActivity::class.java))
-        }*/
     }
 
 

@@ -16,6 +16,7 @@ import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactor
 import com.example.teqelmasr.authentication.register.view.RegistrationActivity
 import com.example.teqelmasr.databinding.ActivityLoginBinding
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.home.HomeActivity
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -45,15 +46,6 @@ class LoginActivity : AppCompatActivity() {
     }
     private lateinit var viewModel: LoginViewModel
 
-    /*public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            // reload();
-            Log.i(TAG, "onStart: inside currentUser != null")
-        }
-    }*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +61,13 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginBtn.setOnClickListener {
-            loginUser()
+            if(NetworkCheck.isNetworkAvailable(this)){
+                loginUser()
+
+            }else{
+                Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show()
+
+            }
 
 
         }

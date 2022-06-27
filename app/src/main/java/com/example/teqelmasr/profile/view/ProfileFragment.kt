@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.teqelmasr.R
 import com.example.teqelmasr.databinding.FragmentProfileBinding
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.home.HomeActivity
 import com.example.teqelmasr.model.Customer
 import com.example.teqelmasr.model.CustomerObj
@@ -198,28 +199,40 @@ class ProfileFragment : Fragment() {
     }
 
     private fun fetchCustomer() {
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.fetchCustomers()
 
-        viewModel.fetchCustomers()
+            viewModel.customerLiveData.observe(viewLifecycleOwner) { customer ->
+                if (!customer.isNullOrEmpty()) {
+                    binding.emailEdt.setText(customer[0].email.toString())
+                    binding.nameEdt.setText(customer[0].first_name.toString())
+                    when (customer[0].note!!) {
 
-        viewModel.customerLiveData.observe(viewLifecycleOwner) { customer ->
-            if (!customer.isNullOrEmpty()) {
-                binding.emailEdt.setText(customer[0].email.toString())
-                binding.nameEdt.setText(customer[0].first_name.toString())
-                when (customer[0].note!!) {
+                        Constants.SELLER_TYPE -> binding.sellerRadioButton.isChecked = true
+                        Constants.BUYER_TYPE -> binding.buyerRadioButton.isChecked = true
 
-                    Constants.SELLER_TYPE -> binding.sellerRadioButton.isChecked = true
-                    Constants.BUYER_TYPE -> binding.buyerRadioButton.isChecked = true
+                    }
+                    binding.saveButton.setOnClickListener {
+                        if(NetworkCheck.isNetworkAvailable(requireContext())){
+                            updateCustomer(customer[0].id!!, customer[0].first_name!!, customer[0].note!!)
+                            Log.i(
+                                "TAG",
+                                "fetchCustomer: customer id ${customer[0].id!!}  customer Type ${customer[0].note!!} "
+                            )
+                        }else{
+                            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
 
-                }
-                binding.saveButton.setOnClickListener {
-                    updateCustomer(customer[0].id!!, customer[0].first_name!!, customer[0].note!!)
-                    Log.i(
-                        "TAG",
-                        "fetchCustomer: customer id ${customer[0].id!!}  customer Type ${customer[0].note!!} "
-                    )
+                        }
+
+                    }
                 }
             }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+
         }
+
+
     }
 
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.RepositoryInterface
@@ -29,9 +30,9 @@ class DisplayRentEquipmentViewModel(private val repository: RepositoryInterface)
     val user = Firebase.auth.currentUser
 
     // val response : FavouriteProduct
-    init {
+/*    init {
         fetchRentEquipments()
-    }
+    }*/
 
      fun fetchRentEquipments() {
         viewModelScope.launch(Dispatchers.IO) {

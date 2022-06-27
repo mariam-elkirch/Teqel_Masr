@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -19,6 +20,7 @@ import com.example.teqelmasr.databinding.FragmentDisplayEquipmentRentBinding
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModel
 import com.example.teqelmasr.displayEquipmentRent.viewModel.DisplayRentEquipmentViewModelFactory
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -89,17 +91,24 @@ class DisplayEquipmentRentFragment : Fragment() , OnProductClickListener {
     }
 
     private fun fetchEquipmentRent() {
-        viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
-            Log.i("TAG", "fetchEquipmentRent: ${it.size}")
-            //equipmentRentAdapter.setEquipmentRentList(it)
-           //searchResultList.addAll(it.products)
-            allProductList= it as ArrayList<Product>
-            filterData()
-            binding.shimmerrent.stopShimmer()
-            binding.shimmerrent.visibility = View.GONE
-            binding.swipeRefreshLayoutRent.isRefreshing = false
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.fetchRentEquipments()
+            viewModel.rentEquipmentLiveData.observe(viewLifecycleOwner) {
+                Log.i("TAG", "fetchEquipmentRent: ${it.size}")
+                //equipmentRentAdapter.setEquipmentRentList(it)
+                //searchResultList.addAll(it.products)
+                allProductList= it as ArrayList<Product>
+                filterData()
+                binding.shimmerrent.stopShimmer()
+                binding.shimmerrent.visibility = View.GONE
+                binding.swipeRefreshLayoutRent.isRefreshing = false
+
+            }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
 
         }
+
     }
 
     override fun onProductClick(product: Product) {

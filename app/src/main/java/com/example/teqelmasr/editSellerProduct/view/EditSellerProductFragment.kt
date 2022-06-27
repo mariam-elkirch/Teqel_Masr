@@ -29,6 +29,7 @@ import com.example.teqelmasr.databinding.FragmentEditSellerProductBinding
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModel
 import com.example.teqelmasr.editSellerProduct.viewModel.EditProductViewModelFactory
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.*
 import com.example.teqelmasr.network.Client
 import kotlinx.coroutines.CoroutineScope
@@ -226,14 +227,19 @@ class EditSellerProductFragment : Fragment() {
             }
 
             saveFloating.setOnClickListener {
+                if(NetworkCheck.isNetworkAvailable(requireContext())){
+                    if (!checkChanges()) {
+                        updateProductObject()
+                        displayDialog()
 
-                if (!checkChanges()) {
-                    updateProductObject()
-                    displayDialog()
+                    } else {
+                        Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
 
-                } else {
-                    Toast.makeText(context, R.string.no_changes, Toast.LENGTH_SHORT).show()
                 }
+
             }
         }
     }

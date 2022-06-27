@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -22,7 +21,6 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -33,7 +31,6 @@ import com.example.teqelmasr.authentication.login.LoginActivity
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModel
 import com.example.teqelmasr.authentication.login.viewmodel.LoginViewModelFactory
 import com.example.teqelmasr.databinding.ActivityHomeBinding
-import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -75,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
         Log.i(TAG, "onCreate: ")
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         sharedPref = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)

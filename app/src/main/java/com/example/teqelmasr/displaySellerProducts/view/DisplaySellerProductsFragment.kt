@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,8 +20,8 @@ import com.example.teqelmasr.databinding.FragmentDisplaySellerProductsBinding
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModel
 import com.example.teqelmasr.displaySellerProducts.viewModel.MyProductsViewModelFactory
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.Product
-import com.example.teqelmasr.model.ProductItem
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
 import com.google.firebase.auth.FirebaseAuth
@@ -57,7 +58,6 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         adapter = MyProductsAdapter(requireContext(), this)
         viewModel = ViewModelProvider(requireActivity(), factory)[MyProductsViewModel::class.java]
 
-
         setUpUI()
 
         observeMyProducts()
@@ -69,14 +69,19 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
 
 
     private fun observeMyProducts() {
-        viewModel.getMyProducts()
-        viewModel.myProducts?.observe(viewLifecycleOwner) {
-            fillData(it)
-            Log.i(TAG, "SellerProduct: ${it?.size}")
-            Log.i(TAG, "SellerProduct: ${FirebaseAuth.getInstance().currentUser?.uid}")
-            binding.refresher.isRefreshing = false
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.getMyProducts()
+            viewModel.myProducts?.observe(viewLifecycleOwner) {
+                fillData(it)
+                Log.i(TAG, "SellerProduct: ${it?.size}")
+                Log.i(TAG, "SellerProduct: ${FirebaseAuth.getInstance().currentUser?.uid}")
+                binding.refresher.isRefreshing = false
 
+            }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
         }
+
     }
 
     private fun fillData(products: ArrayList<Product>?) = binding.apply {
@@ -157,8 +162,14 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
     private fun handleRefresher() = binding.refresher.apply {
         setColorSchemeColors(resources.getColor(R.color.orange, null))
         setOnRefreshListener {
-            isRefreshing = true
-            observeMyProducts()
+           if(NetworkCheck.isNetworkAvailable(requireContext())){
+               isRefreshing = true
+               observeMyProducts()
+           }else{
+               Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+               isRefreshing = false
+           }
+
         }
     }
 
@@ -195,8 +206,14 @@ class DisplaySellerProductsFragment : Fragment(), OnBtnListener {
         Log.i(TAG, "onResume: ${args.filterObj?.categories}")
         Log.i(TAG, "onResume: ${args.filterObj?.types}")
 
-        viewModel.getMyProducts()
-        observeMyProducts()
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.getMyProducts()
+            observeMyProducts()
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+
+        }
+
     }
 
     override fun onPause() {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +23,7 @@ import com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFra
 import com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragmentDirections
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.market.viewModel.MarketViewModel
 import com.example.teqelmasr.market.viewModel.MarketViewModelFactory
 import com.example.teqelmasr.model.Product
@@ -158,17 +160,23 @@ class MarketFragment : Fragment(), OnProductClickListener {
     }
 
     private fun getAllProducts() {
-        viewModel.getAllProducts()
-        viewModel.allProductsLiveData.observe(viewLifecycleOwner) {
-            binding.refreshLayout.isRefreshing = false
-            fillData(it)
-            binding.apply {
-                searchSpareParts.visibility = View.VISIBLE
-                filterButton.visibility = View.VISIBLE
-                spareShimmer.stopShimmer()
-                spareShimmer.visibility = View.GONE
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.getAllProducts()
+            viewModel.allProductsLiveData.observe(viewLifecycleOwner) {
+                binding.refreshLayout.isRefreshing = false
+                fillData(it)
+                binding.apply {
+                    searchSpareParts.visibility = View.VISIBLE
+                    filterButton.visibility = View.VISIBLE
+                    spareShimmer.stopShimmer()
+                    spareShimmer.visibility = View.GONE
+                }
             }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+
         }
+
     }
 
     override fun onProductClick(product: Product) {

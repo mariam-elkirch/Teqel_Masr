@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -18,6 +19,7 @@ import com.example.teqelmasr.authentication.register.view.RegistrationActivity
 
 import com.example.teqelmasr.databinding.FragmentHomeBinding
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 
 import com.example.teqelmasr.model.Product
 import com.google.android.gms.ads.AdRequest
@@ -73,8 +75,9 @@ class HomeFragment : Fragment() {
 
         }
         binding.sellertn.setOnClickListener {
+            if(NetworkCheck.isNetworkAvailable(requireContext())){
 
-            (sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)).let {
+                (sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)).let {
                     when (it) {
                         Constants.GUEST_TYPE -> Snackbar.make(
                             binding.root,
@@ -100,6 +103,11 @@ class HomeFragment : Fragment() {
                             )
                     }
                 }
+            }else{
+                Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+
+            }
+
         }
 
     }

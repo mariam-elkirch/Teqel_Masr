@@ -31,6 +31,7 @@ import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSell
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparPartsViewModelFactory
 import com.example.teqelmasr.displaySparePart.viewModel.DisplaySparePartsViewModel
 import com.example.teqelmasr.helper.Constants
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.ContactInfo
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -62,7 +63,12 @@ class DetailsSparePartFragment : Fragment() {
             Repository.getInstance(Client.getInstance(),requireContext())
         )
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory)[DisplaySparePartsViewModel::class.java]
-        viewModel.getFavProducts()
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.getFavProducts()
+
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+        }
 
     }
     override fun onCreateView(
@@ -251,13 +257,19 @@ class DetailsSparePartFragment : Fragment() {
 
     }
     private fun getFavoriteProduct(){
-        viewModel.getFavProduct(productID!!)
-        viewModel.favListLiveData.observe(requireActivity()) {
-            if (viewModel.favListLiveData.value?.size != 0) {
-                // take the response in object to send it to delete method
-                favProduct = FavouriteProduct(it[0])
-            } else {
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.getFavProduct(productID!!)
+            viewModel.favListLiveData.observe(requireActivity()) {
+                if (viewModel.favListLiveData.value?.size != 0) {
+                    // take the response in object to send it to delete method
+                    favProduct = FavouriteProduct(it[0])
+                } else {
+                }
             }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+
         }
+
     }
 }

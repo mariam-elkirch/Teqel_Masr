@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -22,6 +23,7 @@ import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSell
 import com.example.teqelmasr.displayEquipmentSell.viewModel.DisplayEquipmentSellViewModelFactory
 
 import com.example.teqelmasr.displaySparePart.view.OnProductClickListener
+import com.example.teqelmasr.helper.NetworkCheck
 import com.example.teqelmasr.model.Product
 import com.example.teqelmasr.model.Repository
 import com.example.teqelmasr.network.Client
@@ -129,19 +131,23 @@ class DisplayEquipmentSellFragment : Fragment() , OnProductClickListener {
     //
 
     private fun fetchEquipmentSell() {
+        if(NetworkCheck.isNetworkAvailable(requireContext())){
+            viewModel.fetchSellEquipments()
+            viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {productsList->
+                // equipmentSellAdapter.setEquipmentSellList(it.products!!)
+                binding.shimmersell.stopShimmer()
+                Log.i("tag","fetch equipment")
+                // binding.swipeRefreshLayout.isRefreshing = false
+                //   equipmentList.addAll(it.products)
+                fillData(productsList)
+                binding.shimmersell.visibility = View.GONE
+                binding.swipeRefreshLayout.isRefreshing = false
 
-        viewModel.fetchSellEquipments()
-        viewModel.sellEquipmentLiveData.observe(viewLifecycleOwner) {productsList->
-            // equipmentSellAdapter.setEquipmentSellList(it.products!!)
-            binding.shimmersell.stopShimmer()
-            Log.i("tag","fetch equipment")
-            // binding.swipeRefreshLayout.isRefreshing = false
-            //   equipmentList.addAll(it.products)
-            fillData(productsList)
-            binding.shimmersell.visibility = View.GONE
-            binding.swipeRefreshLayout.isRefreshing = false
-
+            }
+        }else{
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
         }
+
     }
     private fun fillData(productsList: List<Product>) {
         if (productsList.isNullOrEmpty()) {
