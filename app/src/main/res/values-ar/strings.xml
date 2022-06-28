@@ -146,5 +146,6 @@
     <string name="signInFirst">من فضلك سجل الدخول</string>
     <string name="name_error">من فضلك أدخل الإسم</string>
     <string name="noFavProduct">لا يوجد منتجات في المفضلة</string>
-
+    <string name="English">الانجليزيه</string>
+    <string name="Arabic">العربيه</string>
 </resources>

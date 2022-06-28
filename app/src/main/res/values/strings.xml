@@ -139,6 +139,8 @@
     <string name="Emailsent"> Email Sent </string>
     <string name="checkEmail">Make sure the email you entered is correct</string>
     <string name="enterEmail">Please Enter your email</string>
+    <string name="English">English</string>
+    <string name="Arabic">Arabic</string>
 
     <string-array name="type">
         <item>Equipment for Sell</item>

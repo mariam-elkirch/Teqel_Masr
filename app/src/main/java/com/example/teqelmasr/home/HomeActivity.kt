@@ -41,6 +41,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -73,11 +74,22 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         sharedPreferences  = applicationContext.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
         Log.i(TAG, "onCreate: ")
+        sharedPref = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+        val lang =   sharedPref.getString("lang", "en")
+        val config = this.resources?.configuration
 
+        val locale = Locale(lang.toString())
+        Log.i("tag",lang.toString()+"language")
+        Locale.setDefault(locale)
+        config?.setLocale(locale)
+
+        this.createConfigurationContext(config!!)
+        this.resources?.updateConfiguration(config,this.resources!!.displayMetrics)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.navView.menu.clear()
+        binding.navView.inflateMenu(R.menu.activity_main_drawer)
 
-        sharedPref = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
 
         viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
@@ -100,6 +112,9 @@ class HomeActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
             setDisplayShowTitleEnabled(false)
         }
+
+
+
 
         binding.sininText.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -201,7 +216,8 @@ class HomeActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
-
+        binding.navView.menu.clear()
+        binding.navView.inflateMenu(R.menu.activity_main_drawer)
         binding.bottomNav.setOnNavigationItemSelectedListener {
           //  when (it.itemId) {
               //  R.id.homeFragment -> {

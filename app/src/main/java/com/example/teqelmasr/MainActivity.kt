@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.teqelmasr.helper.Constants
 import com.example.teqelmasr.home.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,8 +17,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         sharedPref = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+        val lang =   sharedPref.getString("lang", "en")
+        val config = this.resources?.configuration
+
+        val locale = Locale(lang.toString())
+        Log.i("tag",lang.toString()+"language")
+        Locale.setDefault(locale)
+        config?.setLocale(locale)
+
+        this.createConfigurationContext(config!!)
+        this.resources?.updateConfiguration(config,this.resources!!.displayMetrics)
+        setContentView(R.layout.activity_main)
+
         //Log.i("TAG", "usertype: ${sharedPref.getString(Constants.USER_TYPE, Constants.GUEST_TYPE)}")
 
         //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))

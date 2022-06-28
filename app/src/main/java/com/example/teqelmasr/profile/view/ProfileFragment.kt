@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -67,48 +68,75 @@ class ProfileFragment : Fragment() {
 
         displayWaitingDialog()
 
-
+        val editor: SharedPreferences.Editor = sharedPref.edit()
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         fetchCustomer()
-        binding.spinnerProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        //val id = binding.radioGrouplang.checkedRadioButtonId
+      //  val radioButton: RadioButton = binding.root.findViewById(id)
+/*
+        id.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
 
-            }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.i("tag",position.toString()+"langggggggg")
+                if(radio.text.toString().equals(R.string.English) ) {
+                    val config = context?.resources?.configuration
+                    editor.putString("lang", "en")
+                    editor.apply()
+                    val locale = Locale("en")
+                    Locale.setDefault(locale)
+                    config?.setLocale(locale)
 
-                when (position) {
-                    0 -> {
-                        val config = context?.resources?.configuration
-
-                        val locale = Locale("en")
-                        Locale.setDefault(locale)
-                        config?.setLocale(locale)
-
-                        context?.createConfigurationContext(config!!)
-                        context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
-                    }
-                    1 -> {
-                        val config = context?.resources?.configuration
-
-                        val locale = Locale("ar")
-                        Locale.setDefault(locale)
-                        config?.setLocale(locale)
-
-                        context?.createConfigurationContext(config!!)
-                        context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
-                    }
-
-                    else -> {
-
-                    }
+                    context?.createConfigurationContext(config!!)
+                    context?.resources?.updateConfiguration(
+                        config,
+                        context?.resources!!.displayMetrics
+                    )
                 }
-            }
+                if(radio.text.toString().equals(R.string.Arabic)){
+                    val config = context?.resources?.configuration
+                    editor.putString("lang","ar")
+                    editor.apply()
+                    val locale = Locale("ar")
+                    Locale.setDefault(locale)
+                    config?.setLocale(locale)
 
+                    context?.createConfigurationContext(config!!)
+                    context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
+                }
+
+                /* Toast.makeText(activity," On checked change :"+
+                         " ${radio.text}",
+                     Toast.LENGTH_SHORT).show()*/
+            })*/
+      /*  when(radioButton.text.toString()){
+            getString(R.string.English) -> {
+                val config = context?.resources?.configuration
+                editor.putString("lang","en")
+                editor.apply()
+                val locale = Locale("en")
+                Locale.setDefault(locale)
+                config?.setLocale(locale)
+
+                context?.createConfigurationContext(config!!)
+                context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
+            }
+            getString(R.string.Arabic) -> {
+                val config = context?.resources?.configuration
+                editor.putString("lang","ar")
+                editor.apply()
+                val locale = Locale("ar")
+                Locale.setDefault(locale)
+                config?.setLocale(locale)
+
+                context?.createConfigurationContext(config!!)
+                context?.resources?.updateConfiguration(config, context?.resources!!.displayMetrics)
+            }
         }
+*/
+
+
         return binding.root
     }
 

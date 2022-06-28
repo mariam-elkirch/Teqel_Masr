@@ -26,6 +26,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var sharedPref: SharedPreferences
@@ -40,6 +41,14 @@ class HomeFragment : Fragment() {
             "MyPref",
             AppCompatActivity.MODE_PRIVATE
         )
+
+        val lang =   sharedPref.getString("lang", "en")
+        val config = this.resources?.configuration
+
+        val locale = Locale(lang.toString())
+        Log.i("tag",lang.toString()+"language")
+        Locale.setDefault(locale)
+        config?.setLocale(locale)
         Log.i("TAG", "onCreateView: ")
         return binding.root
     }

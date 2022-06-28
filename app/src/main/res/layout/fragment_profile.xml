@@ -90,7 +90,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
-
+<!--
             <TextView
                 android:id="@+id/language_label"
                 android:layout_width="0dp"
@@ -103,17 +103,39 @@
                 app:layout_constraintStart_toStartOf="@id/name_edt"
                 app:layout_constraintTop_toBottomOf="@id/email_edt" />
 
-            <Spinner
-                android:id="@+id/spinnerProfile"
-                android:layout_width="fill_parent"
+            <RadioGroup
+                android:id="@+id/radio_grouplang"
+                app:layout_constraintTop_toBottomOf="@id/language_label"
+                app:layout_constraintStart_toStartOf="@id/language_label"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:drawSelectorOnTop="true"
-                android:entries="@array/language"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/language_label" />
+                android:orientation="horizontal"
 
+                >
+
+                <RadioButton
+                    android:id="@+id/english_radio_button"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/English"
+                    android:layout_marginStart="16dp"
+                    android:buttonTint="@color/orange"
+                    />
+
+                <RadioButton
+                    android:id="@+id/arabic_radio_button"
+                    android:padding="5dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/Arabic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/orange"
+                    />
+
+            </RadioGroup>
+-->
             <TextView
                 android:id="@+id/type_textView"
                 android:layout_width="wrap_content"
@@ -123,8 +145,8 @@
                 android:text="@string/switch_account"
                 android:textColor="#00477A"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/language_label"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerProfile" />
+                app:layout_constraintStart_toStartOf="@+id/email_edt"
+                app:layout_constraintTop_toBottomOf="@+id/email_edt" />
 
             <RadioGroup
                 android:id="@+id/radio_group"
