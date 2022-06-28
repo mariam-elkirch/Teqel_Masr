@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".displayEquipmentRent.view.DisplayEquipmentRentFragment"
+    android:background="#F7F8F9"
+    >
+
+    <SearchView
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/search_rent_equipment"
+        app:layout_constraintWidth_percent="0.75"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:queryHint="@string/what_are_you_searching_for"
+        app:layout_constraintBottom_toTopOf="@id/swipeRefreshLayoutRent"
+        android:background="@drawable/custom_search_background"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/filter_button_rent_equipment"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_filter"
+        android:backgroundTint="@color/orange"
+        app:layout_constraintStart_toEndOf="@id/search_rent_equipment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/search_rent_equipment"
+        app:layout_constraintBottom_toBottomOf="@id/search_rent_equipment"
+        />
+    <ImageView
+        android:id="@+id/no_results_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_no_results"
+        app:layout_constraintTop_toBottomOf="@id/search_rent_equipment"
+        app:layout_constraintBottom_toTopOf="@id/no_result_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/no_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/no_results_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_rent_equipment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+            <include layout="@layout/shimmer_item" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutRent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_rent_equipment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_rent_equipment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/search_rent_equipment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/spare_part_item"
+        />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

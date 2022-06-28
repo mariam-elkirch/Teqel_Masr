@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/homeFragment"
+                android:icon="@drawable/ic_baseline_home_24"
+                android:title="@string/home"/>
+
+
+        <item
+            android:id="@+id/profileFragment"
+            android:icon="@drawable/ic_baseline_account_circle_24"
+            android:title="@string/profile"/>
+        <item
+            android:id="@+id/marketFragment"
+            android:icon="@drawable/ic_baseline_store_mall_directory_24"
+            android:title="@string/market"
+            />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout_svgrepo_com__1_"
+            android:title="@string/logout"/>
+    </group>
+
+
+
+</menu>

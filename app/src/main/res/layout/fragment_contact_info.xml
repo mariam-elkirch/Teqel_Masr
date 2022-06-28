@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/contact_info_bottom_sheet"
+
+    app:behavior_peekHeight="40dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:context=".displayEquipmentSell.view.ContactInfoFragment">
+
+
+
+    <TextView
+        android:id="@+id/myLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+
+        android:maxLines="3"
+        android:layout_marginTop="20dp"
+        android:text="@string/location"
+        android:hint="@string/location"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/locationImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_location_on_24"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/myLocation"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_call_24"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:id="@+id/imgTeleohone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationImg"
+        app:layout_constraintEnd_toStartOf="@+id/telephone"
+        />
+    <TextView
+        android:id="@+id/telephone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="@+id/imgTeleohone"
+        android:maxLines="1"
+
+        android:text="@string/location"
+        android:hint="@string/location"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgTeleohone"
+        app:layout_constraintTop_toBottomOf="@id/myLocation" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/callButton"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/telephone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/orange"
+        app:tint="@android:color/white"
+        android:src="@drawable/ic_baseline_call_24"
+        />
+    <!--
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/callButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/telephone"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:text="@string/call"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_shape"
+        android:layout_marginBottom="10dp"
+        />
+        -->
+</androidx.constraintlayout.widget.ConstraintLayout>

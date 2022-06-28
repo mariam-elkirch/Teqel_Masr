@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.teqelmasr.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_displayEquipmentSellFragment"
+            app:destination="@id/displayEquipmentSellFragment"
+           />
+        <action
+            android:id="@+id/action_homeFragment_to_displayEquipmentRentFragment"
+            app:destination="@id/displayEquipmentRentFragment"
+            />
+        <action
+            android:id="@+id/action_homeFragment_to_displaySparePartFragment"
+            app:destination="@id/displaySparePartFragment"
+           />
+        <action
+            android:id="@+id/action_homeFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment"
+           />
+        <action
+            android:id="@+id/action_homeFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment"
+            />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.teqelmasr.favourite.view.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_detailsFavouriteFragment"
+            app:destination="@id/detailsFavouriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEquipmentSellFragment"
+        android:name="com.example.teqelmasr.addEquipmentSell.view.AddEquipmentSellFragment"
+        android:label="fragment_add_equipment_sell"
+        tools:layout="@layout/fragment_add_equipment_sell" >
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="ProductFromMap"
+            app:argType="com.example.teqelmasr.model.AddEditProduct"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_addEquipmentSellFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayEquipmentSellFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.DisplayEquipmentSellFragment"
+        android:label="fragment_display_equipment_sell"
+        tools:layout="@layout/fragment_display_equipment_sell" >
+        <action
+            android:id="@+id/action_displayEquipmentSellFragment_to_detailsEquipmentSellFragment"
+            app:destination="@id/detailsEquipmentSellFragment"
+            />
+        <action
+            android:id="@+id/action_displayEquipmentSellFragment_to_equimentSellBottonSheetFrgment"
+            app:destination="@id/equimentSellBottonSheetFrgment" />
+        <argument
+            android:name="filterValue"
+            app:argType="com.example.teqelmasr.model.FilterValues"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayEquipmentRentFragment"
+        android:name="com.example.teqelmasr.displayEquipmentRent.view.DisplayEquipmentRentFragment"
+        android:label="fragment_display_equipment_rent"
+        tools:layout="@layout/fragment_display_equipment_rent" >
+        <action
+            android:id="@+id/action_displayEquipmentRentFragment_to_detailsEquipmentRentFragment"
+            app:destination="@id/detailsEquipmentRentFragment"
+           />
+        <action
+            android:id="@+id/action_displayEquipmentRentFragment_to_equipmentRentFilterBottomSheetFragment"
+            app:destination="@id/equipmentRentFilterBottomSheetFragment" />
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterValues"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/displaySparePartFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.DisplaySparePartFragment"
+        android:label="fragment_display_spare_part"
+        tools:layout="@layout/fragment_display_spare_part" >
+        <action
+            android:id="@+id/action_displaySparePartFragment_to_detailsSparePartFragment2"
+            app:destination="@id/detailsSparePartFragment" />
+        <action
+            android:id="@+id/action_displaySparePartFragment_to_sparePartsFilterBottomSheetFragment"
+            app:destination="@id/sparePartsFilterBottomSheetFragment" />
+        <argument
+            android:name="filter_values"
+            app:argType="com.example.teqelmasr.model.FilterValues"
+            app:nullable="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/displaySellerProductsFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.DisplaySellerProductsFragment"
+        android:label="fragment_display_seller_products"
+        tools:layout="@layout/fragment_display_seller_products" >
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_detailsSellerProductFragment"
+            app:destination="@id/detailsSellerProductFragment" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_editSellerProductFragment"
+            app:destination="@id/editSellerProductFragment" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_filtrationSheetFragment"
+            app:destination="@id/filtrationSheetFragment">
+
+        </action>
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterObj"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_displaySellerProductsFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailsSellerProductFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.DetailsSellerProductFragment"
+        android:label="fragment_details_seller_product"
+        tools:layout="@layout/fragment_details_seller_product" >
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsSellerProductFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsSparePartFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.DetailsSparePartFragment"
+        android:label="fragment_details_spare_part"
+        tools:layout="@layout/fragment_details_spare_part"
+
+        >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsSparePartFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsEquipmentRentFragment"
+        android:name="com.example.teqelmasr.displayEquipmentRent.view.DetailsEquipmentRentFragment"
+        android:label="DetailsEquipmentRentFragment" >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_detailsEquipmentRentFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsEquipmentSellFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.DetailsEquipmentSellFragment"
+        android:label="DetailsEquipmentSellFragment"
+        tools:layout="@layout/fragment_details_equipment_sell">
+        <action
+            android:id="@+id/action_detailsEquipmentSellFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
+        <argument
+            android:name="productsell"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSellerProductFragment"
+        android:name="com.example.teqelmasr.editSellerProduct.view.EditSellerProductFragment"
+        android:label="fragment_edit_seller_product"
+        tools:layout="@layout/fragment_edit_seller_product" >
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.teqelmasr.model.Product" />
+        <action
+            android:id="@+id/action_editSellerProductFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment" />
+        <action
+            android:id="@+id/action_editSellerProductFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment">
+            <argument
+                android:name="currentProduct"
+                app:argType="com.example.teqelmasr.model.Product" />
+
+        </action>
+        <argument
+            android:name="imageURI"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="EditObject"
+            app:argType="com.example.teqelmasr.model.AddEditProduct"
+            app:nullable="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/filtrationSheetFragment"
+        android:name="com.example.teqelmasr.displaySellerProducts.view.FiltrationSheetFragment"
+        android:label="fragment_filteration_sheet"
+        tools:layout="@layout/fragment_filteration_sheet" >
+
+        <action
+            android:id="@+id/action_filtrationSheetFragment_to_displaySellerProductsFragment"
+            app:destination="@id/displaySellerProductsFragment">
+            <argument
+                android:name="filterObj"
+                app:argType="com.example.teqelmasr.model.FilterObj"
+                app:nullable="true" />
+
+
+        </action>
+        <argument
+            android:name="sourceFragment"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_filtrationSheetFragment_to_marketFragment"
+            app:destination="@id/marketFragment"
+            >
+            <argument
+                android:name="filterObj"
+                app:argType="com.example.teqelmasr.model.FilterObj"
+                app:nullable="true" />
+        </action>
+    </dialog>
+    <dialog
+        android:id="@+id/sparePartsFilterBottomSheetFragment"
+        android:name="com.example.teqelmasr.displaySparePart.view.SparePartsFilterBottomSheetFragment"
+        android:label="fragment_filter_bottom_sheet"
+        tools:layout="@layout/fragment_spare_parts_filter_bottom_sheet" >
+        <action
+            android:id="@+id/action_sparePartsFilterBottomSheetFragment_to_displaySparePartFragment"
+            app:destination="@id/displaySparePartFragment" />
+
+    </dialog>
+    <dialog
+        android:id="@+id/equimentSellBottonSheetFrgment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.EquimentSellBottonSheetFrgment"
+        android:label="fragment_equiment_sell_botton_sheet_frgment"
+        tools:layout="@layout/fragment_equiment_sell_botton_sheet_frgment" >
+        <action
+            android:id="@+id/action_equimentSellBottonSheetFrgment_to_displayEquipmentSellFragment"
+            app:destination="@id/displayEquipmentSellFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/equipmentRentFilterBottomSheetFragment"
+        android:name="com.example.teqelmasr.displayEquipmentRent.view.EquipmentRentFilterBottomSheetFragment"
+        android:label="fragment_equipment_rent_filter_bottom_sheet"
+        tools:layout="@layout/fragment_equipment_rent_filter_bottom_sheet" >
+        <action
+            android:id="@+id/action_equipmentRentFilterBottomSheetFragment_to_displayEquipmentRentFragment"
+            app:destination="@id/displayEquipmentRentFragment" />
+
+    </dialog>
+    <activity
+        android:id="@+id/registerationActivity"
+        android:name="com.example.teqelmasr.authentication.register.view.RegistrationActivity"
+        android:label="activity_registeration"
+        tools:layout="@layout/activity_registeration" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.teqelmasr.location.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_addEquipmentSellFragment"
+            app:destination="@id/addEquipmentSellFragment" />
+        <argument
+            android:name="EnteredProduct"
+            app:argType="com.example.teqelmasr.model.AddEditProduct"
+            app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.teqelmasr.model.Product"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_mapsFragment_to_editSellerProductFragment"
+            app:destination="@id/editSellerProductFragment"/>
+        <argument
+            android:name="imageUri"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.example.teqelmasr.market.view.MarketFragment"
+        android:label="MarketFragment" >
+        <action
+            android:id="@+id/action_marketFragment_to_detailsSparePartFragment2"
+            app:destination="@id/detailsSparePartFragment" />
+        <action
+            android:id="@+id/action_marketFragment_to_filtrationSheetFragment"
+            app:destination="@id/filtrationSheetFragment" />
+        <argument
+            android:name="filterObj"
+            app:argType="com.example.teqelmasr.model.FilterObj"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_marketFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsMarketFragment"
+        android:name="com.example.teqelmasr.market.view.DetailsMarketFragment"
+        android:label="DetailsMarketFragment"
+        >
+        <argument
+            android:name="product"
+            app:argType="com.example.teqelmasr.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.teqelmasr.profile.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/contactInfoFragment"
+        android:name="com.example.teqelmasr.displayEquipmentSell.view.ContactInfoFragment"
+        android:label="fragment_contact_info"
+        tools:layout="@layout/fragment_contact_info" >
+        <argument
+            android:name="ContactObj"
+            app:argType="com.example.teqelmasr.model.ContactInfo"
+            app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/detailsFavouriteFragment"
+        android:name="com.example.teqelmasr.favourite.view.DetailsFavouriteFragment"
+        android:label="fragment_details_favourite"
+        tools:layout="@layout/fragment_details_favourite" >
+
+        <argument
+            android:name="productID"
+            app:argType="long" />
+        <argument
+            android:name="draftOrderID"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment"
+            />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_detailsFavouriteFragment_to_contactInfoFragment2"
+            app:destination="@id/contactInfoFragment" />
+
+    </fragment>
+</navigation>
+

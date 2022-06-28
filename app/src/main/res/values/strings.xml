@@ -1,0 +1,183 @@
+<resources>
+    <string name="app_name">Teqel Masr</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title">Title</string>
+    <string name="describtion">describtion</string>
+    <string name="manfactory">Manfactory</string>
+    <string name="save">Save</string>
+    <string name="my_products_txt">My Products</string>
+    <string name="price">Price</string>
+    <string name="delete_message">Do you want to delete this item?</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="item_deleted">Item Deleted</string>
+    <string name="category">Category</string>
+    <string name="type">Type</string>
+    <string name="vendor">Vendor</string>
+    <string name="description">Description</string>
+    <string name="details">Details</string>
+    <string name="dummy_desc" translatable="false">It is the job of the turbocharger to compress more air flowing into the engine\'s cylinder. When air is compressed the oxygen molecules are packed closer together. This increase in air means that more fuel can be added for the same si</string>
+    <string name="what_are_you_searching_for">What are you searching for?</string>
+    <string name="save_message">Save Changes?</string>
+    <string name="item_updated">Item Updated</string>
+    <string name="discard">Discard</string>
+    <string name="no_changes">No Changes</string>
+    <string name="price_range">Price Range</string>
+    <string name="apply">Apply</string>
+    <string name="favourite">Favourite</string>
+    <string name="no_products">No Products</string>
+
+    <string name="sell_equip_tag" translatable="false">equimentsell</string>
+    <string name="rent_equip_tag" translatable="false">equimentrent</string>
+    <string name="spare_tag" translatable="false">spare</string>
+    <string name="sell_equip_txt">Equipment for Sell</string>
+    <string name="rent_equip_txt">Equipment for Rent</string>
+    <string name="spare_txt">Spare Parts</string>
+
+    <string name="coldplaners">Coldplaners</string>
+    <string name="compactors">Compactors</string>
+    <string name="excavators">Excavators</string>
+    <string name="dozers">Dozers</string>
+
+    <string name="turbocharger">Turbocharger</string>
+    <string name="filter">Filter</string>
+    <string name="accumulator">Accumulator</string>
+    <string name="valve">Valve</string>
+    <string name="hose">Hose</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="hydraulic_components">Hydraulic Components</string>
+    <string name="other">Other</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="enable_connection">Enable Connection</string>
+    <string name="sparetype">Spare Parts</string>
+    <string name="equip_type">Equipment</string>
+    <string name="slogan">sell and rent heavy equipment and spare parts</string>
+    <string name="search_text">What are you looking for?</string>
+    <string name="searching_for">What are you searching for?</string>
+    <string name="offer">Offer a Product</string>
+
+    <string name="currency">L.E</string>
+
+    <string name="filters">Filters</string>
+    <string name="clear_all">Clear All</string>
+    <string name="spare_parts">Spare Parts</string>
+    <string name="equipment_sell">Equipment for Sell</string>
+    <string name="equipment_rent">Equipment for Rent</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="have_acount">already have an account?</string>
+
+    <string name="register_seller">Register as a seller</string>
+    <string name="logout">Logout</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="sure_to_edit_profile">Are you sure you want to edit your profile?</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title">Guest</string>
+    <string name="nav_header_subtitle" translatable="false">user email</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="signin">sign in</string>
+    <string name="where_are_you_going">Choose the Location</string>
+    <string name="location">Location</string>
+    <string name="login">Login</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sure_you_want_to_log_out">Are you sure you want to log out your account?</string>
+    <string name="log_out">Log Out</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="already_exists">"Email is already use "</string>
+    <string name="not_valid_pass">Password should be at least 6 characters</string>
+    <string name="badly_formatted">Email not valid</string>
+    <string name="web_client_id" translatable="false">621827483901-hiid781ia48tldrggm3aa9g83c77qleh.apps.googleusercontent.com</string>
+    <string name="failed">Registration Failed</string>
+    <string name="success_reg">Successfully Registered</string>
+    <string name="My_Products">My Products</string>
+    <string name="language">Language</string>
+    <string name="profile">Profile</string>
+    <string name="user_type" translatable="false">UserType</string>
+    <string name="seller">Seller</string>
+    <string name="have_to_login">You have to login to offer a product</string>
+    <string name="seller_note">seller</string>
+    <string name="buyer_note">buyer</string>
+
+    <string name="rent">Equipment for Rent</string>
+    <string name="equipment">Equipment for Sell</string>
+    <string name="have_to_seller">You have to change your account type to seller</string>
+    <string name="Telephone">Telephone</string>
+    <string name="noFavProduct">no favourite products</string>
+    <string name="showcontactinfo">Show Contact Info</string>
+    <string name="mobile">mobile</string>
+    <string name="address">Address</string>
+    <string name="please_wait">Please wait</string>
+    <string name="addedToFav">added To Favourite</string>
+<string name="deleteFavItem">Are you sure delete this item from favourite?</string>
+    <string name="deleteFromFav">deleted From Favourite</string>
+    <string name="profile_updated">Profile Updated</string>
+    <string name="signInFirst">Please Sign in first</string>
+    <string name="EquipmentRent">Equipment For Rent</string>
+    <string name="skip">Skip</string>
+    <string name="switch_account">Switch Account</string>
+    <string name="no_search_results">No Results for your search</string>
+    <string name="call">Call</string>
+    <string name="loginContactInfo">You have to Login to show contact Info</string>
+    <string name="le">LE</string>
+    <string name="offer_for">Offer for</string>
+    <string name="sell">Sell</string>
+    <string name="clickToChooseLocation">Choose your Location</string>
+    <string name="EquipmentSell">Equipment For Sell</string>
+    <string name="market">Market</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="name_error">name can\'t be empty</string>
+    <string name="logged_in">Logged in Successfully</string>
+    <string name="forgetpassword">Forgot password</string>
+    <string name="Emailsent"> Email Sent </string>
+    <string name="checkEmail">Make sure the email you entered is correct</string>
+    <string name="enterEmail">Please Enter your email</string>
+    <string name="English">English</string>
+    <string name="Arabic">Arabic</string>
+
+    <string-array name="type">
+        <item>Equipment for Sell</item>
+        <item>Equipment for Rent</item>
+        <item>Spare Parts</item>
+    </string-array>
+    <string-array name="equiments">
+        <item>Coldplaners</item>
+        <item>Compactors</item>
+        <item>Excavators</item>
+        <item>Dozers</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="spare">
+        <item>Turbocharger</item>
+        <item>Filter </item>
+        <item>Accumulator </item>
+        <item>Valve </item>
+        <item> Hose </item>
+        <item> Miscellaneous </item>
+        <item>Hydraulic Components</item>
+        <item>Other </item>
+    </string-array>
+    <string-array name="sliderValues">
+        <item>0</item>
+        <item>100000000</item>
+    </string-array>
+    <string-array name="spareSliderValues">
+        <item>0</item>
+        <item>50000000</item>
+    </string-array>
+    <string-array name="equipmentsliderValues">
+        <item>50000</item>
+        <item>100000000</item>
+    </string-array>
+    <string-array name="language">
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
+</resources>
